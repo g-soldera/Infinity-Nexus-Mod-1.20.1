@@ -1,0 +1,39 @@
+{
+  "values": [
+    "infinity_nexus_mod:copper_machine_casing",
+    "infinity_nexus_mod:iron_machine_casing",
+    "infinity_nexus_mod:glass_machine_casing",
+    "infinity_nexus_mod:plastic_machine_casing",
+    "infinity_nexus_mod:aluminum_machine_casing",
+    "infinity_nexus_mod:lead_machine_casing",
+    "infinity_nexus_mod:gold_machine_casing",
+    "infinity_nexus_mod:energized_machine_casing",
+    "infinity_nexus_mod:magic_machine_casing",
+
+    "infinity_nexus_mod:empty_basic_gem_basket",
+    "infinity_nexus_mod:empty_basic_metal_box",
+    "infinity_nexus_mod:empty_advanced_gem_basket",
+    "infinity_nexus_mod:empty_advanced_metal_box",
+    "infinity_nexus_mod:empty_elite_gem_basket",
+    "infinity_nexus_mod:empty_elite_metal_box",
+    "infinity_nexus_mod:empty_ultimate_metal_box",
+    "infinity_nexus_mod:empty_elite_gem_basket",
+    "infinity_nexus_mod:empty_elite_metal_box",
+    "infinity_nexus_mod:empty_legendary_metal_box",
+
+    "infinity_nexus_mod:full_basic_mixed_gem_basket",
+    "infinity_nexus_mod:full_basic_mixed_gem_basket_1",
+    "infinity_nexus_mod:full_basic_mixed_metal_box",
+    "infinity_nexus_mod:full_basic_mixed_metal_box_1",
+    "infinity_nexus_mod:full_advanced_mixed_gem_basket",
+    "infinity_nexus_mod:full_advanced_mixed_gem_basket_1",
+    "infinity_nexus_mod:full_advanced_mixed_metal_box",
+    "infinity_nexus_mod:full_elite_mixed_gem_basket",
+    "infinity_nexus_mod:full_elite_mixed_metal_box",
+    "infinity_nexus_mod:full_elite_mixed_metal_box_1",
+    "infinity_nexus_mod:full_elite_mixed_metal_box_2",
+    "infinity_nexus_mod:full_ultimate_mixed_metal_box",
+    "infinity_nexus_mod:full_ultimate_mixed_metal_box_1",
+    "infinity_nexus_mod:full_legendary_mixed_metal_box"
+  ]
+}

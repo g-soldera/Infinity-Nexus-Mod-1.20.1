@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:crushing",
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:infinity_ingot"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:infinity_dust",
+    "count": 9
+  },
+  "time": {
+    "value": 240
+  },
+  "energy": {
+    "value": 12000
+  }
+}

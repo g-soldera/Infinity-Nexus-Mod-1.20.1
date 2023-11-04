@@ -1,0 +1,244 @@
+{
+  "itemGroup.infinity_nexus_mod_addition": "§x§9§0§0§0§9§dInfinity Nexus",
+  "itemGroup.infinity_nexus_mod_progression":"§x§9§0§0§0§9§dInfinity Nexus Progressão",
+  "itemGroup.infinity_nexus_mod_economy":"§x§9§0§0§0§9§dInfinity Nexus Economia",
+  "tooltip.infinity_nexus.pressShift": "§bPressione §eShift §bpara ver mais informações",
+
+  "item.infinity_nexus_mod.catalyst": "Ativador de Portal",
+
+  "item.infinity_nexus_mod.wing": "Asa",
+  "item.infinity_nexus_mod.terrain_marker": "Marcador de Terreno",
+  "item.infinity_nexus_mod.item_dislocator": "Deslocador de Itens",
+  "chat.infinity_nexus_mod.item_dislocator_on": "§bDeslocador de Itens §2Ligado",
+  "chat.infinity_nexus_mod.item_dislocator_off": "§bDeslocador de Itens §cDesligado",
+  "tooltip.infinity_nexus_mod.item_dislocator": "§4WIPE §eExclui itens largados perto de você em um raio de: §5",
+
+  "item.infinity_nexus_mod.imperial_infinity_3d_sword": "§fEspada Imperial de Infinity 3D",
+  "item.infinity_nexus_mod.imperial_infinity_3d_shield": "§fEscudo Imperial de Infinity 3D",
+  "tooltip.infinity_nexus_mod.imperial_infinity_3d_sword": "§eCausa os efeitos §7Fraqueza, §3Veneno §ee §9Definhamento §equando atinge",
+  "item.infinity_nexus_mod.imperial_infinity_3d_helmet": "Elmo Imperial de Infinity 3D",
+  "item.infinity_nexus_mod.imperial_infinity_3d_chestplate": "Peitoral Imperial de Infinity 3D",
+  "item.infinity_nexus_mod.imperial_infinity_3d_leggings": "Perneiras Imperiais de Infinity 3D",
+  "item.infinity_nexus_mod.imperial_infinity_3d_boots": "Botas Imperiais de Infinity 3D",
+
+  "item.infinity_nexus_mod.infinity_3d_sword": "§fEspada de Infinity 3D",
+  "item.infinity_nexus_mod.infinity_3d_shield": "§fEscudo de Infinity 3D",
+  "tooltip.infinity_nexus_mod.infinity_3d_sword": "§eCausa os efeitos §7Fraqueza §ee §9Definhamento §equando atinge",
+  "item.infinity_nexus_mod.infinity_3d_helmet": "Elmo de Infinity 3D",
+  "item.infinity_nexus_mod.infinity_3d_chestplate": "Peitoral de Infinity 3D",
+  "item.infinity_nexus_mod.infinity_3d_leggings": "Perneiras de Infinity 3D",
+  "item.infinity_nexus_mod.infinity_3d_boots": "Botas de Infinity 3D",
+
+  "item.infinity_nexus_mod.imperial_infinity_helmet": "Elmo Imperial de Infinity",
+  "item.infinity_nexus_mod.imperial_infinity_chestplate": "Peitoral Imperial de Infinity",
+  "item.infinity_nexus_mod.imperial_infinity_leggings": "Perneiras Imperiais de Infinity",
+  "item.infinity_nexus_mod.imperial_infinity_boots": "Botas Imperiais de Infinity",
+  "item.infinity_nexus.infinity_armor": "§bArmadura completa concede: §6Voo Criativo §5- Regeneração and §5 Absorção",
+  "item.infinity_nexus_mod.imperial_infinity_sword": "Espada Imperial de Infinity",
+  "tooltip.infinity_nexus_mod.imperial_infinity_sword": "§eCausa os efeitos §7Fraqueza §ee §9Definhamento §equando atinge",
+  "item.infinity_nexus_mod.imperial_infinity_pickaxe": "Picareta Imperial de Infinity",
+  "item.infinity_nexus_mod.imperial_infinity_shovel": "Pá Imperial de Infinity",
+  "item.infinity_nexus_mod.imperial_infinity_axe": "Machado Imperial de Infinity",
+  "item.infinity_nexus_mod.imperial_infinity_hoe": "Enxada Imperial de Infinity",
+  "item.infinity_nexus_mod.imperial_infinity_paxel": "Páxicor Imperial de Infinity",
+  "tooltip.infinity_nexus_mod.imperial_infinity_paxel": "§eAo minerar, há uma chance de §c0,01% §ede soltar uma §bNugget de Infinity§r.",
+  "item.infinity_nexus_mod.imperial_infinity_bow": "Arco Imperial de Infinity",
+
+  "item.infinity_nexus_mod.infinity_helmet": "Elmo de Infinity",
+  "item.infinity_nexus_mod.infinity_chestplate": "Peitoral de Infinity",
+  "item.infinity_nexus_mod.infinity_leggings": "Perneiras de Infinity",
+  "item.infinity_nexus_mod.infinity_boots": "Botas de Infinity",
+  "item.infinity_nexus.imperial_infinity_armor": "§bConcede uma armadura completa com:\n§5- Voo no Modo Criativo\n§5- Absorção\n§5- Visão Noturna\n§5- Velocidade de Escavação\n§5- Aumento de Dano\n§5- Sorte\n§5- Velocidade de Movimento",
+  "item.infinity_nexus_mod.infinity_sword": "Espada de Infinity",
+  "tooltip.infinity_nexus_mod.infinity_sword": "§eCausa os efeitos §7Fraqueza §ee §9Definhamento §equando atinge",
+  "item.infinity_nexus_mod.infinity_pickaxe": "Picareta de Infinity",
+  "item.infinity_nexus_mod.infinity_shovel": "Pá de Infinity",
+  "item.infinity_nexus_mod.infinity_axe": "Machado de Infinity",
+  "item.infinity_nexus_mod.infinity_hoe": "Enxada de Infinity",
+  "item.infinity_nexus_mod.infinity_paxel": "Páxicor de Infinity",
+  "tooltip.infinity_nexus_mod.infinity_paxel": "§kWEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+  "item.infinity_nexus_mod.infinity_bow": "Arco de Infinity",
+
+  "item.infinity_nexus_mod.purple_infinity_3d_sword": "Espada Roxa de Infinity",
+  "tooltip.infinity_nexus_mod.purple_infinity_3d_sword": "§eCausa os efeitos §7Fraqueza §ee §9Definhamento §equando atinge",
+
+  "item.infinity_nexus_mod.infinity_singularity": "Singularidade de Infinity",
+
+  "item.infinity_nexus_mod.gold_wire_cast": "Forma de Arame de Ouro",
+  "item.infinity_nexus_mod.gold_screw_cast": "Forma de Parafuso de Ouro",
+  "item.infinity_nexus_mod.gold_rod_cast": "Forma de Vareta de Ouro",
+  "item.infinity_nexus_mod.gold_sheet_cast": "Forma de Chapa de Ouro",
+
+  "item.infinity_nexus_mod.raw_wire_clay_model": "Modelo de Argila de Arame Bruto",
+  "item.infinity_nexus_mod.raw_screw_clay_model": "Modelo de Argila de Parafuso Bruto",
+  "item.infinity_nexus_mod.raw_rod_clay_model": "Modelo de Argila de Vareta Bruta",
+  "item.infinity_nexus_mod.raw_sheet_clay_model": "Modelo de Argila de Chapa Bruta",
+
+  "item.infinity_nexus_mod.wire_clay_model": "Modelo de Argila de Arame",
+  "item.infinity_nexus_mod.screw_clay_model": "Modelo de Argila de Parafuso",
+  "item.infinity_nexus_mod.rod_clay_model": "Modelo de Argila de Vareta",
+  "item.infinity_nexus_mod.sheet_clay_model": "Modelo de Argila de Chapa",
+
+  "item.infinity_nexus_mod.copper_wire": "Arame de Cobre",
+  "item.infinity_nexus_mod.aluminum_wire": "Arame de Alumínio",
+  "item.infinity_nexus_mod.iron_wire": "Arame de Ferro",
+  "item.infinity_nexus_mod.gold_wire": "Arame de Ouro",
+  "item.infinity_nexus_mod.magic_wire": "Arame Mágico",
+  "item.infinity_nexus_mod.steel_wire": "Arame de Aço",
+  "item.infinity_nexus_mod.industrial_wire": "Arame Industrial",
+
+  "item.infinity_nexus_mod.copper_screw": "Parafuso de Cobre",
+  "item.infinity_nexus_mod.aluminum_screw": "Parafuso de Alumínio",
+  "item.infinity_nexus_mod.iron_screw": "Parafuso de Ferro",
+  "item.infinity_nexus_mod.gold_screw": "Parafuso de Ouro",
+  "item.infinity_nexus_mod.magic_screw": "Parafuso Mágico",
+  "item.infinity_nexus_mod.steel_screw": "Parafuso de Aço",
+  "item.infinity_nexus_mod.industrial_screw": "Parafuso Industrial",
+
+  "item.infinity_nexus_mod.copper_rod": "Vareta de Cobre",
+  "item.infinity_nexus_mod.aluminum_rod": "Vareta de Alumínio",
+  "item.infinity_nexus_mod.iron_rod": "Vareta de Ferro",
+  "item.infinity_nexus_mod.gold_rod": "Vareta de Ouro",
+  "item.infinity_nexus_mod.magic_rod": "Vareta Mágica",
+  "item.infinity_nexus_mod.steel_rod": "Vareta de Aço",
+  "item.infinity_nexus_mod.industrial_rod": "Vareta Industrial",
+
+  "item.infinity_nexus_mod.copper_sheet": "Chapa de Cobre",
+  "item.infinity_nexus_mod.aluminum_sheet": "Chapa de Alumínio",
+  "item.infinity_nexus_mod.iron_sheet": "Chapa de Ferro",
+  "item.infinity_nexus_mod.gold_sheet": "Chapa de Ouro",
+  "item.infinity_nexus_mod.magic_sheet": "Chapa Mágica",
+  "item.infinity_nexus_mod.steel_sheet": "Chapa de Aço",
+  "item.infinity_nexus_mod.industrial_sheet": "Chapa Industrial",
+
+  "item.infinity_nexus_mod.raw_infinity": "Infinity Bruto",
+  "item.infinity_nexus_mod.infinity_ingot": "Lingote de Infinity",
+  "item.infinity_nexus_mod.infinity_dust": "Pó de Infinity",
+  "item.infinity_nexus_mod.infinity_nugget": "Pedaço de Infinity",
+
+  "block.infinity_nexus_mod.copper_machine_casing": "Carcaça de Máquina de Cobre",
+  "block.infinity_nexus_mod.aluminum_machine_casing": "Carcaça de Máquina de Alumínio",
+  "block.infinity_nexus_mod.lead_machine_casing": "Carcaça de Máquina de Chumbo",
+  "block.infinity_nexus_mod.iron_machine_casing": "Carcaça de Máquina de Ferro",
+  "block.infinity_nexus_mod.glass_machine_casing": "Carcaça de Máquina de Vidro",
+  "block.infinity_nexus_mod.plastic_machine_casing": "Carcaça de Máquina de Plástico",
+  "block.infinity_nexus_mod.gold_machine_casing": "Carcaça de Máquina de Ouro",
+  "block.infinity_nexus_mod.magic_machine_casing": "Carcaça de Máquina Mágica",
+  "block.infinity_nexus_mod.steel_machine_casing": "Carcaça de Máquina de Aço",
+  "block.infinity_nexus_mod.energized_machine_casing": "Carcaça de Máquina Energizado",
+  "block.infinity_nexus_mod.industrial_machine_casing": "Carcaça de Máquina Industrial",
+
+  "block.infinity_nexus_mod.molten_tinkers_bucket": "Tinkers Derretido",
+  "fluid.infinity_nexus_mod.molten_tinkers": "Tinkers Derretido",
+  "item.infinity_nexus_mod.molten_tinkers_bucket": "Balde de Tinkers Fundido",
+  "block.infinity_nexus_mod.molten_infinity_bucket": "Infinity Derretido",
+  "fluid.infinity_nexus_mod.molten_infinity": "Infinity Derretido",
+  "item.infinity_nexus_mod.molten_infinity_bucket": "Balde de Infinity Fundido",
+  "block.infinity_nexus_mod.molten_starliquid_bucket": "Starliquid Derretido",
+  "fluid.infinity_nexus_mod.molten_starliquid": "Starliquid Derretido",
+  "item.infinity_nexus_mod.molten_starliquid_bucket": "Balde de Starliquid Fundido",
+
+  "item.infinity_nexus_mod.tinkers_ingot": "Lingote de Tinkers",
+  "item.infinity_nexus_mod.extended_ingot": "Lingote Estendido",
+  "item.infinity_nexus_mod.thermal_ingot": "Lingote Térmico",
+  "block.infinity_nexus_mod.thermal_block": "Bloco Térmico",
+  "item.infinity_nexus_mod.botania_ingot": "Lingote de Botania",
+  "item.infinity_nexus_mod.immersive_ingot": "Lingote Imersivo",
+  "item.infinity_nexus_mod.mystical_ingot": "Lingote Místico",
+  "item.infinity_nexus_mod.draconic_ingot": "Lingote Draconico",
+
+  "block.infinity_nexus_mod.explorar_portal_frame": "Bloco de Portal",
+
+  "block.infinity_nexus_mod.infinity_block": "Bloco de Infinity",
+  "block.infinity_nexus_mod.raw_infinity_block": "Bloco de Infinity Cru",
+  "block.infinity_nexus_mod.infinity_ore": "Minério de Infinity",
+  "block.infinity_nexus_mod.deepslate_infinity_ore": "Minério de Infinity do Abluso",
+
+  "item.minecraft.potion.effect.freeze_potion": "Poção de Congelamento",
+  "item.minecraft.splash_potion.effect.freeze_potion": "Poção de Congelamento Arremessável",
+  "item.minecraft.lingering_potion.effect.freeze_potion": "Poção de Congelamento Persistente",
+  "item.minecraft.tipped_arrow.effect.freeze_potion": "Arrow of Freeze Potion",
+  "effect.infinity_nexus_mod.freeze": "Congelamento",
+
+  "block.infinity_nexus_mod.empty_basic_metal_box": "Caixa Básica de Metal Vazia",
+
+  "block.infinity_nexus_mod.empty_basic_gem_basket": "Cesta Básica de Gemas Vazia",
+
+  "block.infinity_nexus_mod.empty_advanced_metal_box": "Caixa Avançada de Metal Vazia",
+
+  "block.infinity_nexus_mod.empty_advanced_gem_basket": "Cesta Avançada de Gemas Vazia",
+
+  "block.infinity_nexus_mod.empty_elite_gem_basket": "Estojo de Gemas Elite Vazio",
+
+  "block.infinity_nexus_mod.empty_elite_metal_box": "Caixa de Metal Elite Vazia",
+
+  "block.infinity_nexus_mod.empty_ultimate_metal_box": "Caixa de Metal Suprema Vazia",
+
+  "block.infinity_nexus_mod.empty_legendary_metal_box": "Caixa Lendária de Metal Vazia",
+
+  "block.infinity_nexus_mod.full_basic_mixed_metal_box": "Caixa Básica de Metal Cheia",
+  "block.infinity_nexus_mod.full_basic_mixed_metal_box_1": "Caixa Básica de Metal Cheia",
+
+  "block.infinity_nexus_mod.full_basic_mixed_gem_basket": "Cesta Básica de Gemas Cheia",
+  "block.infinity_nexus_mod.full_basic_mixed_gem_basket_1": "Cesta Básica de Gemas Cheia",
+
+  "block.infinity_nexus_mod.full_advanced_mixed_gem_basket": "Cesta Avançada de Gemas Cheia",
+  "block.infinity_nexus_mod.full_advanced_mixed_gem_basket_1": "Cesta Avançada de Gemas Cheia",
+
+  "block.infinity_nexus_mod.full_advanced_mixed_metal_box": "Caixa Avançada de Metal Cheia",
+
+  "block.infinity_nexus_mod.full_elite_mixed_gem_basket": "Estojo de Gemas Elite Cheio",
+
+  "block.infinity_nexus_mod.full_elite_mixed_metal_box": "Caixa de Metal Elite Cheia",
+  "block.infinity_nexus_mod.full_elite_mixed_metal_box_1": "Caixa de Metal Elite Cheia",
+  "block.infinity_nexus_mod.full_elite_mixed_metal_box_2": "Caixa de Metal Elite Cheia",
+
+  "block.infinity_nexus_mod.full_ultimate_mixed_metal_box": "Caixa de Metal Suprema Cheia",
+  "block.infinity_nexus_mod.full_ultimate_mixed_metal_box_1": "Caixa de Metal Suprema Cheia",
+
+  "block.infinity_nexus_mod.full_legendary_mixed_metal_box": "Caixa de Metal de Infinity Cheia",
+
+  "item.infinity_nexus_mod.blue_infinity_helmet": "Elmo Azul de Infinity",
+  "item.infinity_nexus_mod.blue_infinity_chestplate": "Peitoral Azul de Infinity",
+  "item.infinity_nexus_mod.blue_infinity_leggings": "Perneiras Azuis de Infinity",
+  "item.infinity_nexus_mod.blue_infinity_boots": "Botas Azuis de Infinity",
+
+  "item.infinity_nexus_mod.gold_infinity_helmet": "Elmo Dourado de Infinity",
+  "item.infinity_nexus_mod.gold_infinity_chestplate": "Peitoral Dourado de Infinity",
+  "item.infinity_nexus_mod.gold_infinity_leggings": "Perneiras Douradas de Infinity",
+  "item.infinity_nexus_mod.gold_infinity_boots": "Botas Douradas de Infinity",
+
+  "item.infinity_nexus_mod.green_infinity_helmet": "Elmo Verde de Infinity",
+  "item.infinity_nexus_mod.green_infinity_chestplate": "Peitoral Verde de Infinity",
+  "item.infinity_nexus_mod.green_infinity_leggings": "Perneiras Verdes de Infinity",
+  "item.infinity_nexus_mod.green_infinity_boots": "Botas Verdes de Infinity",
+
+  "item.infinity_nexus_mod.pink_infinity_helmet": "Elmo Rosa de Infinity",
+  "item.infinity_nexus_mod.pink_infinity_chestplate": "Peitoral Rosa de Infinity",
+  "item.infinity_nexus_mod.pink_infinity_leggings": "Perneiras Rosas de Infinity",
+  "item.infinity_nexus_mod.pink_infinity_boots": "Botas Rosas de Infinity",
+
+  "item.infinity_nexus_mod.purple_infinity_helmet": "Elmo Roxo de Infinity",
+  "item.infinity_nexus_mod.purple_infinity_chestplate": "Peitoral Roxo de Infinity",
+  "item.infinity_nexus_mod.purple_infinity_leggings": "Perneiras Roxas de Infinity",
+  "item.infinity_nexus_mod.purple_infinity_boots": "Botas Roxas de Infinity",
+
+  "item.infinity_nexus_mod.red_infinity_helmet": "Elmo Vermelho de Infinity",
+  "item.infinity_nexus_mod.red_infinity_chestplate": "Peitoral Vermelho de Infinity",
+  "item.infinity_nexus_mod.red_infinity_leggings": "Perneiras Vermelhas de Infinity",
+  "item.infinity_nexus_mod.red_infinity_boots": "Botas Vermelhas de Infinity",
+
+  "item.infinity_nexus_mod.silver_infinity_helmet": "Elmo Prateado de Infinity",
+  "item.infinity_nexus_mod.silver_infinity_chestplate": "Peitoral Prateado de Infinity",
+  "item.infinity_nexus_mod.silver_infinity_leggings": "Perneiras Prateadas de Infinity",
+  "item.infinity_nexus_mod.silver_infinity_boots": "Botas Prateadas de Infinity",
+
+  "item.infinity_nexus_mod.yellow_infinity_helmet": "Elmo Amarelo de Infinity",
+  "item.infinity_nexus_mod.yellow_infinity_chestplate": "Peitoral Amarelo de Infinity",
+  "item.infinity_nexus_mod.yellow_infinity_leggings": "Perneiras Amarelas de Infinity",
+  "item.infinity_nexus_mod.yellow_infinity_boots": "Botas Amarelas de Infinity",
+
+  "tooltip.infinity_nexus.wipe": "§4Wip",
+
+  "block.infinity_nexus_mod.crusher": "Triturador"
+}

@@ -1,0 +1,248 @@
+{
+  "itemGroup.infinity_nexus_mod_addition":"§x§9§0§0§0§9§dInfinity Nexus Addition",
+  "itemGroup.infinity_nexus_mod_progression":"§x§9§0§0§0§9§dInfinity Nexus Progression",
+  "itemGroup.infinity_nexus_mod_economy":"§x§9§0§0§0§9§dInfinity Nexus Econony",
+  "tooltip.infinity_nexus.pressShift":"§bPress §eShift §bto see more",
+
+  "item.infinity_nexus_mod.catalyst": "Portal Activator",
+
+  "item.infinity_nexus_mod.wing": "Wing",
+  "item.infinity_nexus_mod.terrain_marker": "Terrain Marker",
+  "item.infinity_nexus_mod.item_dislocator": "Item Dislocator",
+  "chat.infinity_nexus_mod.item_dislocator_on": "§bItem Dislocator §2On",
+  "chat.infinity_nexus_mod.item_dislocator_off": "§bItem Dislocator §cOff",
+  "tooltip.infinity_nexus_mod.item_dislocator": "§4WIPE §eDeletes items dropped near you within a radius of:§5 ",
+
+
+  "item.infinity_nexus_mod.imperial_infinity_3d_sword": "§f3D Imperial Infinity Sword",
+  "item.infinity_nexus_mod.imperial_infinity_3d_shield": "§f3D Imperial Infinity Shield",
+  "tooltip.infinity_nexus_mod.imperial_infinity_3d_sword":  "§e3D Inflict effects §7Weakness, §3Poison §eand §9Wither §eon hit",
+  "item.infinity_nexus_mod.imperial_infinity_3d_helmet": "3D Imperial Infinity Helmet",
+  "item.infinity_nexus_mod.imperial_infinity_3d_chestplate": "3D Imperial Infinity Chestplate",
+  "item.infinity_nexus_mod.imperial_infinity_3d_leggings": "3D Imperial Infinity Leggings",
+  "item.infinity_nexus_mod.imperial_infinity_3d_boots": "3D Imperial Infinity Boots",
+
+  "item.infinity_nexus_mod.infinity_3d_sword": "§f3D Infinity Sword",
+  "item.infinity_nexus_mod.infinity_3d_shield": "§f3D Infinity Shield",
+  "tooltip.infinity_nexus_mod.infinity_3d_sword":  "§e3D Inflict effects §7Weakness §eand §9Wither §eon hit",
+  "item.infinity_nexus_mod.infinity_3d_helmet": "3D Infinity Helmet",
+  "item.infinity_nexus_mod.infinity_3d_chestplate": "3D Infinity Chestplate",
+  "item.infinity_nexus_mod.infinity_3d_leggings": "3D Infinity Leggings",
+  "item.infinity_nexus_mod.infinity_3d_boots": "3D Infinity Boots",
+
+  "item.infinity_nexus_mod.imperial_infinity_helmet": "Imperial Infinity Helmet",
+  "item.infinity_nexus_mod.imperial_infinity_chestplate": "Imperial Infinity Chestplate",
+  "item.infinity_nexus_mod.imperial_infinity_leggings": "Imperial Infinity Leggings",
+  "item.infinity_nexus_mod.imperial_infinity_boots": "Imperial Infinity Boots",
+  "item.infinity_nexus.infinity_armor":"§bFull Armor Grant: §6Creative fly §5 Regeneration and §5 Absorption",
+  "item.infinity_nexus_mod.imperial_infinity_sword": "Imperial Infinity Sword",
+  "tooltip.infinity_nexus_mod.imperial_infinity_sword":  "§eInflict effects §7Weakness §eand §9Wither §eon hit",
+  "item.infinity_nexus_mod.imperial_infinity_pickaxe": "Imperial Infinity Pickaxe",
+  "item.infinity_nexus_mod.imperial_infinity_shovel": "Imperial Infinity Shovel",
+  "item.infinity_nexus_mod.imperial_infinity_axe": "Imperial Infinity Axe",
+  "item.infinity_nexus_mod.imperial_infinity_hoe": "Imperial Infinity Hoe",
+  "item.infinity_nexus_mod.imperial_infinity_paxel": "Imperial Infinity Paxel",
+  "tooltip.infinity_nexus_mod.imperial_infinity_paxel":  "§eWhile Mining, there is a §c0.01% §echance to drop an §bInfinity Nugget§r.",
+  "item.infinity_nexus_mod.imperial_infinity_bow": "Imperial Infinity Bow",
+
+
+  "item.infinity_nexus_mod.infinity_helmet": "Infinity Helmet",
+  "item.infinity_nexus_mod.infinity_chestplate": "Infinity Chestplate",
+  "item.infinity_nexus_mod.infinity_leggings": "Infinity Leggings",
+  "item.infinity_nexus_mod.infinity_boots": "Infinity Boots",
+  "item.infinity_nexus.imperial_infinity_armor":"§bFull Armor Grant:\n§5- Creative Fly\n§5- Absorption\n§5- Night Vision\n§5- Dig Speed\n§5- Damage Boost\n§5- Luck\n§5- Movement Speed",
+  "item.infinity_nexus_mod.infinity_sword": "Infinity Sword",
+  "tooltip.infinity_nexus_mod.infinity_sword":  "§eInflict effects §7Weakness §eand §9Wither §eon hit",
+  "item.infinity_nexus_mod.infinity_pickaxe": "Infinity Pickaxe",
+  "item.infinity_nexus_mod.infinity_shovel": "Infinity Shovel",
+  "item.infinity_nexus_mod.infinity_axe": "Infinity Axe",
+  "item.infinity_nexus_mod.infinity_hoe": "Infinity Hoe",
+  "item.infinity_nexus_mod.infinity_paxel": "Infinity Paxel",
+  "tooltip.infinity_nexus_mod.infinity_paxel":  "§kWEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+  "item.infinity_nexus_mod.infinity_bow": "Infinity Bow",
+
+  "item.infinity_nexus_mod.purple_infinity_3d_sword": "Purple Infinity Sword",
+  "tooltip.infinity_nexus_mod.purple_infinity_3d_sword":  "§eInflict effects §7Weakness §eand §9Wither §eon hit",
+
+  "item.infinity_nexus_mod.infinity_singularity": "Infinity Singularity",
+
+  "item.infinity_nexus_mod.gold_wire_cast": "Gold Wire Cast",
+  "item.infinity_nexus_mod.gold_screw_cast": "Gold Screw Cast",
+  "item.infinity_nexus_mod.gold_rod_cast": "Gold Rod Cast",
+  "item.infinity_nexus_mod.gold_sheet_cast": "Gold Sheet Cast",
+
+  "item.infinity_nexus_mod.raw_wire_clay_model": "Raw Wire Clay Model",
+  "item.infinity_nexus_mod.raw_screw_clay_model": "Raw Screw Clay Model",
+  "item.infinity_nexus_mod.raw_rod_clay_model": "Raw Rod Clay Model",
+  "item.infinity_nexus_mod.raw_sheet_clay_model": "Raw Sheet Clay Model",
+
+  "item.infinity_nexus_mod.wire_clay_model": "Wire Clay Model",
+  "item.infinity_nexus_mod.screw_clay_model": "Screw Clay Model",
+  "item.infinity_nexus_mod.rod_clay_model": "Rod Clay Model",
+  "item.infinity_nexus_mod.sheet_clay_model": "Sheet Clay Model",
+
+  "item.infinity_nexus_mod.copper_wire": "Copper Wire",
+  "item.infinity_nexus_mod.aluminum_wire": "Tin Wire",
+  "item.infinity_nexus_mod.iron_wire": "Iron Wire",
+  "item.infinity_nexus_mod.gold_wire": "Gold Wire",
+  "item.infinity_nexus_mod.magic_wire": "Magic Wire",
+  "item.infinity_nexus_mod.steel_wire": "Steel Wire",
+  "item.infinity_nexus_mod.industrial_wire": "Industrial Wire",
+
+  "item.infinity_nexus_mod.copper_screw": "Copper Screw",
+  "item.infinity_nexus_mod.aluminum_screw": "Tin Screw",
+  "item.infinity_nexus_mod.iron_screw": "Iron Screw",
+  "item.infinity_nexus_mod.gold_screw": "Gold Screw",
+  "item.infinity_nexus_mod.magic_screw": "Magic Screw",
+  "item.infinity_nexus_mod.steel_screw": "Steel Screw",
+  "item.infinity_nexus_mod.industrial_screw": "Industrial Screw",
+
+  "item.infinity_nexus_mod.copper_rod": "Copper Rod",
+  "item.infinity_nexus_mod.aluminum_rod": "Tin Rod",
+  "item.infinity_nexus_mod.iron_rod": "Iron Rod",
+  "item.infinity_nexus_mod.gold_rod": "Gold Rod",
+  "item.infinity_nexus_mod.magic_rod": "Magic Rod",
+  "item.infinity_nexus_mod.steel_rod": "Steel Rod",
+  "item.infinity_nexus_mod.industrial_rod": "Industrial Rod",
+
+  "item.infinity_nexus_mod.copper_sheet": "Copper Sheet",
+  "item.infinity_nexus_mod.aluminum_sheet": "Tin Sheet",
+  "item.infinity_nexus_mod.iron_sheet": "Iron Sheet",
+  "item.infinity_nexus_mod.gold_sheet": "Gold Sheet",
+  "item.infinity_nexus_mod.magic_sheet": "Magic Sheet",
+  "item.infinity_nexus_mod.steel_sheet": "Steel Sheet",
+  "item.infinity_nexus_mod.industrial_sheet": "Industrial Sheet",
+
+  "item.infinity_nexus_mod.raw_infinity": "Raw Infinity",
+  "item.infinity_nexus_mod.infinity_ingot": "Infinity Ingot",
+  "item.infinity_nexus_mod.infinity_dust": "Infinity dust",
+  "item.infinity_nexus_mod.infinity_nugget": "Infinity Nugget",
+
+  "block.infinity_nexus_mod.copper_machine_casing": "Copper Machine Casing",
+  "block.infinity_nexus_mod.aluminum_machine_casing": "Tin Machine Casing",
+  "block.infinity_nexus_mod.lead_machine_casing": "Lead Machine Casing",
+  "block.infinity_nexus_mod.iron_machine_casing": "Iron Machine Casing",
+  "block.infinity_nexus_mod.glass_machine_casing": "Glass Machine Casing",
+  "block.infinity_nexus_mod.plastic_machine_casing": "Plastic Machine Casing",
+  "block.infinity_nexus_mod.gold_machine_casing": "Gold Machine Casing",
+  "block.infinity_nexus_mod.magic_machine_casing": "Magic Machine Casing",
+  "block.infinity_nexus_mod.steel_machine_casing": "Steel Machine Casing",
+  "block.infinity_nexus_mod.energized_machine_casing": "Energized Machine Casing",
+  "block.infinity_nexus_mod.industrial_machine_casing": "Industrial Machine Casing",
+
+  "block.infinity_nexus_mod.molten_tinkers_bucket": "Molten Tinkers",
+  "fluid.infinity_nexus_mod.molten_tinkers": "Molten Tinkers",
+  "item.infinity_nexus_mod.molten_tinkers_bucket": "Tinkers Bucket",
+  "block.infinity_nexus_mod.molten_infinity_bucket": "Molten Infinity",
+  "fluid.infinity_nexus_mod.molten_infinity": "Molten Infinity",
+  "item.infinity_nexus_mod.molten_infinity_bucket": "Infinity Bucket",
+  "block.infinity_nexus_mod.molten_starliquid_bucket": "Molten Starliquid",
+  "fluid.infinity_nexus_mod.molten_starliquid": "Molten Starliquid",
+  "item.infinity_nexus_mod.molten_starliquid_bucket": "Starliquid Bucket",
+
+
+  "item.infinity_nexus_mod.tinkers_ingot": "Tinkers Ingot",
+  "item.infinity_nexus_mod.extended_ingot": "Extended Ingot",
+  "item.infinity_nexus_mod.thermal_ingot": "Thermal Ingot",
+  "block.infinity_nexus_mod.thermal_block": "Thermal Block",
+  "item.infinity_nexus_mod.botania_ingot": "Botania Ingot",
+  "item.infinity_nexus_mod.immersive_ingot": "Immersive Ingot",
+  "item.infinity_nexus_mod.mystical_ingot": "Mystical Ingot",
+  "item.infinity_nexus_mod.draconic_ingot": "Draconic Ingot",
+
+  "block.infinity_nexus_mod.explorar_portal_frame": "Portal Block",
+
+  "block.infinity_nexus_mod.infinity_block": "Infinity Block",
+  "block.infinity_nexus_mod.raw_infinity_block": "Raw Infinity Block",
+  "block.infinity_nexus_mod.infinity_ore": "Infinity Ore",
+  "block.infinity_nexus_mod.deepslate_infinity_ore": "Deepslate Infinity Ore",
+
+  "item.minecraft.potion.effect.freeze_potion": "Freeze Potion",
+  "item.minecraft.splash_potion.effect.freeze_potion": "Splash Potion of Freeze",
+  "item.minecraft.lingering_potion.effect.freeze_potion": "Lingering Potion of Freeze",
+  "item.minecraft.tipped_arrow.effect.freeze_potion": "Flecha de Poção de Congelamento",
+  "effect.infinity_nexus_mod.freeze": "Freeze",
+
+  "block.infinity_nexus_mod.empty_basic_metal_box": "Empty Basic Metal Box",
+
+  "block.infinity_nexus_mod.empty_basic_gem_basket": "Empty Basic Gem Basket",
+
+  "block.infinity_nexus_mod.empty_advanced_metal_box": "Empty Advanced Metal Box",
+
+  "block.infinity_nexus_mod.empty_advanced_gem_basket": "Empty Advanced Gem Basket",
+
+  "block.infinity_nexus_mod.empty_elite_gem_basket": "Empty Elite Gem Case",
+
+  "block.infinity_nexus_mod.empty_elite_metal_box": "Empty Elite Metal Box",
+
+  "block.infinity_nexus_mod.empty_ultimate_metal_box": "Empty Ultimate Metal Box",
+
+  "block.infinity_nexus_mod.empty_legendary_metal_box": "Empty Legendary Box",
+
+  "block.infinity_nexus_mod.full_basic_mixed_metal_box": "Full Basic Metal Box",
+  "block.infinity_nexus_mod.full_basic_mixed_metal_box_1": "Full Basic Metal Box",
+
+  "block.infinity_nexus_mod.full_basic_mixed_gem_basket": "Full Basic Gem Basket",
+  "block.infinity_nexus_mod.full_basic_mixed_gem_basket_1": "Full Basic Gem Basket",
+
+  "block.infinity_nexus_mod.full_advanced_mixed_gem_basket": "Full Advanced Gem Basket",
+  "block.infinity_nexus_mod.full_advanced_mixed_gem_basket_1": "Full Advanced Gem Basket",
+
+  "block.infinity_nexus_mod.full_advanced_mixed_metal_box": "Full Advanced Metal Box",
+
+  "block.infinity_nexus_mod.full_elite_mixed_gem_basket": "Full Elite Gem Case",
+
+  "block.infinity_nexus_mod.full_elite_mixed_metal_box": "Full Elite Metal Box",
+  "block.infinity_nexus_mod.full_elite_mixed_metal_box_1": "Full Elite Metal Box",
+  "block.infinity_nexus_mod.full_elite_mixed_metal_box_2": "Full Elite Metal Box",
+
+  "block.infinity_nexus_mod.full_ultimate_mixed_metal_box": "Full Ultimate Metal Box",
+  "block.infinity_nexus_mod.full_ultimate_mixed_metal_box_1": "Full Ultimate Metal Box",
+
+  "block.infinity_nexus_mod.full_legendary_mixed_metal_box": "Full Infinity Metal Box",
+
+
+  "item.infinity_nexus_mod.blue_infinity_helmet": "Blue Infinity Helmet",
+  "item.infinity_nexus_mod.blue_infinity_chestplate": "Blue Infinity Chestplate",
+  "item.infinity_nexus_mod.blue_infinity_leggings": "Blue Infinity Leggings",
+  "item.infinity_nexus_mod.blue_infinity_boots": "Blue Infinity Boots",
+
+  "item.infinity_nexus_mod.gold_infinity_helmet": "Gold Infinity Helmet",
+  "item.infinity_nexus_mod.gold_infinity_chestplate": "Gold Infinity Chestplate",
+  "item.infinity_nexus_mod.gold_infinity_leggings": "Gold Infinity Leggings",
+  "item.infinity_nexus_mod.gold_infinity_boots": "Gold Infinity Boots",
+
+  "item.infinity_nexus_mod.green_infinity_helmet": "Green Infinity Helmet",
+  "item.infinity_nexus_mod.green_infinity_chestplate": "Green Infinity Chestplate",
+  "item.infinity_nexus_mod.green_infinity_leggings": "Green Infinity Leggings",
+  "item.infinity_nexus_mod.green_infinity_boots": "Green Infinity Boots",
+
+  "item.infinity_nexus_mod.pink_infinity_helmet": "Pink Infinity Helmet",
+  "item.infinity_nexus_mod.pink_infinity_chestplate": "Pink Infinity Chestplate",
+  "item.infinity_nexus_mod.pink_infinity_leggings": "Pink Infinity Leggings",
+  "item.infinity_nexus_mod.pink_infinity_boots": "Pink Infinity Boots",
+
+  "item.infinity_nexus_mod.purple_infinity_helmet": "Purple Infinity Helmet",
+  "item.infinity_nexus_mod.purple_infinity_chestplate": "Purple Infinity Chestplate",
+  "item.infinity_nexus_mod.purple_infinity_leggings": "Purple Infinity Leggings",
+  "item.infinity_nexus_mod.purple_infinity_boots": "Purple Infinity Boots",
+
+  "item.infinity_nexus_mod.red_infinity_helmet": "Red Infinity Helmet",
+  "item.infinity_nexus_mod.red_infinity_chestplate": "Red Infinity Chestplate",
+  "item.infinity_nexus_mod.red_infinity_leggings": "Red Infinity Leggings",
+  "item.infinity_nexus_mod.red_infinity_boots": "Red Infinity Boots",
+
+  "item.infinity_nexus_mod.silver_infinity_helmet": "Silver Infinity Helmet",
+  "item.infinity_nexus_mod.silver_infinity_chestplate": "Silver Infinity Chestplate",
+  "item.infinity_nexus_mod.silver_infinity_leggings": "Silver Infinity Leggings",
+  "item.infinity_nexus_mod.silver_infinity_boots": "Silver Infinity Boots",
+
+  "item.infinity_nexus_mod.yellow_infinity_helmet": "Yellow Infinity Helmet",
+  "item.infinity_nexus_mod.yellow_infinity_chestplate": "Yellow Infinity Chestplate",
+  "item.infinity_nexus_mod.yellow_infinity_leggings": "Yellow Infinity Leggings",
+  "item.infinity_nexus_mod.yellow_infinity_boots": "Yellow Infinity Boots",
+
+  "tooltip.infinity_nexus.wipe": "§4Wip",
+
+  "block.infinity_nexus_mod.crusher": "Crusher"
+}

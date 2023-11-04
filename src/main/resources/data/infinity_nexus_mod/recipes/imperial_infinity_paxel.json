@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#%&",
+    " * ",
+    " $ "
+  ],
+  "key": {
+    "#": {
+      "item": "infinity_nexus_mod:imperial_infinity_pickaxe"
+    },
+    "%": {
+      "item": "infinity_nexus_mod:imperial_infinity_shovel"
+    },
+    "&": {
+      "item": "infinity_nexus_mod:imperial_infinity_axe"
+    },
+    "*": {
+      "item": "infinity_nexus_mod:infinity_singularity"
+    },
+    "$": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "infinity_nexus_mod:imperial_infinity_paxel"
+  }
+}

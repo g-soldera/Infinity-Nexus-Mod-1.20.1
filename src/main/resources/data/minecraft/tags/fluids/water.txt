@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "infinity_nexus_mod:molten_tinkers_flowing",
+    "infinity_nexus_mod:molten_tinkers"
+  ]
+}

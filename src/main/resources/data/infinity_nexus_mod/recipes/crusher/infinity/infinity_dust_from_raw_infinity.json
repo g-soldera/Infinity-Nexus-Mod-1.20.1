@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:crushing",
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:raw_infinity"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:infinity_dust",
+    "count": 1
+  },
+  "time": {
+    "value": 120
+  },
+  "energy": {
+    "value": 1000
+  }
+}

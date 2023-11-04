@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:crushing",
+  "ingredients": [
+    {
+      "item": "minecraft:redstone_ore"
+    }
+  ],
+  "output": {
+    "item": "minecraft:redstone",
+    "count": 6
+  },
+  "time": {
+    "value": 120
+  },
+  "energy": {
+    "value": 2000
+  }
+}
