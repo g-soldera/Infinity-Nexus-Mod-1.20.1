@@ -35,7 +35,6 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
         if(pLevel.isClientSide()) {
             return false;
         }
-
         return inputItems.get(0).test(pContainer.getItem(0));
     }
 

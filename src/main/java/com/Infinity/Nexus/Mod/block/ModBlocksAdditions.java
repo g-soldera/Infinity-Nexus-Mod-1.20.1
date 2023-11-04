@@ -17,6 +17,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
+import static com.Infinity.Nexus.Mod.block.custom.Crusher.LIT;
+
 public class ModBlocksAdditions {
         public static final DeferredRegister<Block> BLOCKS =
                 DeferredRegister.create(ForgeRegistries.BLOCKS, InfinityNexusMod.MOD_ID);
@@ -31,7 +33,7 @@ public class ModBlocksAdditions {
 
         public static final RegistryObject<Block> ASPHALT = registerBlock("asphalt",() -> new Asphalt(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.POLISHED_DEEPSLATE)));
 
-        public static final RegistryObject<Block> CRUSHER = registerBlock("crusher",() -> new Crusher(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).noOcclusion()));
+        public static final RegistryObject<Block> CRUSHER = registerBlock("crusher",() -> new Crusher(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(LIT) ? 2 : 0).noOcclusion()));
 
 
 

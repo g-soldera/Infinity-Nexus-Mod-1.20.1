@@ -17,6 +17,9 @@ public class CrusherScreen extends AbstractContainerScreen<CrusherMenu> {
         super(pMenu, pPlayerInventory, pTitle);
     }
 
+
+
+
     @Override
     protected void init() {
         super.init();

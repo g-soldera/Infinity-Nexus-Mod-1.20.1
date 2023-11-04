@@ -59,6 +59,6 @@ public class WrappedHandler implements IItemHandlerModifiable {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-        return this.insert.test(slot, stack) && this.handler.isItemValid(slot, stack);
+        return true;//this.insert.test(slot, stack) && this.handler.isItemValid(slot, stack);
     }
 }

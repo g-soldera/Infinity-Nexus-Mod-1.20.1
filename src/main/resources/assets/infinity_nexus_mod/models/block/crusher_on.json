@@ -4,6 +4,6 @@
     "bottom": "infinity_nexus_mod:block/crusher_bottom",
     "front": "infinity_nexus_mod:block/crusher_front",
     "side": "infinity_nexus_mod:block/crusher_side",
-    "top": "infinity_nexus_mod:block/crusher_top"
+    "top": "infinity_nexus_mod:block/crusher_top_on"
   }
 }
