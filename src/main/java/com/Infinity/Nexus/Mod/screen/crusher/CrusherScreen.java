@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.screen.crusher;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.utils.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -43,7 +44,7 @@ public class CrusherScreen extends AbstractContainerScreen<CrusherMenu> {
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(TEXTURE, x + 81, y + 30, 176, 0, 16, menu.getScaledProgress());
+            guiGraphics.blit(TEXTURE, x + 81, y + 29, 176, 0, 16, menu.getScaledProgress());
         }
     }
 
@@ -60,5 +61,8 @@ public class CrusherScreen extends AbstractContainerScreen<CrusherMenu> {
         pGuiGraphics.drawString(this.font,this.title,8,-9,0XFFFFFF);
 
         super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
+    }
+    private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
+        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }
 }

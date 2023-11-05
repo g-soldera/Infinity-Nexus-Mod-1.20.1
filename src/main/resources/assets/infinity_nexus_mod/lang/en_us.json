@@ -244,5 +244,7 @@
 
   "tooltip.infinity_nexus.wipe": "§4Wip",
 
-  "block.infinity_nexus_mod.crusher": "Crusher"
+  "block.infinity_nexus_mod.crusher": "Crusher",
+  "block.infinity_nexus_mod.press": "Press",
+  "block.infinity_nexus_mod.assembly": "Assembler"
 }

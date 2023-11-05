@@ -15,6 +15,12 @@ public class ModRecipes {
     public static final RegistryObject<RecipeSerializer<CrusherRecipes>> CRUSHER_SERIALIZER =
             SERIALIZER.register("crushing", () -> CrusherRecipes.Serializer.INSTANCE);
 
+    public static final RegistryObject<RecipeSerializer<PressRecipes>> PRESS_SERIALIZER =
+            SERIALIZER.register("pressing", () -> PressRecipes.Serializer.INSTANCE);
+
+    public static final RegistryObject<RecipeSerializer<AssemblerRecipes>> ASSEMBLY_SERIALIZER =
+            SERIALIZER.register("assembler", () -> AssemblerRecipes.Serializer.INSTANCE);
+
     public static void register(IEventBus eventBus) {
         SERIALIZER.register(eventBus);
     }

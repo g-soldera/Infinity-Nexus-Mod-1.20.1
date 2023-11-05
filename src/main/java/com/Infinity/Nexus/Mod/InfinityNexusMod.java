@@ -9,7 +9,9 @@ import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.loot.ModLootModifiers;
 import com.Infinity.Nexus.Mod.recipe.ModRecipes;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
+import com.Infinity.Nexus.Mod.screen.assembly.AssemblerScreen;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherScreen;
+import com.Infinity.Nexus.Mod.screen.press.PressScreen;
 import com.Infinity.Nexus.Mod.tab.ModTabAdditions;
 import com.Infinity.Nexus.Mod.tab.ModTabProgression;
 import com.mojang.logging.LogUtils;
@@ -91,6 +93,8 @@ public class InfinityNexusMod
         public static void onClientSetup(FMLClientSetupEvent event) {
 
             MenuScreens.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
+            MenuScreens.register(ModMenuTypes.PRESS_MENU.get(), PressScreen::new);
+            MenuScreens.register(ModMenuTypes.ASSEMBLY_MENU.get(), AssemblerScreen::new);
         }
     }
     private void setup(final FMLCommonSetupEvent event)

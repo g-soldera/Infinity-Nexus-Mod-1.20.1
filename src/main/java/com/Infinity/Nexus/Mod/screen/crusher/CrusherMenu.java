@@ -34,8 +34,8 @@ public class CrusherMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 12));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 48));
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 11));
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 47));
         });
 
         addDataSlots(data);

@@ -16,6 +16,14 @@ public class ModBlockEntities {
             BLOCK_ENTITY.register("crusher_block_entity", () ->
                     BlockEntityType.Builder.of(CrusherBlockEntity::new, ModBlocksAdditions.CRUSHER.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<PressBlockEntity>> PRESS_BE =
+            BLOCK_ENTITY.register("press_block_entity", () ->
+                    BlockEntityType.Builder.of(PressBlockEntity::new, ModBlocksAdditions.PRESS.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<AssemblerBlockEntity>> ASSEMBLY_BE =
+            BLOCK_ENTITY.register("assembly_block_entity", () ->
+                    BlockEntityType.Builder.of(AssemblerBlockEntity::new, ModBlocksAdditions.ASSEMBLY.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITY.register(eventBus);
     }

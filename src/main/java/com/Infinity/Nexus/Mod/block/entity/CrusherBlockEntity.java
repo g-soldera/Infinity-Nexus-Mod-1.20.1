@@ -169,6 +169,9 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     public int getEnergyStorage() {
         return ENERGY_STORAGE.getEnergyStored();
     }
+    public void setEnergyLevel(int energy) {
+        this.ENERGY_STORAGE.setEnergy(energy);
+    }
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
@@ -183,7 +186,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
         progress = pTag.getInt("crusher.progress");
-        ENERGY_STORAGE.setEnergy(pTag.getInt("creusher_energy"));
+        ENERGY_STORAGE.setEnergy(pTag.getInt("crusher_energy"));
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {

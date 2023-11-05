@@ -1,0 +1,19 @@
+{
+  "type": "infinity_nexus_mod:pressing",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_ingot",
+      "count": 2
+    },
+    {
+      "item": "infinity_nexus_mod:gold_sheet_cast"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:gold_sheet",
+    "count": 1
+  },
+  "time": {
+    "value": 120
+  }
+}

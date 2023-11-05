@@ -21,6 +21,8 @@ public class ModTabAdditions {
                     .displayItems((pParameters, pOutput) -> {
                         //-------------------------//-------------------------//
                         pOutput.accept(new ItemStack(ModBlocksAdditions.CRUSHER.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.PRESS.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.ASSEMBLY.get()));
                         //-------------------------//-------------------------//
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_NUGGET.get()));

@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
-    "bottom": "infinity_nexus_mod:block/crusher_bottom",
-    "front": "infinity_nexus_mod:block/crusher_front",
-    "side": "infinity_nexus_mod:block/crusher_side",
-    "top": "infinity_nexus_mod:block/crusher_top"
+    "bottom": "infinity_nexus_mod:block/crusher/crusher_bottom",
+    "front": "infinity_nexus_mod:block/crusher/crusher_front",
+    "side": "infinity_nexus_mod:block/crusher/crusher_side",
+    "top": "infinity_nexus_mod:block/crusher/crusher_top"
   }
 }

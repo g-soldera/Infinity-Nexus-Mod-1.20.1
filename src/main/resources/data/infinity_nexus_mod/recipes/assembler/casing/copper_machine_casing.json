@@ -1,0 +1,36 @@
+{
+  "type": "infinity_nexus_mod:assembler",
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:copper_sheet"
+    },
+    {
+      "item": "infinity_nexus_mod:copper_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:copper_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:copper_screw"
+    },
+    {
+      "item": "infinity_nexus_mod:copper_sheet"
+    },
+    {
+      "item": "infinity_nexus_mod:copper_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:copper_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:copper_screw"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:copper_machine_casing",
+    "count": 1
+  },
+  "time": {
+    "value": 120
+  }
+}
