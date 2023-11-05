@@ -44,7 +44,21 @@ public class AssemblerScreen extends AbstractContainerScreen<AssemblerMenu> {
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(TEXTURE, x + 133, y + 68, 184, 146, -6, -menu.getScaledProgress());
+            int progress = menu.getScaledProgress();
+            guiGraphics.blit(TEXTURE,
+                    (x + 72 ) + (progress/2),
+                    (y + 20 ) + (progress/2),
+                    176 + (progress/2),
+                    44 + (progress/2),
+                    34 - progress,
+                    34 - progress);
+
+            //guiGraphics.blit(TEXTURE, x + 133, y + 68, 184, 146, -6, -menu.getScaledProgress());
+
+            //guiGraphics.blit(TEXTURE, x + 72, y + 20, 176, 0, 14, menu.getScaledProgress());
+            //guiGraphics.blit(TEXTURE, x + 91, y + 20, 189, 0, 14, menu.getScaledProgress());
+            //guiGraphics.blit(TEXTURE, x + 72, y + 40, 218, 0, menu.getScaledProgress(), 14);
+            //help to render the arrow inverted
 
 
         }
