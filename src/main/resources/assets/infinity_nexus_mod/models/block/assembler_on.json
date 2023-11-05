@@ -4,6 +4,6 @@
     "bottom": "infinity_nexus_mod:block/assembler/assembler_bottom",
     "front": "infinity_nexus_mod:block/assembler/assembler_front_on",
     "side": "infinity_nexus_mod:block/assembler/assembler_side",
-    "top": "infinity_nexus_mod:block/assembler/assembler_top_on"
+    "top": "infinity_nexus_mod:block/assembler/assembler_top"
   }
 }

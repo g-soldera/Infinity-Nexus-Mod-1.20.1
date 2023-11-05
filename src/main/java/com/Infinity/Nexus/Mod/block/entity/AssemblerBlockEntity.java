@@ -47,7 +47,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         }
     };
 
-
     private static final int INPUT_SLOT = 7;
     private static final int OUTPUT_SLOT = 8;
 
@@ -64,16 +63,16 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP,    LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7)),
-                    Direction.DOWN,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7)),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7)),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7)),
-                    Direction.EAST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7)),
-                    Direction.WEST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7)));
+                    Direction.UP,    LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7 && canInsert(i))),
+                    Direction.DOWN,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7 && canInsert(i))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7 && canInsert(i))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7 && canInsert(i))),
+                    Direction.EAST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7 && canInsert(i))),
+                    Direction.WEST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7 && canInsert(i))));
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 0;
+    public int maxProgress = 0;
 
     public AssemblerBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.ASSEMBLY_BE.get(), pPos, pBlockState);
@@ -141,6 +140,10 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         lazyEnergyStorage = LazyOptional.of(() -> ENERGY_STORAGE);
     }
 
+    public boolean canInsert(int slots) {
+        return this.itemHandler.getStackInSlot(slots).getCount() < 1;
+    }
+
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
@@ -190,8 +193,8 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
-        if (!pLevel.isClientSide && !isRedstonePowered(pPos)) {
-            if (hasRecipe() && hasEnoughEnergy()) {
+        if (!pLevel.isClientSide) {
+            if (!isRedstonePowered(pPos) && hasEnoughEnergy() &&  hasRecipe()) {
                 pLevel.setBlock(pPos, pState.setValue(LIT, true), 3);
                 increaseCraftingProgress();
                 extractEnergy(this);
@@ -207,6 +210,8 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
             }
         }
     }
+
+
 
     private void extractEnergy(AssemblerBlockEntity assemblyBlockEntity) {
         assemblyBlockEntity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ, false);

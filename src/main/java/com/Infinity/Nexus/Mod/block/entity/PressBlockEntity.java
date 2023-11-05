@@ -190,8 +190,8 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
-        if (!pLevel.isClientSide && !isRedstonePowered(pPos)) {
-            if (hasRecipe() && hasEnoughEnergy()) {
+        if (!pLevel.isClientSide) {
+            if (!isRedstonePowered(pPos) && hasEnoughEnergy() &&  hasRecipe()) {
                 pLevel.setBlock(pPos, pState.setValue(LIT, true), 3);
                 increaseCraftingProgress();
                 extractEnergy(this);

@@ -3,6 +3,8 @@ package com.Infinity.Nexus.Mod.screen.assembly;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.AssemblerBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
+import com.Infinity.Nexus.Mod.slots.ResultSlot;
+import com.Infinity.Nexus.Mod.slots.SingleItemSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -33,19 +35,19 @@ public class AssemblerMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 59 , 6 ));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 81 , 6 ));
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 103, 6 ));
+            this.addSlot(new SingleItemSlot(iItemHandler, 0, 58 , 6 ));
+            this.addSlot(new SingleItemSlot(iItemHandler, 1, 81 , 6 ));
+            this.addSlot(new SingleItemSlot(iItemHandler, 2, 104, 6 ));
 
-            this.addSlot(new SlotItemHandler(iItemHandler, 3, 59 , 29));
+            this.addSlot(new SingleItemSlot(iItemHandler, 3, 58 , 29));
 
-            this.addSlot(new SlotItemHandler(iItemHandler, 8, 81 , 29));
+            this.addSlot(new ResultSlot(iItemHandler, 8, 81 , 29));
 
-            this.addSlot(new SlotItemHandler(iItemHandler, 4, 103, 29));
+            this.addSlot(new SingleItemSlot(iItemHandler, 4, 104, 29));
 
-            this.addSlot(new SlotItemHandler(iItemHandler, 5, 59 , 52));
-            this.addSlot(new SlotItemHandler(iItemHandler, 6, 81 , 52));
-            this.addSlot(new SlotItemHandler(iItemHandler, 7, 103, 52));
+            this.addSlot(new SingleItemSlot(iItemHandler, 5, 58 , 52));
+            this.addSlot(new SingleItemSlot(iItemHandler, 6, 81 , 52));
+            this.addSlot(new SingleItemSlot(iItemHandler, 7, 104, 52));
 
 
         });
@@ -60,9 +62,12 @@ public class AssemblerMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 18; // This is the height in pixels of your arrow
+        int progressArrowSize = 65; // This is the height in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+    public int getMaxProgress() {
+        return this.data.get(1);
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
