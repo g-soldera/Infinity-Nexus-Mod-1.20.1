@@ -32,8 +32,6 @@ public class ModTabProgression {
                         pOutput.accept(new ItemStack(ModBlocksProgression.ENERGIZED_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.INDUSTRIAL_MACHINE_CASING.get()));
 
-                        pOutput.accept(new ItemStack(ModBlocksProgression.THERMAL_BLOCK.get()));
-
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_WIRE_CAST.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_SCREW_CAST.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_SHEET_CAST.get()));

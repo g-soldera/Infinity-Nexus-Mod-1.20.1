@@ -1,0 +1,19 @@
+{
+  "type": "infinity_nexus_mod:pressing",
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:copper_sheet",
+      "count": 1
+    },
+    {
+      "item": "infinity_nexus_mod:gold_wire_cast"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:copper_wire",
+    "count": 2
+  },
+  "time": {
+    "value": 120
+  }
+}

@@ -240,6 +240,8 @@
 
   "tooltip.infinity_nexus.wipe": "§4Wip",
 
+  "block.infinity_nexus_mod.asphalt": "Asfalto",
+
   "block.infinity_nexus_mod.crusher": "Triturador",
   "block.infinity_nexus_mod.press": "Prensa",
   "block.infinity_nexus_mod.assembly": "Fabricadora"

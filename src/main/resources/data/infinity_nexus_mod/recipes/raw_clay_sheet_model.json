@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ", "ABA", " A "
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:clay_ball"
+    },
+    "B": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "infinity_nexus_mod:raw_sheet_clay_model"
+  }
+}

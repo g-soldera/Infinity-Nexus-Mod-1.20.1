@@ -55,10 +55,6 @@ public class ModBlocksProgression {
                     .strength(6.0f, 6.0f).sound(SoundType.LANTERN)));
 
 
-    public static final RegistryObject<Block> THERMAL_BLOCK = registerBlock("thermal_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops()
-                    .strength(4.0f, 6.0f).sound(SoundType.METAL)));
-
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
             RegistryObject<T> toReturn = BLOCKS.register(name, block);

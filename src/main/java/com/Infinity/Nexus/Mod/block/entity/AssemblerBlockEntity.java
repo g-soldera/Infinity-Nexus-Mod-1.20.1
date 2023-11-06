@@ -194,18 +194,22 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
         if (!pLevel.isClientSide) {
-            if (!isRedstonePowered(pPos) && hasEnoughEnergy() &&  hasRecipe()) {
-                pLevel.setBlock(pPos, pState.setValue(LIT, true), 3);
-                increaseCraftingProgress();
-                extractEnergy(this);
-                setChanged(pLevel, pPos, pState);
+            if(!isRedstonePowered(pPos)) {
+                if (hasEnoughEnergy() && hasRecipe()) {
+                    pLevel.setBlock(pPos, pState.setValue(LIT, true), 3);
+                    increaseCraftingProgress();
+                    extractEnergy(this);
+                    setChanged(pLevel, pPos, pState);
 
-                if (hasProgressFinished()) {
-                    craftItem();
+                    if (hasProgressFinished()) {
+                        craftItem();
+                        resetProgress();
+                    }
+                } else {
                     resetProgress();
+                    pLevel.setBlock(pPos, pState.setValue(LIT, false), 3);
                 }
-            } else {
-                resetProgress();
+            }else{
                 pLevel.setBlock(pPos, pState.setValue(LIT, false), 3);
             }
         }

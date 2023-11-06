@@ -56,14 +56,14 @@ public class AssemblerCategory implements IRecipeCategory<AssemblerRecipes> {
         ItemStack output = recipe.getResultItem(null);
         output.setCount(recipe.getResultCount());
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 59 , 6).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 58 , 6).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.INPUT, 81 , 6).addIngredients(recipe.getIngredients().get(1));
-        builder.addSlot(RecipeIngredientRole.INPUT, 103, 6).addIngredients(recipe.getIngredients().get(2));
-        builder.addSlot(RecipeIngredientRole.INPUT, 59 , 29).addIngredients(recipe.getIngredients().get(3));
-        builder.addSlot(RecipeIngredientRole.INPUT, 103, 29).addIngredients(recipe.getIngredients().get(4));
-        builder.addSlot(RecipeIngredientRole.INPUT, 59 , 52).addIngredients(recipe.getIngredients().get(5));
+        builder.addSlot(RecipeIngredientRole.INPUT, 104, 6).addIngredients(recipe.getIngredients().get(2));
+        builder.addSlot(RecipeIngredientRole.INPUT, 58 , 29).addIngredients(recipe.getIngredients().get(3));
+        builder.addSlot(RecipeIngredientRole.INPUT, 104, 29).addIngredients(recipe.getIngredients().get(4));
+        builder.addSlot(RecipeIngredientRole.INPUT, 58 , 52).addIngredients(recipe.getIngredients().get(5));
         builder.addSlot(RecipeIngredientRole.INPUT, 81 , 52).addIngredients(recipe.getIngredients().get(6));
-        builder.addSlot(RecipeIngredientRole.INPUT, 103, 52).addIngredients(recipe.getIngredients().get(7));
+        builder.addSlot(RecipeIngredientRole.INPUT, 104, 52).addIngredients(recipe.getIngredients().get(7));
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 81 , 29).addItemStack(output);
 
