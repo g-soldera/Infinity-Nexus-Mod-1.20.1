@@ -6,19 +6,16 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class SingleItemSlot extends SlotItemHandler {
-    public SingleItemSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+public class UpgradeSlot extends SlotItemHandler {
+    public UpgradeSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         super(itemHandler, index, xPosition, yPosition);
     }
 
     @Override
-    public int getMaxStackSize(@NotNull ItemStack stack) {
-        return 1;
-    }
-    @Override
     public boolean mayPlace(@NotNull ItemStack stack) {
-        return !(stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get()) || !(stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get());
+        return stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get() || stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get();
     }
+
     @Override
     public int getMaxStackSize() {
         return 1;

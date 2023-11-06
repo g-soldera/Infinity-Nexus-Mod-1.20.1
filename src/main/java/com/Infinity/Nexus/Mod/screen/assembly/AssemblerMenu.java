@@ -5,6 +5,7 @@ import com.Infinity.Nexus.Mod.block.entity.AssemblerBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
 import com.Infinity.Nexus.Mod.slots.ResultSlot;
 import com.Infinity.Nexus.Mod.slots.SingleItemSlot;
+import com.Infinity.Nexus.Mod.slots.UpgradeSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -26,7 +27,7 @@ public class AssemblerMenu extends AbstractContainerMenu {
 
     public AssemblerMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.ASSEMBLY_MENU.get(), pContainerId);
-        checkContainerSize(inv, 9);
+        checkContainerSize(inv, 13);
         blockEntity = ((AssemblerBlockEntity) entity);
         this.level = inv.player.level();
         this.data = data;
@@ -48,6 +49,12 @@ public class AssemblerMenu extends AbstractContainerMenu {
             this.addSlot(new SingleItemSlot(iItemHandler, 5, 58 , 52));
             this.addSlot(new SingleItemSlot(iItemHandler, 6, 81 , 52));
             this.addSlot(new SingleItemSlot(iItemHandler, 7, 104, 52));
+
+
+            this.addSlot(new UpgradeSlot(iItemHandler, 9, 12, 6));
+            this.addSlot(new UpgradeSlot(iItemHandler, 10, 35, 6));
+            this.addSlot(new UpgradeSlot(iItemHandler, 11, 12, 30));
+            this.addSlot(new UpgradeSlot(iItemHandler, 12, 35, 30));
 
 
         });
@@ -86,7 +93,7 @@ public class AssemblerMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 9;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 13;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);

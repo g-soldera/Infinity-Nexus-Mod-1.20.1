@@ -1,6 +1,8 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
+import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.custom.Assembler;
+import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.AssemblerRecipes;
 import com.Infinity.Nexus.Mod.screen.assembly.AssemblerMenu;
 import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
@@ -35,7 +37,7 @@ import java.util.Optional;
 import static com.Infinity.Nexus.Mod.block.custom.Assembler.LIT;
 
 public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(9) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(13) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -63,12 +65,12 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP,    LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7 && canInsert(i))),
-                    Direction.DOWN,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7 && canInsert(i))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7 && canInsert(i))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7 && canInsert(i))),
-                    Direction.EAST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7 && canInsert(i))),
-                    Direction.WEST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i <= 7 && canInsert(i))));
+                    Direction.UP,    LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && canInsert(i, s))),
+                    Direction.DOWN,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && canInsert(i, s))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && canInsert(i, s))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && canInsert(i, s))),
+                    Direction.EAST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && canInsert(i, s))),
+                    Direction.WEST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && canInsert(i, s))));
 
     protected final ContainerData data;
     private int progress = 0;
@@ -140,9 +142,12 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         lazyEnergyStorage = LazyOptional.of(() -> ENERGY_STORAGE);
     }
 
-    public boolean canInsert(int slots) {
-        return this.itemHandler.getStackInSlot(slots).getCount() < 1;
+    public boolean canInsert(int slots, ItemStack stack) {
+        return this.itemHandler.getStackInSlot(slots).getCount() < 1
+                && !(stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get())
+                && !(stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get());
     }
+
 
     @Override
     public void invalidateCaps() {
@@ -150,7 +155,15 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         lazyItemHandler.invalidate();
         lazyEnergyStorage.invalidate();
     }
-
+    private int getSpeed(ItemStackHandler itemHandler) {
+        int speed = 0;
+        for (int i = 9; i < 12; i++) {
+            if (itemHandler.getStackInSlot(i).getItem() == ModItemsAdditions.SPEED_UPGRADE.get()) {
+                speed ++;
+            }
+        }
+        return speed;
+    }
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -183,7 +196,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
         super.saveAdditional(pTag);
     }
-
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
@@ -191,7 +203,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         progress = pTag.getInt("assembly.progress");
         ENERGY_STORAGE.setEnergy(pTag.getInt("assembly_energy"));
     }
-
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
         if (!pLevel.isClientSide) {
             if(!isRedstonePowered(pPos)) {
@@ -214,22 +225,16 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
             }
         }
     }
-
-
-
     private void extractEnergy(AssemblerBlockEntity assemblyBlockEntity) {
         assemblyBlockEntity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ, false);
     }
-
     private boolean hasEnoughEnergy() {
 
         return ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQ * maxProgress;
     }
-
     private void resetProgress() {
         progress = 0;
     }
-
     private void craftItem() {
         Optional<AssemblerRecipes> recipe = getCurrentRecipe();
         ItemStack result = recipe.get().getResultItem(null);
@@ -241,7 +246,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(),
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
     }
-
     private boolean hasRecipe() {
         Optional<AssemblerRecipes> recipe = getCurrentRecipe();
 
@@ -253,7 +257,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemIntoOutputSlot(result.getItem());
     }
-
     private Optional<AssemblerRecipes> getCurrentRecipe() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -261,32 +264,25 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         }
         return this.level.getRecipeManager().getRecipeFor(AssemblerRecipes.Type.INSTANCE, inventory, this.level);
     }
-
     private boolean canInsertItemIntoOutputSlot(Item item) {
         return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() || this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item);
     }
-
     private boolean canInsertAmountIntoOutputSlot(int count) {
         return this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + count <= this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
     }
-
     private boolean isRedstonePowered(BlockPos pPos) {
         return this.level.hasNeighborSignal(pPos);
     }
-
     private boolean hasProgressFinished() {
         maxProgress = getCurrentRecipe().get().getTime();
         return progress >= maxProgress;
     }
-
     private void increaseCraftingProgress() {
-        progress++;
+        progress += + getSpeed(this.itemHandler) + 1;
     }
-
     public static int getInputSlot() {
         return INPUT_SLOT;
     }
-
     public static int getOutputSlot() {
         return OUTPUT_SLOT;
     }
