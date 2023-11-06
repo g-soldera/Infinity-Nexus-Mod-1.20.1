@@ -1,10 +1,10 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "infinity_nexus_mod:raw_wire_rod_model"
+    "item": "infinity_nexus_mod:raw_wire_clay_model"
   },
   "result": {
-    "item": "infinity_nexus_mod:wire_rod_model",
+    "item": "infinity_nexus_mod:wire_clay_model",
     "count": 1
   },
   "experience": 0.1,

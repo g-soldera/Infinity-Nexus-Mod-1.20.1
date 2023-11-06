@@ -5,15 +5,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CrusherRecipes implements Recipe<SimpleContainer> {
@@ -21,6 +20,7 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
     private final ItemStack output;
     private final ResourceLocation id;
     private final int time;
+
 
     public CrusherRecipes(NonNullList<Ingredient> inputItems, ItemStack output, ResourceLocation id, int time) {
         this.inputItems = inputItems;
@@ -39,12 +39,13 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public NonNullList<Ingredient> getIngredients() {
+    public @NotNull NonNullList<Ingredient> getIngredients() {
         return inputItems;
     }
 
+
     @Override
-    public ItemStack assemble(SimpleContainer pContainer, RegistryAccess pRegistryAccess) {
+    public @NotNull ItemStack assemble(@NotNull SimpleContainer pContainer, RegistryAccess pRegistryAccess) {
         return output.copy();
     }
 
@@ -54,7 +55,7 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public  ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public @NotNull ItemStack getResultItem(RegistryAccess pRegistryAccess) {
         return output.copy();
     }
     public int getTime() {

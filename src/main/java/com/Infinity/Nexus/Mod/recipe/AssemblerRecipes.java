@@ -47,6 +47,7 @@ public class AssemblerRecipes implements Recipe<SimpleContainer> {
     @Override
     public NonNullList<Ingredient> getIngredients() {
         return inputItems;
+
     }
 
     @Override

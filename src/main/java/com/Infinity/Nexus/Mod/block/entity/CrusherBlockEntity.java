@@ -1,12 +1,14 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
 import com.Infinity.Nexus.Mod.block.custom.Crusher;
+import com.Infinity.Nexus.Mod.compat.CrusherCategory;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.CrusherRecipes;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherMenu;
 import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
@@ -18,6 +20,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -62,19 +65,24 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private LazyOptional<IEnergyStorage> lazyEnergyStorage = LazyOptional.empty();
 
+
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP,    LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0)),
-                    Direction.DOWN,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0)),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0)),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0)),
-                    Direction.EAST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0)),
-                    Direction.WEST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0)));
+                    Direction.UP,    LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 )),
+                    Direction.DOWN,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 )),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 )),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 )),
+                    Direction.EAST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 )),
+                    Direction.WEST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 )));
 
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 0;
 
+
+    public static class Serializer extends CrusherRecipes.Serializer {
+
+    }
     public CrusherBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.CRUSHER_BE.get(), pPos, pBlockState);
         this.data = new ContainerData() {
