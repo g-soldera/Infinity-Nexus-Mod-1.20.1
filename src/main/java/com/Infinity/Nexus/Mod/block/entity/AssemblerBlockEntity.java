@@ -1,6 +1,5 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
-import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.custom.Assembler;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.AssemblerRecipes;
@@ -9,7 +8,11 @@ import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -52,12 +55,20 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     private static final int INPUT_SLOT = 7;
     private static final int OUTPUT_SLOT = 8;
 
-    private final ModEnergyStorage ENERGY_STORAGE = new ModEnergyStorage(60000, 256){
-        @Override
-        public void onEnergyChanged() {
-            setChanged();
-        }
-    };
+    private static final int capacity = 60000;
+
+    private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
+
+    private ModEnergyStorage createEnergyStorage() {
+        return new ModEnergyStorage(capacity, 265){
+            @Override
+            public void onEnergyChanged() {
+                setChanged();
+                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        };
+    }
+
     private static final int ENERGY_REQ = 32;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
@@ -142,18 +153,16 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         lazyEnergyStorage = LazyOptional.of(() -> ENERGY_STORAGE);
     }
 
-    public boolean canInsert(int slots, ItemStack stack) {
-        return this.itemHandler.getStackInSlot(slots).getCount() < 1
-                && !(stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get())
-                && !(stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get());
-    }
-
-
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
         lazyItemHandler.invalidate();
         lazyEnergyStorage.invalidate();
+    }
+    public boolean canInsert(int slots, ItemStack stack) {
+        return this.itemHandler.getStackInSlot(slots).getCount() < 1
+                && !(stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get())
+                && !(stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get());
     }
     private int getSpeed(ItemStackHandler itemHandler) {
         int speed = 0;
@@ -171,19 +180,19 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         }
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-
     @Override
     public Component getDisplayName() {
         return Component.translatable("block.infinity_nexus_mod.assembly");
     }
+
 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
         return new AssemblerMenu(pContainerId, pPlayerInventory, this, this.data);
     }
-    public int getEnergyStorage() {
-        return ENERGY_STORAGE.getEnergyStored();
+    public IEnergyStorage getEnergyStorage() {
+        return ENERGY_STORAGE;
     }
     public void setEnergyLevel(int energy) {
         this.ENERGY_STORAGE.setEnergy(energy);
@@ -191,8 +200,8 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
-        pTag.putInt("assembly.progress", progress);
-        pTag.putInt("assembly_energy", ENERGY_STORAGE.getEnergyStored());
+        pTag.putInt("assembler.progress", progress);
+        pTag.putInt("assembler.energy", ENERGY_STORAGE.getEnergyStored());
 
         super.saveAdditional(pTag);
     }
@@ -200,8 +209,8 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     public void load(CompoundTag pTag) {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
-        progress = pTag.getInt("assembly.progress");
-        ENERGY_STORAGE.setEnergy(pTag.getInt("assembly_energy"));
+        progress = pTag.getInt("assembler.progress");
+        ENERGY_STORAGE.setEnergy(pTag.getInt("assembler.energy"));
     }
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
         if (!pLevel.isClientSide) {
@@ -229,8 +238,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         assemblyBlockEntity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ, false);
     }
     private boolean hasEnoughEnergy() {
-
-        return ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQ * maxProgress;
+        return ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQ;
     }
     private void resetProgress() {
         progress = 0;
@@ -242,7 +250,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         for (int i = 0; i <= INPUT_SLOT; i++) {
             this.itemHandler.extractItem(i, 1, false);
         }
-
+        //TODO Extract lubrifier
         this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(),
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
     }
@@ -278,7 +286,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         return progress >= maxProgress;
     }
     private void increaseCraftingProgress() {
-        progress += + getSpeed(this.itemHandler) + 1;
+        progress += getSpeed(this.itemHandler) + 1;
     }
     public static int getInputSlot() {
         return INPUT_SLOT;
@@ -287,5 +295,17 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         return OUTPUT_SLOT;
     }
 
-
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+    @Override
+    public CompoundTag getUpdateTag() {
+        return saveWithFullMetadata();
+    }
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+    }
 }

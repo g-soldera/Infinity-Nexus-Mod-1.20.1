@@ -1,6 +1,8 @@
 package com.Infinity.Nexus.Mod.screen.press;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.screen.renderer.EnergyInfoArea;
+import com.Infinity.Nexus.Mod.screen.renderer.InfoArea;
 import com.Infinity.Nexus.Mod.utils.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
@@ -10,10 +12,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
+import java.util.Optional;
+
 public class PressScreen extends AbstractContainerScreen<PressMenu> {
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(InfinityNexusMod.MOD_ID, "textures/gui/press_gui.png");
-
+    private EnergyInfoArea energyInfoArea;
     public PressScreen(PressMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
@@ -26,8 +30,14 @@ public class PressScreen extends AbstractContainerScreen<PressMenu> {
         super.init();
         this.inventoryLabelY = 10000;
         this.titleLabelY = 10000;
+        assignEnergyInfoArea();
     }
+    private void assignEnergyInfoArea() {
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
 
+        energyInfoArea = new EnergyInfoArea(x + 159, y + 6, menu.getBlockEntity().getEnergyStorage());
+    }
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -40,6 +50,7 @@ public class PressScreen extends AbstractContainerScreen<PressMenu> {
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(guiGraphics, x, y);
+        energyInfoArea.render(guiGraphics);
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
@@ -57,10 +68,20 @@ public class PressScreen extends AbstractContainerScreen<PressMenu> {
 
     @Override
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
         pGuiGraphics.drawString(this.font,this.playerInventoryTitle,8,74,0XFFFFFF);
         pGuiGraphics.drawString(this.font,this.title,8,-9,0XFFFFFF);
 
+        renderEnergyAreaTooltips(pGuiGraphics,pMouseX,pMouseY, x, y);
+
+        InfoArea.draw(pGuiGraphics);
         super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
+    }
+    private void renderEnergyAreaTooltips(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, int x, int y) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 159,  6, 6, 62)) {
+            pGuiGraphics.renderTooltip(this.font, energyInfoArea.getTooltips(), Optional.empty(), pMouseX - x, pMouseY - y);
+        }
     }
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
         return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);

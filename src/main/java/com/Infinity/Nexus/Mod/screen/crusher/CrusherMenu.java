@@ -3,6 +3,9 @@ package com.Infinity.Nexus.Mod.screen.crusher;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.CrusherBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
+import com.Infinity.Nexus.Mod.slots.InputSlot;
+import com.Infinity.Nexus.Mod.slots.ResultSlot;
+import com.Infinity.Nexus.Mod.slots.UpgradeSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -11,8 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.items.SlotItemHandler;
 
 public class CrusherMenu extends AbstractContainerMenu {
     public final CrusherBlockEntity blockEntity;
@@ -20,12 +21,12 @@ public class CrusherMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public CrusherMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(TE_INVENTORY_SLOT_COUNT));
     }
 
     public CrusherMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.CRUSHER_MENU.get(), pContainerId);
-        checkContainerSize(inv, 2);
+        checkContainerSize(inv, TE_INVENTORY_SLOT_COUNT);
         blockEntity = ((CrusherBlockEntity) entity);
         this.level = inv.player.level();
         this.data = data;
@@ -34,8 +35,16 @@ public class CrusherMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 11));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 47));
+            this.addSlot(new InputSlot(iItemHandler, 0, 80, 11));
+            this.addSlot(new ResultSlot(iItemHandler, 1, 80, 47));
+
+
+            this.addSlot(new UpgradeSlot(iItemHandler, 2, 12, 6));
+            this.addSlot(new UpgradeSlot(iItemHandler, 3, 35, 6));
+            this.addSlot(new UpgradeSlot(iItemHandler, 4, 12, 29));
+            this.addSlot(new UpgradeSlot(iItemHandler, 5, 35, 29));
+
+
         });
 
         addDataSlots(data);
@@ -44,11 +53,13 @@ public class CrusherMenu extends AbstractContainerMenu {
     public boolean isCrafting() {
         return data.get(0) > 0;
     }
-
+    public CrusherBlockEntity getBlockEntity(){
+        return blockEntity;
+    }
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 18; // This is the height in pixels of your arrow
+        int progressArrowSize = 14; // This is the height in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
@@ -69,7 +80,7 @@ public class CrusherMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 6;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);

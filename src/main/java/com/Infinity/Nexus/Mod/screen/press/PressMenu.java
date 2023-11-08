@@ -3,6 +3,9 @@ package com.Infinity.Nexus.Mod.screen.press;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
+import com.Infinity.Nexus.Mod.slots.InputSlot;
+import com.Infinity.Nexus.Mod.slots.ResultSlot;
+import com.Infinity.Nexus.Mod.slots.UpgradeSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -19,12 +22,12 @@ public class PressMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public PressMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(7));
     }
 
     public PressMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.PRESS_MENU.get(), pContainerId);
-        checkContainerSize(inv, 3);
+        checkContainerSize(inv, 7);
         blockEntity = ((PressBlockEntity) entity);
         this.level = inv.player.level();
         this.data = data;
@@ -33,9 +36,15 @@ public class PressMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 11));
+            this.addSlot(new InputSlot(iItemHandler, 0, 80, 11));
             this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 47));
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 116, 29));
+            this.addSlot(new ResultSlot(iItemHandler, 2, 116, 29));
+
+
+            this.addSlot(new UpgradeSlot(iItemHandler, 3, 12, 6));
+            this.addSlot(new UpgradeSlot(iItemHandler, 4, 35, 6));
+            this.addSlot(new UpgradeSlot(iItemHandler, 5, 12, 29));
+            this.addSlot(new UpgradeSlot(iItemHandler, 6, 35, 29));
         });
 
         addDataSlots(data);
@@ -43,6 +52,9 @@ public class PressMenu extends AbstractContainerMenu {
 
     public boolean isCrafting() {
         return data.get(0) > 0;
+    }
+    public PressBlockEntity getBlockEntity() {
+        return blockEntity;
     }
 
     public int getScaledProgress() {
@@ -69,7 +81,7 @@ public class PressMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 7;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);

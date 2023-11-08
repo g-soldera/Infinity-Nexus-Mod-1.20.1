@@ -14,7 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
 
 public class AssemblerMenu extends AbstractContainerMenu {
     public final AssemblerBlockEntity blockEntity;
@@ -22,12 +21,12 @@ public class AssemblerMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public AssemblerMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(9));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(TE_INVENTORY_SLOT_COUNT));
     }
 
     public AssemblerMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.ASSEMBLY_MENU.get(), pContainerId);
-        checkContainerSize(inv, 13);
+        checkContainerSize(inv, TE_INVENTORY_SLOT_COUNT);
         blockEntity = ((AssemblerBlockEntity) entity);
         this.level = inv.player.level();
         this.data = data;
@@ -52,9 +51,9 @@ public class AssemblerMenu extends AbstractContainerMenu {
 
 
             this.addSlot(new UpgradeSlot(iItemHandler, 9, 12, 6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 10, 35, 6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 11, 12, 30));
-            this.addSlot(new UpgradeSlot(iItemHandler, 12, 35, 30));
+            this.addSlot(new UpgradeSlot(iItemHandler, 10, 35,6));
+            this.addSlot(new UpgradeSlot(iItemHandler, 11, 12,29));
+            this.addSlot(new UpgradeSlot(iItemHandler, 12, 35,29));
 
 
         });
@@ -65,16 +64,15 @@ public class AssemblerMenu extends AbstractContainerMenu {
     public boolean isCrafting() {
         return data.get(0) > 0;
     }
-
+    public AssemblerBlockEntity getBlockEntity(){
+        return blockEntity;
+    }
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);  // Max Progress
         int progressArrowSize = 14; // This is the height in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
-    public int getMaxProgress() {
-        return this.data.get(1);
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons

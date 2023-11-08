@@ -21,6 +21,7 @@ public class InfinityArmorItem extends ArmorItem {
         super(material, type, settings);
     }
 
+
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
 

@@ -7,12 +7,14 @@ import com.Infinity.Nexus.Mod.config.ModCommonConfigs;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.loot.ModLootModifiers;
+import com.Infinity.Nexus.Mod.networking.ModMessages;
 import com.Infinity.Nexus.Mod.recipe.ModRecipes;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
 import com.Infinity.Nexus.Mod.screen.assembly.AssemblerScreen;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherScreen;
 import com.Infinity.Nexus.Mod.screen.press.PressScreen;
 import com.Infinity.Nexus.Mod.tab.ModTabAdditions;
+import com.Infinity.Nexus.Mod.tab.ModTabEconomy;
 import com.Infinity.Nexus.Mod.tab.ModTabProgression;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -51,6 +53,7 @@ public class InfinityNexusMod
 
         ModTabAdditions.register(modEventBus);
         ModTabProgression.register(modEventBus);
+        ModTabEconomy.register(modEventBus);
 
         ModLootModifiers.register(modEventBus);
 
@@ -70,8 +73,9 @@ public class InfinityNexusMod
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-
-
+        event.enqueueWork(() -> {
+            ModMessages.register();
+        });
     }
 
     // Add the example block item to the building blocks tab

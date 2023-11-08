@@ -1,6 +1,8 @@
 package com.Infinity.Nexus.Mod.screen.assembly;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.screen.renderer.EnergyInfoArea;
+import com.Infinity.Nexus.Mod.screen.renderer.InfoArea;
 import com.Infinity.Nexus.Mod.utils.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
@@ -10,23 +12,50 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
+import java.util.Optional;
+
 public class AssemblerScreen extends AbstractContainerScreen<AssemblerMenu> {
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(InfinityNexusMod.MOD_ID, "textures/gui/assembly_gui.png");
 
+    private EnergyInfoArea energyInfoArea;
+
     public AssemblerScreen(AssemblerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
-
-
-
-
     @Override
     protected void init() {
         super.init();
         this.inventoryLabelY = 10000;
         this.titleLabelY = 10000;
+        assignEnergyInfoArea();
     }
+
+    private void assignEnergyInfoArea() {
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
+
+        energyInfoArea = new EnergyInfoArea(x + 159, y + 6, menu.getBlockEntity().getEnergyStorage());
+    }
+    @Override
+    protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
+        pGuiGraphics.drawString(this.font,this.playerInventoryTitle,8,74,0XFFFFFF);
+        pGuiGraphics.drawString(this.font,this.title,8,-9,0XFFFFFF);
+
+        renderEnergyAreaTooltips(pGuiGraphics,pMouseX,pMouseY, x, y);
+
+        InfoArea.draw(pGuiGraphics);
+        super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
+    }
+
+    private void renderEnergyAreaTooltips(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, int x, int y) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 159,  6, 6, 62)) {
+            pGuiGraphics.renderTooltip(this.font, energyInfoArea.getTooltips(), Optional.empty(), pMouseX - x, pMouseY - y);
+        }
+    }
+
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
@@ -39,35 +68,22 @@ public class AssemblerScreen extends AbstractContainerScreen<AssemblerMenu> {
         guiGraphics.blit(TEXTURE, x + 2, y-13, 176, 24, 80, 64);
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
+
         renderProgressArrow(guiGraphics, x, y);
+        energyInfoArea.render(guiGraphics);
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            int progress = menu.getScaledProgress();
-            //guiGraphics.blit(TEXTURE,
-            //        (x + 72 ) + (progress/2),
-            //        (y + 20 ) + (progress/2),
-            //        176 + (progress/2),
-            //        44 + (progress/2),
-            //        34 - progress,
-            //        34 - progress);
-
-            //guiGraphics.blit(TEXTURE, x + 133, y + 68, 184, 146, -6, -menu.getScaledProgress());
-
             guiGraphics.blit(TEXTURE, x + 72, y + 20, 176, 0, 14, menu.getScaledProgress());
             guiGraphics.blit(TEXTURE, x + 91, y + 20, 189, 0, 14+1, menu.getScaledProgress());
             guiGraphics.blit(TEXTURE, x + 72, y + 40, 218, 0, menu.getScaledProgress(), 14);
             guiGraphics.blit(TEXTURE, x + 106, y + 54, 218, 14, -14, -menu.getScaledProgress());
 
-
             guiGraphics.blit(TEXTURE, x + 85, y + 20, 184, 47, 14, menu.getScaledProgress());
             guiGraphics.blit(TEXTURE, x + 93, y + 54, 184, 61, -8, -menu.getScaledProgress());
             guiGraphics.blit(TEXTURE, x + 72, y + 33, 176, 38, menu.getScaledProgress(), 8);
             guiGraphics.blit(TEXTURE, x + 106, y + 41, 204, 46, -menu.getScaledProgress(), -8);
-
-            //help to render the arrow inverted
-
 
         }
     }
@@ -79,13 +95,6 @@ public class AssemblerScreen extends AbstractContainerScreen<AssemblerMenu> {
         renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
-    @Override
-    protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
-        pGuiGraphics.drawString(this.font,this.playerInventoryTitle,8,74,0XFFFFFF);
-        pGuiGraphics.drawString(this.font,this.title,8,-9,0XFFFFFF);
-
-        super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
-    }
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
         return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }
