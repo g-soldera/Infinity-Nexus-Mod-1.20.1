@@ -1,5 +1,6 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
+import com.Infinity.Nexus.Mod.block.custom.Assembler;
 import com.Infinity.Nexus.Mod.block.custom.Crusher;
 import com.Infinity.Nexus.Mod.compat.CrusherCategory;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
@@ -66,10 +67,11 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
             @Override
             public void onEnergyChanged() {
                 setChanged();
-                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 4);
             }
         };
     }
+
     private static final int ENERGY_REQ = 32;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
@@ -78,12 +80,12 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP,    LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && canInsert(i, s))),
-                    Direction.DOWN,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && canInsert(i, s))),
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && canInsert(i, s))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && canInsert(i, s))),
                     Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && canInsert(i, s))),
                     Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && canInsert(i, s))),
-                    Direction.EAST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && canInsert(i, s))),
-                    Direction.WEST,  LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && canInsert(i, s))));
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && canInsert(i, s))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && canInsert(i, s))));
 
     protected final ContainerData data;
     private int progress = 0;
@@ -120,7 +122,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
 
-        if(cap == ForgeCapabilities.ENERGY){
+        if (cap == ForgeCapabilities.ENERGY) {
             return lazyEnergyStorage.cast();
         }
 
@@ -162,20 +164,23 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         lazyItemHandler.invalidate();
         lazyEnergyStorage.invalidate();
     }
+
     public boolean canInsert(int slots, ItemStack stack) {
         return this.itemHandler.getStackInSlot(slots).getCount() < 1
                 && !(stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get())
                 && !(stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get());
     }
+
     private int getSpeed(ItemStackHandler itemHandler) {
         int speed = 0;
         for (int i = 2; i < 6; i++) {
             if (itemHandler.getStackInSlot(i).getItem() == ModItemsAdditions.SPEED_UPGRADE.get()) {
-                speed ++;
+                speed++;
             }
         }
         return speed;
     }
+
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -183,6 +188,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         }
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
+
     @Override
     public Component getDisplayName() {
         return Component.translatable("block.infinity_nexus_mod.crusher");
@@ -193,13 +199,16 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
         return new CrusherMenu(pContainerId, pPlayerInventory, this, this.data);
     }
+
     public IEnergyStorage getEnergyStorage() {
         System.out.println(ENERGY_STORAGE.getEnergyStored());
         return ENERGY_STORAGE;
     }
+
     public void setEnergyLevel(int energy) {
         this.ENERGY_STORAGE.setEnergy(energy);
     }
+
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
@@ -218,23 +227,33 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
-        if (!pLevel.isClientSide) {
-            if(!isRedstonePowered(pPos)) {
-                if (hasEnoughEnergy() && hasRecipe()) {
-                    pLevel.setBlock(pPos, pState.setValue(LIT, true), 3);
-                    increaseCraftingProgress();
-                    extractEnergy(this);
-                    setChanged(pLevel, pPos, pState);
 
-                    if (hasProgressFinished()) {
-                        craftItem();
-                        resetProgress();
-                    }
-                } else {
-                    resetProgress();
-                    pLevel.setBlock(pPos, pState.setValue(LIT, false), 3);
-                }
-            }
+        if (pLevel.isClientSide) {
+            return;
+        }
+
+        if (isRedstonePowered(pPos)) {
+            pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, false), 3);
+            return;
+        }
+
+        if (!hasEnoughEnergy()) {
+            return;
+        }
+
+        if (!hasRecipe()) {
+            resetProgress();
+            pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, false), 3);
+            return;
+        }
+        pLevel.setBlock(pPos, pState.setValue(LIT, true), 3);
+        increaseCraftingProgress();
+        extractEnergy(this);
+        setChanged(pLevel, pPos, pState);
+
+        if (hasProgressFinished()) {
+            craftItem();
+            resetProgress();
         }
     }
 
@@ -283,34 +302,43 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     private boolean canInsertItemIntoOutputSlot(Item item) {
         return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() || this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item);
     }
+
     private boolean canInsertAmountIntoOutputSlot(int count) {
         return this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + count <= this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
     }
+
     private boolean isRedstonePowered(BlockPos pPos) {
         return this.level.hasNeighborSignal(pPos);
     }
+
     private boolean hasProgressFinished() {
         maxProgress = getCurrentRecipe().get().getTime();
         return progress >= maxProgress;
     }
+
     private void increaseCraftingProgress() {
         progress += getSpeed(this.itemHandler) + 1;
     }
+
     public static int getInputSlot() {
         return INPUT_SLOT;
     }
+
     public static int getOutputSlot() {
         return OUTPUT_SLOT;
     }
+
     @Nullable
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
+
     @Override
     public CompoundTag getUpdateTag() {
         return saveWithFullMetadata();
     }
+
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         super.onDataPacket(net, pkt);

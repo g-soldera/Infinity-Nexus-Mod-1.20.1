@@ -5,11 +5,13 @@ import com.Infinity.Nexus.Mod.block.custom.Asphalt;
 import com.Infinity.Nexus.Mod.block.custom.Assembler;
 import com.Infinity.Nexus.Mod.block.custom.Crusher;
 import com.Infinity.Nexus.Mod.block.custom.Press;
+import com.Infinity.Nexus.Mod.fluid.ModFluids;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -38,6 +40,7 @@ public class ModBlocksAdditions {
         public static final RegistryObject<Block> CRUSHER = registerBlock("crusher",() -> new Crusher(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(LIT) ? 2 : 0).noOcclusion()));
         public static final RegistryObject<Block> PRESS = registerBlock("press",() -> new Press(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(LIT) ? 2 : 0).noOcclusion()));
         public static final RegistryObject<Block> ASSEMBLY = registerBlock("assembler",() -> new Assembler(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(LIT) ? 2 : 0).noOcclusion()));
+        public static final RegistryObject<LiquidBlock> LUBRICANT = BLOCKS.register("lubricant", () -> new LiquidBlock(ModFluids.LUBRICANT_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
 
 
 

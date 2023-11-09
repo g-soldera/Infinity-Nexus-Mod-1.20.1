@@ -1,5 +1,6 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
+import com.Infinity.Nexus.Mod.block.custom.Assembler;
 import com.Infinity.Nexus.Mod.block.custom.Press;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.PressRecipes;
@@ -40,7 +41,7 @@ import java.util.Optional;
 import static com.Infinity.Nexus.Mod.block.custom.Press.LIT;
 
 public class PressBlockEntity extends BlockEntity implements MenuProvider {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(7) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(8) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -54,6 +55,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
 
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 2;
+    //private static final int COMPONENT_SLOT = 7;
     private static final int capacity = 60000;
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
@@ -218,23 +220,34 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
-        if (!pLevel.isClientSide) {
-            if (!isRedstonePowered(pPos)) {
-                if (hasEnoughEnergy() && hasRecipe()) {
-                    pLevel.setBlock(pPos, pState.setValue(LIT, true), 3);
-                    increaseCraftingProgress();
-                    extractEnergy(this);
-                    setChanged(pLevel, pPos, pState);
+        if (pLevel.isClientSide) {
+            return;
+        }
 
-                    if (hasProgressFinished()) {
-                        craftItem();
-                        resetProgress();
-                    }
-                } else {
-                    resetProgress();
-                    pLevel.setBlock(pPos, pState.setValue(LIT, false), 3);
-                }
-            }
+        if (isRedstonePowered(pPos)) {
+            pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, false), 3);
+            return;
+        }
+
+        if (!hasEnoughEnergy()) {
+            return;
+        }
+
+        if (!hasRecipe()) {
+            resetProgress();
+            pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, false), 3);
+            return;
+        }
+
+        pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, true), 3);
+        increaseCraftingProgress();
+        extractEnergy(this);
+        setChanged(pLevel, pPos, pState);
+
+
+        if (hasProgressFinished()) {
+            craftItem();
+            resetProgress();
         }
     }
 

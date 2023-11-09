@@ -3,6 +3,7 @@ package com.Infinity.Nexus.Mod.screen.press;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
+import com.Infinity.Nexus.Mod.slots.ComponentSlot;
 import com.Infinity.Nexus.Mod.slots.InputSlot;
 import com.Infinity.Nexus.Mod.slots.ResultSlot;
 import com.Infinity.Nexus.Mod.slots.UpgradeSlot;
@@ -22,12 +23,12 @@ public class PressMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public PressMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(7));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(TE_INVENTORY_SLOT_COUNT));
     }
 
     public PressMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.PRESS_MENU.get(), pContainerId);
-        checkContainerSize(inv, 7);
+        checkContainerSize(inv, TE_INVENTORY_SLOT_COUNT);
         blockEntity = ((PressBlockEntity) entity);
         this.level = inv.player.level();
         this.data = data;
@@ -45,6 +46,8 @@ public class PressMenu extends AbstractContainerMenu {
             this.addSlot(new UpgradeSlot(iItemHandler, 4, 35, 6));
             this.addSlot(new UpgradeSlot(iItemHandler, 5, 12, 29));
             this.addSlot(new UpgradeSlot(iItemHandler, 6, 35, 29));
+
+            this.addSlot(new ComponentSlot(iItemHandler, 7, 24, 52));
         });
 
         addDataSlots(data);
@@ -81,7 +84,7 @@ public class PressMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 7;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 8;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);

@@ -70,6 +70,17 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_BOOTS.get()));
 
+                        pOutput.accept(new ItemStack(ModItemsAdditions.BUCKET_LUBRICANT.get()));
+
+                        pOutput.accept(new ItemStack(ModItemsAdditions.REDSTONE_COMPONENT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.BASIC_COMPONENT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.REINFORCED_COMPONENT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.LOGIC_COMPONENT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ADVANCED_COMPONENT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.REFINED_COMPONENT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.INTEGRAL_COMPONENT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_COMPONENT.get()));
+
                         //-------------------------//-------------------------//
                     })
                     .build());
