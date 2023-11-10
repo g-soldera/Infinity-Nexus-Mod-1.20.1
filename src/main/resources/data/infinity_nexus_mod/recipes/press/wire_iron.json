@@ -1,5 +1,6 @@
 {
   "type": "infinity_nexus_mod:pressing",
+  "component" : "infinity_nexus_mod:logic_component",
   "ingredients": [
     {
       "item": "infinity_nexus_mod:iron_sheet",
@@ -14,6 +15,6 @@
     "count": 2
   },
   "time": {
-    "value": 120
+    "value": 1200
   }
 }

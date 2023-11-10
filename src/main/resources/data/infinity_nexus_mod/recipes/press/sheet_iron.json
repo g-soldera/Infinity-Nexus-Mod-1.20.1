@@ -1,5 +1,6 @@
 {
   "type": "infinity_nexus_mod:pressing",
+  "component" : "infinity_nexus_mod:redstone_component",
   "ingredients": [
     {
       "item": "minecraft:iron_ingot",
@@ -14,6 +15,6 @@
     "count": 1
   },
   "time": {
-    "value": 120
+    "value": 1200
   }
 }

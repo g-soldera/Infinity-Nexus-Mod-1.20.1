@@ -5,6 +5,7 @@ import com.Infinity.Nexus.Mod.block.custom.Press;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.PressRecipes;
 import com.Infinity.Nexus.Mod.screen.press.PressMenu;
+import com.Infinity.Nexus.Mod.utils.ModUtils;
 import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -38,8 +39,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.Infinity.Nexus.Mod.block.custom.Press.LIT;
-
 public class PressBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(8) {
         @Override
@@ -55,7 +54,8 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
 
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 2;
-    //private static final int COMPONENT_SLOT = 7;
+    private static final int UPGRADE_SLOTS = 3;
+    private static final int COMPONENT_SLOT = 7;
     private static final int capacity = 60000;
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
@@ -77,12 +77,12 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> i == 0 && canInsert(i, s))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> i == 0 && canInsert(i, s))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> i == 0 && canInsert(i, s))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> i == 0 && canInsert(i, s))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> i == 0 && canInsert(i, s))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> i == 0 && canInsert(i, s))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> i == 0 && ModUtils.canInsert(i, s, itemHandler))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> i == 0 && ModUtils.canInsert(i, s, itemHandler))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> i == 0 && ModUtils.canInsert(i, s, itemHandler))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> i == 0 && ModUtils.canInsert(i, s, itemHandler))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> i == 0 && ModUtils.canInsert(i, s, itemHandler))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> i == 0 && ModUtils.canInsert(i, s, itemHandler))));
 
     protected final ContainerData data;
     private int progress = 0;
@@ -161,15 +161,6 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         lazyEnergyStorage.invalidate();
     }
 
-    private int getSpeed(ItemStackHandler itemHandler) {
-        int speed = 0;
-        for (int i = 1; i < 2; i++) {
-            if (itemHandler.getStackInSlot(i).getItem() == ModItemsAdditions.SPEED_UPGRADE.get()) {
-                speed++;
-            }
-        }
-        return speed;
-    }
 
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
@@ -179,15 +170,10 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public boolean canInsert(int slots, ItemStack stack) {
-        return this.itemHandler.getStackInSlot(slots).getCount() < 1
-                && !(stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get())
-                && !(stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get());
-    }
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.infinity_nexus_mod.press");
+        return Component.literal(Component.translatable("block.infinity_nexus_mod.press").getString()+" LV"+getMachineLevel());
     }
 
     @Nullable
@@ -224,8 +210,9 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
+        int machineLevel = getMachineLevel()-1 <= 0 ? 0 : getMachineLevel()-1; ;
+        pLevel.setBlock(pPos, pState.setValue(Press.LIT, machineLevel), 3);
         if (isRedstonePowered(pPos)) {
-            pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, false), 3);
             return;
         }
 
@@ -235,11 +222,13 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
 
         if (!hasRecipe()) {
             resetProgress();
-            pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, false), 3);
             return;
         }
 
-        pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, true), 3);
+        if (!isCorrectlyComponent()) {
+            return;
+        }
+        pLevel.setBlock(pPos, pState.setValue(Press.LIT, machineLevel+7), 3);
         increaseCraftingProgress();
         extractEnergy(this);
         setChanged(pLevel, pPos, pState);
@@ -252,7 +241,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void extractEnergy(PressBlockEntity pressBlockEntity) {
-        pressBlockEntity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ, false);
+        pressBlockEntity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ + (getMachineLevel()*20), false);
     }
 
     private boolean hasEnoughEnergy() {
@@ -286,6 +275,15 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemIntoOutputSlot(result.getItem());
     }
 
+    private boolean isCorrectlyComponent(){
+        ItemStack component =  getCurrentRecipe().get().getComponent().copy();
+        int requiredComponentLevel = ModUtils.getComponentLevel(component);
+        int componentLevel = ModUtils.getComponentLevel(this.itemHandler.getStackInSlot(COMPONENT_SLOT));
+        return componentLevel >= requiredComponentLevel;
+    }
+    private int getMachineLevel(){
+        return ModUtils.getComponentLevel(this.itemHandler.getStackInSlot(COMPONENT_SLOT));
+    }
     private Optional<PressRecipes> getCurrentRecipe() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -312,7 +310,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void increaseCraftingProgress() {
-        progress += getSpeed(this.itemHandler) + 1;
+        progress += ((ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS) + 1) + getMachineLevel());
     }
 
     public static int getInputSlot() {

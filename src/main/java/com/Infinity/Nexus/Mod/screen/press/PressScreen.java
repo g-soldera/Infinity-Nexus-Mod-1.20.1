@@ -46,7 +46,7 @@ public class PressScreen extends AbstractContainerScreen<PressMenu> {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(TEXTURE, x + 2, y-13, 176, 24, 80, 64);
+        guiGraphics.blit(TEXTURE, x + 2, y-14, 2, 167, 174, 64);
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(guiGraphics, x, y);

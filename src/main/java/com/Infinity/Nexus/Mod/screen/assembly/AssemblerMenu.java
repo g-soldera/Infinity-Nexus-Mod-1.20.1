@@ -3,6 +3,7 @@ package com.Infinity.Nexus.Mod.screen.assembly;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.AssemblerBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
+import com.Infinity.Nexus.Mod.slots.ComponentSlot;
 import com.Infinity.Nexus.Mod.slots.ResultSlot;
 import com.Infinity.Nexus.Mod.slots.SingleItemSlot;
 import com.Infinity.Nexus.Mod.slots.UpgradeSlot;
@@ -55,6 +56,7 @@ public class AssemblerMenu extends AbstractContainerMenu {
             this.addSlot(new UpgradeSlot(iItemHandler, 11, 12,29));
             this.addSlot(new UpgradeSlot(iItemHandler, 12, 35,29));
 
+            this.addSlot(new ComponentSlot(iItemHandler, 13, 24, 52));
 
         });
 

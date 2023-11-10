@@ -53,8 +53,8 @@ public class JEIModPlugin implements IModPlugin {
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         //-----------------------------------------Registry--------------------------------------------------//
-       registration.addRecipeClickArea(CrusherScreen.class,80, 30,24,16, CrusherCategory.CRUSHER_TYPE);
-       registration.addRecipeClickArea(PressScreen.class,80, 30,24,16, PressCategory.PRESS_TYPE);
-       registration.addRecipeClickArea(AssemblerScreen.class,80, 30,24,16, AssemblerCategory.ASSEMBLY_TYPE);
+       registration.addRecipeClickArea(CrusherScreen.class,162, -10,8,9, CrusherCategory.CRUSHER_TYPE);
+       registration.addRecipeClickArea(PressScreen.class,162, -10,8,9, PressCategory.PRESS_TYPE);
+       registration.addRecipeClickArea(AssemblerScreen.class,162, -10,8,9, AssemblerCategory.ASSEMBLY_TYPE);
     }
 }

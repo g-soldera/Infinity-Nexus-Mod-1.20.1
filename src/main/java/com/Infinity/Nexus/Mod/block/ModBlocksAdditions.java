@@ -37,9 +37,9 @@ public class ModBlocksAdditions {
 
         public static final RegistryObject<Block> ASPHALT = registerBlock("asphalt",() -> new Asphalt(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.POLISHED_DEEPSLATE)));
 
-        public static final RegistryObject<Block> CRUSHER = registerBlock("crusher",() -> new Crusher(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(LIT) ? 2 : 0).noOcclusion()));
-        public static final RegistryObject<Block> PRESS = registerBlock("press",() -> new Press(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(LIT) ? 2 : 0).noOcclusion()));
-        public static final RegistryObject<Block> ASSEMBLY = registerBlock("assembler",() -> new Assembler(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(LIT) ? 2 : 0).noOcclusion()));
+        public static final RegistryObject<Block> CRUSHER = registerBlock("crusher",() -> new Crusher(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Crusher.LIT) >= 7 ? 2 : 0).noOcclusion()));
+        public static final RegistryObject<Block> PRESS = registerBlock("press",() -> new Press(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Press.LIT) >= 7 ? 2 : 0).noOcclusion()));
+        public static final RegistryObject<Block> ASSEMBLY = registerBlock("assembler",() -> new Assembler(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Assembler.LIT) >= 7 ? 2 : 0).noOcclusion()));
         public static final RegistryObject<LiquidBlock> LUBRICANT = BLOCKS.register("lubricant", () -> new LiquidBlock(ModFluids.LUBRICANT_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
 
 

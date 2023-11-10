@@ -57,5 +57,7 @@ public class CrusherCategory implements IRecipeCategory<CrusherRecipes> {
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 47).addItemStack(recipe.getResultItem(null));
 
+        builder.addSlot(RecipeIngredientRole.CATALYST, 24, 52).addItemStack(recipe.getComponent().copy());
+
     }
 }

@@ -22,7 +22,7 @@ public class ComponentSlot extends SlotItemHandler {
                 || item == ModItemsAdditions.ADVANCED_COMPONENT.get()
                 || item == ModItemsAdditions.REFINED_COMPONENT.get()
                 || item == ModItemsAdditions.INTEGRAL_COMPONENT.get()
-                || item == ModItemsAdditions.INTEGRAL_COMPONENT.get();
+                || item == ModItemsAdditions.INFINITY_COMPONENT.get();
     }
 
     @Override

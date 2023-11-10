@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.recipe;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
@@ -12,9 +13,10 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
+import java.util.Objects;
 
 public class PressRecipes implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> inputItems;
@@ -24,14 +26,16 @@ public class PressRecipes implements Recipe<SimpleContainer> {
     private final int count;
     private final int resultCount;
 
-    public PressRecipes(NonNullList<Ingredient> inputItems, ItemStack output, ResourceLocation id, int time, int count, int resultCount) {
+    private final ItemStack component;
+
+    public PressRecipes(NonNullList<Ingredient> inputItems, ItemStack output, ResourceLocation id, int time, int count, int resultCount, ItemStack component) {
         this.inputItems = inputItems;
         this.output = output;
         this.id = id;
         this.time = time;
         this.count = count;
-        this.resultCount = count;
-
+        this.resultCount = resultCount;
+        this.component = component;
     }
 
 
@@ -61,6 +65,10 @@ public class PressRecipes implements Recipe<SimpleContainer> {
     @Override
     public  ItemStack getResultItem(RegistryAccess pRegistryAccess) {
         return output.copy();
+    }
+
+    public ItemStack getComponent() {
+        return component;
     }
     public int getTime() {
         return time;
@@ -103,12 +111,13 @@ public class PressRecipes implements Recipe<SimpleContainer> {
             int resultCount = GsonHelper.getAsJsonObject(pSerializedRecipe, "output").get("count").getAsInt();
             int time = GsonHelper.getAsJsonObject(pSerializedRecipe, "time").get("value").getAsInt();
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
+            ItemStack component = new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(new ResourceLocation(GsonHelper.getAsString(pSerializedRecipe, "component")))));
             int count = ingredients.get(0).getAsJsonObject().get("count").getAsInt();
             NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
             for (int i = 0; i < ingredients.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
-            return new PressRecipes(inputs, output, pRecipeId, time, count, resultCount);
+            return new PressRecipes(inputs, output, pRecipeId, time, count, resultCount, component);
         }
 
         @Override
@@ -118,12 +127,13 @@ public class PressRecipes implements Recipe<SimpleContainer> {
             int time = 0;
             int count = 0;
             int resultCount = 0;
+            ItemStack component = ModItemsAdditions.REDSTONE_COMPONENT.get().getDefaultInstance();
             for(int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromNetwork(pBuffer));
             }
 
             ItemStack output = pBuffer.readItem();
-            return new PressRecipes(inputs, output, pRecipeId, time, count, resultCount);
+            return new PressRecipes(inputs, output, pRecipeId, time, count, resultCount, component);
         }
 
         @Override

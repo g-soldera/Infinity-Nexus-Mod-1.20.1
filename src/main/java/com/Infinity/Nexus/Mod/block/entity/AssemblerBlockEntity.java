@@ -4,6 +4,7 @@ import com.Infinity.Nexus.Mod.block.custom.Assembler;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.AssemblerRecipes;
 import com.Infinity.Nexus.Mod.screen.assembly.AssemblerMenu;
+import com.Infinity.Nexus.Mod.utils.ModUtils;
 import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -41,8 +42,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.Infinity.Nexus.Mod.block.custom.Assembler.LIT;
-
 public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(14) {
         @Override
@@ -58,7 +57,8 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
     private static final int INPUT_SLOT = 7;
     private static final int OUTPUT_SLOT = 8;
-
+    private static final int UPGRADE_SLOTS = 9;
+    private static final int COMPONENT_SLOT = 13;
     private static final int EnergyStorageCapacity = 60000;
     private static final int FluidStorageCapacity = 60000;
 
@@ -196,16 +196,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
                 && !(stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get());
     }
 
-    private int getSpeed(ItemStackHandler itemHandler) {
-        int speed = 0;
-        for (int i = 9; i < 12; i++) {
-            if (itemHandler.getStackInSlot(i).getItem() == ModItemsAdditions.SPEED_UPGRADE.get()) {
-                speed++;
-            }
-        }
-        return speed;
-    }
-
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -216,7 +206,8 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.infinity_nexus_mod.assembly");
+
+        return Component.literal(Component.translatable("block.infinity_nexus_mod.assembly").getString()+" LV"+getMachineLevel());
     }
 
 
@@ -258,8 +249,10 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
+        int machineLevel = getMachineLevel()-1 <= 0 ? 0 : getMachineLevel()-1; ;
+        pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, machineLevel), 3);
+
         if (isRedstonePowered(pPos)) {
-            pLevel.setBlock(pPos, pState.setValue(LIT, false), 3);
             return;
         }
 
@@ -269,11 +262,13 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
         if (!hasRecipe()) {
             resetProgress();
-            pLevel.setBlock(pPos, pState.setValue(LIT, false), 3);
             return;
         }
 
-        pLevel.setBlock(pPos, pState.setValue(LIT, true), 3);
+        if (!isCorrectlyComponent()) {
+            return;
+        }
+        pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, machineLevel+7), 3);
         increaseCraftingProgress();
         extractEnergy(this);
         setChanged(pLevel, pPos, pState);
@@ -285,7 +280,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void extractEnergy(AssemblerBlockEntity assemblyBlockEntity) {
-        assemblyBlockEntity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ, false);
+        assemblyBlockEntity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ + (getMachineLevel()*20), false);
     }
 
     private boolean hasEnoughEnergy() {
@@ -327,7 +322,15 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         }
         return this.level.getRecipeManager().getRecipeFor(AssemblerRecipes.Type.INSTANCE, inventory, this.level);
     }
-
+    private boolean isCorrectlyComponent(){
+        ItemStack component =  getCurrentRecipe().get().getComponent().copy();
+        int requiredComponentLevel = ModUtils.getComponentLevel(component);
+        int componentLevel = ModUtils.getComponentLevel(this.itemHandler.getStackInSlot(COMPONENT_SLOT));
+        return componentLevel >= requiredComponentLevel;
+    }
+    private int getMachineLevel(){
+        return ModUtils.getComponentLevel(this.itemHandler.getStackInSlot(COMPONENT_SLOT));
+    }
     private boolean canInsertItemIntoOutputSlot(Item item) {
         return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() || this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item);
     }
@@ -346,7 +349,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void increaseCraftingProgress() {
-        progress += getSpeed(this.itemHandler) + 1;
+        progress += ((ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS) + 1) + getMachineLevel());
     }
 
     public static int getInputSlot() {
@@ -372,4 +375,5 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         super.onDataPacket(net, pkt);
     }
+
 }

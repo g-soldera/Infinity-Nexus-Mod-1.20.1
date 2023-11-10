@@ -1,5 +1,6 @@
 {
   "type": "infinity_nexus_mod:assembler",
+  "component" : "infinity_nexus_mod:redstone_component",
   "ingredients": [
     {
       "item": "infinity_nexus_mod:copper_rod"

@@ -64,5 +64,7 @@ public class PressCategory implements IRecipeCategory<PressRecipes> {
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 29).addItemStack(output);
 
+        builder.addSlot(RecipeIngredientRole.CATALYST, 24, 52).addItemStack(recipe.getComponent().copy());
+
     }
 }

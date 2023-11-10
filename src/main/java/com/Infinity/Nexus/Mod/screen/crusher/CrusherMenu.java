@@ -3,6 +3,7 @@ package com.Infinity.Nexus.Mod.screen.crusher;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.CrusherBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
+import com.Infinity.Nexus.Mod.slots.ComponentSlot;
 import com.Infinity.Nexus.Mod.slots.InputSlot;
 import com.Infinity.Nexus.Mod.slots.ResultSlot;
 import com.Infinity.Nexus.Mod.slots.UpgradeSlot;
@@ -44,7 +45,7 @@ public class CrusherMenu extends AbstractContainerMenu {
             this.addSlot(new UpgradeSlot(iItemHandler, 4, 12, 29));
             this.addSlot(new UpgradeSlot(iItemHandler, 5, 35, 29));
 
-
+            this.addSlot(new ComponentSlot(iItemHandler, 6, 24, 52));
         });
 
         addDataSlots(data);
