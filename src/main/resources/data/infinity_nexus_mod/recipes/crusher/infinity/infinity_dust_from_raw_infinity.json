@@ -1,8 +1,10 @@
 {
   "type": "infinity_nexus_mod:crushing",
+  "component" : "infinity_nexus_mod:infinity_component",
   "ingredients": [
     {
-      "item": "infinity_nexus_mod:raw_infinity"
+      "item": "infinity_nexus_mod:raw_infinity",
+      "count": 1
     }
   ],
   "output": {

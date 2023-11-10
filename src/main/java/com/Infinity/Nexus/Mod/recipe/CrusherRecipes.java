@@ -102,7 +102,8 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
         @Override
         public CrusherRecipes fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
-            int resultCount = GsonHelper.getAsJsonObject(pSerializedRecipe, "output").get("count").getAsInt();
+            int resultCount = output.getCount();
+
             int time = GsonHelper.getAsJsonObject(pSerializedRecipe, "time").get("value").getAsInt();
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
             ItemStack component = new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(new ResourceLocation(GsonHelper.getAsString(pSerializedRecipe, "component")))));

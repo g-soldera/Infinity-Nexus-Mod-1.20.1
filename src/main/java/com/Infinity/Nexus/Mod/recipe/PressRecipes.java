@@ -122,6 +122,8 @@ public class PressRecipes implements Recipe<SimpleContainer> {
 
         @Override
         public @Nullable PressRecipes fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
+
+            //1
             NonNullList<Ingredient> inputs = NonNullList.withSize(pBuffer.readInt(), Ingredient.EMPTY);
 
             int time = 0;
@@ -129,19 +131,24 @@ public class PressRecipes implements Recipe<SimpleContainer> {
             int resultCount = 0;
             ItemStack component = ModItemsAdditions.REDSTONE_COMPONENT.get().getDefaultInstance();
             for(int i = 0; i < inputs.size(); i++) {
+                //2
                 inputs.set(i, Ingredient.fromNetwork(pBuffer));
             }
-
+            //3
             ItemStack output = pBuffer.readItem();
+
             return new PressRecipes(inputs, output, pRecipeId, time, count, resultCount, component);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf pBuffer, PressRecipes pRecipe) {
+            //1
             pBuffer.writeInt(pRecipe.getIngredients().size());
             for (Ingredient ing : pRecipe.getIngredients()) {
+                //2
                 ing.toNetwork(pBuffer);
             }
+            //3
             pBuffer.writeItemStack(pRecipe.getResultItem(null), false);
         }
     }

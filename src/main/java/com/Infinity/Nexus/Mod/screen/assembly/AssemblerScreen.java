@@ -2,6 +2,7 @@ package com.Infinity.Nexus.Mod.screen.assembly;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.screen.renderer.EnergyInfoArea;
+import com.Infinity.Nexus.Mod.screen.renderer.FluidTankRenderer;
 import com.Infinity.Nexus.Mod.screen.renderer.InfoArea;
 import com.Infinity.Nexus.Mod.utils.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -11,6 +12,8 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Optional;
 
@@ -19,6 +22,7 @@ public class AssemblerScreen extends AbstractContainerScreen<AssemblerMenu> {
             new ResourceLocation(InfinityNexusMod.MOD_ID, "textures/gui/assembly_gui.png");
 
     private EnergyInfoArea energyInfoArea;
+    private FluidTankRenderer fluidRenderer;
 
     public AssemblerScreen(AssemblerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -29,6 +33,11 @@ public class AssemblerScreen extends AbstractContainerScreen<AssemblerMenu> {
         this.inventoryLabelY = 10000;
         this.titleLabelY = 10000;
         assignEnergyInfoArea();
+        assignFluidTank();
+    }
+
+    private void assignFluidTank() {
+        fluidRenderer = new FluidTankRenderer(60000, true, 6, 62);
     }
 
     private void assignEnergyInfoArea() {
@@ -45,9 +54,18 @@ public class AssemblerScreen extends AbstractContainerScreen<AssemblerMenu> {
         pGuiGraphics.drawString(this.font,this.title,8,-9,0XFFFFFF);
 
         renderEnergyAreaTooltips(pGuiGraphics,pMouseX,pMouseY, x, y);
+        renderFluidAreaTooltips(pGuiGraphics,pMouseX,pMouseY, x, y, menu.blockEntity.getFluid(), 146,6, fluidRenderer);
 
         InfoArea.draw(pGuiGraphics);
         super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
+    }
+
+    private void renderFluidAreaTooltips(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y,
+                                        FluidStack stack, int offsetX, int offsetY, FluidTankRenderer renderer) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, offsetX, offsetY, renderer)) {
+            guiGraphics.renderTooltip(this.font, renderer.getTooltip(stack, TooltipFlag.Default.NORMAL),
+                    Optional.empty(), pMouseX - x, pMouseY - y);
+        }
     }
 
     private void renderEnergyAreaTooltips(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, int x, int y) {
@@ -71,6 +89,7 @@ public class AssemblerScreen extends AbstractContainerScreen<AssemblerMenu> {
 
         renderProgressArrow(guiGraphics, x, y);
         energyInfoArea.render(guiGraphics);
+        fluidRenderer.render(guiGraphics, x+146, y+6, menu.blockEntity.getFluid());
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
@@ -94,7 +113,9 @@ public class AssemblerScreen extends AbstractContainerScreen<AssemblerMenu> {
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
     }
-
+    private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, FluidTankRenderer renderer) {
+        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, renderer.getWidth(), renderer.getHeight());
+    }
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
         return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }

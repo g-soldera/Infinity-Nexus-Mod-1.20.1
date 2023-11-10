@@ -1,0 +1,20 @@
+{
+  "type": "infinity_nexus_mod:pressing",
+  "component" : "infinity_nexus_mod:basic_component",
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:lead_sheet",
+      "count": 1
+    },
+    {
+      "item": "infinity_nexus_mod:gold_rod_cast"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:lead_rod",
+    "count": 1
+  },
+  "time": {
+    "value": 1200
+  }
+}

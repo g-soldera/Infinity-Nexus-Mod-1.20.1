@@ -1,0 +1,37 @@
+{
+  "type": "infinity_nexus_mod:assembler",
+  "component" : "infinity_nexus_mod:basic_component",
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:lead_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:lead_screw"
+    },
+    {
+      "item": "infinity_nexus_mod:lead_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:lead_sheet"
+    },
+    {
+      "item": "infinity_nexus_mod:lead_sheet"
+    },
+    {
+      "item": "infinity_nexus_mod:lead_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:lead_screw"
+    },
+    {
+      "item": "infinity_nexus_mod:lead_rod"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:lead_machine_casing",
+    "count": 1
+  },
+  "time": {
+    "value": 1200
+  }
+}

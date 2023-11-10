@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
 import com.Infinity.Nexus.Mod.block.custom.Assembler;
+import com.Infinity.Nexus.Mod.fluid.ModFluids;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.AssemblerRecipes;
 import com.Infinity.Nexus.Mod.screen.assembly.AssemblerMenu;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -33,6 +35,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -43,7 +46,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(14) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(16) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -51,16 +54,26 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return super.isItemValid(slot, stack);
+            return switch (slot) {
+                case 0,1,2,3,4,5,6,7 -> !ModUtils.isUpgrade(stack) || !ModUtils.isComponent(stack);
+                case 8 -> false;
+                case 9,10,11,12 -> ModUtils.isUpgrade(stack);
+                case 13 -> ModUtils.isComponent(stack);
+                case 14,15 -> stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
+
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
 
     private static final int INPUT_SLOT = 7;
     private static final int OUTPUT_SLOT = 8;
-    private static final int UPGRADE_SLOTS = 9;
+    private static final int[] UPGRADE_SLOTS = {9, 10, 11, 12};
     private static final int COMPONENT_SLOT = 13;
+    private static final int FLUID_ITEM_INPUT_SLOT = 14;
+    private static final int FLUID_ITEM_OUTPUT_SLOT = 15;
     private static final int EnergyStorageCapacity = 60000;
-    private static final int FluidStorageCapacity = 60000;
+    private static final int FluidStorageCapacity = 10000;
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
     private final FluidTank FLUID_STORAGE = createFluidStorage();
@@ -88,7 +101,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid() == Fluids.WATER;
+                return stack.getFluid() == ModFluids.LUBRICANT_SOURCE.get();
             }
         };
     }
@@ -189,42 +202,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         lazyEnergyStorage.invalidate();
         lazyFluidHandler.invalidate();
     }
-
-    public boolean canInsert(int slots, ItemStack stack) {
-        return this.itemHandler.getStackInSlot(slots).getCount() < 1
-                && !(stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get())
-                && !(stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get());
-    }
-
-    public void drops() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
-        }
-        Containers.dropContents(this.level, this.worldPosition, inventory);
-    }
-
-    @Override
-    public Component getDisplayName() {
-
-        return Component.literal(Component.translatable("block.infinity_nexus_mod.assembly").getString()+" LV"+getMachineLevel());
-    }
-
-
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return new AssemblerMenu(pContainerId, pPlayerInventory, this, this.data);
-    }
-
-    public IEnergyStorage getEnergyStorage() {
-        return ENERGY_STORAGE;
-    }
-
-    public void setEnergyLevel(int energy) {
-        this.ENERGY_STORAGE.setEnergy(energy);
-    }
-
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
@@ -243,12 +220,51 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         ENERGY_STORAGE.setEnergy(pTag.getInt("assembler.energy"));
         FLUID_STORAGE.readFromNBT(pTag);
     }
+    public boolean canInsert(int slots, ItemStack stack) {
+        return this.itemHandler.getStackInSlot(slots).getCount() < 1
+                && !(stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get())
+                && !(stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get());
+    }
+
+    public void drops() {
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inventory.setItem(i, itemHandler.getStackInSlot(i));
+        }
+        Containers.dropContents(this.level, this.worldPosition, inventory);
+    }
+
+    @Override
+    public Component getDisplayName() {
+
+        return Component.literal(Component.translatable("block.infinity_nexus_mod.assembly").getString()+" LV "+getMachineLevel());
+    }
+
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+        return new AssemblerMenu(pContainerId, pPlayerInventory, this, this.data);
+    }
+
+    public IEnergyStorage getEnergyStorage() {
+        return ENERGY_STORAGE;
+    }
+    public FluidStack getFluid() {
+        return FLUID_STORAGE.getFluid();
+    }
+
+    public void setEnergyLevel(int energy) {
+        this.ENERGY_STORAGE.setEnergy(energy);
+    }
+
+
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
         if (pLevel.isClientSide) {
             return;
         }
-
+        fillUpOnFluid();
         int machineLevel = getMachineLevel()-1 <= 0 ? 0 : getMachineLevel()-1; ;
         pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, machineLevel), 3);
 
@@ -268,15 +284,55 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         if (!isCorrectlyComponent()) {
             return;
         }
-        pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, machineLevel+7), 3);
+        pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, machineLevel+8), 3);
         increaseCraftingProgress();
         extractEnergy(this);
         setChanged(pLevel, pPos, pState);
 
         if (hasProgressFinished()) {
             craftItem();
+            extractFluid();
             resetProgress();
         }
+    }
+
+    private void extractFluid() {
+        this.FLUID_STORAGE.drain(getMachineLevel()+1, IFluidHandler.FluidAction.EXECUTE);
+    }
+
+    private void fillUpOnFluid() {
+        if(hasFluidSourceInSlot(FLUID_ITEM_INPUT_SLOT)) {
+           transferItemFluidToTank(FLUID_ITEM_INPUT_SLOT);
+        }
+    }
+
+    private void transferItemFluidToTank(int fluidInputSlot) {
+        this.itemHandler.getStackInSlot(fluidInputSlot).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(iFluidHandlerItem -> {
+            int drainAmount = Math.min(this.FLUID_STORAGE.getSpace(), 1000);
+
+            FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
+            if(stack.getFluid() == ModFluids.LUBRICANT_SOURCE.get()) {
+                stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
+                fillTankWithFluid(stack, iFluidHandlerItem.getContainer());
+            }
+        });
+    }
+
+    private void fillTankWithFluid(FluidStack stack, ItemStack container) {
+        this.FLUID_STORAGE.fill(new FluidStack(stack.getFluid(), stack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+
+
+
+        if(stack.getAmount() <= 0 || this.FLUID_STORAGE.getCapacity() == this.FLUID_STORAGE.getFluidAmount() || container.getItem() instanceof BucketItem) {
+            this.itemHandler.extractItem(FLUID_ITEM_INPUT_SLOT, 1, false);
+            this.itemHandler.insertItem(FLUID_ITEM_OUTPUT_SLOT, container, false);
+        }
+
+    }
+
+    private boolean hasFluidSourceInSlot(int fluidInputSlot) {
+        return this.itemHandler.getStackInSlot(fluidInputSlot).getCount() > 0 &&
+                this.itemHandler.getStackInSlot(fluidInputSlot).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
     }
 
     private void extractEnergy(AssemblerBlockEntity assemblyBlockEntity) {
@@ -349,7 +405,11 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void increaseCraftingProgress() {
-        progress += ((ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS) + 1) + getMachineLevel());
+        int speed = 0;
+        if(this.FLUID_STORAGE.getFluidAmount() > 0) {
+            speed++;
+        };
+        progress += ((ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS) + 1) + (getMachineLevel()) + speed);
     }
 
     public static int getInputSlot() {
@@ -375,5 +435,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         super.onDataPacket(net, pkt);
     }
+
 
 }

@@ -1,6 +1,5 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
-import com.Infinity.Nexus.Mod.block.custom.Assembler;
 import com.Infinity.Nexus.Mod.block.custom.Crusher;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.CrusherRecipes;
@@ -57,7 +56,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
 
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
-    private static final int UPGRADE_SLOTS = 2;
+    private static final int[] UPGRADE_SLOTS = {2, 3, 4, 5};
     private static final int COMPONENT_SLOT = 6;
     private static final int capacity = 60000;
 
@@ -81,12 +80,12 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && ModUtils.canInsert(i, s, this.itemHandler))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && ModUtils.canInsert(i, s, this.itemHandler))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && ModUtils.canInsert(i, s, this.itemHandler))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && ModUtils.canInsert(i, s, this.itemHandler))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && ModUtils.canInsert(i, s, this.itemHandler))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (i, s) -> i == 0 && ModUtils.canInsert(i, s, this.itemHandler))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
 
     protected final ContainerData data;
     private int progress = 0;
@@ -186,7 +185,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.literal(Component.translatable("block.infinity_nexus_mod.crusher").getString()+" LV"+getMachineLevel());
+        return Component.literal(Component.translatable("block.infinity_nexus_mod.crusher").getString()+" LV "+getMachineLevel());
     }
 
     @Nullable
@@ -245,7 +244,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         if (!isCorrectlyComponent()) {
             return;
         }
-        pLevel.setBlock(pPos, pState.setValue(Crusher.LIT, machineLevel+7), 3);
+        pLevel.setBlock(pPos, pState.setValue(Crusher.LIT, machineLevel+8), 3);
         increaseCraftingProgress();
         extractEnergy(this);
         setChanged(pLevel, pPos, pState);

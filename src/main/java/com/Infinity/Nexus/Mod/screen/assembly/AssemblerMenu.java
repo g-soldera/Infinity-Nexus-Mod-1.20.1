@@ -3,10 +3,8 @@ package com.Infinity.Nexus.Mod.screen.assembly;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.AssemblerBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
-import com.Infinity.Nexus.Mod.slots.ComponentSlot;
+import com.Infinity.Nexus.Mod.slots.*;
 import com.Infinity.Nexus.Mod.slots.ResultSlot;
-import com.Infinity.Nexus.Mod.slots.SingleItemSlot;
-import com.Infinity.Nexus.Mod.slots.UpgradeSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -58,6 +56,10 @@ public class AssemblerMenu extends AbstractContainerMenu {
 
             this.addSlot(new ComponentSlot(iItemHandler, 13, 24, 52));
 
+            this.addSlot(new FluidItemSlot(iItemHandler, 14, 125, 6));
+
+            this.addSlot(new ResultSlot(iItemHandler, 15, 125, 52));
+
         });
 
         addDataSlots(data);
@@ -93,7 +95,7 @@ public class AssemblerMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 14;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 16;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);

@@ -48,6 +48,7 @@ public class ModTabProgression {
 
                         pOutput.accept(new ItemStack(ModItemsProgression.COPPER_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_WIRE.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.LEAD_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.IRON_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STEEL_WIRE.get()));
@@ -56,6 +57,7 @@ public class ModTabProgression {
 
                         pOutput.accept(new ItemStack(ModItemsProgression.COPPER_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_SCREW.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.LEAD_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.IRON_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STEEL_SCREW.get()));
@@ -64,6 +66,7 @@ public class ModTabProgression {
 
                         pOutput.accept(new ItemStack(ModItemsProgression.COPPER_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_ROD.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.LEAD_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.IRON_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STEEL_ROD.get()));
@@ -72,6 +75,7 @@ public class ModTabProgression {
 
                         pOutput.accept(new ItemStack(ModItemsProgression.COPPER_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_SHEET.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.LEAD_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.IRON_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STEEL_SHEET.get()));

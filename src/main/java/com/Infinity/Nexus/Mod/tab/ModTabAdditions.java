@@ -27,6 +27,10 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_DUST.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_DUST.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ALUMINUM_DUST.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_INGOT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ALUMINUM_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.RAW_INFINITY.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_SINGULARITY.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.PORTAL_ACTIVATOR.get()));
@@ -34,7 +38,11 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.INFINITY_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_INFINITY_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.INFINITY_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.LEAD_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.ALUMINUM_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_LEAD_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get()));
 
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ASPHALT.get()));
 
@@ -80,6 +88,9 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.REFINED_COMPONENT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INTEGRAL_COMPONENT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_COMPONENT.get()));
+
+                        pOutput.accept(new ItemStack(ModItemsAdditions.SPEED_UPGRADE.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.STRENGTH_UPGRADE.get()));
 
                         //-------------------------//-------------------------//
                     })

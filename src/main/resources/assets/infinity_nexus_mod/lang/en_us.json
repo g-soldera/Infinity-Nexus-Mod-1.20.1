@@ -248,5 +248,7 @@
 
   "block.infinity_nexus_mod.crusher": "Crusher",
   "block.infinity_nexus_mod.press": "Press",
-  "block.infinity_nexus_mod.assembly": "Assembler"
+  "block.infinity_nexus_mod.assembly": "Assembler",
+  "infinity_nexus_mod.tooltip.liquid.amount.with.capacity": "%s / %s mb",
+  "infinity_nexus_mod.tooltip.liquid.amount": "%s mb"
 }

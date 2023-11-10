@@ -1,8 +1,10 @@
 {
   "type": "infinity_nexus_mod:crushing",
+  "component" : "infinity_nexus_mod:basic_component",
   "ingredients": [
     {
-      "item": "minecraft:redstone_ore"
+      "item": "minecraft:redstone_ore",
+      "count": 1
     }
   ],
   "output": {
