@@ -1,7 +1,10 @@
 package com.Infinity.Nexus.Mod.recipe;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.block.entity.CrusherBlockEntity;
+import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Mod.utils.ModUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
@@ -21,23 +24,20 @@ import java.util.Objects;
 
 public class CrusherRecipes implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> inputItems;
+    private final int inputCount;
     private final ItemStack output;
     private final ResourceLocation id;
-    private final int time;
-    private final int count;
-    private final int resultCount;
-
-    private final ItemStack component;
+    private final int duration;
+    private final int energy;
 
 
-    public CrusherRecipes(NonNullList<Ingredient> inputItems, ItemStack output, ResourceLocation id, int time, int count, int resultCount, ItemStack component) {
+    public CrusherRecipes(NonNullList<Ingredient> inputItems, int inputCount, ItemStack output, ResourceLocation id, int duration, int energy) {
         this.inputItems = inputItems;
+        this.inputCount = inputCount;
         this.output = output;
         this.id = id;
-        this.time = time;
-        this.count = count;
-        this.resultCount = resultCount;
-        this.component = component;
+        this.duration = duration;
+        this.energy = energy;
     }
 
 
@@ -46,15 +46,15 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
         if(pLevel.isClientSide()) {
             return false;
         }
-        return inputItems.get(0).test(pContainer.getItem(0));
+        int componentSlot = CrusherBlockEntity.getComponentSlot();
+        ItemStack stack = pContainer.getItem(componentSlot);
+        return (inputItems.get(0).test(stack) || ModUtils.getComponentLevel(stack) >= ModUtils.getComponentLevel(inputItems.get(0).getItems()[0])) &&
+        inputItems.get(1).test(pContainer.getItem(0)) && pContainer.getItem(0).getCount() >= getInputCount();
     }
 
     @Override
     public @NotNull NonNullList<Ingredient> getIngredients() {
         return inputItems;
-    }
-    public ItemStack getComponent() {
-        return component;
     }
 
     @Override
@@ -70,9 +70,6 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
     @Override
     public @NotNull ItemStack getResultItem(RegistryAccess pRegistryAccess) {
         return output.copy();
-    }
-    public int getTime() {
-        return time;
     }
 
     @Override
@@ -90,6 +87,18 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
         return Type.INSTANCE;
     }
 
+    public int getEnergy() {
+        return energy;
+    }
+
+    public int getInputCount() {
+        return inputCount;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
     public static class Type implements RecipeType<CrusherRecipes> {
         public static final Type INSTANCE = new Type();
         public static final String ID = "crushing";
@@ -102,33 +111,30 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
         @Override
         public CrusherRecipes fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
-            int resultCount = output.getCount();
-
-            int time = GsonHelper.getAsJsonObject(pSerializedRecipe, "time").get("value").getAsInt();
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-            ItemStack component = new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(new ResourceLocation(GsonHelper.getAsString(pSerializedRecipe, "component")))));
-            int count = ingredients.get(0).getAsJsonObject().get("count").getAsInt();
-            NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
+
+            int duration = GsonHelper.getAsJsonObject(pSerializedRecipe, "duration").get("time").getAsInt();
+            int energy = GsonHelper.getAsJsonObject(pSerializedRecipe, "energy").get("amount").getAsInt();
+
+            int inputCount = ingredients.get(1).getAsJsonObject().get("count").getAsInt();
+
+            NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
             for (int i = 0; i < ingredients.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
-            return new CrusherRecipes(inputs, output, pRecipeId, time, count, resultCount, component);
+            return new CrusherRecipes(inputs, inputCount, output, pRecipeId, duration, energy);
         }
 
         @Override
         public @Nullable CrusherRecipes fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(pBuffer.readInt(), Ingredient.EMPTY);
 
-            int time = pBuffer.readInt();
-            int resultCount = 0;
-            int count = 0;
-            ItemStack component = ModItemsAdditions.REDSTONE_COMPONENT.get().getDefaultInstance();
             for(int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromNetwork(pBuffer));
             }
 
             ItemStack output = pBuffer.readItem();
-            return new CrusherRecipes(inputs, output, pRecipeId, time, count, resultCount, component);
+            return new CrusherRecipes(inputs, 0, output, pRecipeId, 0, 0);
         }
 
         @Override

@@ -62,6 +62,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
 
+
     private ModEnergyStorage createEnergyStorage() {
         return new ModEnergyStorage(capacity, 265) {
             @Override
@@ -165,14 +166,8 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     }
 
 
-    private int getSpeed(ItemStackHandler itemHandler) {
-        int speed = 0;
-        for (int i = 2; i <= 6; i++) {
-            if (itemHandler.getStackInSlot(i).getItem() == ModItemsAdditions.SPEED_UPGRADE.get()) {
-                speed++;
-            }
-        }
-        return speed;
+    public static int getComponentSlot() {
+        return COMPONENT_SLOT;
     }
 
     public void drops() {
@@ -232,18 +227,17 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
-        if (!hasEnoughEnergy()) {
-            return;
-        }
 
         if (!hasRecipe()) {
             resetProgress();
             return;
         }
 
-        if (!isCorrectlyComponent()) {
+        setMaxProgress();
+        if (!hasEnoughEnergy()) {
             return;
         }
+
         pLevel.setBlock(pPos, pState.setValue(Crusher.LIT, machineLevel+8), 3);
         increaseCraftingProgress();
         extractEnergy(this);
@@ -255,8 +249,23 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
+    private void setMaxProgress() {
+        maxProgress = getCurrentRecipe().get().getDuration();
+    }
+
     private void extractEnergy(CrusherBlockEntity crusherBlockEntity) {
-        crusherBlockEntity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ + (getMachineLevel()*20), false);
+        int energy = getCurrentRecipe().get().getEnergy();
+        int machineLevel = getMachineLevel() + 1;
+        int maxProgress = crusherBlockEntity.maxProgress;
+        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS) + 1;
+        int strength = (ModUtils.getStrength(itemHandler, UPGRADE_SLOTS) * 10);
+
+        int var1 = ((energy + (machineLevel * 20)) / maxProgress) * (speed + machineLevel);
+        int var2 = Math.multiplyExact(strength, var1 / 100);
+
+        int extractEnergy = var1 - var2;
+
+        crusherBlockEntity.ENERGY_STORAGE.extractEnergy(extractEnergy, false);
     }
 
     private boolean hasEnoughEnergy() {
@@ -271,7 +280,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         Optional<CrusherRecipes> recipe = getCurrentRecipe();
         ItemStack result = recipe.get().getResultItem(null);
 
-        this.itemHandler.extractItem(INPUT_SLOT, 1, false);
+        this.itemHandler.extractItem(INPUT_SLOT, recipe.get().getInputCount(), false);
 
         this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(),
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
@@ -296,12 +305,6 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         }
         return this.level.getRecipeManager().getRecipeFor(CrusherRecipes.Type.INSTANCE, inventory, this.level);
     }
-    private boolean isCorrectlyComponent(){
-        ItemStack component =  getCurrentRecipe().get().getComponent().copy();
-        int requiredComponentLevel = ModUtils.getComponentLevel(component);
-        int componentLevel = ModUtils.getComponentLevel(this.itemHandler.getStackInSlot(COMPONENT_SLOT));
-        return componentLevel >= requiredComponentLevel;
-    }
     private int getMachineLevel(){
         return ModUtils.getComponentLevel(this.itemHandler.getStackInSlot(COMPONENT_SLOT));
     }
@@ -318,11 +321,11 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasProgressFinished() {
-        maxProgress = getCurrentRecipe().get().getTime();
+        maxProgress = getCurrentRecipe().get().getDuration();
         return progress >= maxProgress;
     }
     private void increaseCraftingProgress() {
-        progress += ((ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS) + 1) + getMachineLevel());
+        progress += ((ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS)+1) + getMachineLevel()+1);
     }
 
     public static int getInputSlot() {

@@ -125,10 +125,10 @@
   "block.infinity_nexus_mod.glass_machine_casing": "Glass Machine Casing",
   "block.infinity_nexus_mod.plastic_machine_casing": "Plastic Machine Casing",
   "block.infinity_nexus_mod.gold_machine_casing": "Gold Machine Casing",
-  "block.infinity_nexus_mod.magic_machine_casing": "Magic Machine Casing",
-  "block.infinity_nexus_mod.steel_machine_casing": "Steel Machine Casing",
   "block.infinity_nexus_mod.energized_machine_casing": "Energized Machine Casing",
   "block.infinity_nexus_mod.industrial_machine_casing": "Industrial Machine Casing",
+  "block.infinity_nexus_mod.steel_machine_casing": "Steel Machine Casing",
+  "block.infinity_nexus_mod.infinity_machine_casing": "Infinity Machine Casing",
 
   "block.infinity_nexus_mod.molten_tinkers_bucket": "Molten Tinkers",
   "fluid.infinity_nexus_mod.molten_tinkers": "Molten Tinkers",
@@ -244,11 +244,15 @@
 
   "tooltip.infinity_nexus.wipe": "§4Wip",
 
+  "fluid_type.infinity_nexus_mod.lubricant": "Fluid Lubricant",
+  "item.infinity_nexus_mod.bucket_lubricant": "Bucket Lubricant",
+
   "block.infinity_nexus_mod.asphalt": "Asphalt",
 
   "block.infinity_nexus_mod.crusher": "Crusher",
   "block.infinity_nexus_mod.press": "Press",
   "block.infinity_nexus_mod.assembly": "Assembler",
   "infinity_nexus_mod.tooltip.liquid.amount.with.capacity": "%s / %s mb",
-  "infinity_nexus_mod.tooltip.liquid.amount": "%s mb"
+  "infinity_nexus_mod.tooltip.liquid.amount": "%s mb",
+  "block.infinity_nexus_mod.squeezer": "Squeezer"
 }

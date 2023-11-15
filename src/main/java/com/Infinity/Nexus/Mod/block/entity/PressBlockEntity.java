@@ -1,8 +1,6 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
-import com.Infinity.Nexus.Mod.block.custom.Assembler;
 import com.Infinity.Nexus.Mod.block.custom.Press;
-import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.PressRecipes;
 import com.Infinity.Nexus.Mod.screen.press.PressMenu;
 import com.Infinity.Nexus.Mod.utils.ModUtils;
@@ -48,7 +46,13 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return super.isItemValid(slot, stack);
+            return switch (slot) {
+                case 0,1 -> !ModUtils.isUpgrade(stack) || !ModUtils.isComponent(stack);
+                case 2 -> false;
+                case 3,4,5,6 -> ModUtils.isUpgrade(stack);
+                case 7 -> ModUtils.isComponent(stack);
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
 
@@ -57,11 +61,13 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
     private static final int[] UPGRADE_SLOTS = {3, 4, 5, 6};
     private static final int COMPONENT_SLOT = 7;
     private static final int capacity = 60000;
+    private static final int maxTransfer = 500;
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
 
+
     private ModEnergyStorage createEnergyStorage() {
-        return new ModEnergyStorage(capacity, 265) {
+        return new ModEnergyStorage(capacity, maxTransfer) {
             @Override
             public void onEnergyChanged() {
                 setChanged();
@@ -69,8 +75,6 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
             }
         };
     }
-
-    private static final int ENERGY_REQ = 32;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private LazyOptional<IEnergyStorage> lazyEnergyStorage = LazyOptional.empty();
@@ -86,7 +90,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 0;
+    private int maxProgress;
 
     public PressBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.PRESS_BE.get(), pPos, pBlockState);
@@ -161,7 +165,6 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         lazyEnergyStorage.invalidate();
     }
 
-
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -170,10 +173,12 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-
     @Override
     public Component getDisplayName() {
         return Component.literal(Component.translatable("block.infinity_nexus_mod.press").getString()+" LV "+getMachineLevel());
+    }
+    public static int getComponentSlot() {
+        return COMPONENT_SLOT;
     }
 
     @Nullable
@@ -216,16 +221,12 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
-        if (!hasEnoughEnergy()) {
-            return;
-        }
-
         if (!hasRecipe()) {
             resetProgress();
             return;
         }
-
-        if (!isCorrectlyComponent()) {
+        setMaxProgress();
+        if (!hasEnoughEnergy()) {
             return;
         }
         pLevel.setBlock(pPos, pState.setValue(Press.LIT, machineLevel+8), 3);
@@ -240,13 +241,26 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
-    private void extractEnergy(PressBlockEntity pressBlockEntity) {
-        pressBlockEntity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ + (getMachineLevel()*20), false);
+    private void setMaxProgress() {
+        maxProgress = getCurrentRecipe().get().getDuration();
     }
 
-    private boolean hasEnoughEnergy() {
+    private void extractEnergy(PressBlockEntity pressBlockEntity) {
+        int energy = getCurrentRecipe().get().getEnergy();
+        int machineLevel = getMachineLevel() + 1;
+        int maxProgress = pressBlockEntity.maxProgress;
+        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS) + 1;
+        int strength = (ModUtils.getStrength(itemHandler, UPGRADE_SLOTS) * 10);
 
-        return ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQ;
+        int var1 = ((energy + (machineLevel * 20)) / maxProgress) * (speed + machineLevel);
+        int var2 = Math.multiplyExact(strength, var1 / 100);
+
+        int extractEnergy = var1 - var2;
+
+        pressBlockEntity.ENERGY_STORAGE.extractEnergy(extractEnergy, false);
+    }
+    private boolean hasEnoughEnergy() {
+        return ENERGY_STORAGE.getEnergyStored() >= ((getCurrentRecipe().get().getEnergy() + (getMachineLevel()*20)) / maxProgress);
     }
 
     private void resetProgress() {
@@ -257,7 +271,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         Optional<PressRecipes> recipe = getCurrentRecipe();
         ItemStack result = recipe.get().getResultItem(null);
 
-        this.itemHandler.extractItem(INPUT_SLOT, recipe.get().getCount(), false);
+        this.itemHandler.extractItem(INPUT_SLOT, recipe.get().getInputCount(), false);
 
         this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(),
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
@@ -275,12 +289,6 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemIntoOutputSlot(result.getItem());
     }
 
-    private boolean isCorrectlyComponent(){
-        ItemStack component =  getCurrentRecipe().get().getComponent().copy();
-        int requiredComponentLevel = ModUtils.getComponentLevel(component);
-        int componentLevel = ModUtils.getComponentLevel(this.itemHandler.getStackInSlot(COMPONENT_SLOT));
-        return componentLevel >= requiredComponentLevel;
-    }
     private int getMachineLevel(){
         return ModUtils.getComponentLevel(this.itemHandler.getStackInSlot(COMPONENT_SLOT));
     }
@@ -305,12 +313,11 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasProgressFinished() {
-        maxProgress = getCurrentRecipe().get().getTime();
         return progress >= maxProgress;
     }
 
     private void increaseCraftingProgress() {
-        progress += ((ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS) + 1) + getMachineLevel());
+        progress += ((ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS)+1) + getMachineLevel()+1);
     }
 
     public static int getInputSlot() {

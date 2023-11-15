@@ -23,26 +23,42 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.CRUSHER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.PRESS.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ASSEMBLY.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.SQUEEZER.get()));
                         //-------------------------//-------------------------//
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_INGOT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_INGOT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ALUMINUM_INGOT.get()));
+
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_NUGGET.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_NUGGET.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ALUMINUM_NUGGET.get()));
+
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.ALUMINUM_DUST.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_INGOT.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.ALUMINUM_INGOT.get()));
+
                         pOutput.accept(new ItemStack(ModItemsAdditions.RAW_INFINITY.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_SINGULARITY.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.PORTAL_ACTIVATOR.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.RAW_LEAD.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.RAW_ALUMINUM.get()));
 
                         pOutput.accept(new ItemStack(ModBlocksAdditions.INFINITY_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.LEAD_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.ALUMINUM_BLOCK.get()));
+
                         pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_INFINITY_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_LEAD_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_ALUMINUM_BLOCK.get()));
+
                         pOutput.accept(new ItemStack(ModBlocksAdditions.INFINITY_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.LEAD_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ALUMINUM_ORE.get()));
+                        
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_LEAD_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get()));
+
+                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_SINGULARITY.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.PORTAL_ACTIVATOR.get()));
 
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ASPHALT.get()));
 

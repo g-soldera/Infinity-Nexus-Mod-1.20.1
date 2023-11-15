@@ -4,6 +4,7 @@ import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.screen.assembly.AssemblerMenu;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherMenu;
 import com.Infinity.Nexus.Mod.screen.press.PressMenu;
+import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -25,6 +26,9 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<AssemblerMenu>> ASSEMBLY_MENU =
             registerMenuType("assembler_menu", AssemblerMenu::new);
+
+    public static final RegistryObject<MenuType<SqueezerMenu>> SQUEEZER_MENU =
+            registerMenuType("squeezer_menu", SqueezerMenu::new);
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));

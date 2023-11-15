@@ -1,9 +1,0 @@
-
-{
-  "variants":{
-    "facing=north":{"model": "infinity_nexus_mod:block/empty_ultimate_metal_box"},
-    "facing=east":{"model": "infinity_nexus_mod:block/empty_ultimate_metal_box", "y": 90},
-    "facing=south":{"model": "infinity_nexus_mod:block/empty_ultimate_metal_box", "y": 180},
-    "facing=west":{"model": "infinity_nexus_mod:block/empty_ultimate_metal_box", "y": 270}
-  }
-}

@@ -78,6 +78,10 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
     private final FluidTank FLUID_STORAGE = createFluidStorage();
 
+    public static int getComponentSlot() {
+        return COMPONENT_SLOT;
+    }
+
 
     private ModEnergyStorage createEnergyStorage() {
         return new ModEnergyStorage(EnergyStorageCapacity, 265) {
@@ -161,7 +165,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         if (cap == ForgeCapabilities.FLUID_HANDLER) {
             return lazyFluidHandler.cast();
         }
-
         if (cap == ForgeCapabilities.ITEM_HANDLER) {
             if (side == null) {
                 return lazyItemHandler.cast();
@@ -272,16 +275,14 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
-        if (!hasEnoughEnergy()) {
-            return;
-        }
 
         if (!hasRecipe()) {
             resetProgress();
             return;
         }
 
-        if (!isCorrectlyComponent()) {
+        setMaxProgress();
+        if (!hasEnoughEnergy()) {
             return;
         }
         pLevel.setBlock(pPos, pState.setValue(Assembler.LIT, machineLevel+8), 3);
@@ -305,7 +306,24 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
            transferItemFluidToTank(FLUID_ITEM_INPUT_SLOT);
         }
     }
+    private void setMaxProgress() {
+        maxProgress = getCurrentRecipe().get().getDuration();
+    }
 
+    private void extractEnergy(AssemblerBlockEntity assemblerBlockEntity) {
+        int energy = getCurrentRecipe().get().getEnergy();
+        int machineLevel = getMachineLevel() + 1;
+        int maxProgress = assemblerBlockEntity.maxProgress;
+        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS) + 1;
+        int strength = (ModUtils.getStrength(itemHandler, UPGRADE_SLOTS) * 10);
+
+        int var1 = ((energy + (machineLevel * 20)) / maxProgress) * (speed + machineLevel);
+        int var2 = Math.multiplyExact(strength, var1 / 100);
+
+        int extractEnergy = var1 - var2;
+
+        assemblerBlockEntity.ENERGY_STORAGE.extractEnergy(extractEnergy, false);
+    }
     private void transferItemFluidToTank(int fluidInputSlot) {
         this.itemHandler.getStackInSlot(fluidInputSlot).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(iFluidHandlerItem -> {
             int drainAmount = Math.min(this.FLUID_STORAGE.getSpace(), 1000);
@@ -333,10 +351,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     private boolean hasFluidSourceInSlot(int fluidInputSlot) {
         return this.itemHandler.getStackInSlot(fluidInputSlot).getCount() > 0 &&
                 this.itemHandler.getStackInSlot(fluidInputSlot).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
-    }
-
-    private void extractEnergy(AssemblerBlockEntity assemblyBlockEntity) {
-        assemblyBlockEntity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ + (getMachineLevel()*20), false);
     }
 
     private boolean hasEnoughEnergy() {
@@ -378,12 +392,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         }
         return this.level.getRecipeManager().getRecipeFor(AssemblerRecipes.Type.INSTANCE, inventory, this.level);
     }
-    private boolean isCorrectlyComponent(){
-        ItemStack component =  getCurrentRecipe().get().getComponent().copy();
-        int requiredComponentLevel = ModUtils.getComponentLevel(component);
-        int componentLevel = ModUtils.getComponentLevel(this.itemHandler.getStackInSlot(COMPONENT_SLOT));
-        return componentLevel >= requiredComponentLevel;
-    }
     private int getMachineLevel(){
         return ModUtils.getComponentLevel(this.itemHandler.getStackInSlot(COMPONENT_SLOT));
     }
@@ -400,7 +408,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasProgressFinished() {
-        maxProgress = getCurrentRecipe().get().getTime();
+        maxProgress = getCurrentRecipe().get().getDuration();
         return progress >= maxProgress;
     }
 
@@ -409,7 +417,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         if(this.FLUID_STORAGE.getFluidAmount() > 0) {
             speed++;
         };
-        progress += ((ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS) + 1) + (getMachineLevel()) + speed);
+        progress += ((ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS)+1) + getMachineLevel()+1) + speed;
     }
 
     public static int getInputSlot() {

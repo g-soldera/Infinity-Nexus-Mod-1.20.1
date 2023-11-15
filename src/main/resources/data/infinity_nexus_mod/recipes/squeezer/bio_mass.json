@@ -1,0 +1,20 @@
+{
+  "type": "infinity_nexus_mod:squeezing",
+  "energy": 1200,
+  "duration": 1200,
+  "fluidType": "minecraft:lava",
+  "fluidAmount": 1000,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:basic_component"
+    },
+    {
+      "item": "minecraft:cocoa_beans",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:copper_rod",
+    "count": 1
+  }
+}

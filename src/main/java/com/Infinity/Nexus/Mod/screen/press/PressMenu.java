@@ -3,10 +3,8 @@ package com.Infinity.Nexus.Mod.screen.press;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
-import com.Infinity.Nexus.Mod.slots.ComponentSlot;
-import com.Infinity.Nexus.Mod.slots.InputSlot;
+import com.Infinity.Nexus.Mod.slots.*;
 import com.Infinity.Nexus.Mod.slots.ResultSlot;
-import com.Infinity.Nexus.Mod.slots.UpgradeSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +21,7 @@ public class PressMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public PressMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(TE_INVENTORY_SLOT_COUNT));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
     public PressMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
@@ -38,9 +36,8 @@ public class PressMenu extends AbstractContainerMenu {
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             this.addSlot(new InputSlot(iItemHandler, 0, 80, 11));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 47));
+            this.addSlot(new CastSlot(iItemHandler, 1, 80, 47));
             this.addSlot(new ResultSlot(iItemHandler, 2, 116, 29));
-
 
             this.addSlot(new UpgradeSlot(iItemHandler, 3, 12, 6));
             this.addSlot(new UpgradeSlot(iItemHandler, 4, 35, 6));

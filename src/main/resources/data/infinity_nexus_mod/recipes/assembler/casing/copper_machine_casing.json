@@ -3,6 +3,9 @@
   "component" : "infinity_nexus_mod:redstone_component",
   "ingredients": [
     {
+      "item": "infinity_nexus_mod:reinforced_component"
+    },
+    {
       "item": "infinity_nexus_mod:copper_rod"
     },
     {
@@ -31,7 +34,10 @@
     "item": "infinity_nexus_mod:copper_machine_casing",
     "count": 1
   },
-  "time": {
-    "value": 1200
+  "duration": {
+    "time": 1200
+  },
+  "energy": {
+    "amount": 1200
   }
 }

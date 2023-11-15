@@ -20,17 +20,19 @@ public class ModTabProgression {
                     .title(Component.translatable("itemGroup.infinity_nexus_mod_addition"))
                     .displayItems((pParameters, pOutput) -> {
                         //-------------------------//-------------------------//
+
+                        pOutput.accept(new ItemStack(ModBlocksProgression.WOOD_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.COPPER_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.LEAD_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.ALUMINUM_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.GOLD_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.IRON_MACHINE_CASING.get()));
-                        pOutput.accept(new ItemStack(ModBlocksProgression.STEEL_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.PLASTIC_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.GLASS_MACHINE_CASING.get()));
-                        pOutput.accept(new ItemStack(ModBlocksProgression.MAGIC_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.ENERGIZED_MACHINE_CASING.get()));
+                        pOutput.accept(new ItemStack(ModBlocksProgression.STEEL_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.INDUSTRIAL_MACHINE_CASING.get()));
+                        pOutput.accept(new ItemStack(ModBlocksProgression.INFINITY_MACHINE_CASING.get()));
 
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_WIRE_CAST.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_SCREW_CAST.get()));
@@ -52,8 +54,8 @@ public class ModTabProgression {
                         pOutput.accept(new ItemStack(ModItemsProgression.IRON_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STEEL_WIRE.get()));
-                        pOutput.accept(new ItemStack(ModItemsProgression.MAGIC_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INDUSTRIAL_WIRE.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.INFINITY_WIRE.get()));
 
                         pOutput.accept(new ItemStack(ModItemsProgression.COPPER_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_SCREW.get()));
@@ -61,8 +63,8 @@ public class ModTabProgression {
                         pOutput.accept(new ItemStack(ModItemsProgression.IRON_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STEEL_SCREW.get()));
-                        pOutput.accept(new ItemStack(ModItemsProgression.MAGIC_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INDUSTRIAL_SCREW.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.INFINITY_SCREW.get()));
 
                         pOutput.accept(new ItemStack(ModItemsProgression.COPPER_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_ROD.get()));
@@ -70,8 +72,8 @@ public class ModTabProgression {
                         pOutput.accept(new ItemStack(ModItemsProgression.IRON_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STEEL_ROD.get()));
-                        pOutput.accept(new ItemStack(ModItemsProgression.MAGIC_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INDUSTRIAL_ROD.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.INFINITY_ROD.get()));
 
                         pOutput.accept(new ItemStack(ModItemsProgression.COPPER_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_SHEET.get()));
@@ -79,8 +81,8 @@ public class ModTabProgression {
                         pOutput.accept(new ItemStack(ModItemsProgression.IRON_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STEEL_SHEET.get()));
-                        pOutput.accept(new ItemStack(ModItemsProgression.MAGIC_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INDUSTRIAL_SHEET.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.INFINITY_SHEET.get()));
 
 
                         //-------------------------//-------------------------//

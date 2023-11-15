@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.slots;
 
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Mod.utils.ModUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
@@ -14,15 +15,7 @@ public class ComponentSlot extends SlotItemHandler {
 
     @Override
     public boolean mayPlace(@NotNull ItemStack stack) {
-        Item item = stack.getItem();
-        return item == ModItemsAdditions.REDSTONE_COMPONENT.get()
-                || item == ModItemsAdditions.BASIC_COMPONENT.get()
-                || item == ModItemsAdditions.REINFORCED_COMPONENT.get()
-                || item == ModItemsAdditions.LOGIC_COMPONENT.get()
-                || item == ModItemsAdditions.ADVANCED_COMPONENT.get()
-                || item == ModItemsAdditions.REFINED_COMPONENT.get()
-                || item == ModItemsAdditions.INTEGRAL_COMPONENT.get()
-                || item == ModItemsAdditions.INFINITY_COMPONENT.get();
+        return ModUtils.isComponent(stack);
     }
 
     @Override

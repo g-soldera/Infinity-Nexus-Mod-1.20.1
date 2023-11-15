@@ -52,19 +52,15 @@ public class PressCategory implements IRecipeCategory<PressRecipes> {
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, PressRecipes recipe, IFocusGroup focuses) {
+        ItemStack input =  recipe.getIngredients().get(1).getItems()[0];
+        input.setCount(recipe.getInputCount());
 
-        ItemStack[] input = recipe.getIngredients().get(0).getItems();
-        input[0].setCount(recipe.getCount());
+        builder.addSlot(RecipeIngredientRole.CATALYST, 24, 52).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 80, 11).addIngredients(recipe.getIngredients().get(1));
+        builder.addSlot(RecipeIngredientRole.INPUT, 80, 47).addIngredients(recipe.getIngredients().get(2));
 
-        ItemStack output = recipe.getResultItem(null);
-        output.setCount(recipe.getResultCount());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 29).addItemStack(recipe.getResultItem(null));
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 80, 11).addItemStack(input[0]);
-        builder.addSlot(RecipeIngredientRole.INPUT, 80, 47).addIngredients(recipe.getIngredients().get(1));
-
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 29).addItemStack(output);
-
-        builder.addSlot(RecipeIngredientRole.CATALYST, 24, 52).addItemStack(recipe.getComponent().copy());
 
     }
 }

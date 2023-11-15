@@ -15,6 +15,7 @@ import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
 import com.Infinity.Nexus.Mod.screen.assembly.AssemblerScreen;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherScreen;
 import com.Infinity.Nexus.Mod.screen.press.PressScreen;
+import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerScreen;
 import com.Infinity.Nexus.Mod.tab.ModTabAdditions;
 import com.Infinity.Nexus.Mod.tab.ModTabEconomy;
 import com.Infinity.Nexus.Mod.tab.ModTabProgression;
@@ -106,10 +107,14 @@ public class InfinityNexusMod
             MenuScreens.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
             MenuScreens.register(ModMenuTypes.PRESS_MENU.get(), PressScreen::new);
             MenuScreens.register(ModMenuTypes.ASSEMBLY_MENU.get(), AssemblerScreen::new);
+            MenuScreens.register(ModMenuTypes.SQUEEZER_MENU.get(), SqueezerScreen::new);
 
 
             ItemBlockRenderTypes.setRenderLayer(ModFluids.LUBRICANT_SOURCE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.LUBRICANT_FLOWING.get(), RenderType.translucent());
+
+
+
         }
     }
     private void setup(final FMLCommonSetupEvent event)

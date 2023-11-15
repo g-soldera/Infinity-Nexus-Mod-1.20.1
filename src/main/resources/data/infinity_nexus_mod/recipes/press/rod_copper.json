@@ -1,7 +1,9 @@
 {
   "type": "infinity_nexus_mod:pressing",
-  "component" : "infinity_nexus_mod:redstone_component",
   "ingredients": [
+    {
+      "item": "infinity_nexus_mod:reinforced_component"
+    },
     {
       "item": "infinity_nexus_mod:copper_sheet",
       "count": 1
@@ -14,7 +16,10 @@
     "item": "infinity_nexus_mod:copper_rod",
     "count": 1
   },
-  "time": {
-    "value": 1200
+  "duration": {
+    "time": 1200
+  },
+  "energy": {
+    "amount": 1200
   }
 }

@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.slots;
 
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Mod.utils.ModUtils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -17,10 +18,7 @@ public class InputSlot extends SlotItemHandler {
     }
     @Override
     public boolean mayPlace(@NotNull ItemStack stack) {
-        if(stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get() || stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get()){
-            return false;
-        }
-        return true;
+        return !(ModUtils.isUpgrade(stack) || ModUtils.isComponent(stack));
     }
     @Override
     public int getMaxStackSize() {

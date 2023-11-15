@@ -1,9 +1,13 @@
 package com.Infinity.Nexus.Mod.recipe;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Mod.utils.ModUtils;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
@@ -14,28 +18,27 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class PressRecipes implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> inputItems;
+    private final int inputCount;
     private final ItemStack output;
     private final ResourceLocation id;
-    private final int time;
-    private final int count;
-    private final int resultCount;
+    private final int duration;
+    private final int energy;
 
-    private final ItemStack component;
-
-    public PressRecipes(NonNullList<Ingredient> inputItems, ItemStack output, ResourceLocation id, int time, int count, int resultCount, ItemStack component) {
+    public PressRecipes(NonNullList<Ingredient> inputItems,int inputCount, ItemStack output, ResourceLocation id, int duration, int energy) {
         this.inputItems = inputItems;
+        this.inputCount = inputCount;
         this.output = output;
         this.id = id;
-        this.time = time;
-        this.count = count;
-        this.resultCount = resultCount;
-        this.component = component;
+        this.duration = duration;
+        this.energy = energy;
     }
 
 
@@ -44,7 +47,11 @@ public class PressRecipes implements Recipe<SimpleContainer> {
         if(pLevel.isClientSide()) {
             return false;
         }
-        return pContainer.getItem(0).getCount() >= count && inputItems.get(0).test(pContainer.getItem(0)) && inputItems.get(1).test(pContainer.getItem(1));
+        int componentSlot = PressBlockEntity.getComponentSlot();
+        ItemStack stack = pContainer.getItem(componentSlot);
+        return (inputItems.get(0).test(stack) || ModUtils.getComponentLevel(stack) >= ModUtils.getComponentLevel(inputItems.get(0).getItems()[0])) &&
+                (inputItems.get(1).test(pContainer.getItem(0)))&&
+                inputItems.get(2).test(pContainer.getItem(1));
     }
 
     @Override
@@ -67,15 +74,17 @@ public class PressRecipes implements Recipe<SimpleContainer> {
         return output.copy();
     }
 
-    public ItemStack getComponent() {
-        return component;
+    public int getDuration() {
+        return duration;
     }
-    public int getTime() {
-        return time;
+
+    public int getEnergy() {
+        return energy;
     }
-    public int getCount() {
-        return count;
+    public int getInputCount() {
+        return inputCount;
     }
+
 
     @Override
     public ResourceLocation getId() {
@@ -92,9 +101,6 @@ public class PressRecipes implements Recipe<SimpleContainer> {
         return Type.INSTANCE;
     }
 
-    public int getResultCount() {
-        return resultCount;
-    }
 
     public static class Type implements RecipeType<PressRecipes> {
         public static final Type INSTANCE = new Type();
@@ -106,30 +112,27 @@ public class PressRecipes implements Recipe<SimpleContainer> {
         public static final ResourceLocation ID = new ResourceLocation(InfinityNexusMod.MOD_ID, "pressing");
 
         @Override
-        public PressRecipes fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
+        public @NotNull PressRecipes fromJson(@NotNull ResourceLocation pRecipeId, @NotNull JsonObject pSerializedRecipe) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
-            int resultCount = GsonHelper.getAsJsonObject(pSerializedRecipe, "output").get("count").getAsInt();
-            int time = GsonHelper.getAsJsonObject(pSerializedRecipe, "time").get("value").getAsInt();
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-            ItemStack component = new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(new ResourceLocation(GsonHelper.getAsString(pSerializedRecipe, "component")))));
-            int count = ingredients.get(0).getAsJsonObject().get("count").getAsInt();
-            NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
+
+            int duration = GsonHelper.getAsJsonObject(pSerializedRecipe, "duration").get("time").getAsInt();
+            int energy = GsonHelper.getAsJsonObject(pSerializedRecipe, "energy").get("amount").getAsInt();
+
+            int inputCount = ingredients.get(1).getAsJsonObject().get("count").getAsInt();
+
+            NonNullList<Ingredient> inputs = NonNullList.withSize(3, Ingredient.EMPTY);
             for (int i = 0; i < ingredients.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
-            return new PressRecipes(inputs, output, pRecipeId, time, count, resultCount, component);
+            return new PressRecipes(inputs, inputCount, output, pRecipeId, duration, energy);
         }
 
         @Override
-        public @Nullable PressRecipes fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
-
-            //1
+        public @Nullable PressRecipes fromNetwork(@NotNull ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
+                //1
             NonNullList<Ingredient> inputs = NonNullList.withSize(pBuffer.readInt(), Ingredient.EMPTY);
 
-            int time = 0;
-            int count = 0;
-            int resultCount = 0;
-            ItemStack component = ModItemsAdditions.REDSTONE_COMPONENT.get().getDefaultInstance();
             for(int i = 0; i < inputs.size(); i++) {
                 //2
                 inputs.set(i, Ingredient.fromNetwork(pBuffer));
@@ -137,13 +140,14 @@ public class PressRecipes implements Recipe<SimpleContainer> {
             //3
             ItemStack output = pBuffer.readItem();
 
-            return new PressRecipes(inputs, output, pRecipeId, time, count, resultCount, component);
+            return new PressRecipes(inputs, 0, output, pRecipeId, 0, 0);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf pBuffer, PressRecipes pRecipe) {
             //1
             pBuffer.writeInt(pRecipe.getIngredients().size());
+
             for (Ingredient ing : pRecipe.getIngredients()) {
                 //2
                 ing.toNetwork(pBuffer);

@@ -20,6 +20,8 @@ public class ModRecipes {
 
     public static final RegistryObject<RecipeSerializer<AssemblerRecipes>> ASSEMBLY_SERIALIZER =
             SERIALIZER.register("assembler", () -> AssemblerRecipes.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<SqueezerRecipes>> SQUEEZER_SERIALIZER =
+            SERIALIZER.register("squeezing", () -> SqueezerRecipes.Serializer.INSTANCE);
 
     public static void register(IEventBus eventBus) {
         SERIALIZER.register(eventBus);

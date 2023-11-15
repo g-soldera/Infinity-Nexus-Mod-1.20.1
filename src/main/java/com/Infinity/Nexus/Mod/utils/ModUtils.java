@@ -50,6 +50,15 @@ public class ModUtils {
         }
         return speed;
     }
+    public static int getStrength(ItemStackHandler itemHandler, int[] upgradeSlots) {
+        int strength = 0;
+        for (int i : upgradeSlots) {
+            if (itemHandler.getStackInSlot(i).getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get()) {
+                strength ++;
+            }
+        }
+        return strength;
+    }
 
     public static boolean isUpgrade(ItemStack stack) {
         return stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get()

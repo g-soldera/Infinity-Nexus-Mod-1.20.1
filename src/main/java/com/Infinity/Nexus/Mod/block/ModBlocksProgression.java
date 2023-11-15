@@ -20,39 +20,42 @@ public class ModBlocksProgression {
         public static final DeferredRegister<Block> BLOCKS =
                 DeferredRegister.create(ForgeRegistries.BLOCKS, InfinityNexusMod.MOD_ID);
 
+    public static final RegistryObject<Block> WOOD_MACHINE_CASING = registerBlock("wood_machine_casing",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).requiresCorrectToolForDrops()
+                    .strength(2.0f, 1.0f).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> COPPER_MACHINE_CASING = registerBlock("copper_machine_casing",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
-                    .strength(2.0f, 6.0f).sound(SoundType.COPPER)));
+                    .strength(2.0f, 3.0f).sound(SoundType.COPPER)));
     public static final RegistryObject<Block> LEAD_MACHINE_CASING = registerBlock("lead_machine_casing",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
-                    .strength(2.0f, 6.0f).sound(SoundType.COPPER)));
+                    .strength(2.0f, 4.0f).sound(SoundType.COPPER)));
     public static final RegistryObject<Block> ALUMINUM_MACHINE_CASING = registerBlock("aluminum_machine_casing",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
-                    .strength(2.0f, 6.0f).sound(SoundType.METAL)));
+                    .strength(2.0f, 5.0f).sound(SoundType.METAL)));
     public static final RegistryObject<Block> GOLD_MACHINE_CASING = registerBlock("gold_machine_casing",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
                     .strength(2.0f, 6.0f).sound(SoundType.METAL)));
     public static final RegistryObject<Block> IRON_MACHINE_CASING = registerBlock("iron_machine_casing",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
                     .strength(3.0f, 6.0f).sound(SoundType.METAL)));
-    public static final RegistryObject<Block> STEEL_MACHINE_CASING = registerBlock("steel_machine_casing",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
-                    .strength(2.0f, 6.0f).sound(SoundType.ANVIL)));
     public static final RegistryObject<Block> PLASTIC_MACHINE_CASING = registerBlock("plastic_machine_casing",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
                     .strength(2.0f, 6.0f).sound(SoundType.LODESTONE)));
     public static final RegistryObject<Block> GLASS_MACHINE_CASING = registerBlock("glass_machine_casing",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
                     .strength(1.0f, 6.0f).sound(SoundType.GLASS)));
-    public static final RegistryObject<Block> MAGIC_MACHINE_CASING = registerBlock("magic_machine_casing",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
-                    .strength(4.0f, 6.0f).sound(SoundType.SCULK)));
     public static final RegistryObject<Block> ENERGIZED_MACHINE_CASING = registerBlock("energized_machine_casing",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
                     .strength(5.0f, 6.0f).sound(SoundType.LANTERN)));
+    public static final RegistryObject<Block> STEEL_MACHINE_CASING = registerBlock("steel_machine_casing",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
+                    .strength(2.0f, 6.0f).sound(SoundType.ANVIL)));
     public static final RegistryObject<Block> INDUSTRIAL_MACHINE_CASING = registerBlock("industrial_machine_casing",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
                     .strength(6.0f, 6.0f).sound(SoundType.LANTERN)));
+    public static final RegistryObject<Block> INFINITY_MACHINE_CASING = registerBlock("infinity_machine_casing",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
+                    .strength(4.0f, 6.0f).sound(SoundType.NETHERITE_BLOCK)));
 
 
 

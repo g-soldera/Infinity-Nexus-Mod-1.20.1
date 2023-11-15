@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.slots;
 
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Mod.utils.ModUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
@@ -14,7 +15,7 @@ public class FluidItemSlot extends SlotItemHandler {
 
     @Override
     public boolean mayPlace(@NotNull ItemStack stack) {
-        return true;
+        return !(ModUtils.isComponent(stack) || ModUtils.isUpgrade(stack));
     }
 
     @Override

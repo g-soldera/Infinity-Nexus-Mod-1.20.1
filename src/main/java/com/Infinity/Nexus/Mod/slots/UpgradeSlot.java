@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.slots;
 
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Mod.utils.ModUtils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -13,7 +14,7 @@ public class UpgradeSlot extends SlotItemHandler {
 
     @Override
     public boolean mayPlace(@NotNull ItemStack stack) {
-        return stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get() || stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get();
+        return ModUtils.isUpgrade(stack);
     }
 
     @Override

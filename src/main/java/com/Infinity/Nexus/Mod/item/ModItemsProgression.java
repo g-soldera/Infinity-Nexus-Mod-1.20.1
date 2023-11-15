@@ -36,8 +36,8 @@ public class ModItemsProgression {
     public static final RegistryObject<Item> IRON_WIRE = ITEMS.register("iron_wire", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> GOLD_WIRE = ITEMS.register("gold_wire", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> STEEL_WIRE = ITEMS.register("steel_wire", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> MAGIC_WIRE = ITEMS.register("magic_wire", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> INDUSTRIAL_WIRE = ITEMS.register("industrial_wire", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> INFINITY_WIRE = ITEMS.register("infinity_wire", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
     //Screws
     public static final RegistryObject<Item> COPPER_SCREW = ITEMS.register("copper_screw", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
@@ -46,8 +46,8 @@ public class ModItemsProgression {
     public static final RegistryObject<Item> IRON_SCREW = ITEMS.register("iron_screw", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> GOLD_SCREW = ITEMS.register("gold_screw", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> STEEL_SCREW = ITEMS.register("steel_screw", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> MAGIC_SCREW = ITEMS.register("magic_screw", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> INDUSTRIAL_SCREW = ITEMS.register("industrial_screw", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> INFINITY_SCREW = ITEMS.register("infinity_screw", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
     //Rods
     public static final RegistryObject<Item> COPPER_ROD = ITEMS.register("copper_rod", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
@@ -56,8 +56,8 @@ public class ModItemsProgression {
     public static final RegistryObject<Item> IRON_ROD = ITEMS.register("iron_rod", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> GOLD_ROD = ITEMS.register("gold_rod", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> STEEL_ROD = ITEMS.register("steel_rod", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> MAGIC_ROD = ITEMS.register("magic_rod", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> INDUSTRIAL_ROD = ITEMS.register("industrial_rod", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> INFINITY_ROD = ITEMS.register("infinity_rod", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
     //Sheets
     public static final RegistryObject<Item> COPPER_SHEET = ITEMS.register("copper_sheet", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
@@ -66,8 +66,8 @@ public class ModItemsProgression {
     public static final RegistryObject<Item> IRON_SHEET = ITEMS.register("iron_sheet", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> GOLD_SHEET = ITEMS.register("gold_sheet", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> STEEL_SHEET = ITEMS.register("steel_sheet", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> MAGIC_SHEET = ITEMS.register("magic_sheet", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> INDUSTRIAL_SHEET = ITEMS.register("industrial_sheet", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> INFINITY_SHEET = ITEMS.register("infinity_sheet", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
 
     public static void register(IEventBus eventBus) {

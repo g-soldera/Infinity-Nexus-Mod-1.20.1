@@ -123,10 +123,10 @@
   "block.infinity_nexus_mod.glass_machine_casing": "Carcaça de Máquina de Vidro",
   "block.infinity_nexus_mod.plastic_machine_casing": "Carcaça de Máquina de Plástico",
   "block.infinity_nexus_mod.gold_machine_casing": "Carcaça de Máquina de Ouro",
-  "block.infinity_nexus_mod.magic_machine_casing": "Carcaça de Máquina Mágica",
-  "block.infinity_nexus_mod.steel_machine_casing": "Carcaça de Máquina de Aço",
   "block.infinity_nexus_mod.energized_machine_casing": "Carcaça de Máquina Energizado",
+  "block.infinity_nexus_mod.steel_machine_casing": "Carcaça de Máquina de Aço",
   "block.infinity_nexus_mod.industrial_machine_casing": "Carcaça de Máquina Industrial",
+  "block.infinity_nexus_mod.infinity_machine_casing": "Carcaça de Máquina de Infinity",
 
   "block.infinity_nexus_mod.molten_tinkers_bucket": "Tinkers Derretido",
   "fluid.infinity_nexus_mod.molten_tinkers": "Tinkers Derretido",
