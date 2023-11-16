@@ -38,7 +38,7 @@ public class AssemblerCategory implements IRecipeCategory<AssemblerRecipes> {
 
     @Override
     public Component getTitle() {
-        return Component.translatable("block.infinity_nexus_mod.assembly");
+        return Component.translatable("block.infinity_nexus_mod.assembler");
     }
 
     @Override

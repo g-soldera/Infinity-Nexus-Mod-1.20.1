@@ -33,23 +33,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.INFINITY_SINGULARITY);
         simpleItem(ModItemsAdditions.ITEM_DISLOCATOR);
         simpleItem(ModItemsAdditions.PORTAL_ACTIVATOR);
-        simpleItem(ModItemsAdditions.INFINITY_SWORD);
-        simpleItem(ModItemsAdditions.INFINITY_PAXEL);
-        simpleItem(ModItemsAdditions.INFINITY_PICKAXE);
-        simpleItem(ModItemsAdditions.INFINITY_AXE);
-        simpleItem(ModItemsAdditions.INFINITY_SHOVEL);
-        simpleItem(ModItemsAdditions.INFINITY_HOE);
+        simpletools(ModItemsAdditions.INFINITY_SWORD);
+        simpletools(ModItemsAdditions.INFINITY_PAXEL);
+        simpletools(ModItemsAdditions.INFINITY_PICKAXE);
+        simpletools(ModItemsAdditions.INFINITY_AXE);
+        simpletools(ModItemsAdditions.INFINITY_SHOVEL);
+        simpletools(ModItemsAdditions.INFINITY_HOE);
         simpleItem(ModItemsAdditions.INFINITY_HELMET);
         simpleItem(ModItemsAdditions.INFINITY_CHESTPLATE);
         simpleItem(ModItemsAdditions.INFINITY_LEGGINGS);
         simpleItem(ModItemsAdditions.INFINITY_BOOTS);
         simpleItem(ModItemsAdditions.INFINITY_BOW);
-        simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_SWORD);
-        simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_PAXEL);
-        simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_PICKAXE);
-        simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_AXE);
-        simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_SHOVEL);
-        simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_HOE);
+        simpletools(ModItemsAdditions.IMPERIAL_INFINITY_SWORD);
+        simpletools(ModItemsAdditions.IMPERIAL_INFINITY_PAXEL);
+        simpletools(ModItemsAdditions.IMPERIAL_INFINITY_PICKAXE);
+        simpletools(ModItemsAdditions.IMPERIAL_INFINITY_AXE);
+        simpletools(ModItemsAdditions.IMPERIAL_INFINITY_SHOVEL);
+        simpletools(ModItemsAdditions.IMPERIAL_INFINITY_HOE);
         simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_HELMET);
         simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_CHESTPLATE);
         simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS);
@@ -123,9 +123,13 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){
-        System.out.println("Biruleibe "+item.getId());
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(InfinityNexusMod.MOD_ID, "item/" + item.getId().getPath()));
+    }
+    private ItemModelBuilder simpletools(RegistryObject<Item> item){
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/handheld")).texture("layer0",
                 new ResourceLocation(InfinityNexusMod.MOD_ID, "item/" + item.getId().getPath()));
     }
 }

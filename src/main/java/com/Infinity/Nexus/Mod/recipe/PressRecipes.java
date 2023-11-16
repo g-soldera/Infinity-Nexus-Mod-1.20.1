@@ -116,15 +116,16 @@ public class PressRecipes implements Recipe<SimpleContainer> {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
 
-            int duration = GsonHelper.getAsJsonObject(pSerializedRecipe, "duration").get("time").getAsInt();
-            int energy = GsonHelper.getAsJsonObject(pSerializedRecipe, "energy").get("amount").getAsInt();
-
             int inputCount = ingredients.get(1).getAsJsonObject().get("count").getAsInt();
 
             NonNullList<Ingredient> inputs = NonNullList.withSize(3, Ingredient.EMPTY);
             for (int i = 0; i < ingredients.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
+
+            int duration = pSerializedRecipe.get("duration").getAsInt();
+            int energy = pSerializedRecipe.get("energy").getAsInt();
+
             return new PressRecipes(inputs, inputCount, output, pRecipeId, duration, energy);
         }
 
@@ -138,9 +139,12 @@ public class PressRecipes implements Recipe<SimpleContainer> {
                 inputs.set(i, Ingredient.fromNetwork(pBuffer));
             }
             //3
+            int inputCount = pBuffer.readInt();
+            int duration = pBuffer.readInt();
+            int energy = pBuffer.readInt();
             ItemStack output = pBuffer.readItem();
 
-            return new PressRecipes(inputs, 0, output, pRecipeId, 0, 0);
+            return new PressRecipes(inputs, inputCount, output, pRecipeId, duration, energy);
         }
 
         @Override
@@ -153,6 +157,9 @@ public class PressRecipes implements Recipe<SimpleContainer> {
                 ing.toNetwork(pBuffer);
             }
             //3
+            pBuffer.writeInt(pRecipe.inputCount);
+            pBuffer.writeInt(pRecipe.duration);
+            pBuffer.writeInt(pRecipe.energy);
             pBuffer.writeItemStack(pRecipe.getResultItem(null), false);
         }
     }

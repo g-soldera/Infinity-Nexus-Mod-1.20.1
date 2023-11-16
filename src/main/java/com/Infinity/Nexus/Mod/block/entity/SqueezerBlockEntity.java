@@ -318,13 +318,12 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
         try {
             ItemStack fluidStack = this.itemHandler.getStackInSlot(fluidInputSlot);
             fluidStack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(iFluidHandlerItem -> {
-                if (fluidStack.getItem() instanceof BucketItem bucketItem) {
-                    //TODO 80%, testar
+                if (fluidStack.getItem() instanceof BucketItem bucketItem ) {
                     FluidStack fluidStackToDrain = new FluidStack(FLUID_STORAGE.getFluid(), 1000);
 
                     ItemStack filledBucket = new ItemStack(FLUID_STORAGE.getFluid().getFluid().getBucket());
 
-                    if (!filledBucket.isEmpty() && itemHandler.getStackInSlot(OUTPUT_FLUID_SLOT).isEmpty() && bucketItem == Items.BUCKET) {
+                    if (isValidBucket(filledBucket, bucketItem)) {
                         System.out.println(filledBucket.getDisplayName());
                         FLUID_STORAGE.drain(fluidStackToDrain, IFluidHandler.FluidAction.EXECUTE);
                         itemHandler.insertItem(OUTPUT_FLUID_SLOT, filledBucket, false);
@@ -332,7 +331,6 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
                         itemHandler.setStackInSlot(OUTPUT_FLUID_SLOT, filledBucket);
                     }
                 } else {
-                    //TODO para cada tank
                     if (canInsertFluidOnItem(iFluidHandlerItem)) {
                         FluidStack fluidStackToFill = new FluidStack(FLUID_STORAGE.getFluid(), 10);
                         FLUID_STORAGE.drain(fluidStackToFill, IFluidHandler.FluidAction.EXECUTE);
@@ -350,12 +348,18 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
+    private boolean isValidBucket(ItemStack filledBucket, BucketItem bucketItem) {
+        return !filledBucket.isEmpty() && itemHandler.getStackInSlot(OUTPUT_FLUID_SLOT).isEmpty() && bucketItem == Items.BUCKET && FLUID_STORAGE.getFluid().getAmount() >= 1000;
+    }
+
+
     private boolean canInsertFluidItemInOutputSlot() {
         return itemHandler.getStackInSlot(OUTPUT_FLUID_SLOT).isEmpty()
                 && !FLUID_STORAGE.isEmpty();
     }
 
     private boolean canInsertFluidOnItem(IFluidHandlerItem iFluidHandlerItem) {
+        //TODO para cada tank
         return iFluidHandlerItem.getFluidInTank(0).isFluidEqual(FLUID_STORAGE.getFluid())
                 && iFluidHandlerItem.getFluidInTank(0).getAmount() < iFluidHandlerItem.getTankCapacity(0)
                 || iFluidHandlerItem.getFluidInTank(0).isEmpty();

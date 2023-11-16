@@ -1,6 +1,7 @@
-
 {
   "type": "infinity_nexus_mod:crushing",
+  "energy": 1200,
+  "duration": 1200,
   "ingredients": [
     {
       "item": "infinity_nexus_mod:reinforced_component"
@@ -13,11 +14,5 @@
   "output": {
     "item": "infinity_nexus_mod:aluminum_dust",
     "count": 3
-  },
-  "duration": {
-    "time": 1200
-  },
-  "energy": {
-    "amount": 1200
   }
 }

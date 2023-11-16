@@ -1,5 +1,7 @@
 {
   "type": "infinity_nexus_mod:pressing",
+  "energy": 1200,
+  "duration": 1200,
   "ingredients": [
     {
       "item": "infinity_nexus_mod:reinforced_component"
@@ -15,11 +17,5 @@
   "output": {
     "item": "infinity_nexus_mod:aluminum_rod",
     "count": 1
-  },
-  "duration": {
-    "time": 1200
-  },
-  "energy": {
-    "amount": 60000
   }
 }

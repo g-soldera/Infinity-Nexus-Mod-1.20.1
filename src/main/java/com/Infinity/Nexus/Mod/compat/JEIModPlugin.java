@@ -50,9 +50,13 @@ public class JEIModPlugin implements IModPlugin {
 
 
         registration.addRecipes(CrusherCategory.CRUSHER_TYPE, crusherRecipes);
+        System.out.println("Registry: " + crusherRecipes.size() + " for Crusher");
         registration.addRecipes(PressCategory.PRESS_TYPE, pressRecipes);
+        System.out.println("Registry: " + pressRecipes.size() + " for Press");
         registration.addRecipes(AssemblerCategory.ASSEMBLY_TYPE, assemblyRecipes);
+        System.out.println("Registry: " + assemblyRecipes.size() + " for Assembly");
         registration.addRecipes(SqueezerCategory.SQUEEZER_TYPE, squeezerRecipes);
+        System.out.println("Registry: " + squeezerRecipes.size() + " for Squeezer");
     }
 
     @Override

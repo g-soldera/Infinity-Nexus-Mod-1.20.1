@@ -94,15 +94,11 @@ public class AssemblerScreen extends AbstractContainerScreen<AssemblerMenu> {
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(TEXTURE, x + 72, y + 20, 176, 0, 14, menu.getScaledProgress());
-            guiGraphics.blit(TEXTURE, x + 91, y + 20, 189, 0, 14+1, menu.getScaledProgress());
-            guiGraphics.blit(TEXTURE, x + 72, y + 40, 218, 0, menu.getScaledProgress(), 14);
-            guiGraphics.blit(TEXTURE, x + 106, y + 54, 218, 14, -14, -menu.getScaledProgress());
 
-            guiGraphics.blit(TEXTURE, x + 85, y + 20, 184, 47, 14, menu.getScaledProgress());
-            guiGraphics.blit(TEXTURE, x + 93, y + 54, 184, 61, -8, -menu.getScaledProgress());
-            guiGraphics.blit(TEXTURE, x + 72, y + 33, 176, 38, menu.getScaledProgress(), 8);
-            guiGraphics.blit(TEXTURE, x + 106, y + 41, 204, 46, -menu.getScaledProgress(), -8);
+            guiGraphics.blit(TEXTURE, x + 58, y + 6, 176, 0, 62, menu.getScaledProgress());
+            guiGraphics.blit(TEXTURE, x + 58, y + 6, 176, 0, menu.getScaledProgress(), 62);
+            guiGraphics.blit(TEXTURE, x + 120, y + 68 , 238, 62,  -62, -menu.getScaledProgress());
+            guiGraphics.blit(TEXTURE, x + 120, y + 68 , 238, 62,  -menu.getScaledProgress(), -62);
 
         }
     }

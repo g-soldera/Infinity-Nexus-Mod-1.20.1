@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.datagen;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.utils.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -19,7 +20,6 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-
     }
 
     @Override

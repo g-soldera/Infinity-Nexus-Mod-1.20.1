@@ -113,8 +113,6 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
 
-            int duration = GsonHelper.getAsJsonObject(pSerializedRecipe, "duration").get("time").getAsInt();
-            int energy = GsonHelper.getAsJsonObject(pSerializedRecipe, "energy").get("amount").getAsInt();
 
             int inputCount = ingredients.get(1).getAsJsonObject().get("count").getAsInt();
 
@@ -122,27 +120,43 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
             for (int i = 0; i < ingredients.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
+
+            int duration = pSerializedRecipe.get("duration").getAsInt();
+            int energy = pSerializedRecipe.get("energy").getAsInt();
+
             return new CrusherRecipes(inputs, inputCount, output, pRecipeId, duration, energy);
         }
 
         @Override
         public @Nullable CrusherRecipes fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
+            //1
             NonNullList<Ingredient> inputs = NonNullList.withSize(pBuffer.readInt(), Ingredient.EMPTY);
 
             for(int i = 0; i < inputs.size(); i++) {
+                //2
                 inputs.set(i, Ingredient.fromNetwork(pBuffer));
             }
-
+            //3
+            int inputCount = pBuffer.readInt();
+            int duration = pBuffer.readInt();
+            int energy = pBuffer.readInt();
             ItemStack output = pBuffer.readItem();
-            return new CrusherRecipes(inputs, 0, output, pRecipeId, 0, 0);
+            return new CrusherRecipes(inputs, inputCount, output, pRecipeId, duration, energy);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf pBuffer, CrusherRecipes pRecipe) {
+            //1
             pBuffer.writeInt(pRecipe.getIngredients().size());
+
             for (Ingredient ing : pRecipe.getIngredients()) {
+                //2
                 ing.toNetwork(pBuffer);
             }
+            //3
+            pBuffer.writeInt(pRecipe.inputCount);
+            pBuffer.writeInt(pRecipe.duration);
+            pBuffer.writeInt(pRecipe.energy);
             pBuffer.writeItemStack(pRecipe.getResultItem(null), false);
         }
     }
