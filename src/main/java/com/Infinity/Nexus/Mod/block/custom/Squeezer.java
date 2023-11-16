@@ -2,6 +2,7 @@ package com.Infinity.Nexus.Mod.block.custom;
 
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
 import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
+import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -83,6 +84,13 @@ public class Squeezer extends BaseEntityBlock {
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
+            if(pPlayer.getMainHandItem().getItem() instanceof ComponentItem){
+               if(pLevel.getBlockEntity(pPos) instanceof SqueezerBlockEntity squeezer){
+                   pPlayer.getMainHandItem().shrink(1);
+                   squeezer.setUpgradeLevel(pPlayer.getMainHandItem());
+               }
+
+            }
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
@@ -103,4 +111,5 @@ public class Squeezer extends BaseEntityBlock {
         return createTickerHelper(pBlockEntityType, ModBlockEntities.SQUEEZER_BE.get(),
                 (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1));
     }
+
 }

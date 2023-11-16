@@ -318,11 +318,6 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void transferFluidToItem() {
-        if(this.itemHandler.getStackInSlot(OUTPUT_FLUID_SLOT).isEmpty()) {
-            this.itemHandler.extractItem(FLUID_SLOT, 1, false);
-            FLUID_STORAGE.drain(1000, IFluidHandler.FluidAction.EXECUTE);
-            this.itemHandler.setStackInSlot(OUTPUT_FLUID_SLOT, ModItemsAdditions.BUCKET_LUBRICANT.get().getDefaultInstance().copy());
-        }
     }
 
     private void setMaxProgress() {
@@ -432,7 +427,7 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
     public void setUpgradeLevel(ItemStack itemStack) {
         {
             if (this.itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
-                this.itemHandler.setStackInSlot(1, itemStack);
+                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack);
             }
         }
     }
