@@ -23,7 +23,12 @@ public class ModFluidType {
 
 
     public static final RegistryObject<FluidType> LUBRICANT = registryFluidType("lubricant",
-            new BaseFluidType(WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, 0xA1E038D0,
+            new BaseFluidType(WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, 0xA1FFBD26,
+            new Vector3f(224f / 225f, 56f / 225f, 208f / 255f),
+            FluidType.Properties.create().lightLevel(2).viscosity(3).density(15)));
+
+    public static final RegistryObject<FluidType> ETHANOL = registryFluidType("ethanol",
+            new BaseFluidType(WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, 0xA17AE2FF,
             new Vector3f(224f / 225f, 56f / 225f, 208f / 255f),
             FluidType.Properties.create().lightLevel(2).viscosity(3).density(15)));
 

@@ -45,12 +45,18 @@ public class AssemblerRecipes implements Recipe<SimpleContainer> {
 
         int componentSlot = AssemblerBlockEntity.getComponentSlot();
         ItemStack stack = pContainer.getItem(componentSlot);
+
         for (int i = 1; i < inputItems.size(); i++) {
-                if (!inputItems.get(i).test(pContainer.getItem(i)) ||
-                        !inputItems.get(0).test(stack) || ModUtils.getComponentLevel(stack) >= ModUtils.getComponentLevel(inputItems.get(0).getItems()[0])
-                ) {
-                    return false;
+
+            if (!inputItems.get(i).test(pContainer.getItem(i-1))) {
+                return false;
             }
+
+        }
+
+        if (ModUtils.getComponentLevel(stack) < ModUtils.getComponentLevel(inputItems.get(0).getItems()[0])) {
+            System.out.println("Not enough components");
+            return false;
         }
         return true;
     }
@@ -113,13 +119,14 @@ public class AssemblerRecipes implements Recipe<SimpleContainer> {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
 
-            int duration = GsonHelper.getAsJsonObject(pSerializedRecipe, "duration").get("time").getAsInt();
-            int energy = GsonHelper.getAsJsonObject(pSerializedRecipe, "energy").get("amount").getAsInt();
-
             NonNullList<Ingredient> inputs = NonNullList.withSize(9, Ingredient.EMPTY);
             for (int i = 0; i < ingredients.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
+
+            int duration = pSerializedRecipe.get("duration").getAsInt();
+            int energy = pSerializedRecipe.get("energy").getAsInt();
+
             return new AssemblerRecipes(inputs, output,pRecipeId,duration, energy);
         }
 
@@ -131,8 +138,10 @@ public class AssemblerRecipes implements Recipe<SimpleContainer> {
                 inputs.set(i, Ingredient.fromNetwork(pBuffer));
             }
 
+            int duration = pBuffer.readInt();
+            int energy = pBuffer.readInt();
             ItemStack output = pBuffer.readItem();
-            return new AssemblerRecipes(inputs, output, pRecipeId, 0, 0);
+            return new AssemblerRecipes(inputs, output, pRecipeId, duration, energy);
         }
 
         @Override
@@ -141,6 +150,8 @@ public class AssemblerRecipes implements Recipe<SimpleContainer> {
             for (Ingredient ing : pRecipe.getIngredients()) {
                 ing.toNetwork(pBuffer);
             }
+            pBuffer.writeInt(pRecipe.duration);
+            pBuffer.writeInt(pRecipe.energy);
             pBuffer.writeItemStack(pRecipe.getResultItem(null), false);
         }
     }

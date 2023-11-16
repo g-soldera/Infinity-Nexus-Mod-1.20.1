@@ -1,0 +1,20 @@
+{
+  "type": "infinity_nexus_mod:squeezing",
+  "energy": 1200,
+  "duration": 1200,
+  "fluidType": "infinity_nexus_mod:lubricant_water_fluid",
+  "fluidAmount": 10,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:logic_component"
+    },
+    {
+      "item": "minecraft:cocoa_beans",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:bio_mass",
+    "count": 1
+  }
+}

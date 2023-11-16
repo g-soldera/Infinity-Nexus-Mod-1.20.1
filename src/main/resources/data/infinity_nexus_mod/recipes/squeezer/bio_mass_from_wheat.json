@@ -1,0 +1,20 @@
+{
+  "type": "infinity_nexus_mod:squeezing",
+  "energy": 1000,
+  "duration": 1000,
+  "fluidType": "infinity_nexus_mod:lubricant_water_fluid",
+  "fluidAmount": 10,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:basic_component"
+    },
+    {
+      "item": "minecraft:wheat_seeds",
+      "count": 5
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:bio_mass",
+    "count": 1
+  }
+}

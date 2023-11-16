@@ -286,7 +286,8 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
             if (!hasEnoughEnergy()) {
                 return;
             }
-            if(FLUID_STORAGE.getSpace() < getCurrentRecipe().get().getFluid().getAmount() || FLUID_STORAGE.getFluid().copy() != getCurrentRecipe().get().getFluid().copy() && !FLUID_STORAGE.isEmpty()){
+            if(!canInsertOutputFluid()){
+                System.out.println("Can't insert fluid");
                 return;
             }
             pLevel.setBlock(pPos, pState.setValue(Squeezer.LIT, machineLevel + 8), 3);
@@ -302,6 +303,12 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private boolean canInsertOutputFluid() {
+        return FLUID_STORAGE.getSpace() >= getCurrentRecipe().get().getFluid().getAmount()  &&
+                FLUID_STORAGE.getFluid().isFluidEqual(getCurrentRecipe().get().getFluid()) ||
+                FLUID_STORAGE.getFluid().isEmpty();
     }
 
     private void fillUpOnFluid() {

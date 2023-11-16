@@ -82,44 +82,49 @@
   "item.infinity_nexus_mod.sheet_clay_model": "Sheet Clay Model",
 
   "item.infinity_nexus_mod.copper_wire": "Copper Wire",
-  "item.infinity_nexus_mod.aluminum_wire": "Tin Wire",
+  "item.infinity_nexus_mod.aluminum_wire": "Aluminum Wire",
+  "item.infinity_nexus_mod.lead_wire": "Lead Wire",
   "item.infinity_nexus_mod.iron_wire": "Iron Wire",
   "item.infinity_nexus_mod.gold_wire": "Gold Wire",
-  "item.infinity_nexus_mod.magic_wire": "Magic Wire",
   "item.infinity_nexus_mod.steel_wire": "Steel Wire",
   "item.infinity_nexus_mod.industrial_wire": "Industrial Wire",
+  "item.infinity_nexus_mod.infinity_wire": "Infinity Wire",
 
   "item.infinity_nexus_mod.copper_screw": "Copper Screw",
-  "item.infinity_nexus_mod.aluminum_screw": "Tin Screw",
+  "item.infinity_nexus_mod.aluminum_screw": "Aluminum Screw",
+  "item.infinity_nexus_mod.lead_screw": "Lead Screw",
   "item.infinity_nexus_mod.iron_screw": "Iron Screw",
   "item.infinity_nexus_mod.gold_screw": "Gold Screw",
-  "item.infinity_nexus_mod.magic_screw": "Magic Screw",
   "item.infinity_nexus_mod.steel_screw": "Steel Screw",
   "item.infinity_nexus_mod.industrial_screw": "Industrial Screw",
+  "item.infinity_nexus_mod.infinity_screw": "Infinity Screw",
 
   "item.infinity_nexus_mod.copper_rod": "Copper Rod",
-  "item.infinity_nexus_mod.aluminum_rod": "Tin Rod",
+  "item.infinity_nexus_mod.aluminum_rod": "Aluminum Rod",
+  "item.infinity_nexus_mod.lead_rod": "Lead Rod",
   "item.infinity_nexus_mod.iron_rod": "Iron Rod",
   "item.infinity_nexus_mod.gold_rod": "Gold Rod",
-  "item.infinity_nexus_mod.magic_rod": "Magic Rod",
   "item.infinity_nexus_mod.steel_rod": "Steel Rod",
   "item.infinity_nexus_mod.industrial_rod": "Industrial Rod",
+  "item.infinity_nexus_mod.infinity_rod": "Infinity Rod",
 
   "item.infinity_nexus_mod.copper_sheet": "Copper Sheet",
-  "item.infinity_nexus_mod.aluminum_sheet": "Tin Sheet",
+  "item.infinity_nexus_mod.aluminum_sheet": "Aluminum Sheet",
+  "item.infinity_nexus_mod.lead_sheet": "Lead Sheet",
   "item.infinity_nexus_mod.iron_sheet": "Iron Sheet",
   "item.infinity_nexus_mod.gold_sheet": "Gold Sheet",
-  "item.infinity_nexus_mod.magic_sheet": "Magic Sheet",
   "item.infinity_nexus_mod.steel_sheet": "Steel Sheet",
   "item.infinity_nexus_mod.industrial_sheet": "Industrial Sheet",
+  "item.infinity_nexus_mod.infinity_sheet": "Infinity Sheet",
 
   "item.infinity_nexus_mod.raw_infinity": "Raw Infinity",
   "item.infinity_nexus_mod.infinity_ingot": "Infinity Ingot",
   "item.infinity_nexus_mod.infinity_dust": "Infinity dust",
   "item.infinity_nexus_mod.infinity_nugget": "Infinity Nugget",
 
+  "block.infinity_nexus_mod.wood_machine_casing": "Wood Machine Casing",
   "block.infinity_nexus_mod.copper_machine_casing": "Copper Machine Casing",
-  "block.infinity_nexus_mod.aluminum_machine_casing": "Tin Machine Casing",
+  "block.infinity_nexus_mod.aluminum_machine_casing": "Aluminum Machine Casing",
   "block.infinity_nexus_mod.lead_machine_casing": "Lead Machine Casing",
   "block.infinity_nexus_mod.iron_machine_casing": "Iron Machine Casing",
   "block.infinity_nexus_mod.glass_machine_casing": "Glass Machine Casing",
@@ -130,9 +135,6 @@
   "block.infinity_nexus_mod.steel_machine_casing": "Steel Machine Casing",
   "block.infinity_nexus_mod.infinity_machine_casing": "Infinity Machine Casing",
 
-  "block.infinity_nexus_mod.molten_tinkers_bucket": "Molten Tinkers",
-  "fluid.infinity_nexus_mod.molten_tinkers": "Molten Tinkers",
-  "item.infinity_nexus_mod.molten_tinkers_bucket": "Tinkers Bucket",
   "block.infinity_nexus_mod.molten_infinity_bucket": "Molten Infinity",
   "fluid.infinity_nexus_mod.molten_infinity": "Molten Infinity",
   "item.infinity_nexus_mod.molten_infinity_bucket": "Infinity Bucket",
@@ -140,15 +142,6 @@
   "fluid.infinity_nexus_mod.molten_starliquid": "Molten Starliquid",
   "item.infinity_nexus_mod.molten_starliquid_bucket": "Starliquid Bucket",
 
-
-  "item.infinity_nexus_mod.tinkers_ingot": "Tinkers Ingot",
-  "item.infinity_nexus_mod.extended_ingot": "Extended Ingot",
-  "item.infinity_nexus_mod.thermal_ingot": "Thermal Ingot",
-  "block.infinity_nexus_mod.thermal_block": "Thermal Block",
-  "item.infinity_nexus_mod.botania_ingot": "Botania Ingot",
-  "item.infinity_nexus_mod.immersive_ingot": "Immersive Ingot",
-  "item.infinity_nexus_mod.mystical_ingot": "Mystical Ingot",
-  "item.infinity_nexus_mod.draconic_ingot": "Draconic Ingot",
 
   "block.infinity_nexus_mod.explorar_portal_frame": "Portal Block",
 
@@ -163,96 +156,76 @@
   "item.minecraft.tipped_arrow.effect.freeze_potion": "Flecha de Poção de Congelamento",
   "effect.infinity_nexus_mod.freeze": "Freeze",
 
-  "block.infinity_nexus_mod.empty_basic_metal_box": "Empty Basic Metal Box",
-
-  "block.infinity_nexus_mod.empty_basic_gem_basket": "Empty Basic Gem Basket",
-
-  "block.infinity_nexus_mod.empty_advanced_metal_box": "Empty Advanced Metal Box",
-
-  "block.infinity_nexus_mod.empty_advanced_gem_basket": "Empty Advanced Gem Basket",
-
-  "block.infinity_nexus_mod.empty_elite_gem_basket": "Empty Elite Gem Case",
-
-  "block.infinity_nexus_mod.empty_elite_metal_box": "Empty Elite Metal Box",
-
-  "block.infinity_nexus_mod.empty_ultimate_metal_box": "Empty Ultimate Metal Box",
-
-  "block.infinity_nexus_mod.empty_legendary_metal_box": "Empty Legendary Box",
-
-  "block.infinity_nexus_mod.full_basic_mixed_metal_box": "Full Basic Metal Box",
-  "block.infinity_nexus_mod.full_basic_mixed_metal_box_1": "Full Basic Metal Box",
-
-  "block.infinity_nexus_mod.full_basic_mixed_gem_basket": "Full Basic Gem Basket",
-  "block.infinity_nexus_mod.full_basic_mixed_gem_basket_1": "Full Basic Gem Basket",
-
-  "block.infinity_nexus_mod.full_advanced_mixed_gem_basket": "Full Advanced Gem Basket",
-  "block.infinity_nexus_mod.full_advanced_mixed_gem_basket_1": "Full Advanced Gem Basket",
-
-  "block.infinity_nexus_mod.full_advanced_mixed_metal_box": "Full Advanced Metal Box",
-
-  "block.infinity_nexus_mod.full_elite_mixed_gem_basket": "Full Elite Gem Case",
-
-  "block.infinity_nexus_mod.full_elite_mixed_metal_box": "Full Elite Metal Box",
-  "block.infinity_nexus_mod.full_elite_mixed_metal_box_1": "Full Elite Metal Box",
-  "block.infinity_nexus_mod.full_elite_mixed_metal_box_2": "Full Elite Metal Box",
-
-  "block.infinity_nexus_mod.full_ultimate_mixed_metal_box": "Full Ultimate Metal Box",
-  "block.infinity_nexus_mod.full_ultimate_mixed_metal_box_1": "Full Ultimate Metal Box",
-
-  "block.infinity_nexus_mod.full_legendary_mixed_metal_box": "Full Infinity Metal Box",
-
-
-  "item.infinity_nexus_mod.blue_infinity_helmet": "Blue Infinity Helmet",
-  "item.infinity_nexus_mod.blue_infinity_chestplate": "Blue Infinity Chestplate",
-  "item.infinity_nexus_mod.blue_infinity_leggings": "Blue Infinity Leggings",
-  "item.infinity_nexus_mod.blue_infinity_boots": "Blue Infinity Boots",
-
-  "item.infinity_nexus_mod.gold_infinity_helmet": "Gold Infinity Helmet",
-  "item.infinity_nexus_mod.gold_infinity_chestplate": "Gold Infinity Chestplate",
-  "item.infinity_nexus_mod.gold_infinity_leggings": "Gold Infinity Leggings",
-  "item.infinity_nexus_mod.gold_infinity_boots": "Gold Infinity Boots",
-
-  "item.infinity_nexus_mod.green_infinity_helmet": "Green Infinity Helmet",
-  "item.infinity_nexus_mod.green_infinity_chestplate": "Green Infinity Chestplate",
-  "item.infinity_nexus_mod.green_infinity_leggings": "Green Infinity Leggings",
-  "item.infinity_nexus_mod.green_infinity_boots": "Green Infinity Boots",
-
-  "item.infinity_nexus_mod.pink_infinity_helmet": "Pink Infinity Helmet",
-  "item.infinity_nexus_mod.pink_infinity_chestplate": "Pink Infinity Chestplate",
-  "item.infinity_nexus_mod.pink_infinity_leggings": "Pink Infinity Leggings",
-  "item.infinity_nexus_mod.pink_infinity_boots": "Pink Infinity Boots",
-
-  "item.infinity_nexus_mod.purple_infinity_helmet": "Purple Infinity Helmet",
-  "item.infinity_nexus_mod.purple_infinity_chestplate": "Purple Infinity Chestplate",
-  "item.infinity_nexus_mod.purple_infinity_leggings": "Purple Infinity Leggings",
-  "item.infinity_nexus_mod.purple_infinity_boots": "Purple Infinity Boots",
-
-  "item.infinity_nexus_mod.red_infinity_helmet": "Red Infinity Helmet",
-  "item.infinity_nexus_mod.red_infinity_chestplate": "Red Infinity Chestplate",
-  "item.infinity_nexus_mod.red_infinity_leggings": "Red Infinity Leggings",
-  "item.infinity_nexus_mod.red_infinity_boots": "Red Infinity Boots",
-
-  "item.infinity_nexus_mod.silver_infinity_helmet": "Silver Infinity Helmet",
-  "item.infinity_nexus_mod.silver_infinity_chestplate": "Silver Infinity Chestplate",
-  "item.infinity_nexus_mod.silver_infinity_leggings": "Silver Infinity Leggings",
-  "item.infinity_nexus_mod.silver_infinity_boots": "Silver Infinity Boots",
-
-  "item.infinity_nexus_mod.yellow_infinity_helmet": "Yellow Infinity Helmet",
-  "item.infinity_nexus_mod.yellow_infinity_chestplate": "Yellow Infinity Chestplate",
-  "item.infinity_nexus_mod.yellow_infinity_leggings": "Yellow Infinity Leggings",
-  "item.infinity_nexus_mod.yellow_infinity_boots": "Yellow Infinity Boots",
-
   "tooltip.infinity_nexus.wipe": "§4Wip",
+
+  "item.infinity_nexus_mod.redstone_component": "Redstone Component",
+  "item.infinity_nexus_mod.basic_component": "Basic Component",
+  "item.infinity_nexus_mod.reinforced_component": "Reinforced Component",
+  "item.infinity_nexus_mod.logic_component": "Lógic Component",
+  "item.infinity_nexus_mod.advanced_component": "Advanced Component",
+  "item.infinity_nexus_mod.refined_component": "Refined Component",
+  "item.infinity_nexus_mod.integral_component": "Integral Component",
+  "item.infinity_nexus_mod.infinity_component": "Infinity Component",
+
+  "item.infinity_nexus_mod.speed_upgrade": "Speed Upgrade",
+  "item.infinity_nexus_mod.strength_upgrade": "Strength Upgrade",
 
   "fluid_type.infinity_nexus_mod.lubricant": "Fluid Lubricant",
   "item.infinity_nexus_mod.bucket_lubricant": "Bucket Lubricant",
+  "fluid_type.infinity_nexus_mod.ethanol": "Fluid Ethanol",
+  "item.infinity_nexus_mod.bucket_ethanol": "Bucket Ethanol",
+  "item.infinity_nexus_mod.bottle_ethanol": "Alcool Bottle",
+  "item.infinity_nexus_mod.bio_mass": "Bio Mass",
 
   "block.infinity_nexus_mod.asphalt": "Asphalt",
 
   "block.infinity_nexus_mod.crusher": "Crusher",
   "block.infinity_nexus_mod.press": "Press",
-  "block.infinity_nexus_mod.assembly": "Assembler",
+  "block.infinity_nexus_mod.assembler": "Assembler",
+  "block.infinity_nexus_mod.squeezer": "Squeezer",
   "infinity_nexus_mod.tooltip.liquid.amount.with.capacity": "%s / %s mb",
   "infinity_nexus_mod.tooltip.liquid.amount": "%s mb",
-  "block.infinity_nexus_mod.squeezer": "Squeezer"
+
+  "block.infinity_nexus_mod.lead_ore": "Lead Ore",
+  "item.infinity_nexus_mod.raw_lead": "Raw Lead",
+  "item.infinity_nexus_mod.lead_dust": "Lead Dust",
+  "item.infinity_nexus_mod.lead_ingot": "Lead Ingot",
+  "item.infinity_nexus_mod.lead_nugget": "Lead Nugget",
+  "block.infinity_nexus_mod.lead_block": "Lead Block",
+  "block.infinity_nexus_mod.raw_lead_block": "Raw Lead Block",
+
+  "block.infinity_nexus_mod.aluminum_ore": "Aluminum Ore",
+  "item.infinity_nexus_mod.raw_aluminum": "Raw Aluminum",
+  "item.infinity_nexus_mod.aluminum_dust":  "Aluminum Dust",
+  "item.infinity_nexus_mod.aluminum_ingot":  "Aluminum Ingot",
+  "item.infinity_nexus_mod.aluminum_nugget": "Aluminum Nugget",
+  "block.infinity_nexus_mod.aluminum_block": "Aluminum Block",
+  "block.infinity_nexus_mod.raw_aluminum_block": "Raw Aluminum Block",
+
+  "block.infinity_nexus_mod.tin_ore": "Tin Ore",
+  "item.infinity_nexus_mod.raw_tin": "Raw Tin",
+  "item.infinity_nexus_mod.tin_dust": "Tin Dust",
+  "item.infinity_nexus_mod.tin_ingot": "Tin Ingot",
+  "item.infinity_nexus_mod.tin_nugget": "Tin Nugget",
+  "block.infinity_nexus_mod.tin_block": "Tin Block",
+  "block.infinity_nexus_mod.raw_tin_block": "Raw Tin Block",
+
+  "block.infinity_nexus_mod.nickel_ore": "Nickel Ore",
+  "item.infinity_nexus_mod.raw_nickel": "Raw Nickel",
+  "item.infinity_nexus_mod.nickel_dust": "Nickel Dust",
+  "item.infinity_nexus_mod.nickel_ingot": "Nickel Ingot",
+  "item.infinity_nexus_mod.nickel_nugget": "Nickel Nugget",
+  "block.infinity_nexus_mod.nickel_block": "Nickel Block",
+  "block.infinity_nexus_mod.raw_nickel_block": "Raw Nickel Block",
+
+  "block.infinity_nexus_mod.silver_ore": "Silver Ore",
+  "item.infinity_nexus_mod.raw_silver": "Raw Silver",
+  "item.infinity_nexus_mod.silver_dust": "Silver Dust",
+  "item.infinity_nexus_mod.silver_ingot": "Silver Ingot",
+  "item.infinity_nexus_mod.silver_nugget": "Silver Nugget",
+  "block.infinity_nexus_mod.silver_block": "Silver Block",
+  "block.infinity_nexus_mod.raw_silver_block": "Raw Silver Block"
+
+
+
 }

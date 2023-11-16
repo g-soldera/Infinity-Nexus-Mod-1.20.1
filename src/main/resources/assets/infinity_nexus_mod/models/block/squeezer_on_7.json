@@ -4,6 +4,6 @@
     "bottom": "infinity_nexus_mod:block/base_machines/machine_bottom_0",
     "front": "infinity_nexus_mod:block/squeezer/squeezer_front_on_7",
     "side": "infinity_nexus_mod:block/base_machines/machine_side_0",
-    "top": "infinity_nexus_mod:block/squeezer/squeezer_top_0"
+    "top": "infinity_nexus_mod:block/squeezer/squeezer_top_on_0"
   }
 }

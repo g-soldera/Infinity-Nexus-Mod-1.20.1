@@ -72,6 +72,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.INTEGRAL_COMPONENT);
         simpleItem(ModItemsAdditions.INFINITY_COMPONENT);
         simpleItem(ModItemsAdditions.BUCKET_LUBRICANT);
+        simpleItem(ModItemsAdditions.BUCKET_ETHANOL);
 
 
         simpleItem(ModItemsProgression.GOLD_ROD_CAST);
@@ -118,6 +119,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.STEEL_SHEET);
         simpleItem(ModItemsProgression.INDUSTRIAL_SHEET);
         simpleItem(ModItemsProgression.INFINITY_SHEET);
+        simpleItem(ModItemsProgression.BIO_MASS);
 
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){

@@ -1,0 +1,20 @@
+{
+  "type": "infinity_nexus_mod:squeezing",
+  "energy": 1200,
+  "duration": 1200,
+  "fluidType": "infinity_nexus_mod:ethanol_water_fluid",
+  "fluidAmount": 15,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:reinforced_component"
+    },
+    {
+      "item": "minecraft:sugar_cane",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:bio_mass",
+    "count": 2
+  }
+}

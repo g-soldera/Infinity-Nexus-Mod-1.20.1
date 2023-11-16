@@ -20,10 +20,19 @@ public class ModFluids {
     public static final RegistryObject<FlowingFluid> LUBRICANT_FLOWING = FLUIDS.register("flowing_lubricant_water_fluid",
             () -> new ForgeFlowingFluid.Flowing(ModFluids.LUBRICANT_FLUID_PROPERTIES));
 
+    public static final RegistryObject<FlowingFluid> ETHANOL_SOURCE = FLUIDS.register("ethanol_water_fluid",
+            () -> new ForgeFlowingFluid.Source(ModFluids.ETHANOL_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> ETHANOL_FLOWING = FLUIDS.register("flowing_ethanol_water_fluid",
+            () -> new ForgeFlowingFluid.Flowing(ModFluids.ETHANOL_FLUID_PROPERTIES));
+
     public static final ForgeFlowingFluid.Properties LUBRICANT_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
         ModFluidType.LUBRICANT, LUBRICANT_SOURCE, LUBRICANT_FLOWING)
             .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocksAdditions.LUBRICANT)
             .bucket(ModItemsAdditions.BUCKET_LUBRICANT);
+    public static final ForgeFlowingFluid.Properties ETHANOL_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+        ModFluidType.ETHANOL, ETHANOL_SOURCE, ETHANOL_FLOWING)
+            .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocksAdditions.ETHANOL)
+            .bucket(ModItemsAdditions.BUCKET_ETHANOL);
 
 
     public static void register(IEventBus eventBus) {

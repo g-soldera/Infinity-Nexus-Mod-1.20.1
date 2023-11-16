@@ -64,6 +64,7 @@ public class SqueezerScreen extends AbstractContainerScreen<SqueezerMenu> implem
         }
         renderProgressArrow(guiGraphics, x, y);
         energyInfoArea.render(guiGraphics);
+        fluidRenderer.render(guiGraphics, x+146, y+6, menu.blockEntity.getFluid());
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {

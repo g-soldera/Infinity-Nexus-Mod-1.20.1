@@ -1,6 +1,7 @@
 {
   "type": "infinity_nexus_mod:assembler",
-  "component" : "infinity_nexus_mod:redstone_component",
+  "duration": 1200,
+  "energy": 1200,
   "ingredients": [
     {
       "item": "infinity_nexus_mod:reinforced_component"
@@ -33,11 +34,5 @@
   "output": {
     "item": "infinity_nexus_mod:copper_machine_casing",
     "count": 1
-  },
-  "duration": {
-    "time": 1200
-  },
-  "energy": {
-    "amount": 1200
   }
 }
