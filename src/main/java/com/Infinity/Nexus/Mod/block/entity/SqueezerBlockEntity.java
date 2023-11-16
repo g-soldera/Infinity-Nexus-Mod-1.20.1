@@ -38,6 +38,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -332,12 +333,12 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
                     }
                 } else {
                     //TODO para cada tank
-                    if (iFluidHandlerItem.getFluidInTank(0).isFluidEqual(FLUID_STORAGE.getFluid()) && iFluidHandlerItem.getFluidInTank(0).getAmount() < iFluidHandlerItem.getTankCapacity(0) || iFluidHandlerItem.getFluidInTank(0).isEmpty()) {
+                    if (canInsertFluidOnItem(iFluidHandlerItem)) {
                         FluidStack fluidStackToFill = new FluidStack(FLUID_STORAGE.getFluid(), 10);
                         FLUID_STORAGE.drain(fluidStackToFill, IFluidHandler.FluidAction.EXECUTE);
                         iFluidHandlerItem.fill(fluidStackToFill, IFluidHandler.FluidAction.EXECUTE);
                     }else{
-                        if(itemHandler.getStackInSlot(OUTPUT_FLUID_SLOT).isEmpty() && !FLUID_STORAGE.isEmpty()) {
+                        if(canInsertFluidItemInOutputSlot()) {
                             this.itemHandler.extractItem(FLUID_SLOT, 1, false);
                             this.itemHandler.setStackInSlot(OUTPUT_FLUID_SLOT, iFluidHandlerItem.getContainer());
                         }
@@ -347,6 +348,17 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private boolean canInsertFluidItemInOutputSlot() {
+        return itemHandler.getStackInSlot(OUTPUT_FLUID_SLOT).isEmpty()
+                && !FLUID_STORAGE.isEmpty();
+    }
+
+    private boolean canInsertFluidOnItem(IFluidHandlerItem iFluidHandlerItem) {
+        return iFluidHandlerItem.getFluidInTank(0).isFluidEqual(FLUID_STORAGE.getFluid())
+                && iFluidHandlerItem.getFluidInTank(0).getAmount() < iFluidHandlerItem.getTankCapacity(0)
+                || iFluidHandlerItem.getFluidInTank(0).isEmpty();
     }
 
     private void setMaxProgress() {
