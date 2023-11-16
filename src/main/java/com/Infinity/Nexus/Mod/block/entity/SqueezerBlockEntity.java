@@ -26,7 +26,9 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -34,6 +36,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
@@ -269,7 +272,7 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
             if (pLevel.isClientSide) {
                 return;
             }
-            fillUpOnFluid();
+            fillUpOnFluid(FLUID_SLOT);
 
             int machineLevel = getMachineLevel() - 1 <= 0 ? 0 : getMachineLevel() - 1;
             ;
@@ -287,7 +290,6 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
                 return;
             }
             if(!canInsertOutputFluid()){
-                System.out.println("Can't insert fluid");
                 return;
             }
             pLevel.setBlock(pPos, pState.setValue(Squeezer.LIT, machineLevel + 8), 3);
@@ -311,13 +313,40 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
                 FLUID_STORAGE.getFluid().isEmpty();
     }
 
-    private void fillUpOnFluid() {
-        if(FLUID_STORAGE.getFluidAmount() >= 1000 && this.itemHandler.getStackInSlot(FLUID_SLOT).getItem() instanceof BucketItem){
-            transferFluidToItem();
-        }
-    }
+    private void fillUpOnFluid(int fluidInputSlot) {
+        try {
+            ItemStack fluidStack = this.itemHandler.getStackInSlot(fluidInputSlot);
+            fluidStack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(iFluidHandlerItem -> {
+                if (fluidStack.getItem() instanceof BucketItem bucketItem) {
+                    //TODO 80%, testar
+                    FluidStack fluidStackToDrain = new FluidStack(FLUID_STORAGE.getFluid(), 1000);
 
-    private void transferFluidToItem() {
+                    ItemStack filledBucket = new ItemStack(FLUID_STORAGE.getFluid().getFluid().getBucket());
+
+                    if (!filledBucket.isEmpty() && itemHandler.getStackInSlot(OUTPUT_FLUID_SLOT).isEmpty() && bucketItem == Items.BUCKET) {
+                        System.out.println(filledBucket.getDisplayName());
+                        FLUID_STORAGE.drain(fluidStackToDrain, IFluidHandler.FluidAction.EXECUTE);
+                        itemHandler.insertItem(OUTPUT_FLUID_SLOT, filledBucket, false);
+                        itemHandler.extractItem(FLUID_SLOT, 1, false);
+                        itemHandler.setStackInSlot(OUTPUT_FLUID_SLOT, filledBucket);
+                    }
+                } else {
+                    //TODO para cada tank
+                    if (iFluidHandlerItem.getFluidInTank(0).isFluidEqual(FLUID_STORAGE.getFluid()) && iFluidHandlerItem.getFluidInTank(0).getAmount() < iFluidHandlerItem.getTankCapacity(0) || iFluidHandlerItem.getFluidInTank(0).isEmpty()) {
+                        FluidStack fluidStackToFill = new FluidStack(FLUID_STORAGE.getFluid(), 10);
+                        FLUID_STORAGE.drain(fluidStackToFill, IFluidHandler.FluidAction.EXECUTE);
+                        iFluidHandlerItem.fill(fluidStackToFill, IFluidHandler.FluidAction.EXECUTE);
+                    }else{
+                        if(itemHandler.getStackInSlot(OUTPUT_FLUID_SLOT).isEmpty() && !FLUID_STORAGE.isEmpty()) {
+                            this.itemHandler.extractItem(FLUID_SLOT, 1, false);
+                            this.itemHandler.setStackInSlot(OUTPUT_FLUID_SLOT, iFluidHandlerItem.getContainer());
+                        }
+                    }
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void setMaxProgress() {
