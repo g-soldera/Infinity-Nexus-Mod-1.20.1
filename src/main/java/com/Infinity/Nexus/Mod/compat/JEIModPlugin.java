@@ -4,7 +4,7 @@ import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.recipe.*;
 import com.Infinity.Nexus.Mod.screen.assembler.AssemblerScreen;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherScreen;
-import com.Infinity.Nexus.Mod.screen.fermenting.FermentingBarrelScreen;
+import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelScreen;
 import com.Infinity.Nexus.Mod.screen.press.PressScreen;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerScreen;
 import mezz.jei.api.IModPlugin;
@@ -33,7 +33,7 @@ public class JEIModPlugin implements IModPlugin {
         registration.addRecipeCategories(new PressCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new AssemblerCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new SqueezerCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new FermentingBarrelCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new FermentationBarrelCategory(registration.getJeiHelpers().getGuiHelper()));
 
     }
 
@@ -46,7 +46,7 @@ public class JEIModPlugin implements IModPlugin {
         List<PressRecipes> pressRecipes = recipeManager.getAllRecipesFor(PressRecipes.Type.INSTANCE);
         List<AssemblerRecipes> assemblyRecipes = recipeManager.getAllRecipesFor(AssemblerRecipes.Type.INSTANCE);
         List<SqueezerRecipes> squeezerRecipes = recipeManager.getAllRecipesFor(SqueezerRecipes.Type.INSTANCE);
-        List<FermentingBarrelRecipes> fermentingBarrelRecipes = recipeManager.getAllRecipesFor(FermentingBarrelRecipes.Type.INSTANCE);
+        List<FermentationBarrelRecipes> fermentationBarrelRecipes = recipeManager.getAllRecipesFor(FermentationBarrelRecipes.Type.INSTANCE);
 
 
         registration.addRecipes(CrusherCategory.CRUSHER_TYPE, crusherRecipes);
@@ -57,8 +57,8 @@ public class JEIModPlugin implements IModPlugin {
         System.out.println("Registry: " + assemblyRecipes.size() + " for Assembly");
         registration.addRecipes(SqueezerCategory.SQUEEZER_TYPE, squeezerRecipes);
         System.out.println("Registry: " + squeezerRecipes.size() + " for Squeezer");
-        registration.addRecipes(FermentingBarrelCategory.FERMENTING_BARREL_TYPE, fermentingBarrelRecipes);
-        System.out.println("Registry: " + fermentingBarrelRecipes.size() + " for Fermenting Barrel");
+        registration.addRecipes(FermentationBarrelCategory.FERMENTATION_BARREL_TYPE, fermentationBarrelRecipes);
+        System.out.println("Registry: " + fermentationBarrelRecipes.size() + " for Fermentation Barrel");
     }
 
     @Override
@@ -68,6 +68,6 @@ public class JEIModPlugin implements IModPlugin {
        registration.addRecipeClickArea(PressScreen.class,162, -10,8,9, PressCategory.PRESS_TYPE);
        registration.addRecipeClickArea(AssemblerScreen.class,162, -10,8,9, AssemblerCategory.ASSEMBLY_TYPE);
        registration.addRecipeClickArea(SqueezerScreen.class,162, -10,8,9, SqueezerCategory.SQUEEZER_TYPE);
-       registration.addRecipeClickArea(FermentingBarrelScreen.class,162, -10,8,9, FermentingBarrelCategory.FERMENTING_BARREL_TYPE);
+       registration.addRecipeClickArea(FermentationBarrelScreen.class,162, -10,8,9, FermentationBarrelCategory.FERMENTATION_BARREL_TYPE);
     }
 }

@@ -24,7 +24,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.PRESS.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ASSEMBLY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SQUEEZER.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.FERMENTING_BARREL.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.FERMENTATION_BARREL.get()));
                         //-------------------------//-------------------------//
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_INGOT.get()));

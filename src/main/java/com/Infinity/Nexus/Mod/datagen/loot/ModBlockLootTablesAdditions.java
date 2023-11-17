@@ -67,7 +67,7 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksAdditions.CRUSHER.get());
         this.dropSelf(ModBlocksAdditions.ASSEMBLY.get());
         this.dropSelf(ModBlocksAdditions.SQUEEZER.get());
-        this.dropSelf(ModBlocksAdditions.FERMENTING_BARREL.get());
+        this.dropSelf(ModBlocksAdditions.FERMENTATION_BARREL.get());
 
 
         this.dropSelf(ModBlocksProgression.WOOD_MACHINE_CASING.get());

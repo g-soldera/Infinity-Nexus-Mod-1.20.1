@@ -111,7 +111,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_redstone_component", inventoryTrigger(ItemPredicate.Builder.item().of(Items.REDSTONE).build()))
                 .save(pWriter, "redstone_component");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.FERMENTING_BARREL.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.FERMENTATION_BARREL.get())
                 .pattern("AB ")
                 .pattern("CDC")
                 .define('A', Blocks.OAK_BUTTON)
@@ -119,7 +119,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Items.STICK)
                 .define('D', ModBlocksProgression.WOOD_MACHINE_CASING.get())
                 .unlockedBy("has_barrel", inventoryTrigger(ItemPredicate.Builder.item().of(Blocks.BARREL).build()))
-                .save(pWriter, "fermenting_barrel");
+                .save(pWriter, "fermentation_barrel");
 
 
         //infinity
