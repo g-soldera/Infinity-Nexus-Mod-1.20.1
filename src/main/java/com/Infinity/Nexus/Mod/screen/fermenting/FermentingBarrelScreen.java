@@ -1,6 +1,8 @@
 package com.Infinity.Nexus.Mod.screen.fermenting;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.block.entity.FermentingBarrelBlockEntity;
+import com.Infinity.Nexus.Mod.screen.renderer.FluidTankRenderer;
 import com.Infinity.Nexus.Mod.screen.renderer.InfoArea;
 import com.Infinity.Nexus.Mod.utils.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -10,11 +12,17 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.util.Optional;
 
 public class FermentingBarrelScreen extends AbstractContainerScreen<FermentingBarrelMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(InfinityNexusMod.MOD_ID, "textures/gui/fermenting_barrel_gui.png");
+            new ResourceLocation(InfinityNexusMod.MOD_ID, "textures/gui/fermentation_barrel_gui.png");
 
+    private FluidTankRenderer fluidRenderer;
+    private FluidTankRenderer fluidRendererOut;
 
     public FermentingBarrelScreen(FermentingBarrelMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -24,14 +32,21 @@ public class FermentingBarrelScreen extends AbstractContainerScreen<FermentingBa
         super.init();
         this.inventoryLabelY = 10000;
         this.titleLabelY = 10000;
+        assignFluidTank();
     }
-
+    private void assignFluidTank() {
+        fluidRenderer = new FluidTankRenderer(FermentingBarrelBlockEntity.getInputFluidCapacity(), true, 16, 62);
+        fluidRendererOut = new FluidTankRenderer(FermentingBarrelBlockEntity.getOutputFluidCapacity(), true, 16, 62);
+    }
     @Override
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         pGuiGraphics.drawString(this.font,this.playerInventoryTitle,8,74,0XFFFFFF);
         pGuiGraphics.drawString(this.font,this.title,8,-9,0XFFFFFF);
+
+        renderFluidAreaTooltips(pGuiGraphics,pMouseX,pMouseY, x, y, menu.blockEntity.getFluidInInputTank(), 62,6, fluidRenderer);
+        renderFluidAreaTooltips(pGuiGraphics,pMouseX,pMouseY, x, y, menu.blockEntity.getFluidInOutputTank(), 98,6, fluidRendererOut);
 
         InfoArea.draw(pGuiGraphics);
         super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
@@ -52,6 +67,9 @@ public class FermentingBarrelScreen extends AbstractContainerScreen<FermentingBa
 
 
         renderProgressArrow(guiGraphics, x, y);
+
+        fluidRenderer.render(guiGraphics, x+62, y+6, menu.blockEntity.getFluidInInputTank());
+        fluidRendererOut.render(guiGraphics, x+98, y+6, menu.blockEntity.getFluidInOutputTank());
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
@@ -67,7 +85,16 @@ public class FermentingBarrelScreen extends AbstractContainerScreen<FermentingBa
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
     }
-
+    private void renderFluidAreaTooltips(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y,
+                                         FluidStack stack, int offsetX, int offsetY, FluidTankRenderer renderer) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, offsetX, offsetY, renderer)) {
+            guiGraphics.renderTooltip(this.font, renderer.getTooltip(stack, TooltipFlag.Default.NORMAL),
+                    Optional.empty(), pMouseX - x, pMouseY - y);
+        }
+    }
+    private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, FluidTankRenderer renderer) {
+        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, renderer.getWidth(), renderer.getHeight());
+    }
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
         return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }

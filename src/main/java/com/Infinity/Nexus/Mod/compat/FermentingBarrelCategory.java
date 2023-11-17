@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 public class FermentingBarrelCategory implements IRecipeCategory<FermentingBarrelRecipes> {
 
     public static final ResourceLocation UID = new ResourceLocation(InfinityNexusMod.MOD_ID, "fermenting");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(InfinityNexusMod.MOD_ID, "textures/gui/jei/fermenting_barrel_gui.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(InfinityNexusMod.MOD_ID, "textures/gui/jei/fermentation_barrel_gui.png");
 
     public static final RecipeType<FermentingBarrelRecipes> FERMENTING_BARREL_TYPE = new RecipeType<>(UID, FermentingBarrelRecipes.class);
 
