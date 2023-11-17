@@ -49,38 +49,59 @@ public class ModTabProgression {
                         pOutput.accept(new ItemStack(ModItemsProgression.ROD_CLAY_MODEL.get()));
 
                         pOutput.accept(new ItemStack(ModItemsProgression.COPPER_WIRE.get()));
-                        pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.LEAD_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.IRON_WIRE.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.TIN_WIRE.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.IRON_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_WIRE.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.SILVER_WIRE.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.NICKEL_WIRE.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.BRASS_WIRE.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.BRONZE_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STEEL_WIRE.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INDUSTRIAL_WIRE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INFINITY_WIRE.get()));
 
                         pOutput.accept(new ItemStack(ModItemsProgression.COPPER_SCREW.get()));
-                        pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.LEAD_SCREW.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.TIN_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.IRON_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_SCREW.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.SILVER_SCREW.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.NICKEL_SCREW.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.BRASS_SCREW.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.BRONZE_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STEEL_SCREW.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INDUSTRIAL_SCREW.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INFINITY_SCREW.get()));
 
                         pOutput.accept(new ItemStack(ModItemsProgression.COPPER_ROD.get()));
-                        pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.LEAD_ROD.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.TIN_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.IRON_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_ROD.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.SILVER_ROD.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.NICKEL_ROD.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.BRASS_ROD.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.BRONZE_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STEEL_ROD.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INDUSTRIAL_ROD.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INFINITY_ROD.get()));
 
                         pOutput.accept(new ItemStack(ModItemsProgression.COPPER_SHEET.get()));
-                        pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.LEAD_SHEET.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.TIN_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.IRON_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_SHEET.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.SILVER_SHEET.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.NICKEL_SHEET.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.BRASS_SHEET.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.BRONZE_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STEEL_SHEET.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.ALUMINUM_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INDUSTRIAL_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INFINITY_SHEET.get()));
 

@@ -35,6 +35,30 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksAdditions.ALUMINUM_ORE.get());
         this.dropSelf(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get());
 
+        this.dropSelf(ModBlocksAdditions.TIN_BLOCK.get());
+        this.dropSelf(ModBlocksAdditions.RAW_TIN_BLOCK.get());
+        this.dropSelf(ModBlocksAdditions.TIN_ORE.get());
+        this.dropSelf(ModBlocksAdditions.DEEPSLATE_TIN_ORE.get());
+
+        this.dropSelf(ModBlocksAdditions.NICKEL_BLOCK.get());
+        this.dropSelf(ModBlocksAdditions.RAW_NICKEL_BLOCK.get());
+        this.dropSelf(ModBlocksAdditions.NICKEL_ORE.get());
+        this.dropSelf(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE.get());
+
+        this.dropSelf(ModBlocksAdditions.SILVER_BLOCK.get());
+        this.dropSelf(ModBlocksAdditions.RAW_SILVER_BLOCK.get());
+        this.dropSelf(ModBlocksAdditions.SILVER_ORE.get());
+        this.dropSelf(ModBlocksAdditions.DEEPSLATE_SILVER_ORE.get());
+
+        this.dropSelf(ModBlocksAdditions.URANIUM_BLOCK.get());
+        this.dropSelf(ModBlocksAdditions.RAW_URANIUM_BLOCK.get());
+        this.dropSelf(ModBlocksAdditions.URANIUM_ORE.get());
+        this.dropSelf(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get());
+
+        this.dropSelf(ModBlocksAdditions.BRASS_BLOCK.get());
+        this.dropSelf(ModBlocksAdditions.BRONZE_BLOCK.get());
+        this.dropSelf(ModBlocksAdditions.STEEL_BLOCK.get());
+
         this.dropSelf(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get());
         this.dropSelf(ModBlocksAdditions.EXPLORAR_PORTAL.get());
         this.dropSelf(ModBlocksAdditions.ASPHALT.get());
@@ -61,6 +85,19 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
 
 
         this.add(ModBlocksAdditions.INFINITY_ORE.get(), block -> createOreDrop( ModBlocksAdditions.INFINITY_ORE.get(), ModItemsAdditions.RAW_INFINITY.get()));
+        this.add(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get(), block -> createOreDrop( ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get(), ModItemsAdditions.RAW_INFINITY.get()));
+        this.add(ModBlocksAdditions.LEAD_ORE.get(), block -> createOreDrop( ModBlocksAdditions.LEAD_ORE.get(), ModItemsAdditions.RAW_LEAD.get()));
+        this.add(ModBlocksAdditions.DEEPSLATE_LEAD_ORE.get(), block -> createOreDrop( ModBlocksAdditions.DEEPSLATE_LEAD_ORE.get(), ModItemsAdditions.RAW_LEAD.get()));
+        this.add(ModBlocksAdditions.ALUMINUM_ORE.get(), block -> createOreDrop( ModBlocksAdditions.ALUMINUM_ORE.get(), ModItemsAdditions.RAW_ALUMINUM.get()));
+        this.add(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get(), block -> createOreDrop( ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get(), ModItemsAdditions.RAW_ALUMINUM.get()));
+        this.add(ModBlocksAdditions.TIN_ORE.get(), block -> createOreDrop( ModBlocksAdditions.TIN_ORE.get(), ModItemsAdditions.RAW_TIN.get()));
+        this.add(ModBlocksAdditions.DEEPSLATE_TIN_ORE.get(), block -> createOreDrop( ModBlocksAdditions.DEEPSLATE_TIN_ORE.get(), ModItemsAdditions.RAW_TIN.get()));
+        this.add(ModBlocksAdditions.NICKEL_ORE.get(), block -> createOreDrop( ModBlocksAdditions.NICKEL_ORE.get(), ModItemsAdditions.RAW_NICKEL.get()));
+        this.add(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE.get(), block -> createOreDrop( ModBlocksAdditions.DEEPSLATE_NICKEL_ORE.get(), ModItemsAdditions.RAW_NICKEL.get()));
+        this.add(ModBlocksAdditions.SILVER_ORE.get(), block -> createOreDrop( ModBlocksAdditions.SILVER_ORE.get(), ModItemsAdditions.RAW_SILVER.get()));
+        this.add(ModBlocksAdditions.DEEPSLATE_SILVER_ORE.get(), block -> createOreDrop( ModBlocksAdditions.DEEPSLATE_SILVER_ORE.get(), ModItemsAdditions.RAW_SILVER.get()));
+        this.add(ModBlocksAdditions.URANIUM_ORE.get(), block -> createOreDrop( ModBlocksAdditions.URANIUM_ORE.get(), ModItemsAdditions.RAW_URANIUM.get()));
+        this.add(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get(), block -> createOreDrop( ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get(), ModItemsAdditions.RAW_URANIUM.get()));
     }
 
     @Override

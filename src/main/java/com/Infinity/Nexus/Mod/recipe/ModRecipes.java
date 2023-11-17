@@ -11,17 +11,11 @@ public class ModRecipes {
 
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZER =
             DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, InfinityNexusMod.MOD_ID);
-
-    public static final RegistryObject<RecipeSerializer<CrusherRecipes>> CRUSHER_SERIALIZER =
-            SERIALIZER.register("crushing", () -> CrusherRecipes.Serializer.INSTANCE);
-
-    public static final RegistryObject<RecipeSerializer<PressRecipes>> PRESS_SERIALIZER =
-            SERIALIZER.register("pressing", () -> PressRecipes.Serializer.INSTANCE);
-
-    public static final RegistryObject<RecipeSerializer<AssemblerRecipes>> ASSEMBLY_SERIALIZER =
-            SERIALIZER.register("assembler", () -> AssemblerRecipes.Serializer.INSTANCE);
-    public static final RegistryObject<RecipeSerializer<SqueezerRecipes>> SQUEEZER_SERIALIZER =
-            SERIALIZER.register("squeezing", () -> SqueezerRecipes.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<CrusherRecipes>> CRUSHER_SERIALIZER = SERIALIZER.register("crushing", () -> CrusherRecipes.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<PressRecipes>> PRESS_SERIALIZER = SERIALIZER.register("pressing", () -> PressRecipes.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<AssemblerRecipes>> ASSEMBLY_SERIALIZER = SERIALIZER.register("assembler", () -> AssemblerRecipes.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<SqueezerRecipes>> SQUEEZER_SERIALIZER = SERIALIZER.register("squeezing", () -> SqueezerRecipes.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<FermentingBarrelRecipes>> FERMENTING_BARREL_SERIALIZER = SERIALIZER.register("fermenting", () -> FermentingBarrelRecipes.Serializer.INSTANCE);
 
     public static void register(IEventBus eventBus) {
         SERIALIZER.register(eventBus);

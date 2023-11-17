@@ -12,8 +12,9 @@ import com.Infinity.Nexus.Mod.loot.ModLootModifiers;
 import com.Infinity.Nexus.Mod.networking.ModMessages;
 import com.Infinity.Nexus.Mod.recipe.ModRecipes;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
-import com.Infinity.Nexus.Mod.screen.assembly.AssemblerScreen;
+import com.Infinity.Nexus.Mod.screen.assembler.AssemblerScreen;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherScreen;
+import com.Infinity.Nexus.Mod.screen.fermenting.FermentingBarrelScreen;
 import com.Infinity.Nexus.Mod.screen.press.PressScreen;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerScreen;
 import com.Infinity.Nexus.Mod.tab.ModTabAdditions;
@@ -108,6 +109,7 @@ public class InfinityNexusMod
             MenuScreens.register(ModMenuTypes.PRESS_MENU.get(), PressScreen::new);
             MenuScreens.register(ModMenuTypes.ASSEMBLY_MENU.get(), AssemblerScreen::new);
             MenuScreens.register(ModMenuTypes.SQUEEZER_MENU.get(), SqueezerScreen::new);
+            MenuScreens.register(ModMenuTypes.FERMENTING_BARREL_MENU.get(), FermentingBarrelScreen::new);
 
 
             ItemBlockRenderTypes.setRenderLayer(ModFluids.LUBRICANT_SOURCE.get(), RenderType.translucent());

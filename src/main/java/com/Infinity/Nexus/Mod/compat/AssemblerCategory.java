@@ -18,8 +18,8 @@ import net.minecraft.world.item.ItemStack;
 
 public class AssemblerCategory implements IRecipeCategory<AssemblerRecipes> {
 
-    public static final ResourceLocation UID = new ResourceLocation(InfinityNexusMod.MOD_ID, "assembly");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(InfinityNexusMod.MOD_ID, "textures/gui/jei/assembly_gui.png");
+    public static final ResourceLocation UID = new ResourceLocation(InfinityNexusMod.MOD_ID, "assembler");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(InfinityNexusMod.MOD_ID, "textures/gui/jei/assembler_gui.png");
 
     public static final RecipeType<AssemblerRecipes> ASSEMBLY_TYPE = new RecipeType<>(UID, AssemblerRecipes.class);
 

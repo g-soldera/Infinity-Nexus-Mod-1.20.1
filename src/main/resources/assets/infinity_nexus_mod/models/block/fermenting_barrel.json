@@ -2,10 +2,10 @@
 	"texture_size": [32, 32],
 	"render_type": "translucent",
 	"textures": {
-		"0": "infinity_nexus_mod:block/barrel_top",
-		"1": "infinity_nexus_mod:block/barrel_bottom",
-		"2": "infinity_nexus_mod:block/barrel_side",
-		"particle": "infinity_nexus_mod:block/barrel_top"
+		"0": "infinity_nexus_mod:block/fermenting/fermenting_barrel_front",
+		"1": "infinity_nexus_mod:block/fermenting/fermenting_barrel_back",
+		"2": "infinity_nexus_mod:block/fermenting/fermenting_barrel_side",
+		"particle": "infinity_nexus_mod:block/fermenting/fermenting_barrel_side"
 	},
 	"elements": [
 		{

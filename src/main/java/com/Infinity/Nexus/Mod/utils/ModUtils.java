@@ -2,6 +2,7 @@ package com.Infinity.Nexus.Mod.utils;
 
 import com.Infinity.Nexus.Mod.block.entity.WrappedHandler;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -66,13 +67,6 @@ public class ModUtils {
 
     }
     public static boolean isComponent(ItemStack stack) {
-        return stack.getItem() == ModItemsAdditions.REDSTONE_COMPONENT.get()
-                || stack.getItem() == ModItemsAdditions.BASIC_COMPONENT.get()
-                || stack.getItem() == ModItemsAdditions.REINFORCED_COMPONENT.get()
-                || stack.getItem() == ModItemsAdditions.LOGIC_COMPONENT.get()
-                || stack.getItem() == ModItemsAdditions.ADVANCED_COMPONENT.get()
-                || stack.getItem() == ModItemsAdditions.REFINED_COMPONENT.get()
-                || stack.getItem() == ModItemsAdditions.INTEGRAL_COMPONENT.get()
-                || stack.getItem() == ModItemsAdditions.INFINITY_COMPONENT.get();
+        return stack.getItem() instanceof ComponentItem;
     }
 }
