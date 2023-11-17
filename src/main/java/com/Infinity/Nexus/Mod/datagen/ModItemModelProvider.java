@@ -73,6 +73,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.INFINITY_COMPONENT);
         simpleItem(ModItemsAdditions.BUCKET_LUBRICANT);
         simpleItem(ModItemsAdditions.BUCKET_ETHANOL);
+        simpleItem(ModItemsAdditions.ALCOHOL_BOTTLE);
 
 
         simpleItem(ModItemsProgression.GOLD_ROD_CAST);

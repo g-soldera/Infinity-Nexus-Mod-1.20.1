@@ -21,7 +21,7 @@ public class ModBlocksProgression {
                 DeferredRegister.create(ForgeRegistries.BLOCKS, InfinityNexusMod.MOD_ID);
 
     public static final RegistryObject<Block> WOOD_MACHINE_CASING = registerBlock("wood_machine_casing",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).requiresCorrectToolForDrops()
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
                     .strength(2.0f, 1.0f).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> COPPER_MACHINE_CASING = registerBlock("copper_machine_casing",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
