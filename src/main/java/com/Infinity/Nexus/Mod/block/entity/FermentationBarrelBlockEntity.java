@@ -4,6 +4,7 @@ import com.Infinity.Nexus.Mod.block.custom.FermentationBarrel;
 import com.Infinity.Nexus.Mod.fluid.ModFluids;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.FermentationBarrelRecipes;
+import com.Infinity.Nexus.Mod.recipe.PressRecipes;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelMenu;
 import com.Infinity.Nexus.Mod.utils.ModUtils;
 import net.minecraft.core.BlockPos;
@@ -37,6 +38,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -78,10 +80,10 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
             return true;
         }
     };
-    private static final int INPUT_TO_FILL_SLOT = 0;
-    private static final int OUTPUT_FROM_FILL_SLOT = 1;
-    private static final int INPUT_TO_DRAIN_SLOT = 2;
-    private static final int OUTPUT_FROM_DRAIN_SLOT = 3;
+    private static final int INPUT_FLUID_ITEM = 0;
+    private static final int OUTPUT_FLUID_ITEM = 1;
+    private static final int INPUT_SLOT = 2;
+    private static final int OUTPUT_SLOT = 3;
     private final FluidTank FLUID_STORAGE_INPUT = inputFluidHandler;
     private static final int INPUT_FLUID_CAPACITY = 8000;
     private static final int OUTPUT_FLUID_CAPACITY = 8000;
@@ -91,12 +93,12 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT  || i == INPUT_TO_FILL_SLOT  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT  || i == INPUT_TO_FILL_SLOT  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT  || i == INPUT_TO_FILL_SLOT  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT  || i == INPUT_TO_FILL_SLOT  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT  || i == INPUT_TO_FILL_SLOT  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT  || i == INPUT_TO_FILL_SLOT  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT || i == OUTPUT_FLUID_ITEM, (i, s) -> i == INPUT_SLOT  || i == INPUT_FLUID_ITEM  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT || i == OUTPUT_FLUID_ITEM, (i, s) -> i == INPUT_SLOT  || i == INPUT_FLUID_ITEM  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT || i == OUTPUT_FLUID_ITEM, (i, s) -> i == INPUT_SLOT  || i == INPUT_FLUID_ITEM  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT || i == OUTPUT_FLUID_ITEM, (i, s) -> i == INPUT_SLOT  || i == INPUT_FLUID_ITEM  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT || i == OUTPUT_FLUID_ITEM, (i, s) -> i == INPUT_SLOT  || i == INPUT_FLUID_ITEM  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT || i == OUTPUT_FLUID_ITEM, (i, s) -> i == INPUT_SLOT  || i == INPUT_FLUID_ITEM  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
 
     protected final ContainerData data;
     private int progress = 0;
@@ -226,8 +228,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
         if (pLevel.isClientSide) {
             return;
         }
-        //TODO
-        transferItemFluidToTank(INPUT_TO_DRAIN_SLOT);
+        fillUpOnFluid();
         if (isRedstonePowered(pPos)) {
             return;
         }
@@ -248,29 +249,41 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
             resetProgress();
         }
     }
-
+    private void fillUpOnFluid() {
+        if(hasFluidSourceInSlot(INPUT_FLUID_ITEM)) {
+            transferItemFluidToTank(INPUT_FLUID_ITEM);
+        }
+    }
     private void transferItemFluidToTank(int fluidInputSlot) {
         this.itemHandler.getStackInSlot(fluidInputSlot).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(iFluidHandlerItem -> {
-            int drainAmount = Math.min(this.FLUID_STORAGE_INPUT.getSpace(), 1000);
-
-            FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
-            if(stack.getFluid() == ModFluids.LUBRICANT_SOURCE.get()) {
-                stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
-                fillTankWithFluid(stack, iFluidHandlerItem.getContainer());
+            //TODO
+            if(iFluidHandlerItem.getContainer().getItem() instanceof BucketItem) {
+                if(this.FLUID_STORAGE_INPUT.getSpace() >= 1000){
+                    int drainAmount = 1000;
+                    FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
+                    this.FLUID_STORAGE_INPUT.fill(new FluidStack(stack.getFluid(), stack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+                    removeContainer(stack, iFluidHandlerItem.getContainer());
+                }
+            }else if(this.FLUID_STORAGE_INPUT.getSpace() >= 10 || this.FLUID_STORAGE_INPUT.getSpace() >= iFluidHandlerItem.getContainer().getCount()) {
+                int drainAmount = Math.min(this.FLUID_STORAGE_INPUT.getSpace(), 10);
+                FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
+                this.FLUID_STORAGE_INPUT.fill(new FluidStack(stack.getFluid(), stack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+                removeContainer(stack, iFluidHandlerItem.getContainer());
             }
         });
     }
 
-    private void fillTankWithFluid(FluidStack stack, ItemStack container) {
-        this.FLUID_STORAGE_INPUT.fill(new FluidStack(stack.getFluid(), stack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
-
-
-
-        if(stack.getAmount() <= 0 || this.FLUID_STORAGE_INPUT.getCapacity() == this.FLUID_STORAGE_INPUT.getFluidAmount() || container.getItem() instanceof BucketItem) {
-            this.itemHandler.extractItem(INPUT_TO_DRAIN_SLOT, 1, false);
-            this.itemHandler.insertItem(OUTPUT_FROM_DRAIN_SLOT, container, false);
+    private void removeContainer(FluidStack stack, ItemStack container) {
+        if(container.getCount() <= 0) {
+            this.itemHandler.extractItem(INPUT_FLUID_ITEM, 1, false);
+            this.itemHandler.setStackInSlot(OUTPUT_FLUID_ITEM, container);
         }
 
+    }
+
+    private boolean hasFluidSourceInSlot(int fluidInputSlot) {
+        return this.itemHandler.getStackInSlot(fluidInputSlot).getCount() > 0 &&
+                this.itemHandler.getStackInSlot(fluidInputSlot).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
     }
 
     private boolean canInsertOutputItem() {
@@ -291,32 +304,38 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
         Optional<FermentationBarrelRecipes> recipe = getCurrentRecipe();
         //TODO: Fix
             this.level.playLocalSound(this.getBlockPos(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F, false);
-            this.FLUID_STORAGE_INPUT.drain(recipe.get().getInputFluidStack(), IFluidHandler.FluidAction.EXECUTE);
+            this.FLUID_STORAGE_INPUT.drain(recipe.get().getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
             itemHandler.setStackInSlot(3, new ItemStack(recipe.get().getResultItem(null).getItem(),recipe.get().getResultItem(null).getCount() + itemHandler.getStackInSlot(3).getCount()));
             itemHandler.getStackInSlot(2).shrink(recipe.get().getInputCount());
     }
 
     private boolean hasRecipe() {
         Optional<FermentationBarrelRecipes> recipe = getCurrentRecipe();
-
         if (recipe.isEmpty()) {
             return false;
         }
-        //TODO
-        return true;//recipe.get().getInputFluidStack() == FLUID_STORAGE_INPUT.getFluid()
-               // && itemHandler.getStackInSlot(3).getItem() == Items.GLASS_BOTTLE
-               // && FLUID_STORAGE_INPUT.getFluidAmount() >= recipe.get().getInputFluidStack().getAmount();
+        ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
+        return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemIntoOutputSlot(result.getItem()) && hasFluidInTank();
     }
 
+    private boolean hasFluidInTank() {
+        return this.FLUID_STORAGE_INPUT.getFluid().getAmount() >= getCurrentRecipe().get().getInputFluidStack().getAmount()
+                && this.FLUID_STORAGE_INPUT.getFluid().getFluid() == getCurrentRecipe().get().getInputFluidStack().getFluid();
+    }
+
+    private boolean canInsertItemIntoOutputSlot(Item item) {
+        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() || this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item);
+    }
+
+    private boolean canInsertAmountIntoOutputSlot(int count) {
+        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + count <= this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
+    }
     private Optional<FermentationBarrelRecipes> getCurrentRecipe() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
         return this.level.getRecipeManager().getRecipeFor(FermentationBarrelRecipes.Type.INSTANCE, inventory, this.level);
-    }
-    private boolean canInsertDrainedItemIntoOutputSlot(Item item) {
-        return this.itemHandler.getStackInSlot(OUTPUT_FROM_DRAIN_SLOT).isEmpty() || this.itemHandler.getStackInSlot(OUTPUT_FROM_DRAIN_SLOT).is(item);
     }
 
     private boolean isRedstonePowered(BlockPos pPos) {
@@ -331,11 +350,11 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
     }
 
     public static int getInputSlot() {
-        return INPUT_TO_DRAIN_SLOT;
+        return INPUT_SLOT;
     }
 
     public static int getOutputSlot() {
-        return OUTPUT_FROM_DRAIN_SLOT;
+        return OUTPUT_SLOT;
     }
 
     @Nullable

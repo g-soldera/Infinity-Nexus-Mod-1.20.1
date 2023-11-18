@@ -328,7 +328,6 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
                     ItemStack filledBucket = new ItemStack(FLUID_STORAGE.getFluid().getFluid().getBucket());
 
                     if (isValidBucket(filledBucket, bucketItem)) {
-                        System.out.println(filledBucket.getDisplayName());
                         FLUID_STORAGE.drain(fluidStackToDrain, IFluidHandler.FluidAction.EXECUTE);
                         itemHandler.insertItem(OUTPUT_FLUID_SLOT, filledBucket, false);
                         itemHandler.extractItem(FLUID_SLOT, 1, false);
