@@ -2,12 +2,14 @@ package com.Infinity.Nexus.Mod.compat;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
+import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
 import com.Infinity.Nexus.Mod.recipe.FermentationBarrelRecipes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
@@ -51,7 +53,12 @@ public class FermentationBarrelCategory implements IRecipeCategory<FermentationB
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, FermentationBarrelRecipes recipe, IFocusGroup focuses) {
+        ItemStack input =  recipe.getIngredients().get(0).getItems()[0];
+        input.setCount(recipe.getInputCount());
     //TODO
 
+        builder.addSlot(RecipeIngredientRole.INPUT, 62, 6).setFluidRenderer(SqueezerBlockEntity.getFluidCapacity(), true,16,62).addFluidStack(recipe.getInputFluidStack().getFluid(),recipe.getInputFluidStack().getAmount());
+        builder.addSlot(RecipeIngredientRole.CATALYST, 116, 6).addItemStack(input);
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 52).addItemStack(recipe.getResultItem(null));
     }
 }

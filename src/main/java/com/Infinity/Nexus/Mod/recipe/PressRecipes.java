@@ -143,7 +143,6 @@ public class PressRecipes implements Recipe<SimpleContainer> {
             int duration = pBuffer.readInt();
             int energy = pBuffer.readInt();
             ItemStack output = pBuffer.readItem();
-
             return new PressRecipes(inputs, inputCount, output, pRecipeId, duration, energy);
         }
 

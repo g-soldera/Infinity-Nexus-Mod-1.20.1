@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.ClipContext;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Optional;
@@ -22,7 +23,6 @@ public class FermentationBarrelScreen extends AbstractContainerScreen<Fermentati
             new ResourceLocation(InfinityNexusMod.MOD_ID, "textures/gui/fermentation_barrel_gui.png");
 
     private FluidTankRenderer fluidRenderer;
-    private FluidTankRenderer fluidRendererOut;
 
     public FermentationBarrelScreen(FermentationBarrelMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -36,7 +36,6 @@ public class FermentationBarrelScreen extends AbstractContainerScreen<Fermentati
     }
     private void assignFluidTank() {
         fluidRenderer = new FluidTankRenderer(FermentationBarrelBlockEntity.getInputFluidCapacity(), true, 16, 62);
-        fluidRendererOut = new FluidTankRenderer(FermentationBarrelBlockEntity.getOutputFluidCapacity(), true, 16, 62);
     }
     @Override
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
@@ -46,7 +45,6 @@ public class FermentationBarrelScreen extends AbstractContainerScreen<Fermentati
         pGuiGraphics.drawString(this.font,this.title,8,-9,0XFFFFFF);
 
         renderFluidAreaTooltips(pGuiGraphics,pMouseX,pMouseY, x, y, menu.blockEntity.getFluidInInputTank(), 62,6, fluidRenderer);
-        renderFluidAreaTooltips(pGuiGraphics,pMouseX,pMouseY, x, y, menu.blockEntity.getFluidInOutputTank(), 98,6, fluidRendererOut);
 
         InfoArea.draw(pGuiGraphics);
         super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
@@ -68,14 +66,13 @@ public class FermentationBarrelScreen extends AbstractContainerScreen<Fermentati
 
         renderProgressArrow(guiGraphics, x, y);
 
+
         fluidRenderer.render(guiGraphics, x+62, y+6, menu.blockEntity.getFluidInInputTank());
-        fluidRendererOut.render(guiGraphics, x+98, y+6, menu.blockEntity.getFluidInOutputTank());
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(TEXTURE, x + 81, y + 29, 176, 0, 16, menu.getScaledProgress());
-
+            guiGraphics.blit(TEXTURE, x + 93, y + 51, 186, 27, -10, -menu.getScaledProgress());
         }
     }
 

@@ -3,9 +3,8 @@ package com.Infinity.Nexus.Mod.screen.fermentation;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.FermentationBarrelBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
-import com.Infinity.Nexus.Mod.slots.InputSlot;
+import com.Infinity.Nexus.Mod.slots.FluidItemSlot;
 import com.Infinity.Nexus.Mod.slots.ResultSlot;
-import com.Infinity.Nexus.Mod.slots.UpgradeSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -35,12 +34,12 @@ public class FermentationBarrelMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new InputSlot(iItemHandler, 0, 44, 6));
+            this.addSlot(new FluidItemSlot(iItemHandler, 0, 44, 6));
             this.addSlot(new ResultSlot(iItemHandler, 1, 44, 52));
 
 
-            this.addSlot(new UpgradeSlot(iItemHandler, 2, 116, 6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 3, 116, 52));
+            this.addSlot(new FluidItemSlot(iItemHandler, 2, 116, 6));
+            this.addSlot(new ResultSlot(iItemHandler, 3, 116, 52));
         });
 
         addDataSlots(data);
@@ -55,7 +54,7 @@ public class FermentationBarrelMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 14; // This is the height in pixels of your arrow
+        int progressArrowSize = 27; // This is the height in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }

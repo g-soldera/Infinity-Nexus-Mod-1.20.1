@@ -1,6 +1,8 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
 import com.Infinity.Nexus.Mod.block.custom.FermentationBarrel;
+import com.Infinity.Nexus.Mod.fluid.ModFluids;
+import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.FermentationBarrelRecipes;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelMenu;
 import com.Infinity.Nexus.Mod.utils.ModUtils;
@@ -21,11 +23,15 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -50,65 +56,47 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0,1,2,3 -> stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
+                case 0 -> stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
+                case 2 -> true;
+                case 1,3 -> false;
                 default -> super.isItemValid(slot, stack);
             };
         }
     };
 
+    private final FluidTank inputFluidHandler = new FluidTank(INPUT_FLUID_CAPACITY) {
+        @Override
+        public void onContentsChanged() {
+            setChanged();
+            if (!level.isClientSide()) {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        }
+
+        @Override
+        public boolean isFluidValid(FluidStack stack) {
+            return true;
+        }
+    };
     private static final int INPUT_TO_FILL_SLOT = 0;
     private static final int OUTPUT_FROM_FILL_SLOT = 1;
     private static final int INPUT_TO_DRAIN_SLOT = 2;
     private static final int OUTPUT_FROM_DRAIN_SLOT = 3;
-    private final FluidTank INPUT_FLUID_STORAGE = createInputFluidStorage();
-    private final FluidTank OUTPUT_FLUID_STORAGE = createOutputFluidStorage();
+    private final FluidTank FLUID_STORAGE_INPUT = inputFluidHandler;
     private static final int INPUT_FLUID_CAPACITY = 8000;
     private static final int OUTPUT_FLUID_CAPACITY = 8000;
-
-    private FluidTank createInputFluidStorage() {
-        return new FluidTank(INPUT_FLUID_CAPACITY) {
-            @Override
-            public void onContentsChanged() {
-                setChanged();
-                if(!level.isClientSide()) {
-                    level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-                }
-            }
-
-            @Override
-            public boolean isFluidValid(FluidStack stack) {
-                return true;
-            }
-        };
-    }
-    private FluidTank createOutputFluidStorage() {
-        return new FluidTank(OUTPUT_FLUID_CAPACITY) {
-            @Override
-            public void onContentsChanged() {
-                setChanged();
-                if(!level.isClientSide()) {
-                    level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-                }
-            }
-
-            @Override
-            public boolean isFluidValid(FluidStack stack) {
-                return true;
-            }
-        };
-    }
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
 
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT || i == INPUT_TO_FILL_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT || i == INPUT_TO_FILL_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT || i == INPUT_TO_FILL_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT || i == INPUT_TO_FILL_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT || i == INPUT_TO_FILL_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT || i == INPUT_TO_FILL_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT  || i == INPUT_TO_FILL_SLOT  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT  || i == INPUT_TO_FILL_SLOT  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT  || i == INPUT_TO_FILL_SLOT  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT  || i == INPUT_TO_FILL_SLOT  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT  || i == INPUT_TO_FILL_SLOT  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_FROM_DRAIN_SLOT || i == OUTPUT_FROM_FILL_SLOT, (i, s) -> i == INPUT_TO_DRAIN_SLOT  || i == INPUT_TO_FILL_SLOT  && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
 
     protected final ContainerData data;
     private int progress = 0;
@@ -177,8 +165,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
-        lazyFluidHandler = LazyOptional.of(() -> INPUT_FLUID_STORAGE);
-        lazyFluidHandler = LazyOptional.of(() -> OUTPUT_FLUID_STORAGE);
+        lazyFluidHandler = LazyOptional.of(() -> FLUID_STORAGE_INPUT);
     }
 
     @Override
@@ -219,8 +206,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
         pTag.put("inventory", itemHandler.serializeNBT());
         pTag.putInt("fermentation_barrel.progress", progress);
         pTag.putInt("fermentation_barrel.max_progress", maxProgress);
-        pTag = INPUT_FLUID_STORAGE.writeToNBT(pTag);
-        pTag = OUTPUT_FLUID_STORAGE.writeToNBT(pTag);
+        pTag = FLUID_STORAGE_INPUT.writeToNBT(pTag);
         super.saveAdditional(pTag);
     }
 
@@ -230,14 +216,10 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
         progress = pTag.getInt("fermentation_barrel.progress");
         maxProgress = pTag.getInt("fermentation_barrel.max_progress");
-        INPUT_FLUID_STORAGE.readFromNBT(pTag);
-        OUTPUT_FLUID_STORAGE.readFromNBT(pTag);
+        FLUID_STORAGE_INPUT.readFromNBT(pTag);
     }
     public FluidStack getFluidInInputTank() {
-        return INPUT_FLUID_STORAGE.getFluid();
-    }
-    public FluidStack getFluidInOutputTank() {
-        return OUTPUT_FLUID_STORAGE.getFluid();
+        return FLUID_STORAGE_INPUT.getFluid();
     }
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
 
@@ -245,18 +227,16 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
             return;
         }
         //TODO
-        //fillUpOnFluid(INPUT_TO_FILL_SLOT);
-        //fillUpOnFluid(INPUT_TO_DRAIN_SLOT);
+        transferItemFluidToTank(INPUT_TO_DRAIN_SLOT);
         if (isRedstonePowered(pPos)) {
             return;
         }
-
         if (!hasRecipe()) {
             resetProgress();
             return;
         }
         setMaxProgress();
-        if(!canInsertOutputFluid()){
+        if(!canInsertOutputItem()){
             return;
         }
         increaseCraftingProgress();
@@ -268,10 +248,35 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
             resetProgress();
         }
     }
-    private boolean canInsertOutputFluid() {
-        return OUTPUT_FLUID_STORAGE.getSpace() >= getCurrentRecipe().get().getOutputFluidStack().getAmount()  &&
-                OUTPUT_FLUID_STORAGE.getFluid().isFluidEqual(getCurrentRecipe().get().getInputFluidStack()) ||
-                OUTPUT_FLUID_STORAGE.getFluid().isEmpty();
+
+    private void transferItemFluidToTank(int fluidInputSlot) {
+        this.itemHandler.getStackInSlot(fluidInputSlot).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(iFluidHandlerItem -> {
+            int drainAmount = Math.min(this.FLUID_STORAGE_INPUT.getSpace(), 1000);
+
+            FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
+            if(stack.getFluid() == ModFluids.LUBRICANT_SOURCE.get()) {
+                stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
+                fillTankWithFluid(stack, iFluidHandlerItem.getContainer());
+            }
+        });
+    }
+
+    private void fillTankWithFluid(FluidStack stack, ItemStack container) {
+        this.FLUID_STORAGE_INPUT.fill(new FluidStack(stack.getFluid(), stack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+
+
+
+        if(stack.getAmount() <= 0 || this.FLUID_STORAGE_INPUT.getCapacity() == this.FLUID_STORAGE_INPUT.getFluidAmount() || container.getItem() instanceof BucketItem) {
+            this.itemHandler.extractItem(INPUT_TO_DRAIN_SLOT, 1, false);
+            this.itemHandler.insertItem(OUTPUT_FROM_DRAIN_SLOT, container, false);
+        }
+
+    }
+
+    private boolean canInsertOutputItem() {
+        return itemHandler.getStackInSlot(3).isEmpty()
+                || itemHandler.getStackInSlot(3).getItem() == getCurrentRecipe().get().getResultItem(null).getItem()
+                && (itemHandler.getStackInSlot(3).getCount() + getCurrentRecipe().get().getResultItem(null).getCount()) <= itemHandler.getStackInSlot(3).getItem().getMaxStackSize();
     }
     private void setMaxProgress() {
         maxProgress = getCurrentRecipe().get().getDuration();
@@ -284,11 +289,11 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
 
     private void craftItem() {
         Optional<FermentationBarrelRecipes> recipe = getCurrentRecipe();
-        FluidStack outputFluid = recipe.get().getOutputFluidStack();
-        //TODO: Fix this
-        BlockPos pos = this.getBlockPos();
-        this.OUTPUT_FLUID_STORAGE.fill(new FluidStack(outputFluid, outputFluid.getAmount()), IFluidHandler.FluidAction.EXECUTE);
-        this.getLevel().playLocalSound(pos.getX(),pos.getY(),pos.getZ(),SoundEvents.BREWING_STAND_BREW,SoundSource.BLOCKS,2,1,false);
+        //TODO: Fix
+            this.level.playLocalSound(this.getBlockPos(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+            this.FLUID_STORAGE_INPUT.drain(recipe.get().getInputFluidStack(), IFluidHandler.FluidAction.EXECUTE);
+            itemHandler.setStackInSlot(3, new ItemStack(recipe.get().getResultItem(null).getItem(),recipe.get().getResultItem(null).getCount() + itemHandler.getStackInSlot(3).getCount()));
+            itemHandler.getStackInSlot(2).shrink(recipe.get().getInputCount());
     }
 
     private boolean hasRecipe() {
@@ -297,12 +302,10 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
         if (recipe.isEmpty()) {
             return false;
         }
-
-        return recipe.get().getInputFluidStack() == INPUT_FLUID_STORAGE.getFluid()
-                && OUTPUT_FLUID_STORAGE.isEmpty() ||
-                recipe.get().getInputFluidStack() == INPUT_FLUID_STORAGE.getFluid()
-                && recipe.get().getInputFluidStack().getAmount() <= OUTPUT_FLUID_STORAGE.getSpace()
-                && recipe.get().getOutputFluidStack().isFluidEqual(OUTPUT_FLUID_STORAGE.getFluid());
+        //TODO
+        return true;//recipe.get().getInputFluidStack() == FLUID_STORAGE_INPUT.getFluid()
+               // && itemHandler.getStackInSlot(3).getItem() == Items.GLASS_BOTTLE
+               // && FLUID_STORAGE_INPUT.getFluidAmount() >= recipe.get().getInputFluidStack().getAmount();
     }
 
     private Optional<FermentationBarrelRecipes> getCurrentRecipe() {
@@ -321,7 +324,6 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
     }
 
     private boolean hasProgressFinished() {
-        maxProgress = getCurrentRecipe().get().getDuration();
         return progress >= maxProgress;
     }
     private void increaseCraftingProgress() {

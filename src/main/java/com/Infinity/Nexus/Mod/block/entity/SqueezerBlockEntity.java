@@ -265,6 +265,7 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
     public void setOnofre(int value) {
         data.set(2, value);
     }
+
     public FluidStack getFluid() {
         return FLUID_STORAGE.getFluid();
     }
@@ -317,6 +318,9 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
     private void fillUpOnFluid(int fluidInputSlot) {
         try {
             ItemStack fluidStack = this.itemHandler.getStackInSlot(fluidInputSlot);
+            if (fluidStack.isEmpty()) {
+                return;
+            }
             fluidStack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(iFluidHandlerItem -> {
                 if (fluidStack.getItem() instanceof BucketItem bucketItem ) {
                     FluidStack fluidStackToDrain = new FluidStack(FLUID_STORAGE.getFluid(), 1000);
