@@ -265,7 +265,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
 
         int extractEnergy = var1 - var2;
 
-        crusherBlockEntity.ENERGY_STORAGE.extractEnergy(extractEnergy, false);
+        crusherBlockEntity.ENERGY_STORAGE.extractEnergy(Math.max(extractEnergy, 1), false);
     }
 
     private boolean hasEnoughEnergy() {

@@ -320,7 +320,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
         int extractEnergy = var1 - var2;
 
-        assemblerBlockEntity.ENERGY_STORAGE.extractEnergy(extractEnergy, false);
+        assemblerBlockEntity.ENERGY_STORAGE.extractEnergy(Math.max(extractEnergy, 1), false);
     }
     private void transferItemFluidToTank(int fluidInputSlot) {
         this.itemHandler.getStackInSlot(fluidInputSlot).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(iFluidHandlerItem -> {

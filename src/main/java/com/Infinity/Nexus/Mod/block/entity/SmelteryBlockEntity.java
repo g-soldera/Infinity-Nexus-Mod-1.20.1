@@ -34,6 +34,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 
@@ -46,7 +47,13 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return super.isItemValid(slot, stack);
+            return switch (slot) {
+                case 0, 1, 2 -> !ModUtils.isUpgrade(stack) || !ModUtils.isComponent(stack);
+                case 3 -> false;
+                case 4, 5, 6, 7 -> ModUtils.isUpgrade(stack);
+                case 8 -> ModUtils.isComponent(stack);
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
 
@@ -228,7 +235,6 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
             resetProgress();
             return;
         }
-
         setMaxProgress();
         if (!hasEnoughEnergy()) {
             return;
@@ -246,7 +252,7 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void setMaxProgress() {
-        maxProgress = getCurrentRecipe().get().getDuration();
+        this.maxProgress = getCurrentRecipe().get().getDuration();
     }
 
     private void extractEnergy(SmelteryBlockEntity smelteryBlockEntity) {
@@ -260,8 +266,7 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
         int var2 = Math.multiplyExact(strength, var1 / 100);
 
         int extractEnergy = var1 - var2;
-
-        smelteryBlockEntity.ENERGY_STORAGE.extractEnergy(extractEnergy, false);
+        smelteryBlockEntity.ENERGY_STORAGE.extractEnergy(Math.max(extractEnergy, 1), false);
     }
 
     private boolean hasEnoughEnergy() {
@@ -275,8 +280,11 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
     private void craftItem() {
         Optional<SmelteryRecipes> recipe = getCurrentRecipe();
         ItemStack result = recipe.get().getResultItem(null);
-
-        this.itemHandler.extractItem(INPUT_SLOT, recipe.get().getInputCount(), false);
+        int[] inputCount = recipe.get().getInputCount();
+        //TODO
+        for(int i = 1; i < inputCount.length; i++){
+            this.itemHandler.extractItem(i-1, inputCount[i], false);
+        }
 
         this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(),
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
@@ -287,6 +295,13 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
 
         if (recipe.isEmpty()) {
             return false;
+        }
+
+        int[] inputCount = recipe.get().getInputCount();
+        for(int i = 1; i < recipe.get().getIngredients().size(); i++){
+            if(this.itemHandler.getStackInSlot(i-1).getCount() < inputCount[i]){
+                return false;
+            }
         }
 
         ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());

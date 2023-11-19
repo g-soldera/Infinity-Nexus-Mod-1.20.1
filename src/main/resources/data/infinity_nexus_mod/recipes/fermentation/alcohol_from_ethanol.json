@@ -1,11 +1,17 @@
 {
   "type": "infinity_nexus_mod:fermentation",
-  "energy": 1200,
-  "duration": 1200,
-
+  "duration": 240,
   "fluidInputType": "infinity_nexus_mod:ethanol_water_fluid",
-  "fluidInputAmount": 1000,
-
-  "fluidOutputType": "minecraft:water",
-  "fluidOutputAmount": 1000
+  "fluidInputAmount": 250,
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle",
+      "count": 1
+    }
+  ],
+  "output":
+  {
+    "item": "infinity_nexus_mod:alcohol_bottle",
+    "count": 2
+  }
 }

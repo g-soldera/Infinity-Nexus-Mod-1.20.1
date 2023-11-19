@@ -257,7 +257,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
 
         int extractEnergy = var1 - var2;
 
-        pressBlockEntity.ENERGY_STORAGE.extractEnergy(extractEnergy, false);
+        pressBlockEntity.ENERGY_STORAGE.extractEnergy(Math.max(extractEnergy, 1), false);
     }
     private boolean hasEnoughEnergy() {
         return ENERGY_STORAGE.getEnergyStored() >= ((getCurrentRecipe().get().getEnergy() + (getMachineLevel()*20)) / maxProgress);

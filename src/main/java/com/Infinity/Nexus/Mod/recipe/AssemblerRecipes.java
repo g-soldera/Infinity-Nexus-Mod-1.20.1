@@ -55,7 +55,6 @@ public class AssemblerRecipes implements Recipe<SimpleContainer> {
         }
 
         if (ModUtils.getComponentLevel(stack) < ModUtils.getComponentLevel(inputItems.get(0).getItems()[0])) {
-            System.out.println("Not enough components");
             return false;
         }
         return true;

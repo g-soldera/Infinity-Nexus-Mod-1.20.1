@@ -101,6 +101,8 @@ public class FermentationBarrelRecipes implements Recipe<SimpleContainer> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID = new ResourceLocation(InfinityNexusMod.MOD_ID, "fermentation");
 
+
+
         @Override
         public FermentationBarrelRecipes fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
 

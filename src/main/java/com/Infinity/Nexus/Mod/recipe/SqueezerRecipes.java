@@ -123,7 +123,6 @@ public class SqueezerRecipes implements Recipe<SimpleContainer> {
         public @NotNull SqueezerRecipes fromJson(@NotNull ResourceLocation pRecipeId, @NotNull JsonObject pSerializedRecipe) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-
             int inputCount = ingredients.get(1).getAsJsonObject().get("count").getAsInt();
 
             FluidStack fluidStack = new FluidStack(Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(new ResourceLocation(pSerializedRecipe.get("fluidType").getAsString()))),

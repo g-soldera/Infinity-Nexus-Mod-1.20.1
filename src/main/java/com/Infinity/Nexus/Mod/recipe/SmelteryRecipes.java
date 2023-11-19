@@ -2,6 +2,7 @@ package com.Infinity.Nexus.Mod.recipe;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.SmelteryBlockEntity;
+import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
 import com.Infinity.Nexus.Mod.utils.ModUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -17,16 +18,18 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+
 public class SmelteryRecipes implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> inputItems;
-    private final int inputCount;
+    private final int[] inputCount;
     private final ItemStack output;
     private final ResourceLocation id;
     private final int duration;
     private final int energy;
 
 
-    public SmelteryRecipes(NonNullList<Ingredient> inputItems, int inputCount, ItemStack output, ResourceLocation id, int duration, int energy) {
+    public SmelteryRecipes(NonNullList<Ingredient> inputItems,int[] inputCount, ItemStack output, ResourceLocation id, int duration, int energy) {
         this.inputItems = inputItems;
         this.inputCount = inputCount;
         this.output = output;
@@ -41,10 +44,19 @@ public class SmelteryRecipes implements Recipe<SimpleContainer> {
         if(pLevel.isClientSide()) {
             return false;
         }
-        int componentSlot = SmelteryBlockEntity.getComponentSlot();
+        int componentSlot = SqueezerBlockEntity.getComponentSlot();
         ItemStack stack = pContainer.getItem(componentSlot);
+
+        for (int i = 1; i < inputItems.size(); i++) {
+
+            if (!inputItems.get(i).test(pContainer.getItem(i-1))) {
+                return false;
+            }
+
+        }
+
         return (inputItems.get(0).test(stack) || ModUtils.getComponentLevel(stack) >= ModUtils.getComponentLevel(inputItems.get(0).getItems()[0])) &&
-                inputItems.get(1).test(pContainer.getItem(0)) && pContainer.getItem(0).getCount() >= getInputCount();
+                (inputItems.get(1).test(pContainer.getItem(0)));
     }
 
     @Override
@@ -86,7 +98,7 @@ public class SmelteryRecipes implements Recipe<SimpleContainer> {
         return energy;
     }
 
-    public int getInputCount() {
+    public int[] getInputCount() {
         return inputCount;
     }
 
@@ -96,30 +108,29 @@ public class SmelteryRecipes implements Recipe<SimpleContainer> {
 
     public static class Type implements RecipeType<SmelteryRecipes> {
         public static final Type INSTANCE = new Type();
-        public static final String ID = "smelting";
+        public static final String ID = "melting";
     }
 
     public static class Serializer implements RecipeSerializer<SmelteryRecipes> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = new ResourceLocation(InfinityNexusMod.MOD_ID, "smelting");
+        public static final ResourceLocation ID = new ResourceLocation(InfinityNexusMod.MOD_ID, "melting");
 
         @Override
         public SmelteryRecipes fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
 
+            int inputCount[] = {1,1,1,1};
 
-            int inputCount = ingredients.get(1).getAsJsonObject().get("count").getAsInt();
-
-            NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
+            NonNullList<Ingredient> inputs = NonNullList.withSize(Math.min(ingredients.size(), 4), Ingredient.EMPTY);
             for (int i = 0; i < ingredients.size(); i++) {
+                inputCount[i] = ingredients.get(i).getAsJsonObject().get("count").getAsInt();;
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
-
             int duration = pSerializedRecipe.get("duration").getAsInt();
             int energy = pSerializedRecipe.get("energy").getAsInt();
 
-            return new SmelteryRecipes(inputs, inputCount, output, pRecipeId, duration, energy);
+            return new SmelteryRecipes(inputs,inputCount, output, pRecipeId, duration, energy);
         }
 
         @Override
@@ -132,11 +143,11 @@ public class SmelteryRecipes implements Recipe<SimpleContainer> {
                 inputs.set(i, Ingredient.fromNetwork(pBuffer));
             }
             //3
-            int inputCount = pBuffer.readInt();
+            int[] inputCount = {pBuffer.readInt(), pBuffer.readInt(), pBuffer.readInt(), pBuffer.readInt()};
             int duration = pBuffer.readInt();
             int energy = pBuffer.readInt();
             ItemStack output = pBuffer.readItem();
-            return new SmelteryRecipes(inputs, inputCount, output, pRecipeId, duration, energy);
+            return new SmelteryRecipes(inputs,inputCount, output, pRecipeId, duration, energy);
         }
 
         @Override
@@ -149,7 +160,7 @@ public class SmelteryRecipes implements Recipe<SimpleContainer> {
                 ing.toNetwork(pBuffer);
             }
             //3
-            pBuffer.writeInt(pRecipe.inputCount);
+            pBuffer.writeVarIntArray(pRecipe.inputCount);
             pBuffer.writeInt(pRecipe.duration);
             pBuffer.writeInt(pRecipe.energy);
             pBuffer.writeItemStack(pRecipe.getResultItem(null), false);
