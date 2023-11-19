@@ -27,6 +27,11 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<SqueezerBlockEntity>> SQUEEZER_BE =
             BLOCK_ENTITY.register("squeezer_block_entity", () ->
                     BlockEntityType.Builder.of(SqueezerBlockEntity::new, ModBlocksAdditions.SQUEEZER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<SmelteryBlockEntity>> SMELTERY_BE =
+            BLOCK_ENTITY.register("smeltery_block_entity", () ->
+                    BlockEntityType.Builder.of(SmelteryBlockEntity::new, ModBlocksAdditions.SMELTERY.get()).build(null));
+
     public static final RegistryObject<BlockEntityType<FermentationBarrelBlockEntity>> FERMENTATION_BE =
             BLOCK_ENTITY.register("fermentation_barrel_block_entity", () ->
                     BlockEntityType.Builder.of(FermentationBarrelBlockEntity::new, ModBlocksAdditions.FERMENTATION_BARREL.get()).build(null));

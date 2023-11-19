@@ -5,6 +5,7 @@ import com.Infinity.Nexus.Mod.screen.assembler.AssemblerMenu;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherMenu;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelMenu;
 import com.Infinity.Nexus.Mod.screen.press.PressMenu;
+import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryMenu;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -30,6 +31,9 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<SqueezerMenu>> SQUEEZER_MENU =
             registerMenuType("squeezer_menu", SqueezerMenu::new);
+    public static final RegistryObject<MenuType<SmelteryMenu>> SMELTERY_MENU =
+            registerMenuType("smeltery_menu", SmelteryMenu::new);
+
     public static final RegistryObject<MenuType<FermentationBarrelMenu>> FERMENTATION_BARREL_MENU =
             registerMenuType("fermentation_barre_menu", FermentationBarrelMenu::new);
 

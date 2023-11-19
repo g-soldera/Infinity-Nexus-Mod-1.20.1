@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"render_type": "translucent",
 	"textures": {
-		"0": "infinity_nexus_mod:block/lead_machine_casing",
-		"particle": "infinity_nexus_mod:block/lead_machine_casing"
+		"0": "infinity_nexus_mod:block/lead_block",
+		"particle": "infinity_nexus_mod:block/lead_block"
 	},
 	"elements": [
 		{

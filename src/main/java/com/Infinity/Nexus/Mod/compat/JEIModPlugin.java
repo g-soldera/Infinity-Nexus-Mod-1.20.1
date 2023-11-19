@@ -6,6 +6,7 @@ import com.Infinity.Nexus.Mod.screen.assembler.AssemblerScreen;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherScreen;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelScreen;
 import com.Infinity.Nexus.Mod.screen.press.PressScreen;
+import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryScreen;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerScreen;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -33,6 +34,7 @@ public class JEIModPlugin implements IModPlugin {
         registration.addRecipeCategories(new PressCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new AssemblerCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new SqueezerCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new SmelteryCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new FermentationBarrelCategory(registration.getJeiHelpers().getGuiHelper()));
 
     }
@@ -46,6 +48,7 @@ public class JEIModPlugin implements IModPlugin {
         List<PressRecipes> pressRecipes = recipeManager.getAllRecipesFor(PressRecipes.Type.INSTANCE);
         List<AssemblerRecipes> assemblyRecipes = recipeManager.getAllRecipesFor(AssemblerRecipes.Type.INSTANCE);
         List<SqueezerRecipes> squeezerRecipes = recipeManager.getAllRecipesFor(SqueezerRecipes.Type.INSTANCE);
+        List<SmelteryRecipes> smelteryRecipes = recipeManager.getAllRecipesFor(SmelteryRecipes.Type.INSTANCE);
         List<FermentationBarrelRecipes> fermentationBarrelRecipes = recipeManager.getAllRecipesFor(FermentationBarrelRecipes.Type.INSTANCE);
 
 
@@ -57,6 +60,8 @@ public class JEIModPlugin implements IModPlugin {
         System.out.println("Registry: " + assemblyRecipes.size() + " for Assembly");
         registration.addRecipes(SqueezerCategory.SQUEEZER_TYPE, squeezerRecipes);
         System.out.println("Registry: " + squeezerRecipes.size() + " for Squeezer");
+        registration.addRecipes(SmelteryCategory.SMELTERY_TYPE, smelteryRecipes);
+        System.out.println("Registry: " + smelteryRecipes.size() + " for Smeltery");
         registration.addRecipes(FermentationBarrelCategory.FERMENTATION_BARREL_TYPE, fermentationBarrelRecipes);
         System.out.println("Registry: " + fermentationBarrelRecipes.size() + " for Fermentation Barrel");
     }
@@ -68,6 +73,7 @@ public class JEIModPlugin implements IModPlugin {
        registration.addRecipeClickArea(PressScreen.class,162, -10,8,9, PressCategory.PRESS_TYPE);
        registration.addRecipeClickArea(AssemblerScreen.class,162, -10,8,9, AssemblerCategory.ASSEMBLY_TYPE);
        registration.addRecipeClickArea(SqueezerScreen.class,162, -10,8,9, SqueezerCategory.SQUEEZER_TYPE);
+       registration.addRecipeClickArea(SmelteryScreen.class,162, -10,8,9, SmelteryCategory.SMELTERY_TYPE);
        registration.addRecipeClickArea(FermentationBarrelScreen.class,162, -10,8,9, FermentationBarrelCategory.FERMENTATION_BARREL_TYPE);
     }
 }

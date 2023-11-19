@@ -1,9 +1,6 @@
 package com.Infinity.Nexus.Mod.networking.packet;
 
-import com.Infinity.Nexus.Mod.block.entity.AssemblerBlockEntity;
-import com.Infinity.Nexus.Mod.block.entity.CrusherBlockEntity;
-import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
-import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
+import com.Infinity.Nexus.Mod.block.entity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -40,6 +37,8 @@ public class EnergySyncS2CPacket {
             }else if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof PressBlockEntity blockEntity) {
                 blockEntity.setEnergyLevel(energy);
             }else if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof SqueezerBlockEntity blockEntity) {
+                blockEntity.setEnergyLevel(energy);
+            }else if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof SmelteryBlockEntity blockEntity) {
                 blockEntity.setEnergyLevel(energy);
             }
 

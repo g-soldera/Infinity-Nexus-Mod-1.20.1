@@ -17,44 +17,34 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 
-        blockWithItem(ModBlocksAdditions.INFINITY_BLOCK);
-        blockWithItem(ModBlocksAdditions.RAW_INFINITY_BLOCK);
         blockWithItem(ModBlocksAdditions.INFINITY_ORE);
+        blockWithItem(ModBlocksAdditions.RAW_INFINITY_BLOCK);
         blockWithItem(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE);
 
         blockWithItem(ModBlocksAdditions.LEAD_ORE);
         blockWithItem(ModBlocksAdditions.DEEPSLATE_LEAD_ORE);
-        blockWithItem(ModBlocksAdditions.LEAD_BLOCK);
         blockWithItem(ModBlocksAdditions.RAW_LEAD_BLOCK);
 
         blockWithItem(ModBlocksAdditions.TIN_ORE);
         blockWithItem(ModBlocksAdditions.DEEPSLATE_TIN_ORE);
-        blockWithItem(ModBlocksAdditions.TIN_BLOCK);
         blockWithItem(ModBlocksAdditions.RAW_TIN_BLOCK);
 
         blockWithItem(ModBlocksAdditions.SILVER_ORE);
         blockWithItem(ModBlocksAdditions.DEEPSLATE_SILVER_ORE);
-        blockWithItem(ModBlocksAdditions.SILVER_BLOCK);
         blockWithItem(ModBlocksAdditions.RAW_SILVER_BLOCK);
 
         blockWithItem(ModBlocksAdditions.NICKEL_ORE);
         blockWithItem(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE);
-        blockWithItem(ModBlocksAdditions.NICKEL_BLOCK);
         blockWithItem(ModBlocksAdditions.RAW_NICKEL_BLOCK);
 
         blockWithItem(ModBlocksAdditions.ALUMINUM_ORE);
         blockWithItem(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE);
-        blockWithItem(ModBlocksAdditions.ALUMINUM_BLOCK);
         blockWithItem(ModBlocksAdditions.RAW_ALUMINUM_BLOCK);
 
         blockWithItem(ModBlocksAdditions.URANIUM_ORE);
         blockWithItem(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE);
-        blockWithItem(ModBlocksAdditions.URANIUM_BLOCK);
         blockWithItem(ModBlocksAdditions.RAW_URANIUM_BLOCK);
 
-        blockWithItem(ModBlocksAdditions.BRASS_BLOCK);
-        blockWithItem(ModBlocksAdditions.BRONZE_BLOCK);
-        blockWithItem(ModBlocksAdditions.STEEL_BLOCK);
 
         blockWithItem(ModBlocksAdditions.ASPHALT);
 

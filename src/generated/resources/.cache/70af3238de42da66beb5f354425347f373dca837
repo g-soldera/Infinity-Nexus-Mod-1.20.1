@@ -1,0 +1,7 @@
+// 1.20.1	2023-11-18T20:33:32.9778816	Block Tags
+5b8b984240b7deceab5270e6a7374b1e9177ba0d data/infinity_nexus_mod/tags/blocks/paxel_mineable.json
+97320ab922aaaf6a453b05bb33d8f83b03c9c309 data/minecraft/tags/blocks/mineable/axe.json
+0aa0c370602a16bcbd9d2186a7ea885a8c8d0459 data/minecraft/tags/blocks/mineable/pickaxe.json
+2ba49c35a15ed90f94f3272913fecc4256a67263 data/minecraft/tags/blocks/needs_diamond_tool.json
+804d4fdbf599f33bb4f83e0579955b08a5b70447 data/minecraft/tags/blocks/needs_iron_tool.json
+86b360facef9fdf02f6f621b32a1c85b9656129c data/minecraft/tags/blocks/needs_stone_tool.json

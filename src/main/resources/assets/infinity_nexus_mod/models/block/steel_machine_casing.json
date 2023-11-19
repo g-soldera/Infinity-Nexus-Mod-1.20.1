@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"render_type": "translucent",
 	"textures": {
-		"1": "infinity_nexus_mod:block/steel_machine_casing",
-		"particle": "infinity_nexus_mod:block/steel_machine_casing"
+		"1": "infinity_nexus_mod:block/steel_block",
+		"particle": "infinity_nexus_mod:block/steel_block"
 	},
 	"elements": [
 		{

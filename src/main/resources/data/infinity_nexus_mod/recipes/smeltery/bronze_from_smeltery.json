@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:smelting",
+  "energy": 1200,
+  "duration": 1200,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:reinforced_component"
+    },
+    {
+      "item": "minecraft:iron_ingot",
+      "count": 2
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:aluminum_dust",
+    "count": 3
+  }
+}

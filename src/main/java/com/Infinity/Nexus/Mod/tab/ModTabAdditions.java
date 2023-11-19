@@ -20,96 +20,82 @@ public class ModTabAdditions {
                     .title(Component.translatable("itemGroup.infinity_nexus_mod_addition"))
                     .displayItems((pParameters, pOutput) -> {
                         //-------------------------//-------------------------//
+                        //machines
                         pOutput.accept(new ItemStack(ModBlocksAdditions.CRUSHER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.PRESS.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ASSEMBLY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SQUEEZER.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.SMELTERY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.FERMENTATION_BARREL.get()));
                         //-------------------------//-------------------------//
-                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_INGOT.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_INGOT.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.TIN_INGOT.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.NICKEL_INGOT.get()));
+                        //ingots
                         pOutput.accept(new ItemStack(ModItemsAdditions.SILVER_INGOT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.TIN_INGOT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_INGOT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.NICKEL_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRASS_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRONZE_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.STEEL_INGOT.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.URANIUM_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.ALUMINUM_INGOT.get()));
-
-                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_NUGGET.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_NUGGET.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.TIN_NUGGET.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.NICKEL_NUGGET.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.URANIUM_INGOT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_INGOT.get()));
+                        //nuggets
                         pOutput.accept(new ItemStack(ModItemsAdditions.SILVER_NUGGET.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.TIN_NUGGET.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_NUGGET.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.NICKEL_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRASS_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRONZE_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.STEEL_NUGGET.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.URANIUM_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.ALUMINUM_NUGGET.get()));
-
-                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_DUST.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_DUST.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.TIN_DUST.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.NICKEL_DUST.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.URANIUM_NUGGET.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_NUGGET.get()));
+                        //dust
                         pOutput.accept(new ItemStack(ModItemsAdditions.SILVER_DUST.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.TIN_DUST.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_DUST.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.NICKEL_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRASS_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRONZE_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.STEEL_DUST.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.URANIUM_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.ALUMINUM_DUST.get()));
-
-                        pOutput.accept(new ItemStack(ModItemsAdditions.RAW_INFINITY.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.RAW_LEAD.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.RAW_TIN.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.RAW_NICKEL.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.RAW_SILVER.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.RAW_URANIUM.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.RAW_ALUMINUM.get()));
-
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.INFINITY_BLOCK.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.LEAD_BLOCK.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.TIN_BLOCK.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.NICKEL_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.URANIUM_DUST.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_DUST.get()));
+                        //blocks
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SILVER_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.TIN_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.LEAD_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.NICKEL_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.BRASS_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.BRONZE_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.STEEL_BLOCK.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.URANIUM_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ALUMINUM_BLOCK.get()));
-
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_INFINITY_BLOCK.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_LEAD_BLOCK.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_TIN_BLOCK.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_NICKEL_BLOCK.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_URANIUM_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.URANIUM_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.INFINITY_BLOCK.get()));
+                        //raw
                         pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_SILVER_BLOCK.get()));
-
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_TIN_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_LEAD_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_NICKEL_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_ALUMINUM_BLOCK.get()));
-
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.INFINITY_ORE.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.LEAD_ORE.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.TIN_ORE.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.NICKEL_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_URANIUM_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_INFINITY_BLOCK.get()));
+                        //ores
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SILVER_ORE.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.URANIUM_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.TIN_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.LEAD_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.NICKEL_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ALUMINUM_ORE.get()));
-                        
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_LEAD_ORE.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_TIN_ORE.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.URANIUM_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.INFINITY_ORE.get()));
+                        //deepslates
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_SILVER_ORE.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_TIN_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_LEAD_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get()));
-
-                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_SINGULARITY.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.PORTAL_ACTIVATOR.get()));
-
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.ASPHALT.get()));
-
-                        pOutput.accept(new ItemStack(ModItemsAdditions.ITEM_DISLOCATOR.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_SWORD.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_PAXEL.get()));
@@ -140,7 +126,14 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_BOOTS.get()));
 
+                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_SINGULARITY.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.PORTAL_ACTIVATOR.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.ASPHALT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ITEM_DISLOCATOR.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get()));
+
                         pOutput.accept(new ItemStack(ModItemsAdditions.BUCKET_LUBRICANT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ALCOHOL_BOTTLE.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.REDSTONE_COMPONENT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BASIC_COMPONENT.get()));
@@ -154,7 +147,6 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.SPEED_UPGRADE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.STRENGTH_UPGRADE.get()));
 
-                        pOutput.accept(new ItemStack(ModItemsAdditions.ALCOHOL_BOTTLE.get()));
 
                         //-------------------------//-------------------------//
                     })
