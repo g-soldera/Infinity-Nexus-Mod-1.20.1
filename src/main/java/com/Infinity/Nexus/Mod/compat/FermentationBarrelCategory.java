@@ -27,7 +27,7 @@ public class FermentationBarrelCategory implements IRecipeCategory<FermentationB
     private final IDrawable icon;
 
     public FermentationBarrelCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 75);
+        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 88);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocksAdditions.FERMENTATION_BARREL.get()));
     }
 

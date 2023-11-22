@@ -236,13 +236,10 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
             resetProgress();
             return;
         }
+
         setMaxProgress();
-        if(!canInsertOutputItem()){
-            return;
-        }
         increaseCraftingProgress();
         setChanged(pLevel, pPos, pState);
-
 
         if (hasProgressFinished()) {
             craftItem();
@@ -259,22 +256,23 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
             //TODO
             if(iFluidHandlerItem.getContainer().getItem() instanceof BucketItem) {
                 if(this.FLUID_STORAGE_INPUT.getSpace() >= 1000){
-                    int drainAmount = 1000;
-                    FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
+                    System.out.println("1000");
+                    FluidStack stack = iFluidHandlerItem.drain(1000, IFluidHandler.FluidAction.EXECUTE);
                     this.FLUID_STORAGE_INPUT.fill(new FluidStack(stack.getFluid(), stack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
-                    removeContainer(stack, iFluidHandlerItem.getContainer());
+                    removeContainer(iFluidHandlerItem.getContainer(), 0);
                 }
             }else if(this.FLUID_STORAGE_INPUT.getSpace() >= 10 || this.FLUID_STORAGE_INPUT.getSpace() >= iFluidHandlerItem.getContainer().getCount()) {
                 int drainAmount = Math.min(this.FLUID_STORAGE_INPUT.getSpace(), 10);
                 FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
+                iFluidHandlerItem.drain(stack, IFluidHandler.FluidAction.EXECUTE);
                 this.FLUID_STORAGE_INPUT.fill(new FluidStack(stack.getFluid(), stack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
-                removeContainer(stack, iFluidHandlerItem.getContainer());
+                removeContainer(iFluidHandlerItem.getContainer(), iFluidHandlerItem.getFluidInTank(0).getAmount());
             }
         });
     }
 
-    private void removeContainer(FluidStack stack, ItemStack container) {
-        if(container.getCount() <= 0) {
+    private void removeContainer(ItemStack container, int fluid) {
+        if(fluid <= 0 || container.getItem() instanceof BucketItem) {
             this.itemHandler.extractItem(INPUT_FLUID_ITEM, 1, false);
             this.itemHandler.setStackInSlot(OUTPUT_FLUID_ITEM, container);
         }
@@ -284,12 +282,6 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
     private boolean hasFluidSourceInSlot(int fluidInputSlot) {
         return this.itemHandler.getStackInSlot(fluidInputSlot).getCount() > 0 &&
                 this.itemHandler.getStackInSlot(fluidInputSlot).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
-    }
-
-    private boolean canInsertOutputItem() {
-        return itemHandler.getStackInSlot(3).isEmpty()
-                || itemHandler.getStackInSlot(3).getItem() == getCurrentRecipe().get().getResultItem(null).getItem()
-                && (itemHandler.getStackInSlot(3).getCount() + getCurrentRecipe().get().getResultItem(null).getCount()) <= itemHandler.getStackInSlot(3).getItem().getMaxStackSize();
     }
     private void setMaxProgress() {
         maxProgress = getCurrentRecipe().get().getDuration();
@@ -303,9 +295,11 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
     private void craftItem() {
         Optional<FermentationBarrelRecipes> recipe = getCurrentRecipe();
         //TODO: Fix
-            this.level.playLocalSound(this.getBlockPos(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+
+            level.playSound(null, this.getBlockPos(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0f, 1.0f);
             this.FLUID_STORAGE_INPUT.drain(recipe.get().getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
-            itemHandler.setStackInSlot(3, new ItemStack(recipe.get().getResultItem(null).getItem(),recipe.get().getResultItem(null).getCount() + itemHandler.getStackInSlot(3).getCount()));
+
+            itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(recipe.get().getResultItem(null).getItem(),recipe.get().getResultItem(null).getCount() + itemHandler.getStackInSlot(3).getCount()));
             itemHandler.getStackInSlot(2).shrink(recipe.get().getInputCount());
     }
 

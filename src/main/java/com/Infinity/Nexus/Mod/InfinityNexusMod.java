@@ -78,7 +78,7 @@ public class InfinityNexusMod
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC, "InfinityNexus/infinity_nexus_mod-common.toml");
+        //ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC, "InfinityNexus/infinity_nexus_mod-common.toml");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

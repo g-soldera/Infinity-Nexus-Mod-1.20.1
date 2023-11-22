@@ -143,7 +143,7 @@ public class SmelteryRecipes implements Recipe<SimpleContainer> {
                 inputs.set(i, Ingredient.fromNetwork(pBuffer));
             }
             //3
-            int[] inputCount = {pBuffer.readInt(), pBuffer.readInt(), pBuffer.readInt(), pBuffer.readInt()};
+            int[] inputCount = pBuffer.readVarIntArray();
             int duration = pBuffer.readInt();
             int energy = pBuffer.readInt();
             ItemStack output = pBuffer.readItem();

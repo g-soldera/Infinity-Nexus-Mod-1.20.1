@@ -78,7 +78,6 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksProgression.IRON_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.PLASTIC_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.GLASS_MACHINE_CASING.get());
-        this.dropSelf(ModBlocksProgression.ENERGIZED_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.STEEL_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.INDUSTRIAL_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.INFINITY_MACHINE_CASING.get());

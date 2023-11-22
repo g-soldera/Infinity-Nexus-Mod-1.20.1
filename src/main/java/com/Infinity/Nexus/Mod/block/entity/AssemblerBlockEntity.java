@@ -15,9 +15,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -442,5 +445,35 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         super.onDataPacket(net, pkt);
     }
 
+    public void setMachineLevel(ItemStack itemStack, Player player) {
+        {
+            if (this.itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
+                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
+                player.getMainHandItem().shrink(1);
+                this.setChanged();
+            }else{
+                ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
+                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
+                player.getMainHandItem().shrink(1);
+                this.setChanged();
+                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), component);
+                this.level.addFreshEntity(itemEntity);
+            }
+            assert level != null;
+            level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_NETHERITE, SoundSource.BLOCKS, 1.0f, 1.0f);
+        }
 
+    }
+
+    public void setUpgradeLevel(ItemStack itemStack, Player player) {
+        {
+            for(int i = 0; i < UPGRADE_SLOTS.length; i++ ){
+                if (this.itemHandler.getStackInSlot(UPGRADE_SLOTS[i]).isEmpty()) {
+                    this.itemHandler.setStackInSlot(UPGRADE_SLOTS[i], itemStack.copy());
+                    player.getMainHandItem().shrink(1);
+                    this.setChanged();
+                }
+            }
+        }
+    }
 }

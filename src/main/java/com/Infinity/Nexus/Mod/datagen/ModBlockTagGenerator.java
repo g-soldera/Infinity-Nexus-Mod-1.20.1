@@ -81,7 +81,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksProgression.IRON_MACHINE_CASING.get())
                 .add(ModBlocksProgression.PLASTIC_MACHINE_CASING.get())
                 .add(ModBlocksProgression.GOLD_MACHINE_CASING.get())
-                .add(ModBlocksProgression.ENERGIZED_MACHINE_CASING.get())
                 .add(ModBlocksProgression.STEEL_MACHINE_CASING.get())
                 .add(ModBlocksProgression.INDUSTRIAL_MACHINE_CASING.get())
                 .add(ModBlocksProgression.INFINITY_MACHINE_CASING.get());
@@ -145,7 +144,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksProgression.IRON_MACHINE_CASING.get())
                 .add(ModBlocksProgression.PLASTIC_MACHINE_CASING.get())
                 .add(ModBlocksProgression.GOLD_MACHINE_CASING.get())
-                .add(ModBlocksProgression.ENERGIZED_MACHINE_CASING.get())
                 .add(ModBlocksProgression.STEEL_MACHINE_CASING.get())
                 .add(ModBlocksProgression.INDUSTRIAL_MACHINE_CASING.get())
                 .add(ModBlocksProgression.INFINITY_MACHINE_CASING.get());
@@ -171,7 +169,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksProgression.IRON_MACHINE_CASING.get())
                 .add(ModBlocksProgression.PLASTIC_MACHINE_CASING.get())
                 .add(ModBlocksProgression.GOLD_MACHINE_CASING.get())
-                .add(ModBlocksProgression.ENERGIZED_MACHINE_CASING.get())
                 .add(ModBlocksProgression.STEEL_MACHINE_CASING.get())
                 .add(ModBlocksProgression.INDUSTRIAL_MACHINE_CASING.get())
                 .add(ModBlocksProgression.INFINITY_MACHINE_CASING.get());

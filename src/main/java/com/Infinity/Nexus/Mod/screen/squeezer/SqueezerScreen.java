@@ -56,12 +56,7 @@ public class SqueezerScreen extends AbstractContainerScreen<SqueezerMenu> implem
 
         guiGraphics.blit(TEXTURE, x + 2, y-14, 2, 167, 174, 64);
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
-        if(menu.blockEntity.getOnofre() == 1){
-            guiGraphics.blit(TEXTURE, x + 151,y - 9,176,167,7,7);
-        }else{
-            guiGraphics.blit(TEXTURE, x + 151,y - 9,183,167,7,7);
 
-        }
         renderProgressArrow(guiGraphics, x, y);
         energyInfoArea.render(guiGraphics);
         fluidRenderer.render(guiGraphics, x+146, y+6, menu.blockEntity.getFluid());
@@ -78,21 +73,6 @@ public class SqueezerScreen extends AbstractContainerScreen<SqueezerMenu> implem
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
-    }
-
-    @Override
-    public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
-
-        if(isMouseAboveArea((int) pMouseX,(int) pMouseY,x + 151,y - 10,0,0,6,6)) {
-           if(menu.blockEntity.getOnofre() == 1) {
-               menu.blockEntity.setOnofre(0);
-           }else{
-               menu.blockEntity.setOnofre(1);
-           }
-        }
-        return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
     private void renderFluidAreaTooltips(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y,
                                          FluidStack stack, int offsetX, int offsetY, FluidTankRenderer renderer) {

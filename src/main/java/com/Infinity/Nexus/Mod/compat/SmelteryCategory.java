@@ -3,14 +3,18 @@ package com.Infinity.Nexus.Mod.compat;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.recipe.SmelteryRecipes;
+import com.Infinity.Nexus.Mod.recipe.SqueezerRecipes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +30,7 @@ public class SmelteryCategory implements IRecipeCategory<SmelteryRecipes> {
     private final IDrawable icon;
 
     public SmelteryCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 75);
+        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 88);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocksAdditions.SMELTERY.get()));
     }
 
@@ -43,6 +47,12 @@ public class SmelteryCategory implements IRecipeCategory<SmelteryRecipes> {
     @Override
     public IDrawable getBackground() {
         return this.background;
+    }
+
+    @Override
+    public void draw(SmelteryRecipes recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        Minecraft minecraft = Minecraft.getInstance();
+        guiGraphics.drawString(minecraft.font, recipe.getEnergy() + " FE", 6, 76, 0xFFFFFF, false);
     }
 
     @Override

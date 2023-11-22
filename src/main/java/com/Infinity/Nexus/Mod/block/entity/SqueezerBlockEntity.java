@@ -15,9 +15,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -46,6 +49,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
@@ -397,11 +401,16 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
     private void craftItem() {
         Optional<SqueezerRecipes> recipe = getCurrentRecipe();
         ItemStack result = recipe.get().getResultItem(null);
+        ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
 
         this.itemHandler.extractItem(INPUT_SLOT, recipe.get().getInputCount(), false);
         this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(),
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
-
+        component.hurt(1, this.level.random, null);
+        if (component.getDamageValue() >= component.getMaxDamage()) {
+            component.shrink(1);
+            level.playSound(null, this.getBlockPos(), SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
+        }
         FluidStack fluidStack = recipe.get().getFluid();
         this.FLUID_STORAGE.fill(new FluidStack(fluidStack, fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
     }
@@ -472,11 +481,36 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
         super.onDataPacket(net, pkt);
     }
 
-    public void setUpgradeLevel(ItemStack itemStack) {
+    public void setMachineLevel(ItemStack itemStack, Player player) {
         {
             if (this.itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
-                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack);
+                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
+                player.getMainHandItem().shrink(1);
+                this.setChanged();
+            }else{
+                ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
+                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
+                player.getMainHandItem().shrink(1);
+                this.setChanged();
+                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), component);
+                this.level.addFreshEntity(itemEntity);
+            }
+            assert level != null;
+            level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_NETHERITE, SoundSource.BLOCKS, 1.0f, 1.0f);
+        }
+
+    }
+
+    public void setUpgradeLevel(ItemStack itemStack, Player player) {
+        {
+            for(int i = 0; i < UPGRADE_SLOTS.length; i++ ){
+                if (this.itemHandler.getStackInSlot(UPGRADE_SLOTS[i]).isEmpty()) {
+                    this.itemHandler.setStackInSlot(UPGRADE_SLOTS[i], itemStack.copy());
+                    player.getMainHandItem().shrink(1);
+                    this.setChanged();
+                }
             }
         }
     }
+
 }

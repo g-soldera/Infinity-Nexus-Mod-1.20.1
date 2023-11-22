@@ -2,6 +2,9 @@ package com.Infinity.Nexus.Mod.block.custom;
 
 import com.Infinity.Nexus.Mod.block.entity.SmelteryBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
+import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
+import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
+import com.Infinity.Nexus.Mod.item.custom.UpgradeItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -79,7 +82,21 @@ public class Smeltery extends BaseEntityBlock {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof SmelteryBlockEntity) {
+                if(!(pPlayer.getMainHandItem().getItem() instanceof ComponentItem)) {
                 NetworkHooks.openScreen(((ServerPlayer)pPlayer), (SmelteryBlockEntity)entity, pPos);
+                }else {
+                    if (pPlayer.getMainHandItem().getItem() instanceof ComponentItem) {
+                        ((SmelteryBlockEntity) entity).setMachineLevel(pPlayer.getMainHandItem(), pPlayer);
+                        pPlayer.closeContainer();
+                        return InteractionResult.FAIL;
+                    }
+
+                    if (pPlayer.getMainHandItem().getItem() instanceof UpgradeItem) {
+                        ((SmelteryBlockEntity) entity).setUpgradeLevel(pPlayer.getMainHandItem(), pPlayer);
+                        pPlayer.closeContainer();
+                        return InteractionResult.FAIL;
+                    }
+                }
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }

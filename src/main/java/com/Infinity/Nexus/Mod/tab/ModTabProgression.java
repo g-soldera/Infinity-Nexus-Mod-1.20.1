@@ -23,13 +23,17 @@ public class ModTabProgression {
 
                         pOutput.accept(new ItemStack(ModBlocksProgression.WOOD_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.COPPER_MACHINE_CASING.get()));
+                        pOutput.accept(new ItemStack(ModBlocksProgression.SILVER_MACHINE_CASING.get()));
+                        pOutput.accept(new ItemStack(ModBlocksProgression.TIN_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.LEAD_MACHINE_CASING.get()));
+                        pOutput.accept(new ItemStack(ModBlocksProgression.NICKEL_MACHINE_CASING.get()));
+                        pOutput.accept(new ItemStack(ModBlocksProgression.BRASS_MACHINE_CASING.get()));
+                        pOutput.accept(new ItemStack(ModBlocksProgression.BRONZE_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.ALUMINUM_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.GOLD_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.IRON_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.PLASTIC_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.GLASS_MACHINE_CASING.get()));
-                        pOutput.accept(new ItemStack(ModBlocksProgression.ENERGIZED_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.STEEL_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.INDUSTRIAL_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.INFINITY_MACHINE_CASING.get()));

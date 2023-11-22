@@ -4,19 +4,26 @@ import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
 import com.Infinity.Nexus.Mod.recipe.SqueezerRecipes;
+import com.Infinity.Nexus.Mod.screen.renderer.EnergyInfoArea;
+import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class SqueezerCategory implements IRecipeCategory<SqueezerRecipes> {
 
@@ -29,7 +36,7 @@ public class SqueezerCategory implements IRecipeCategory<SqueezerRecipes> {
     private final IDrawable icon;
 
     public SqueezerCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 75);
+        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 88);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocksAdditions.SQUEEZER.get()));
     }
 
@@ -50,6 +57,12 @@ public class SqueezerCategory implements IRecipeCategory<SqueezerRecipes> {
     }
 
     @Override
+    public void draw(SqueezerRecipes recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        Minecraft minecraft = Minecraft.getInstance();
+        guiGraphics.drawString(minecraft.font, recipe.getEnergy() + " FE", 6, 76, 0xFFFFFF, false);
+    }
+
+    @Override
     public IDrawable getIcon() {
         return this.icon;
     }
@@ -64,8 +77,6 @@ public class SqueezerCategory implements IRecipeCategory<SqueezerRecipes> {
         builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 47).addItemStack(recipe.getResultItem(null));
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 146, 6).setFluidRenderer(SqueezerBlockEntity.getFluidCapacity(), true,6,62).addFluidStack(recipe.getFluid().getFluid(),recipe.getFluid().getAmount());
-
-        //builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 24, 29).setFluidRenderer(10, true,62,6);
 
 
     }
