@@ -16,7 +16,7 @@ public class ModTags {
         public static final TagKey<Block> PICKAXE = tag("mineable/pickaxe");
         public static final TagKey<Block> AXE = tag("mineable/axe");
         public static final TagKey<Block> SHOVEL = tag("mineable/shovel");
-        public static final TagKey<Block> HOE = tag("mineable/heo");
+        public static final TagKey<Block> HOE = tag("mineable/hoe");
 
 
 

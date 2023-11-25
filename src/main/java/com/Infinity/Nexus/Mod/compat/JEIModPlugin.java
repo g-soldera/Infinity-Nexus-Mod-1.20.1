@@ -10,9 +10,7 @@ import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryScreen;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerScreen;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.registration.IGuiHandlerRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -64,6 +62,12 @@ public class JEIModPlugin implements IModPlugin {
         System.out.println("Registry: " + smelteryRecipes.size() + " for Smeltery");
         registration.addRecipes(FermentationBarrelCategory.FERMENTATION_BARREL_TYPE, fermentationBarrelRecipes);
         System.out.println("Registry: " + fermentationBarrelRecipes.size() + " for Fermentation Barrel");
+    }
+
+    @Override
+    public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+        //TODO
+        IModPlugin.super.registerRecipeTransferHandlers(registration);
     }
 
     @Override

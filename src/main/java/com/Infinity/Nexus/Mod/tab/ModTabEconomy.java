@@ -29,7 +29,6 @@ public class ModTabEconomy {
                         pOutput.accept(new ItemStack(ModItemsAdditions.VIPNEXUS_BAG.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.VIPINFINITY_BAG.get()));
 
-
                         //-------------------------//-------------------------//
                     })
                     .build());

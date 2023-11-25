@@ -1,5 +1,6 @@
 package com.Infinity.Nexus.Mod.block.custom;
 
+import com.Infinity.Nexus.Mod.block.entity.AssemblerBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
 import com.Infinity.Nexus.Mod.block.entity.SmelteryBlockEntity;
@@ -27,6 +28,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Press extends BaseEntityBlock {
@@ -79,30 +81,29 @@ public class Press extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
+            boolean component = pPlayer.getMainHandItem().getItem() instanceof ComponentItem;
+            boolean upgrade = pPlayer.getMainHandItem().getItem() instanceof UpgradeItem;
+
             if(entity instanceof PressBlockEntity) {
-                if(!(pPlayer.getMainHandItem().getItem() instanceof ComponentItem)) {
-                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (PressBlockEntity)entity, pPos);
-                }else{
-                    if (pPlayer.getMainHandItem().getItem() instanceof ComponentItem) {
+                if(!(component || upgrade)) {
+                    NetworkHooks.openScreen(((ServerPlayer) pPlayer), (PressBlockEntity) entity, pPos);
+                }else if (component) {
                     ((PressBlockEntity) entity).setMachineLevel(pPlayer.getMainHandItem(), pPlayer);
                     pPlayer.closeContainer();
                     return InteractionResult.FAIL;
-                    }
 
-                    if (pPlayer.getMainHandItem().getItem() instanceof UpgradeItem) {
-                        ((PressBlockEntity) entity).setUpgradeLevel(pPlayer.getMainHandItem(), pPlayer);
-                        pPlayer.closeContainer();
-                        return InteractionResult.FAIL;
-                    }
+                }else{
+                    ((PressBlockEntity) entity).setUpgradeLevel(pPlayer.getMainHandItem(), pPlayer);
+                    pPlayer.closeContainer();
+                    return InteractionResult.FAIL;
                 }
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
         }
-
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 

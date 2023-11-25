@@ -27,6 +27,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Assembler extends BaseEntityBlock {
@@ -79,30 +80,29 @@ public class Assembler extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if(entity instanceof AssemblerBlockEntity) {
-                if(!(pPlayer.getMainHandItem().getItem() instanceof ComponentItem)) {
-                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (AssemblerBlockEntity)entity, pPos);
-                }else {
-                    if (pPlayer.getMainHandItem().getItem() instanceof ComponentItem) {
-                        ((AssemblerBlockEntity) entity).setMachineLevel(pPlayer.getMainHandItem(), pPlayer);
-                        pPlayer.closeContainer();
-                        return InteractionResult.FAIL;
-                    }
+            boolean component = pPlayer.getMainHandItem().getItem() instanceof ComponentItem;
+            boolean upgrade = pPlayer.getMainHandItem().getItem() instanceof UpgradeItem;
 
-                    if (pPlayer.getMainHandItem().getItem() instanceof UpgradeItem) {
-                        ((AssemblerBlockEntity) entity).setUpgradeLevel(pPlayer.getMainHandItem(), pPlayer);
-                        pPlayer.closeContainer();
-                        return InteractionResult.FAIL;
-                    }
+            if(entity instanceof AssemblerBlockEntity) {
+                if(!(component || upgrade)) {
+                    NetworkHooks.openScreen(((ServerPlayer) pPlayer), (AssemblerBlockEntity) entity, pPos);
+                }else if (component) {
+                    ((AssemblerBlockEntity) entity).setMachineLevel(pPlayer.getMainHandItem(), pPlayer);
+                    pPlayer.closeContainer();
+                    return InteractionResult.FAIL;
+
+                }else{
+                    ((AssemblerBlockEntity) entity).setUpgradeLevel(pPlayer.getMainHandItem(), pPlayer);
+                    pPlayer.closeContainer();
+                    return InteractionResult.FAIL;
                 }
-            }else{
+            } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
         }
-
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 

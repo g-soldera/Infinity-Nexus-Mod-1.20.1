@@ -41,6 +41,6 @@ public class EnergyInfoArea {
     public void render(GuiGraphics guiGraphics) {
         int stored = (int)(height * (energy.getEnergyStored() / (float)energy.getMaxEnergyStored()));
         guiGraphics.fillGradient(xPos,yPos + (height - stored),xPos + width,
-                yPos + height, 0xffb51500, 0xff600b00);
+                yPos + height, 0x99D60000, 0x99D60000);
     }
 }

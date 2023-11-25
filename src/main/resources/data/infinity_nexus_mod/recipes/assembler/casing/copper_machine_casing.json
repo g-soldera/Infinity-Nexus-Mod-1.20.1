@@ -4,7 +4,7 @@
   "energy": 1200,
   "ingredients": [
     {
-      "item": "infinity_nexus_mod:reinforced_component"
+      "item": "infinity_nexus_mod:redstone_component"
     },
     {
       "item": "infinity_nexus_mod:copper_rod"

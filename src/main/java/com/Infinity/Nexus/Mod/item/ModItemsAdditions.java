@@ -131,7 +131,6 @@ public class ModItemsAdditions {
 
     public static final RegistryObject<Item> BUCKET_LUBRICANT = ITEMS.register("bucket_lubricant", () -> new BucketItem(ModFluids.LUBRICANT_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
     public static final RegistryObject<Item> BUCKET_ETHANOL = ITEMS.register("bucket_ethanol", () -> new BucketItem(ModFluids.ETHANOL_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
-
     public static final RegistryObject<Item> ALCOHOL_BOTTLE = ITEMS.register("alcohol_bottle", () -> new BottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
 
 

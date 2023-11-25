@@ -15,6 +15,7 @@ import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
 import com.Infinity.Nexus.Mod.screen.assembler.AssemblerScreen;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherScreen;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelScreen;
+import com.Infinity.Nexus.Mod.screen.generator.GeneratorScreen;
 import com.Infinity.Nexus.Mod.screen.press.PressScreen;
 import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryScreen;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerScreen;
@@ -111,6 +112,7 @@ public class InfinityNexusMod
             MenuScreens.register(ModMenuTypes.ASSEMBLY_MENU.get(), AssemblerScreen::new);
             MenuScreens.register(ModMenuTypes.SQUEEZER_MENU.get(), SqueezerScreen::new);
             MenuScreens.register(ModMenuTypes.SMELTERY_MENU.get(), SmelteryScreen::new);
+            MenuScreens.register(ModMenuTypes.GENERATOR_MENU.get(), GeneratorScreen::new);
             MenuScreens.register(ModMenuTypes.FERMENTATION_BARREL_MENU.get(), FermentationBarrelScreen::new);
 
 

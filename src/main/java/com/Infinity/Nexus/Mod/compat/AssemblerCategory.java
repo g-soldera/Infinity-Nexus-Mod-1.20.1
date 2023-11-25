@@ -61,6 +61,7 @@ public class AssemblerCategory implements IRecipeCategory<AssemblerRecipes> {
         return this.icon;
     }
 
+
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, AssemblerRecipes recipe, IFocusGroup focuses) {
 

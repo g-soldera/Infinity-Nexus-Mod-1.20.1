@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.block.custom;
 
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
+import com.Infinity.Nexus.Mod.block.entity.SmelteryBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
 import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
 import com.Infinity.Nexus.Mod.item.custom.UpgradeItem;
@@ -25,6 +26,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Squeezer extends BaseEntityBlock {
@@ -77,32 +79,29 @@ public class Squeezer extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pLevel.isClientSide()) {
-            return InteractionResult.SUCCESS;
-        }
+    public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
+        if (!pLevel.isClientSide()) {
+            BlockEntity entity = pLevel.getBlockEntity(pPos);
+            boolean component = pPlayer.getMainHandItem().getItem() instanceof ComponentItem;
+            boolean upgrade = pPlayer.getMainHandItem().getItem() instanceof UpgradeItem;
 
-        BlockEntity entity = pLevel.getBlockEntity(pPos);
-        if (entity instanceof SqueezerBlockEntity) {
-            if(!(pPlayer.getMainHandItem().getItem() instanceof ComponentItem)) {
-                NetworkHooks.openScreen((ServerPlayer) pPlayer, (SqueezerBlockEntity) entity, pPos);
-            }else{
-                if (pPlayer.getMainHandItem().getItem() instanceof ComponentItem) {
+            if(entity instanceof SqueezerBlockEntity) {
+                if(!(component || upgrade)) {
+                    NetworkHooks.openScreen(((ServerPlayer) pPlayer), (SqueezerBlockEntity) entity, pPos);
+                }else if (component) {
                     ((SqueezerBlockEntity) entity).setMachineLevel(pPlayer.getMainHandItem(), pPlayer);
                     pPlayer.closeContainer();
                     return InteractionResult.FAIL;
-                }
 
-                if (pPlayer.getMainHandItem().getItem() instanceof UpgradeItem) {
+                }else{
                     ((SqueezerBlockEntity) entity).setUpgradeLevel(pPlayer.getMainHandItem(), pPlayer);
                     pPlayer.closeContainer();
                     return InteractionResult.FAIL;
                 }
+            } else {
+                throw new IllegalStateException("Our Container provider is missing!");
             }
-        } else {
-            throw new IllegalStateException("Our Container provider is missing!");
         }
-
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 

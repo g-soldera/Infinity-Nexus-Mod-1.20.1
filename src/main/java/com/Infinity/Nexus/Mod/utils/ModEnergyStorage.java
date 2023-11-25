@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.utils;
 
 import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
 
 public abstract class ModEnergyStorage extends EnergyStorage {
     public ModEnergyStorage(int capacity, int maxTransfer) {
@@ -33,4 +34,5 @@ public abstract class ModEnergyStorage extends EnergyStorage {
     }
 
     public abstract void onEnergyChanged();
+
 }

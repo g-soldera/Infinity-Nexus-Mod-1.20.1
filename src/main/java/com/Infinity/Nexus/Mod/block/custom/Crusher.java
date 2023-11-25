@@ -28,6 +28,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Crusher extends BaseEntityBlock {
@@ -80,31 +81,29 @@ public class Crusher extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
+            boolean component = pPlayer.getMainHandItem().getItem() instanceof ComponentItem;
+            boolean upgrade = pPlayer.getMainHandItem().getItem() instanceof UpgradeItem;
+
             if(entity instanceof CrusherBlockEntity) {
-                if(!(pPlayer.getMainHandItem().getItem() instanceof ComponentItem)) {
-                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (CrusherBlockEntity)entity, pPos);
-                }else{
-                    if (pPlayer.getMainHandItem().getItem() instanceof ComponentItem) {
+                if(!(component || upgrade)) {
+                    NetworkHooks.openScreen(((ServerPlayer) pPlayer), (CrusherBlockEntity) entity, pPos);
+                }else if (component) {
                         ((CrusherBlockEntity) entity).setMachineLevel(pPlayer.getMainHandItem(), pPlayer);
                         pPlayer.closeContainer();
                         return InteractionResult.FAIL;
-                    }
 
-                    if (pPlayer.getMainHandItem().getItem() instanceof UpgradeItem) {
+                }else{
                         ((CrusherBlockEntity) entity).setUpgradeLevel(pPlayer.getMainHandItem(), pPlayer);
                         pPlayer.closeContainer();
                         return InteractionResult.FAIL;
-                    }
-
-                }            } else {
+                }
+            } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
-
         }
-
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 
