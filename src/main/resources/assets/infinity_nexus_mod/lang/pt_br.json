@@ -1,7 +1,6 @@
 {
   "itemGroup.infinity_nexus_mod_addition": "§x§9§0§0§0§9§dInfinity Nexus",
   "itemGroup.infinity_nexus_mod_progression":"§x§9§0§0§0§9§dInfinity Nexus Progressão",
-  "itemGroup.infinity_nexus_mod_economy":"§x§9§0§0§0§9§dInfinity Nexus Economia",
   "tooltip.infinity_nexus.pressShift": "§bPressione §eShift §bpara ver mais informações",
 
   "item.infinity_nexus_mod.catalyst": "Ativador de Portal",
@@ -63,6 +62,13 @@
   "tooltip.infinity_nexus_mod.purple_infinity_3d_sword": "§eCausa os efeitos §7Fraqueza §ee §9Definhamento §equando atinge",
 
   "item.infinity_nexus_mod.infinity_singularity": "Singularidade de Infinity",
+
+  "item.infinity_nexus_mod.bag_member": "Bolsa Membro",
+  "item.infinity_nexus_mod.bag_apoiador": "Bolsa Apoiador",
+  "item.infinity_nexus_mod.bag_vip": "Bolsa Vip",
+  "item.infinity_nexus_mod.bag_vipplus": "Bolsa Vip Plus",
+  "item.infinity_nexus_mod.bag_vipnexus": "Bolsa Vip Nexus",
+  "item.infinity_nexus_mod.bag_vipinfinity": "Bolsa Vip Infinity",
 
   "item.infinity_nexus_mod.gold_wire_cast": "Forma de Arame de Ouro",
   "item.infinity_nexus_mod.gold_screw_cast": "Forma de Parafuso de Ouro",
@@ -198,9 +204,21 @@
 
   "fluid_type.infinity_nexus_mod.lubricant": "Lubrificante",
   "item.infinity_nexus_mod.bucket_lubricant": "Balde de Lubrificante",
+
   "fluid_type.infinity_nexus_mod.ethanol": "Alcool",
   "item.infinity_nexus_mod.bucket_ethanol": "Balde de Alcool",
+
+  "fluid_type.infinity_nexus_mod.vinegar": "Vinho",
+  "item.infinity_nexus_mod.bucket_vinegar": "Balde de Vinho",
+
+  "fluid_type.infinity_nexus_mod.sugarcane_juice": "Suco de Cana-de-Açúcar",
+  "item.infinity_nexus_mod.bucket_sugarcane_juice": "Balde de Suco de Cana-de-Açúcar",
+
   "item.infinity_nexus_mod.alcohol_bottle": "Garrafa de Alcool",
+  "item.infinity_nexus_mod.wine_bottle": "Garrafa de Vinho",
+  "item.infinity_nexus_mod.vinegar_bottle": "Garrafa de Vinho",
+  "item.infinity_nexus_mod.sugarcane_juice_bottle": "Garrafa de Suco de Cana-de-Açúcar",
+
   "item.infinity_nexus_mod.bio_mass": "Biomassa",
 
   "block.infinity_nexus_mod.asphalt": "Asfalto",
@@ -250,5 +268,24 @@
   "item.infinity_nexus_mod.silver_ingot": "Lingote de Prata",
   "item.infinity_nexus_mod.silver_nugget": "Pepita de Prata",
   "block.infinity_nexus_mod.silver_block": "Bloco de Prata",
-  "block.infinity_nexus_mod.raw_silver_block": "Bloco de Prata Cru"
+  "block.infinity_nexus_mod.raw_silver_block": "Bloco de Prata Cru",
+
+  "item.infinity_nexus_mod.bronze_dust": "Pó de Bronze",
+  "item.infinity_nexus_mod.bronze_nugget": "Pepita de Bronze",
+  "item.infinity_nexus_mod.bronze_ingot": "Lingote de Bronze",
+  "block.infinity_nexus_mod.bronze_block": "Bloco de Bronze",
+
+  "item.infinity_nexus_mod.brass_dust": "Pó de Latão",
+  "item.infinity_nexus_mod.brass_nugget": "Pepita de Latão",
+  "item.infinity_nexus_mod.brass_ingot": "Lingote de Latão",
+  "block.infinity_nexus_mod.brass_block": "Bloco de Latão",
+
+  "item.infinity_nexus_mod.steel_dust": "Pó de Steel",
+  "item.infinity_nexus_mod.steel_nugget": "Pepita de Steel",
+  "item.infinity_nexus_mod.steel_ingot": "Lingote de Steel",
+  "block.infinity_nexus_mod.steel_block": "Bloco de Steel",
+
+  "item.infinity_nexus_mod.iron_dust": "Pó de Ferro",
+  "item.infinity_nexus_mod.copper_dust": "Pó de Cobre",
+  "item.infinity_nexus_mod.gold_dust": "Pó de Ouro"
 }

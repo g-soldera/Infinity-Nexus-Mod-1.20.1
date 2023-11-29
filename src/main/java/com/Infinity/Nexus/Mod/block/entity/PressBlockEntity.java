@@ -179,7 +179,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.literal(Component.translatable("block.infinity_nexus_mod.press").getString()+" LV "+getMachineLevel());
+        return Component.translatable("block.infinity_nexus_mod.press").append(" LV "+ getMachineLevel());
     }
     public static int getComponentSlot() {
         return COMPONENT_SLOT;

@@ -17,7 +17,7 @@ public class Asphalt extends Block {
     @Override
     public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
         if(pEntity instanceof Player) {
-            ((Player) pEntity).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100, 0));
+            ((Player) pEntity).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 0));
         }
     }
 }

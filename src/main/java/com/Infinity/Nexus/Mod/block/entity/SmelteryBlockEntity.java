@@ -52,7 +52,7 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0, 1, 2 -> !ModUtils.isUpgrade(stack) || !ModUtils.isComponent(stack);
+                case 0, 1, 2 -> !ModUtils.isUpgrade(stack) && !ModUtils.isComponent(stack);
                 case 3 -> false;
                 case 4, 5, 6, 7 -> ModUtils.isUpgrade(stack);
                 case 8 -> ModUtils.isComponent(stack);
@@ -88,17 +88,16 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == 1 || i == 2 || i == 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == 1 || i == 2 || i == 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == 1 || i == 2 || i == 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == 1 || i == 2 || i == 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == 1 || i == 2 || i == 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == 1 || i == 2 || i == 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
 
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 0;
-
 
     public SmelteryBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.SMELTERY_BE.get(), pPos, pBlockState);
@@ -187,7 +186,7 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.literal(Component.translatable("block.infinity_nexus_mod.smeltery").getString()+" LV "+getMachineLevel());
+        return Component.translatable("block.infinity_nexus_mod.smeltery").append(" LV "+ getMachineLevel());
     }
 
     @Nullable

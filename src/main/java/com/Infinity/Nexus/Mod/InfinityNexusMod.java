@@ -3,7 +3,6 @@ package com.Infinity.Nexus.Mod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.ModBlocksProgression;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
-import com.Infinity.Nexus.Mod.config.ModCommonConfigs;
 import com.Infinity.Nexus.Mod.fluid.ModFluidType;
 import com.Infinity.Nexus.Mod.fluid.ModFluids;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
@@ -20,7 +19,6 @@ import com.Infinity.Nexus.Mod.screen.press.PressScreen;
 import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryScreen;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerScreen;
 import com.Infinity.Nexus.Mod.tab.ModTabAdditions;
-import com.Infinity.Nexus.Mod.tab.ModTabEconomy;
 import com.Infinity.Nexus.Mod.tab.ModTabProgression;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -32,9 +30,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -61,7 +57,6 @@ public class InfinityNexusMod
 
         ModTabAdditions.register(modEventBus);
         ModTabProgression.register(modEventBus);
-        ModTabEconomy.register(modEventBus);
 
         ModLootModifiers.register(modEventBus);
 
@@ -69,6 +64,7 @@ public class InfinityNexusMod
         ModMenuTypes.register(modEventBus);
 
         ModRecipes.register(modEventBus);
+        //ModEntities.register(modEventBus);
 
         ModFluids.register(modEventBus);
         ModFluidType.register(modEventBus);
@@ -121,8 +117,14 @@ public class InfinityNexusMod
             ItemBlockRenderTypes.setRenderLayer(ModFluids.LUBRICANT_FLOWING.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.ETHANOL_SOURCE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.ETHANOL_FLOWING.get(), RenderType.translucent());
-
-
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_FLOWING.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.VINEGAR_SOURCE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.VINEGAR_FLOWING.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SUGARCANE_JUICE_SOURCE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SUGARCANE_JUICE_FLOWING.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.WINE_SOURCE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.WINE_FLOWING.get(), RenderType.translucent());
 
         }
     }

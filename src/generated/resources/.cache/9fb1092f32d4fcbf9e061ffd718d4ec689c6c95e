@@ -1,4 +1,4 @@
-// 1.20.1	2023-11-18T20:33:32.9818926	Recipes
+// 1.20.1	2023-11-29T10:15:37.0746311	Recipes
 fee615835d53581e01b29c6f43b4f4181d353e67 data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot.json
 8ba69b00c384b85b687b57eb7986ade8d6d1d5e5 data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot_from_blasting_aluminum_dust.json
 25d67609fb62f0ece675817fe330e52c13650e6f data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot_from_blasting_aluminum_ore.json
@@ -144,6 +144,7 @@ e6a7b85242a5fdc30e419df30a18471be34d0ff2 data/minecraft/advancements/recipes/mis
 2750dce34abca379d47d315952f32d2452e7ad4b data/minecraft/advancements/recipes/misc/aluminum_nugget.json
 a8adbadf7aa7ad7285373cccf7a40bf7395cb1c8 data/minecraft/advancements/recipes/misc/asphalt.json
 228fdda883f457778315f2945e9c62a08e85c9e5 data/minecraft/advancements/recipes/misc/assembly.json
+99bfcae3af7bc9f12f0059168cc512df7e14d732 data/minecraft/advancements/recipes/misc/basic_component.json
 1ed4c6cbbf54f41e02edbf24751415cb0517f0c4 data/minecraft/advancements/recipes/misc/brass_block_from_ingot.json
 89d70f7bc35664f093b72dc59f1d648bf4ff9657 data/minecraft/advancements/recipes/misc/brass_ingot.json
 d9677b376c949b2515b680cdea26ea020a755c22 data/minecraft/advancements/recipes/misc/brass_nugget.json
@@ -200,6 +201,7 @@ b3dedf8a80154a6fc51568eded708cec70a01495 data/minecraft/advancements/recipes/mis
 ab766a3b81b42375e1953c975ecc822524d87588 data/minecraft/recipes/aluminum_nugget.json
 a705501246d27fa0535562edb2cb2b62b607314f data/minecraft/recipes/asphalt.json
 4f05dbeec9ad587fcc39cc568d40300afd8a6d56 data/minecraft/recipes/assembly.json
+b8fd9089ad21734da22ed83bbfad0a4f13d2bb7f data/minecraft/recipes/basic_component.json
 60eb0de62f3d9f7f8ed06f70ae62520f1fbb4462 data/minecraft/recipes/brass_block_from_ingot.json
 a8277abcfa26ce3ef14f13f010e3ce4a46733b66 data/minecraft/recipes/brass_ingot.json
 a4dcc13c52ab76613f1c467c6aa31823c0e87056 data/minecraft/recipes/brass_nugget.json

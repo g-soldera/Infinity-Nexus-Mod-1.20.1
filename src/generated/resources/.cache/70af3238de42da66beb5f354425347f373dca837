@@ -1,7 +1,12 @@
-// 1.20.1	2023-11-18T20:33:32.9778816	Block Tags
-5b8b984240b7deceab5270e6a7374b1e9177ba0d data/infinity_nexus_mod/tags/blocks/paxel_mineable.json
+// 1.20.1	2023-11-29T10:15:37.0691734	Block Tags
+b86fd901a9efe2baefc8d97d2011b8d71671d77e data/forge/tags/blocks/forge/ores.json
+85fd0be1d834845488d4198d4d584ea124a01f08 data/forge/tags/blocks/forge/ore_in_ground/deepslate.json
+ed344aa554c5d1cf8a7f2455df7028b8d7707df7 data/forge/tags/blocks/forge/ore_in_ground/stone.json
+b86fd901a9efe2baefc8d97d2011b8d71671d77e data/forge/tags/blocks/forge/ore_rates/singular.json
+cedc5640665737aa77ac2ac1a80ec5fefabd74f5 data/forge/tags/blocks/forge/storage_blocks.json
+8285bab65e23aa39d4fca4f4eb952d1807b763a2 data/infinity_nexus_mod/tags/blocks/paxel_mineable.json
 97320ab922aaaf6a453b05bb33d8f83b03c9c309 data/minecraft/tags/blocks/mineable/axe.json
-0aa0c370602a16bcbd9d2186a7ea885a8c8d0459 data/minecraft/tags/blocks/mineable/pickaxe.json
+5f6e4664876232d71b4b126b736bf5b32c5eafe2 data/minecraft/tags/blocks/mineable/pickaxe.json
 2ba49c35a15ed90f94f3272913fecc4256a67263 data/minecraft/tags/blocks/needs_diamond_tool.json
-804d4fdbf599f33bb4f83e0579955b08a5b70447 data/minecraft/tags/blocks/needs_iron_tool.json
-86b360facef9fdf02f6f621b32a1c85b9656129c data/minecraft/tags/blocks/needs_stone_tool.json
+e6296ebca6e46b278d76d75e30811b914cc25ec3 data/minecraft/tags/blocks/needs_iron_tool.json
+ddfef41966a8bf9d578eb1e14d1b4fb9a6a9a902 data/minecraft/tags/blocks/needs_stone_tool.json

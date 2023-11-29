@@ -12,11 +12,11 @@ public class ModTags {
 
     public static class Blocks {
         public static final TagKey<Block> MINEABLE_WITH_PAXEL = tag("paxel_mineable");
-        public static final TagKey<Block> NEEDS_STONE_TOOL = tag("needs_stone_tool");
-        public static final TagKey<Block> PICKAXE = tag("mineable/pickaxe");
-        public static final TagKey<Block> AXE = tag("mineable/axe");
-        public static final TagKey<Block> SHOVEL = tag("mineable/shovel");
-        public static final TagKey<Block> HOE = tag("mineable/hoe");
+        public static final TagKey<Block> FORGE_STORAGE_BLOCKS = forgeTag("storage_blocks");
+        public static final TagKey<Block> FORGE_ORES = forgeTag("ores");
+        public static final TagKey<Block> FORGE_ORES_SINGULAR = forgeTag("ore_rates/singular");
+        public static final TagKey<Block> FORGE_ORES_IN_GROUND_STONE = forgeTag("ore_in_ground/stone");
+        public static final TagKey<Block> FORGE_ORES_IN_GROUND_DEEPSLATE = forgeTag("ore_in_ground/deepslate");
 
 
 
@@ -33,6 +33,14 @@ public class ModTags {
         public static final TagKey<Item> INFINITY_CHESTPLATE = tag("infinity_chestplate");
         public static final TagKey<Item> INFINITY_LEGGINGS = tag("infinity_leggings");
         public static final TagKey<Item> INFINITY_BOOTS = tag("infinity_boots");
+        public static final TagKey<Item> FORGE_INGOTS = forgeTag("ingots");
+        public static final TagKey<Item> FORGE_NUGGETS = forgeTag("nuggets");
+        public static final TagKey<Item> FORGE_RAW = forgeTag("raw_materials");
+        public static final TagKey<Item> FORGE_DUSTS = forgeTag("dusts");
+        public static final TagKey<Item> FORGE_PLATES = forgeTag("plates");
+        public static final TagKey<Item> FORGE_ROD = forgeTag("rods");
+        public static final TagKey<Item> FORGE_SCREW = forgeTag("screws");
+        public static final TagKey<Item> FORGE_WIRES = forgeTag("wires");
 
 
         private static TagKey<Item> tag(String name) {

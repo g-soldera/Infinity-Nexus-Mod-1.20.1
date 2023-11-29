@@ -1,14 +1,12 @@
 package com.Infinity.Nexus.Mod.item;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
-import com.Infinity.Nexus.Mod.config.ModCommonConfigs;
 import com.Infinity.Nexus.Mod.fluid.ModFluids;
 import com.Infinity.Nexus.Mod.item.custom.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -32,6 +30,7 @@ public class ModItemsAdditions {
 
 
     public static final RegistryObject<Item> INFINITY_NUGGET = ITEMS.register("infinity_nugget",() -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> COPPER_NUGGET = ITEMS.register("copper_nugget",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LEAD_NUGGET = ITEMS.register("lead_nugget",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ALUMINUM_NUGGET = ITEMS.register("aluminum_nugget",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NICKEL_NUGGET = ITEMS.register("nickel_nugget",() -> new Item(new Item.Properties()));
@@ -44,6 +43,9 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget",() -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> INFINITY_DUST = ITEMS.register("infinity_dust",() -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> COPPER_DUST = ITEMS.register("copper_dust",() -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IRON_DUST = ITEMS.register("iron_dust",() -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GOLD_DUST = ITEMS.register("gold_dust",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LEAD_DUST = ITEMS.register("lead_dust",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ALUMINUM_DUST = ITEMS.register("aluminum_dust",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NICKEL_DUST = ITEMS.register("nickel_dust",() -> new Item(new Item.Properties()));
@@ -131,7 +133,15 @@ public class ModItemsAdditions {
 
     public static final RegistryObject<Item> BUCKET_LUBRICANT = ITEMS.register("bucket_lubricant", () -> new BucketItem(ModFluids.LUBRICANT_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
     public static final RegistryObject<Item> BUCKET_ETHANOL = ITEMS.register("bucket_ethanol", () -> new BucketItem(ModFluids.ETHANOL_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
+    public static final RegistryObject<Item> BUCKET_OIL = ITEMS.register("bucket_oil", () -> new BucketItem(ModFluids.OIL_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
+    public static final RegistryObject<Item> BUCKET_VINEGAR = ITEMS.register("bucket_vinegar", () -> new BucketItem(ModFluids.VINEGAR_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
+    public static final RegistryObject<Item> BUCKET_SUGARCANE_JUICE = ITEMS.register("bucket_sugarcane_juice", () -> new BucketItem(ModFluids.SUGARCANE_JUICE_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
+    public static final RegistryObject<Item> BUCKET_WINE = ITEMS.register("bucket_wine", () -> new BucketItem(ModFluids.WINE_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
+
     public static final RegistryObject<Item> ALCOHOL_BOTTLE = ITEMS.register("alcohol_bottle", () -> new BottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
+    public static final RegistryObject<Item> SUGARCANE_JUICE_BOTTLE = ITEMS.register("sugarcane_juice_bottle", () -> new BottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
+    public static final RegistryObject<Item> VINEGAR_BOTTLE = ITEMS.register("vinegar_bottle", () -> new BottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
+    public static final RegistryObject<Item> WINE_BOTTLE = ITEMS.register("wine_bottle", () -> new BottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
 
 
 
@@ -151,6 +161,8 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> REFINED_COMPONENT = ITEMS.register("refined_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(640).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> INTEGRAL_COMPONENT = ITEMS.register("integral_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(1280).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> INFINITY_COMPONENT = ITEMS.register("infinity_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(-1).rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<Item> TERRAIN_MARKER = ITEMS.register("terrain_marker", () -> new Item(new Item.Properties().stacksTo(1).durability(-1)));
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

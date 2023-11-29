@@ -240,8 +240,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-
-        return Component.literal(Component.translatable("block.infinity_nexus_mod.assembler")+" LV "+getMachineLevel());
+        return Component.translatable("block.infinity_nexus_mod.assembler").append(" LV "+ getMachineLevel());
     }
 
 

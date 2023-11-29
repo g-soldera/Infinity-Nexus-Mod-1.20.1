@@ -31,6 +31,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.STEEL_INGOT);
 
         simpleItem(ModItemsAdditions.INFINITY_NUGGET);
+        simpleItem(ModItemsAdditions.COPPER_NUGGET);
         simpleItem(ModItemsAdditions.LEAD_NUGGET);
         simpleItem(ModItemsAdditions.ALUMINUM_NUGGET);
         simpleItem(ModItemsAdditions.NICKEL_NUGGET);
@@ -43,6 +44,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.STEEL_NUGGET);
 
         simpleItem(ModItemsAdditions.INFINITY_DUST);
+        simpleItem(ModItemsAdditions.IRON_DUST);
+        simpleItem(ModItemsAdditions.COPPER_DUST);
+        simpleItem(ModItemsAdditions.GOLD_DUST);
         simpleItem(ModItemsAdditions.LEAD_DUST);
         simpleItem(ModItemsAdditions.ALUMINUM_DUST);
         simpleItem(ModItemsAdditions.NICKEL_DUST);
@@ -79,7 +83,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.INFINITY_CHESTPLATE);
         simpleItem(ModItemsAdditions.INFINITY_LEGGINGS);
         simpleItem(ModItemsAdditions.INFINITY_BOOTS);
-        simpleItem(ModItemsAdditions.INFINITY_BOW);
         simpletools(ModItemsAdditions.IMPERIAL_INFINITY_SWORD);
         simpletools(ModItemsAdditions.IMPERIAL_INFINITY_PAXEL);
         simpletools(ModItemsAdditions.IMPERIAL_INFINITY_PICKAXE);
@@ -90,7 +93,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_CHESTPLATE);
         simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS);
         simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_BOOTS);
-        simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_BOW);
         simpleItem(ModItemsAdditions.SPEED_UPGRADE);
         simpleItem(ModItemsAdditions.STRENGTH_UPGRADE);
         simpleItem(ModItemsAdditions.MEMBER_BAG);
@@ -109,8 +111,15 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.INFINITY_COMPONENT);
         simpleItem(ModItemsAdditions.BUCKET_LUBRICANT);
         simpleItem(ModItemsAdditions.BUCKET_ETHANOL);
-        simpleItem(ModItemsAdditions.ALCOHOL_BOTTLE);
+        simpleItem(ModItemsAdditions.BUCKET_OIL);
+        simpleItem(ModItemsAdditions.BUCKET_VINEGAR);
+        simpleItem(ModItemsAdditions.BUCKET_SUGARCANE_JUICE);
+        simpleItem(ModItemsAdditions.BUCKET_WINE);
 
+        simpleItem(ModItemsAdditions.ALCOHOL_BOTTLE);
+        simpleItem(ModItemsAdditions.VINEGAR_BOTTLE);
+        simpleItem(ModItemsAdditions.SUGARCANE_JUICE_BOTTLE);
+        simpleItem(ModItemsAdditions.WINE_BOTTLE);
 
         simpleItem(ModItemsProgression.GOLD_ROD_CAST);
         simpleItem(ModItemsProgression.GOLD_SCREW_CAST);
@@ -182,6 +191,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.INFINITY_SHEET);
 
         simpleItem(ModItemsProgression.BIO_MASS);
+
+        simpleItem(ModItemsAdditions.TERRAIN_MARKER);
 
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){

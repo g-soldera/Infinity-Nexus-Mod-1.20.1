@@ -1,7 +1,6 @@
 {
   "itemGroup.infinity_nexus_mod_addition":"§x§9§0§0§0§9§dInfinity Nexus Addition",
   "itemGroup.infinity_nexus_mod_progression":"§x§9§0§0§0§9§dInfinity Nexus Progression",
-  "itemGroup.infinity_nexus_mod_economy":"§x§9§0§0§0§9§dInfinity Nexus Econony",
   "tooltip.infinity_nexus.pressShift":"§bPress §eShift §bto see more",
 
   "item.infinity_nexus_mod.catalyst": "Portal Activator",
@@ -65,6 +64,13 @@
   "tooltip.infinity_nexus_mod.purple_infinity_3d_sword":  "§eInflict effects §7Weakness §eand §9Wither §eon hit",
 
   "item.infinity_nexus_mod.infinity_singularity": "Infinity Singularity",
+
+  "item.infinity_nexus_mod.bag_member": "Bag Member",
+  "item.infinity_nexus_mod.bag_apoiador": "Bag Sponsor",
+  "item.infinity_nexus_mod.bag_vip": "Bag Vip",
+  "item.infinity_nexus_mod.bag_vipplus": "Bag Vip Plus",
+  "item.infinity_nexus_mod.bag_vipnexus": "Bag Vip Nexus",
+  "item.infinity_nexus_mod.bag_vipinfinity": "Bag Vip Infinity",
 
   "item.infinity_nexus_mod.gold_wire_cast": "Gold Wire Cast",
   "item.infinity_nexus_mod.gold_screw_cast": "Gold Screw Cast",
@@ -201,9 +207,24 @@
 
   "fluid_type.infinity_nexus_mod.lubricant": "Fluid Lubricant",
   "item.infinity_nexus_mod.bucket_lubricant": "Bucket Lubricant",
+
   "fluid_type.infinity_nexus_mod.ethanol": "Fluid Ethanol",
   "item.infinity_nexus_mod.bucket_ethanol": "Bucket Ethanol",
+
+  "fluid_type.infinity_nexus_mod.vinegar": "Vinegar",
+  "item.infinity_nexus_mod.bucket_vinegar": "Bucket Vinegar",
+
+  "fluid_type.infinity_nexus_mod.sugarcane_juice": "Sugarcane Juice",
+  "item.infinity_nexus_mod.bucket_sugarcane_juice": "Bucket Sugarcane Juice",
+
+  "fluid_type.infinity_nexus_mod.wine": "Wine",
+  "item.infinity_nexus_mod.bucket_wine": "Bucket Wine",
+
   "item.infinity_nexus_mod.alcohol_bottle": "Alcohol Bottle",
+  "item.infinity_nexus_mod.vinegar_bottle": "Vinegar Bottle",
+  "item.infinity_nexus_mod.sugarcane_juice_bottle": "Sugarcane Juice Bottle",
+  "item.infinity_nexus_mod.wine_bottle": "Wine Bottle",
+
   "item.infinity_nexus_mod.bio_mass": "Bio Mass",
 
   "block.infinity_nexus_mod.asphalt": "Asphalt",
@@ -295,5 +316,11 @@
   "item.infinity_nexus_mod.steel_dust": "Steel Dust",
   "item.infinity_nexus_mod.steel_ingot": "Steel Ingot",
   "item.infinity_nexus_mod.steel_nugget": "Steel Nugget",
-  "block.infinity_nexus_mod.steel_block": "Steel Block"
+  "block.infinity_nexus_mod.steel_block": "Steel Block",
+
+  "item.infinity_nexus_mod.iron_dust": "Iron Dust",
+  "item.infinity_nexus_mod.copper_dust": "Copper Dust",
+  "item.infinity_nexus_mod.gold_dust": "Gold Dust"
+
+
 }

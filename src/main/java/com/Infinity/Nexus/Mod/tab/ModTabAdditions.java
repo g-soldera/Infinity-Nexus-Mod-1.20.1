@@ -41,6 +41,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.URANIUM_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_INGOT.get()));
                         //nuggets
+                        pOutput.accept(new ItemStack(ModItemsAdditions.COPPER_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.SILVER_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.TIN_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_NUGGET.get()));
@@ -52,6 +53,9 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.URANIUM_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_NUGGET.get()));
                         //dust
+                        pOutput.accept(new ItemStack(ModItemsAdditions.COPPER_DUST.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.IRON_DUST.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.GOLD_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.SILVER_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.TIN_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_DUST.get()));
@@ -135,6 +139,9 @@ public class ModTabAdditions {
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.BUCKET_LUBRICANT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.ALCOHOL_BOTTLE.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.WINE_BOTTLE.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.VINEGAR_BOTTLE.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.SUGARCANE_JUICE_BOTTLE.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.REDSTONE_COMPONENT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BASIC_COMPONENT.get()));
@@ -147,6 +154,8 @@ public class ModTabAdditions {
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.SPEED_UPGRADE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.STRENGTH_UPGRADE.get()));
+
+                        pOutput.accept(new ItemStack(ModItemsAdditions.TERRAIN_MARKER.get()));
 
 
                         //-------------------------//-------------------------//

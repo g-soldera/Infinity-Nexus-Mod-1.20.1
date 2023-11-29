@@ -220,7 +220,7 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.literal(Component.translatable("block.infinity_nexus_mod.squeezer").getString()+" LV "+getMachineLevel());
+        return Component.translatable("block.infinity_nexus_mod.squeezer").append(" LV "+ getMachineLevel());
     }
     public static int getComponentSlot() {
         return COMPONENT_SLOT;

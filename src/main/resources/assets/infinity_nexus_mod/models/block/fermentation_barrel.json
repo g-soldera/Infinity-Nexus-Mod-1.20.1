@@ -1,6 +1,6 @@
 {
 	"texture_size": [32, 32],
-	"render_type": "translucent",
+	"render_type": "tripwire",
 	"textures": {
 		"0": "infinity_nexus_mod:block/fermentation/fermentation_barrel_front",
 		"1": "infinity_nexus_mod:block/fermentation/fermentation_barrel_back",

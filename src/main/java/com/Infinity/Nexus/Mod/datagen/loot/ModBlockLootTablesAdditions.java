@@ -67,11 +67,18 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksAdditions.CRUSHER.get());
         this.dropSelf(ModBlocksAdditions.ASSEMBLY.get());
         this.dropSelf(ModBlocksAdditions.SQUEEZER.get());
+        this.dropSelf(ModBlocksAdditions.SMELTERY.get());
+        this.dropSelf(ModBlocksAdditions.GENERATOR.get());
         this.dropSelf(ModBlocksAdditions.FERMENTATION_BARREL.get());
 
 
         this.dropSelf(ModBlocksProgression.WOOD_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.COPPER_MACHINE_CASING.get());
+        this.dropSelf(ModBlocksProgression.SILVER_MACHINE_CASING.get());
+        this.dropSelf(ModBlocksProgression.TIN_MACHINE_CASING.get());
+        this.dropSelf(ModBlocksProgression.NICKEL_MACHINE_CASING.get());
+        this.dropSelf(ModBlocksProgression.BRONZE_MACHINE_CASING.get());
+        this.dropSelf(ModBlocksProgression.BRASS_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.LEAD_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.ALUMINUM_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.GOLD_MACHINE_CASING.get());
