@@ -27,6 +27,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SQUEEZER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SMELTERY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.GENERATOR.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.MOB_CRUSHER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.FERMENTATION_BARREL.get()));
                         //-------------------------//-------------------------//
                         //ingots
@@ -156,6 +157,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.STRENGTH_UPGRADE.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.TERRAIN_MARKER.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.LINKING_TOOL.get()));
 
 
                         //-------------------------//-------------------------//

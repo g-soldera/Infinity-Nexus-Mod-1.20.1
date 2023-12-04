@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Map;
@@ -68,5 +69,34 @@ public class ModUtils {
     }
     public static boolean isComponent(ItemStack stack) {
         return stack.getItem() instanceof ComponentItem;
+    }
+
+    public static boolean canPlaceItemInContainer(ItemStack itemStack, int slotIndex, IItemHandler iItemHandler) {
+        ItemStack slotStack = iItemHandler.getStackInSlot(slotIndex);
+
+        if (!slotStack.isEmpty()) {
+            if (!itemStack.is(slotStack.getItem())) {
+                return false;
+            }
+
+            if (!ItemStack.isSameItemSameTags(itemStack, slotStack)) {
+                return false;
+            }
+
+            int slotCapacity = iItemHandler.getSlotLimit(slotIndex);
+            int stackCapacity = itemStack.getMaxStackSize();
+            int slotCount = slotStack.getCount();
+            int itemCount = itemStack.getCount();
+
+            if (itemCount + slotCount > slotCapacity) {
+                return false;
+            }
+
+            if (itemCount + slotCount > stackCapacity) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

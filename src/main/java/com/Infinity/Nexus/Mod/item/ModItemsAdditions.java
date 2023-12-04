@@ -137,12 +137,12 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> BUCKET_VINEGAR = ITEMS.register("bucket_vinegar", () -> new BucketItem(ModFluids.VINEGAR_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
     public static final RegistryObject<Item> BUCKET_SUGARCANE_JUICE = ITEMS.register("bucket_sugarcane_juice", () -> new BucketItem(ModFluids.SUGARCANE_JUICE_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
     public static final RegistryObject<Item> BUCKET_WINE = ITEMS.register("bucket_wine", () -> new BucketItem(ModFluids.WINE_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
+    public static final RegistryObject<Item> BUCKET_EXPERIENCE = ITEMS.register("bucket_experience", () -> new BucketItem(ModFluids.EXPERIENCE_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
 
     public static final RegistryObject<Item> ALCOHOL_BOTTLE = ITEMS.register("alcohol_bottle", () -> new BottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
     public static final RegistryObject<Item> SUGARCANE_JUICE_BOTTLE = ITEMS.register("sugarcane_juice_bottle", () -> new BottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
     public static final RegistryObject<Item> VINEGAR_BOTTLE = ITEMS.register("vinegar_bottle", () -> new BottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
     public static final RegistryObject<Item> WINE_BOTTLE = ITEMS.register("wine_bottle", () -> new BottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
-
 
 
     public static final RegistryObject<Item> MEMBER_BAG = ITEMS.register("bag_member", () -> new Item(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.COMMON)));
@@ -163,6 +163,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> INFINITY_COMPONENT = ITEMS.register("infinity_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(-1).rarity(Rarity.EPIC)));
 
     public static final RegistryObject<Item> TERRAIN_MARKER = ITEMS.register("terrain_marker", () -> new Item(new Item.Properties().stacksTo(1).durability(-1)));
+    public static final RegistryObject<Item> LINKING_TOOL = ITEMS.register("linking_tool", () -> new LinkingTool(new Item.Properties().stacksTo(1).durability(-1)));
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

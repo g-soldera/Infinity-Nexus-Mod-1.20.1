@@ -320,7 +320,9 @@
 
   "item.infinity_nexus_mod.iron_dust": "Iron Dust",
   "item.infinity_nexus_mod.copper_dust": "Copper Dust",
-  "item.infinity_nexus_mod.gold_dust": "Gold Dust"
+  "item.infinity_nexus_mod.gold_dust": "Gold Dust",
+  "block.infinity_nexus_mod.null": "New Machine Name",
+  "block.infinity_nexus_mod.mob_crusher": "Mob Crusher"
 
 
 }

@@ -50,6 +50,10 @@ public class ModFluidType {
             new BaseFluidType(WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, 0xA14800FF,
             new Vector3f(224f / 225f, 56f / 225f, 208f / 255f),
             FluidType.Properties.create().lightLevel(0).viscosity(3).density(15)));
+    public static final RegistryObject<FluidType> EXPERIENCE = registryFluidType("experience",
+            new BaseFluidType(WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, 0xA13DCE00,
+            new Vector3f(224f / 225f, 56f / 225f, 208f / 255f),
+            FluidType.Properties.create().lightLevel(0).viscosity(3).density(15)));
 
 
     public static RegistryObject<FluidType> registryFluidType(String name, FluidType fluidType) {

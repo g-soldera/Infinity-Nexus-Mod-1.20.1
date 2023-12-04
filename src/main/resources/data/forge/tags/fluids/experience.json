@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "infinity_nexus_mod:experience_water_fluid",
+    "infinity_nexus_mod:flowing_experience_water_fluid"
+  ]
+}

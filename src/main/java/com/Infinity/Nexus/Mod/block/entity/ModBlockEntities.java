@@ -12,6 +12,9 @@ public class ModBlockEntities {
     public  static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, InfinityNexusMod.MOD_ID);
 
+    public static final RegistryObject<BlockEntityType<MobCrusherBlockEntity>> MOBCRUSHER_BE =
+            BLOCK_ENTITY.register("mob_crusher_block_entity", () ->
+                    BlockEntityType.Builder.of(MobCrusherBlockEntity::new, ModBlocksAdditions.MOB_CRUSHER.get()).build(null));
     public static final RegistryObject<BlockEntityType<CrusherBlockEntity>> CRUSHER_BE =
             BLOCK_ENTITY.register("crusher_block_entity", () ->
                     BlockEntityType.Builder.of(CrusherBlockEntity::new, ModBlocksAdditions.CRUSHER.get()).build(null));

@@ -12,6 +12,7 @@ import com.Infinity.Nexus.Mod.networking.ModMessages;
 import com.Infinity.Nexus.Mod.recipe.ModRecipes;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
 import com.Infinity.Nexus.Mod.screen.assembler.AssemblerScreen;
+import com.Infinity.Nexus.Mod.screen.mobcrusher.MobCrusherScreen;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherScreen;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelScreen;
 import com.Infinity.Nexus.Mod.screen.generator.GeneratorScreen;
@@ -103,6 +104,7 @@ public class InfinityNexusMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
+            MenuScreens.register(ModMenuTypes.MOB_CRUSHER_MENU.get(), MobCrusherScreen::new);
             MenuScreens.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
             MenuScreens.register(ModMenuTypes.PRESS_MENU.get(), PressScreen::new);
             MenuScreens.register(ModMenuTypes.ASSEMBLY_MENU.get(), AssemblerScreen::new);
@@ -125,6 +127,8 @@ public class InfinityNexusMod
             ItemBlockRenderTypes.setRenderLayer(ModFluids.SUGARCANE_JUICE_FLOWING.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.WINE_SOURCE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.WINE_FLOWING.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.EXPERIENCE_SOURCE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.EXPERIENCE_FLOWING.get(), RenderType.translucent());
 
         }
     }

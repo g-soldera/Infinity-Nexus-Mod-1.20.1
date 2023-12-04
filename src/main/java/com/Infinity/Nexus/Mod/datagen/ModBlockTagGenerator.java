@@ -3,6 +3,7 @@ package com.Infinity.Nexus.Mod.datagen;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.ModBlocksProgression;
+import com.Infinity.Nexus.Mod.fluid.ModFluids;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.utils.ModTags;
 import net.minecraft.core.HolderLookup;
@@ -312,7 +313,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.BRASS_BLOCK.get())
                 .add(ModBlocksAdditions.BRONZE_BLOCK.get())
                 .add(ModBlocksAdditions.STEEL_BLOCK.get());
-
 
 
     }

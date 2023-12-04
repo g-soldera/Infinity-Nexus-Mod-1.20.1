@@ -2,6 +2,7 @@ package com.Infinity.Nexus.Mod.screen;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.screen.assembler.AssemblerMenu;
+import com.Infinity.Nexus.Mod.screen.mobcrusher.MobCrusherMenu;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherMenu;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelMenu;
 import com.Infinity.Nexus.Mod.screen.generator.GeneratorMenu;
@@ -21,6 +22,8 @@ public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
             DeferredRegister.create(ForgeRegistries.MENU_TYPES, InfinityNexusMod.MOD_ID);
 
+    public static final RegistryObject<MenuType<MobCrusherMenu>> MOB_CRUSHER_MENU =
+            registerMenuType("mob_crusher_menu", MobCrusherMenu::new);
     public static final RegistryObject<MenuType<CrusherMenu>> CRUSHER_MENU =
             registerMenuType("crusher_menu", CrusherMenu::new);
 

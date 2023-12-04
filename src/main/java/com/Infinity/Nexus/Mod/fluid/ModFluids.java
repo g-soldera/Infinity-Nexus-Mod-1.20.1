@@ -44,6 +44,11 @@ public class ModFluids {
     public static final RegistryObject<FlowingFluid> WINE_FLOWING = FLUIDS.register("flowing_wine_water_fluid",
             () -> new ForgeFlowingFluid.Flowing(ModFluids.WINE_FLUID_PROPERTIES));
 
+    public static final RegistryObject<FlowingFluid> EXPERIENCE_SOURCE = FLUIDS.register("experience_water_fluid",
+            () -> new ForgeFlowingFluid.Source(ModFluids.EXPERIENCE_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> EXPERIENCE_FLOWING = FLUIDS.register("flowing_experience_water_fluid",
+            () -> new ForgeFlowingFluid.Flowing(ModFluids.EXPERIENCE_FLUID_PROPERTIES));
+
     public static final ForgeFlowingFluid.Properties LUBRICANT_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
         ModFluidType.LUBRICANT, LUBRICANT_SOURCE, LUBRICANT_FLOWING)
             .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocksAdditions.LUBRICANT)
@@ -68,6 +73,10 @@ public class ModFluids {
         ModFluidType.WINE, WINE_SOURCE, WINE_FLOWING)
             .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocksAdditions.WINE)
             .bucket(ModItemsAdditions.BUCKET_WINE);
+    public static final ForgeFlowingFluid.Properties EXPERIENCE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+        ModFluidType.EXPERIENCE, EXPERIENCE_SOURCE, EXPERIENCE_FLOWING)
+            .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocksAdditions.EXPERIENCE)
+            .bucket(ModItemsAdditions.BUCKET_EXPERIENCE);
 
 
     public static void register(IEventBus eventBus) {
