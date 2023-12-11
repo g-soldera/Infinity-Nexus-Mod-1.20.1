@@ -1,7 +1,6 @@
 package com.Infinity.Nexus.Mod.block.custom;
 
 import com.Infinity.Nexus.Mod.block.entity.AssemblerBlockEntity;
-import com.Infinity.Nexus.Mod.block.entity.CrusherBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
 import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
 import com.Infinity.Nexus.Mod.item.custom.UpgradeItem;
@@ -20,7 +19,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;

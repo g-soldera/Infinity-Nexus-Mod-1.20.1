@@ -1,12 +1,12 @@
-// 1.20.1	2023-11-29T12:47:11.6278759	Block Tags
-b86fd901a9efe2baefc8d97d2011b8d71671d77e data/forge/tags/blocks/ores.json
-85fd0be1d834845488d4198d4d584ea124a01f08 data/forge/tags/blocks/ore_in_ground/deepslate.json
-ed344aa554c5d1cf8a7f2455df7028b8d7707df7 data/forge/tags/blocks/ore_in_ground/stone.json
-b86fd901a9efe2baefc8d97d2011b8d71671d77e data/forge/tags/blocks/ore_rates/singular.json
-cedc5640665737aa77ac2ac1a80ec5fefabd74f5 data/forge/tags/blocks/storage_blocks.json
-8285bab65e23aa39d4fca4f4eb952d1807b763a2 data/infinity_nexus_mod/tags/blocks/paxel_mineable.json
+// 1.20.1	2023-12-10T23:35:59.2383458	Block Tags
+2ecd1c02786dd6f6663590b2af0c5cb1e7cafb21 data/forge/tags/blocks/ores.json
+e33d126d7ba60d66acd86c96ffa21794fd510a4a data/forge/tags/blocks/ore_in_ground/deepslate.json
+8eee4d3c23d7fa910aeb650a2fb393cb28a3998d data/forge/tags/blocks/ore_in_ground/stone.json
+2ecd1c02786dd6f6663590b2af0c5cb1e7cafb21 data/forge/tags/blocks/ore_rates/singular.json
+7a9013d2712093a7a95d5d40cc7078207938a398 data/forge/tags/blocks/storage_blocks.json
+70c624779a7118956a57f9e636af29c0296324a9 data/infinity_nexus_mod/tags/blocks/paxel_mineable.json
 97320ab922aaaf6a453b05bb33d8f83b03c9c309 data/minecraft/tags/blocks/mineable/axe.json
-5f6e4664876232d71b4b126b736bf5b32c5eafe2 data/minecraft/tags/blocks/mineable/pickaxe.json
+b7e29a90fa3d6011f8181f6e47b626ed4ed6e552 data/minecraft/tags/blocks/mineable/pickaxe.json
 2ba49c35a15ed90f94f3272913fecc4256a67263 data/minecraft/tags/blocks/needs_diamond_tool.json
-e6296ebca6e46b278d76d75e30811b914cc25ec3 data/minecraft/tags/blocks/needs_iron_tool.json
-ddfef41966a8bf9d578eb1e14d1b4fb9a6a9a902 data/minecraft/tags/blocks/needs_stone_tool.json
+ce12ceeae5712ef258b2c9a0c7fff7d13896fed2 data/minecraft/tags/blocks/needs_iron_tool.json
+3ad2c1981a2cddf4727502e9823ab9fdeea74664 data/minecraft/tags/blocks/needs_stone_tool.json

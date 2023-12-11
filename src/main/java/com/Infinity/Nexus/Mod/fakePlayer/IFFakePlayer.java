@@ -30,9 +30,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -43,6 +46,8 @@ import java.util.UUID;
 
 public class IFFakePlayer extends FakePlayer {
 
+    private float luck;
+
     private static final UUID uuid = UUID.fromString("376b0492-4386-40ec-8907-2124f2d65823");
 
     private static final GameProfile PROFILE = new GameProfile(uuid, "[IN]");
@@ -52,8 +57,22 @@ public class IFFakePlayer extends FakePlayer {
     }
 
     @Override
+    public float getLuck() {
+        return super.getLuck();
+    }
+
+    public void setLuck(float luck) {
+        this.luck = luck;
+    }
+
+    @Override
     public ItemStack getItemInHand(InteractionHand pHand) {
         return new ItemStack(Items.NETHERITE_SWORD);
+    }
+    public ItemStack getItemInHandPickaxe(InteractionHand pHand, int fortune, float luck) {
+        ItemStack pickaxe = new ItemStack(Items.NETHERITE_PICKAXE);
+        pickaxe.enchant(Enchantments.BLOCK_FORTUNE, fortune);
+        return pickaxe;
     }
 
     public boolean placeBlock(Level world, BlockPos pos, ItemStack stack) {

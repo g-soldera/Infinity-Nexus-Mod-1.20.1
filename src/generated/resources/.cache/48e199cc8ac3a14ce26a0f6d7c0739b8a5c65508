@@ -1,9 +1,10 @@
-// 1.20.1	2023-11-29T12:47:11.6298759	Item Tags
-8f10b6aeb9eb9caad43da7e73621c360dcadac99 data/forge/tags/items/dusts.json
-7f809d15e682a22a983d9fc69e609a9e5e5cd769 data/forge/tags/items/ingots.json
-7b48c2a8622650aef5f57009d143dca4e0bf0bd5 data/forge/tags/items/nuggets.json
-661929bc4efff19bb964426f95668e3335a03150 data/forge/tags/items/plates.json
-e7d82747046cfdfd9e3ea0d2649616bb9659bc25 data/forge/tags/items/raw_materials.json
-30e946c04f2f554b9dfea81e0b7e5f7310e528b9 data/forge/tags/items/rods.json
-d69de58dcd0af93bbcf5e859c37aa4f2887976ad data/forge/tags/items/screws.json
-b8f03584f46f50cdb4602a95733fa5f88cdab420 data/forge/tags/items/wires.json
+// 1.20.1	2023-12-11T13:27:10.9359883	Item Tags
+7ae532a62d53040c26f77c57274bf606643f887f data/forge/tags/items/dusts.json
+4529464ea2159707459b2a6b3248a6fe5efd733d data/forge/tags/items/ingots.json
+023e350dbfbd1f6ebb58a378b2db15cb3632b24f data/forge/tags/items/nuggets.json
+0b9c1b5855e2b0127ef7b729c8541648933dcc18 data/forge/tags/items/paxels.json
+392ddb3468ec520d4ddd9f691ea1f0e56739b87b data/forge/tags/items/plates.json
+941c220882dda660eb56650179b3ed22a2f61c5b data/forge/tags/items/raw_materials.json
+4c92ae58cf356bf1983c29cb7f2823de778890e7 data/forge/tags/items/rods.json
+29a52d91a5ee024970b96519c97abf546b3eb43a data/forge/tags/items/screws.json
+b868cf8268d3ec2fecd27492f185d56f50905f06 data/forge/tags/items/wires.json

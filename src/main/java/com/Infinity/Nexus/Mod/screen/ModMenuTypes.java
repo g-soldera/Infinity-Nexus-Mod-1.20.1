@@ -2,6 +2,7 @@ package com.Infinity.Nexus.Mod.screen;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.screen.assembler.AssemblerMenu;
+import com.Infinity.Nexus.Mod.screen.miner.MinerMenu;
 import com.Infinity.Nexus.Mod.screen.mobcrusher.MobCrusherMenu;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherMenu;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelMenu;
@@ -41,6 +42,8 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<GeneratorMenu>> GENERATOR_MENU =
             registerMenuType("generator_menu", GeneratorMenu::new);
+    public static final RegistryObject<MenuType<MinerMenu>> MINER_MENU =
+            registerMenuType("miner_menu", MinerMenu::new);
 
     public static final RegistryObject<MenuType<FermentationBarrelMenu>> FERMENTATION_BARREL_MENU =
             registerMenuType("fermentation_barre_menu", FermentationBarrelMenu::new);

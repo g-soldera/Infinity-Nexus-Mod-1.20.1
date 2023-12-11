@@ -45,6 +45,11 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksAdditions.NICKEL_ORE.get());
         this.dropSelf(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE.get());
 
+        this.dropSelf(ModBlocksAdditions.ZINC_BLOCK.get());
+        this.dropSelf(ModBlocksAdditions.RAW_ZINC_BLOCK.get());
+        this.dropSelf(ModBlocksAdditions.ZINC_ORE.get());
+        this.dropSelf(ModBlocksAdditions.DEEPSLATE_ZINC_ORE.get());
+
         this.dropSelf(ModBlocksAdditions.SILVER_BLOCK.get());
         this.dropSelf(ModBlocksAdditions.RAW_SILVER_BLOCK.get());
         this.dropSelf(ModBlocksAdditions.SILVER_ORE.get());
@@ -63,11 +68,13 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksAdditions.EXPLORAR_PORTAL.get());
         this.dropSelf(ModBlocksAdditions.ASPHALT.get());
 
+        this.dropSelf(ModBlocksAdditions.MOB_CRUSHER.get());
         this.dropSelf(ModBlocksAdditions.PRESS.get());
         this.dropSelf(ModBlocksAdditions.CRUSHER.get());
         this.dropSelf(ModBlocksAdditions.ASSEMBLY.get());
         this.dropSelf(ModBlocksAdditions.SQUEEZER.get());
         this.dropSelf(ModBlocksAdditions.SMELTERY.get());
+        this.dropSelf(ModBlocksAdditions.MINER.get());
         this.dropSelf(ModBlocksAdditions.GENERATOR.get());
         this.dropSelf(ModBlocksAdditions.FERMENTATION_BARREL.get());
 

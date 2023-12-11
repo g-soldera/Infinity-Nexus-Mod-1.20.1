@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_screw_clay_model": {
+    "has_raw_zinc": {
       "conditions": {
         "items": [
           {
             "items": [
-              "infinity_nexus_mod:raw_screw_clay_model"
+              "infinity_nexus_mod:raw_zinc"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:screw_clay_model_from_smoking"
+        "recipe": "infinity_nexus_mod:zinc_ingot_from_smelting_raw_zinc"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_raw_screw_clay_model",
+      "has_raw_zinc",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:screw_clay_model_from_smoking"
+      "infinity_nexus_mod:zinc_ingot_from_smelting_raw_zinc"
     ]
   },
   "sends_telemetry_event": false

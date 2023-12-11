@@ -20,6 +20,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> LEAD_INGOT = ITEMS.register("lead_ingot",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ALUMINUM_INGOT = ITEMS.register("aluminum_ingot",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NICKEL_INGOT = ITEMS.register("nickel_ingot",() -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ZINC_INGOT = ITEMS.register("zinc_ingot",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SILVER_INGOT = ITEMS.register("silver_ingot",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TIN_INGOT = ITEMS.register("tin_ingot",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> INVAR_INGOT = ITEMS.register("invar_ingot",() -> new Item(new Item.Properties()));
@@ -34,6 +35,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> LEAD_NUGGET = ITEMS.register("lead_nugget",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ALUMINUM_NUGGET = ITEMS.register("aluminum_nugget",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NICKEL_NUGGET = ITEMS.register("nickel_nugget",() -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ZINC_NUGGET = ITEMS.register("zinc_nugget",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SILVER_NUGGET = ITEMS.register("silver_nugget",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TIN_NUGGET = ITEMS.register("tin_nugget",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> INVAR_NUGGET = ITEMS.register("invar_nugget",() -> new Item(new Item.Properties()));
@@ -49,6 +51,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> LEAD_DUST = ITEMS.register("lead_dust",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ALUMINUM_DUST = ITEMS.register("aluminum_dust",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NICKEL_DUST = ITEMS.register("nickel_dust",() -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ZINC_DUST = ITEMS.register("zinc_dust",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SILVER_DUST = ITEMS.register("silver_dust",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TIN_DUST = ITEMS.register("tin_dust",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> INVAR_DUST = ITEMS.register("invar_dust",() -> new Item(new Item.Properties()));
@@ -61,6 +64,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> RAW_LEAD = ITEMS.register("raw_lead",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RAW_ALUMINUM = ITEMS.register("raw_aluminum",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RAW_NICKEL = ITEMS.register("raw_nickel",() -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_ZINC = ITEMS.register("raw_zinc",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RAW_SILVER = ITEMS.register("raw_silver",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RAW_TIN = ITEMS.register("raw_tin",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RAW_URANIUM = ITEMS.register("raw_uranium",() -> new Item(new Item.Properties()));
@@ -161,6 +165,9 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> REFINED_COMPONENT = ITEMS.register("refined_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(640).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> INTEGRAL_COMPONENT = ITEMS.register("integral_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(1280).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> INFINITY_COMPONENT = ITEMS.register("infinity_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(-1).rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<Item> BASIC_CIRCUIT = ITEMS.register("basic_circuit", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> ADVANCED_CIRCUIT = ITEMS.register("advanced_circuit", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<Item> TERRAIN_MARKER = ITEMS.register("terrain_marker", () -> new Item(new Item.Properties().stacksTo(1).durability(-1)));
     public static final RegistryObject<Item> LINKING_TOOL = ITEMS.register("linking_tool", () -> new LinkingTool(new Item.Properties().stacksTo(1).durability(-1)));

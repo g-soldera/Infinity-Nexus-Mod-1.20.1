@@ -1,6 +1,5 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
-import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.custom.MobCrusher;
 import com.Infinity.Nexus.Mod.fakePlayer.IFFakePlayer;
 import com.Infinity.Nexus.Mod.fluid.ModFluids;
@@ -18,14 +17,14 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.*;
+import net.minecraft.world.Containers;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -33,12 +32,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -55,13 +51,11 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -98,7 +92,7 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
                 case 0,1,2,3,4,5,6,7,8 -> !ModUtils.isUpgrade(stack) || !ModUtils.isComponent(stack);
                 case 9,10,11,12 -> ModUtils.isUpgrade(stack);
                 case 13 -> ModUtils.isComponent(stack);
-                case 14 -> stack.is(ModItemsAdditions.TERRAIN_MARKER.get().asItem());
+                case 14 -> stack.is(ModItemsAdditions.LINKING_TOOL.get().asItem());
                 default -> super.isItemValid(slot, stack);
             };
         }
@@ -433,7 +427,7 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
             insertItemOnInventory(itemEntity.getItem());
             itemEntity.remove(Entity.RemovalReason.KILLED);
         });
-        mob.remove(Entity.RemovalReason.KILLED);
+        mob.setHealth(0);
         insertExpense(mob.getExperienceReward());
     }
 

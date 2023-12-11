@@ -27,6 +27,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItemsAdditions.TIN_INGOT.get())
                 .add(ModItemsAdditions.LEAD_INGOT.get())
                 .add(ModItemsAdditions.NICKEL_INGOT.get())
+                .add(ModItemsAdditions.ZINC_INGOT.get())
                 .add(ModItemsAdditions.BRASS_INGOT.get())
                 .add(ModItemsAdditions.BRONZE_INGOT.get())
                 .add(ModItemsAdditions.STEEL_INGOT.get())
@@ -39,6 +40,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItemsAdditions.RAW_TIN.get())
                 .add(ModItemsAdditions.RAW_LEAD.get())
                 .add(ModItemsAdditions.RAW_NICKEL.get())
+                .add(ModItemsAdditions.RAW_ZINC.get())
                 .add(ModItemsAdditions.RAW_ALUMINUM.get())
                 .add(ModItemsAdditions.RAW_URANIUM.get())
                 .add(ModItemsAdditions.RAW_INFINITY.get());
@@ -51,6 +53,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItemsAdditions.TIN_DUST.get())
                 .add(ModItemsAdditions.LEAD_DUST.get())
                 .add(ModItemsAdditions.NICKEL_DUST.get())
+                .add(ModItemsAdditions.ZINC_DUST.get())
                 .add(ModItemsAdditions.BRASS_DUST.get())
                 .add(ModItemsAdditions.BRONZE_DUST.get())
                 .add(ModItemsAdditions.STEEL_DUST.get())
@@ -64,6 +67,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItemsAdditions.TIN_NUGGET.get())
                 .add(ModItemsAdditions.LEAD_NUGGET.get())
                 .add(ModItemsAdditions.NICKEL_NUGGET.get())
+                .add(ModItemsAdditions.ZINC_NUGGET.get())
                 .add(ModItemsAdditions.BRASS_NUGGET.get())
                 .add(ModItemsAdditions.BRONZE_NUGGET.get())
                 .add(ModItemsAdditions.STEEL_NUGGET.get())
@@ -79,6 +83,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItemsProgression.TIN_SHEET.get())
                 .add(ModItemsProgression.LEAD_SHEET.get())
                 .add(ModItemsProgression.NICKEL_SHEET.get())
+                .add(ModItemsProgression.ZINC_SHEET.get())
                 .add(ModItemsProgression.BRASS_SHEET.get())
                 .add(ModItemsProgression.BRONZE_SHEET.get())
                 .add(ModItemsProgression.STEEL_SHEET.get())
@@ -94,6 +99,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItemsProgression.TIN_ROD.get())
                 .add(ModItemsProgression.LEAD_ROD.get())
                 .add(ModItemsProgression.NICKEL_ROD.get())
+                .add(ModItemsProgression.ZINC_ROD.get())
                 .add(ModItemsProgression.BRASS_ROD.get())
                 .add(ModItemsProgression.BRONZE_ROD.get())
                 .add(ModItemsProgression.STEEL_ROD.get())
@@ -109,6 +115,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItemsProgression.TIN_SCREW.get())
                 .add(ModItemsProgression.LEAD_SCREW.get())
                 .add(ModItemsProgression.NICKEL_SCREW.get())
+                .add(ModItemsProgression.ZINC_SCREW.get())
                 .add(ModItemsProgression.BRASS_SCREW.get())
                 .add(ModItemsProgression.BRONZE_SCREW.get())
                 .add(ModItemsProgression.STEEL_SCREW.get())
@@ -124,12 +131,17 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItemsProgression.TIN_WIRE.get())
                 .add(ModItemsProgression.LEAD_WIRE.get())
                 .add(ModItemsProgression.NICKEL_WIRE.get())
+                .add(ModItemsProgression.ZINC_WIRE.get())
                 .add(ModItemsProgression.BRASS_WIRE.get())
                 .add(ModItemsProgression.BRONZE_WIRE.get())
                 .add(ModItemsProgression.STEEL_WIRE.get())
                 .add(ModItemsProgression.ALUMINUM_WIRE.get())
                 .add(ModItemsProgression.INDUSTRIAL_WIRE.get())
                 .add(ModItemsProgression.INFINITY_WIRE.get());
+
+        this.tag(ModTags.Items.PAXELS)
+                .add(ModItemsAdditions.INFINITY_PAXEL.get())
+                .add(ModItemsAdditions.IMPERIAL_INFINITY_PAXEL.get());
     }
 
     @Override

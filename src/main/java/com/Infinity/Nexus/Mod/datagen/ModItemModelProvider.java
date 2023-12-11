@@ -22,6 +22,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.LEAD_INGOT);
         simpleItem(ModItemsAdditions.ALUMINUM_INGOT);
         simpleItem(ModItemsAdditions.NICKEL_INGOT);
+        simpleItem(ModItemsAdditions.ZINC_INGOT);
         simpleItem(ModItemsAdditions.SILVER_INGOT);
         simpleItem(ModItemsAdditions.TIN_INGOT);
         simpleItem(ModItemsAdditions.INVAR_INGOT);
@@ -35,6 +36,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.LEAD_NUGGET);
         simpleItem(ModItemsAdditions.ALUMINUM_NUGGET);
         simpleItem(ModItemsAdditions.NICKEL_NUGGET);
+        simpleItem(ModItemsAdditions.ZINC_NUGGET);
         simpleItem(ModItemsAdditions.SILVER_NUGGET);
         simpleItem(ModItemsAdditions.TIN_NUGGET);
         simpleItem(ModItemsAdditions.INVAR_NUGGET);
@@ -50,6 +52,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.LEAD_DUST);
         simpleItem(ModItemsAdditions.ALUMINUM_DUST);
         simpleItem(ModItemsAdditions.NICKEL_DUST);
+        simpleItem(ModItemsAdditions.ZINC_DUST);
         simpleItem(ModItemsAdditions.SILVER_DUST);
         simpleItem(ModItemsAdditions.TIN_DUST);
         simpleItem(ModItemsAdditions.INVAR_DUST);
@@ -62,6 +65,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.RAW_LEAD);
         simpleItem(ModItemsAdditions.RAW_ALUMINUM);
         simpleItem(ModItemsAdditions.RAW_NICKEL);
+        simpleItem(ModItemsAdditions.RAW_ZINC);
         simpleItem(ModItemsAdditions.RAW_SILVER);
         simpleItem(ModItemsAdditions.RAW_TIN);
         simpleItem(ModItemsAdditions.RAW_URANIUM);
@@ -109,6 +113,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.REFINED_COMPONENT);
         simpleItem(ModItemsAdditions.INTEGRAL_COMPONENT);
         simpleItem(ModItemsAdditions.INFINITY_COMPONENT);
+
+        simpleItem(ModItemsAdditions.BASIC_CIRCUIT);
+        simpleItem(ModItemsAdditions.ADVANCED_CIRCUIT);
+
         simpleItem(ModItemsAdditions.BUCKET_LUBRICANT);
         simpleItem(ModItemsAdditions.BUCKET_ETHANOL);
         simpleItem(ModItemsAdditions.BUCKET_OIL);
@@ -141,6 +149,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.GOLD_WIRE);
         simpleItem(ModItemsProgression.SILVER_WIRE);
         simpleItem(ModItemsProgression.NICKEL_WIRE);
+        simpleItem(ModItemsProgression.ZINC_WIRE);
         simpleItem(ModItemsProgression.BRASS_WIRE);
         simpleItem(ModItemsProgression.BRONZE_WIRE);
         simpleItem(ModItemsProgression.STEEL_WIRE);
@@ -155,6 +164,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.GOLD_SCREW);
         simpleItem(ModItemsProgression.SILVER_SCREW);
         simpleItem(ModItemsProgression.NICKEL_SCREW);
+        simpleItem(ModItemsProgression.ZINC_SCREW);
         simpleItem(ModItemsProgression.BRASS_SCREW);
         simpleItem(ModItemsProgression.BRONZE_SCREW);
         simpleItem(ModItemsProgression.STEEL_SCREW);
@@ -169,6 +179,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.GOLD_ROD);
         simpleItem(ModItemsProgression.SILVER_ROD);
         simpleItem(ModItemsProgression.NICKEL_ROD);
+        simpleItem(ModItemsProgression.ZINC_ROD);
         simpleItem(ModItemsProgression.BRASS_ROD);
         simpleItem(ModItemsProgression.BRONZE_ROD);
         simpleItem(ModItemsProgression.STEEL_ROD);
@@ -183,6 +194,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.GOLD_SHEET);
         simpleItem(ModItemsProgression.SILVER_SHEET);
         simpleItem(ModItemsProgression.NICKEL_SHEET);
+        simpleItem(ModItemsProgression.ZINC_SHEET);
         simpleItem(ModItemsProgression.BRASS_SHEET);
         simpleItem(ModItemsProgression.BRONZE_SHEET);
         simpleItem(ModItemsProgression.STEEL_SHEET);
@@ -193,6 +205,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.BIO_MASS);
 
         simpleItem(ModItemsAdditions.TERRAIN_MARKER);
+        simpleItem(ModItemsAdditions.LINKING_TOOL);
 
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){

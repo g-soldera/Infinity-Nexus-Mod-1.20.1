@@ -35,6 +35,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.TIN_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.NICKEL_INGOT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ZINC_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRASS_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRONZE_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.STEEL_INGOT.get()));
@@ -47,6 +48,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.TIN_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.NICKEL_NUGGET.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ZINC_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRASS_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRONZE_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.STEEL_NUGGET.get()));
@@ -61,6 +63,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.TIN_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.LEAD_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.NICKEL_DUST.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ZINC_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRASS_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRONZE_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.STEEL_DUST.get()));
@@ -72,6 +75,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.TIN_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.LEAD_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.NICKEL_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.ZINC_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.BRASS_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.BRONZE_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.STEEL_BLOCK.get()));
@@ -83,6 +87,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_TIN_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_LEAD_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_NICKEL_BLOCK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_ZINC_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_ALUMINUM_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_URANIUM_BLOCK.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.RAW_INFINITY_BLOCK.get()));
@@ -91,6 +96,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.TIN_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.LEAD_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.NICKEL_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.ZINC_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ALUMINUM_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.URANIUM_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.INFINITY_ORE.get()));
@@ -99,6 +105,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_TIN_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_LEAD_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_ZINC_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get()));
@@ -155,6 +162,9 @@ public class ModTabAdditions {
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.SPEED_UPGRADE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.STRENGTH_UPGRADE.get()));
+
+                        pOutput.accept(new ItemStack(ModItemsAdditions.BASIC_CIRCUIT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ADVANCED_CIRCUIT.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.TERRAIN_MARKER.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.LINKING_TOOL.get()));

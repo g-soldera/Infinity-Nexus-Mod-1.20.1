@@ -177,7 +177,6 @@
   "fluid.infinity_nexus_mod.molten_starliquid": "Molten Starliquid",
   "item.infinity_nexus_mod.molten_starliquid_bucket": "Starliquid Bucket",
 
-
   "block.infinity_nexus_mod.explorar_portal_frame": "Portal Block",
 
   "block.infinity_nexus_mod.infinity_block": "Infinity Block",
@@ -216,6 +215,9 @@
 
   "fluid_type.infinity_nexus_mod.sugarcane_juice": "Sugarcane Juice",
   "item.infinity_nexus_mod.bucket_sugarcane_juice": "Bucket Sugarcane Juice",
+
+  "fluid_type.infinity_nexus_mod.experience": "Experience",
+  "item.infinity_nexus_mod.bucket_experience": "Bucket Experience",
 
   "fluid_type.infinity_nexus_mod.wine": "Wine",
   "item.infinity_nexus_mod.bucket_wine": "Bucket Wine",
@@ -322,7 +324,11 @@
   "item.infinity_nexus_mod.copper_dust": "Copper Dust",
   "item.infinity_nexus_mod.gold_dust": "Gold Dust",
   "block.infinity_nexus_mod.null": "New Machine Name",
-  "block.infinity_nexus_mod.mob_crusher": "Mob Crusher"
+  "block.infinity_nexus_mod.mob_crusher": "Mob Crusher",
+
+  "item.infinity_nexus_mod.linking_tool":"Linking Tool",
+  "tooltip.infinity_nexus.linking_tool": "§bHold §eShift + Higth Click §bon inventory container to select destine chest",
+  "block.infinity_nexus_mod.miner": "Miner"
 
 
 }

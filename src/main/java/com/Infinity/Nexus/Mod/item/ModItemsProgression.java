@@ -38,6 +38,7 @@ public class ModItemsProgression {
     public static final RegistryObject<Item> GOLD_WIRE = ITEMS.register("gold_wire", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> SILVER_WIRE = ITEMS.register("silver_wire", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> NICKEL_WIRE = ITEMS.register("nickel_wire", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> ZINC_WIRE = ITEMS.register("zinc_wire", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> BRASS_WIRE = ITEMS.register("brass_wire", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> BRONZE_WIRE = ITEMS.register("bronze_wire", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> ALUMINUM_WIRE = ITEMS.register("aluminum_wire", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
@@ -53,6 +54,7 @@ public class ModItemsProgression {
     public static final RegistryObject<Item> GOLD_SCREW = ITEMS.register("gold_screw", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> SILVER_SCREW = ITEMS.register("silver_screw", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> NICKEL_SCREW = ITEMS.register("nickel_screw", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> ZINC_SCREW = ITEMS.register("zinc_screw", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> BRASS_SCREW = ITEMS.register("brass_screw", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> BRONZE_SCREW = ITEMS.register("bronze_screw", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> ALUMINUM_SCREW = ITEMS.register("aluminum_screw", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
@@ -68,6 +70,7 @@ public class ModItemsProgression {
     public static final RegistryObject<Item> GOLD_ROD = ITEMS.register("gold_rod", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> SILVER_ROD = ITEMS.register("silver_rod", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> NICKEL_ROD = ITEMS.register("nickel_rod", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> ZINC_ROD = ITEMS.register("zinc_rod", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> BRASS_ROD = ITEMS.register("brass_rod", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> BRONZE_ROD = ITEMS.register("bronze_rod", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> ALUMINUM_ROD = ITEMS.register("aluminum_rod", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
@@ -83,6 +86,7 @@ public class ModItemsProgression {
     public static final RegistryObject<Item> GOLD_SHEET = ITEMS.register("gold_sheet", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> SILVER_SHEET = ITEMS.register("silver_sheet", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> NICKEL_SHEET = ITEMS.register("nickel_sheet", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> ZINC_SHEET = ITEMS.register("zinc_sheet", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> BRASS_SHEET = ITEMS.register("brass_sheet", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> BRONZE_SHEET = ITEMS.register("bronze_sheet", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> ALUMINUM_SHEET = ITEMS.register("aluminum_sheet", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));

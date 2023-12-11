@@ -91,8 +91,13 @@ public class LinkingTool extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.translatable("tooltip.infinity_nexus.pressShift"));
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
+        if (Screen.hasShiftDown()) {
+            components.add(Component.translatable("tooltip.infinity_nexus.linking_tool"));
+        } else {
+            components.add(Component.translatable("tooltip.infinity_nexus.pressShift"));
+        }
+
+        super.appendHoverText(stack, level, components, flag);
     }
 }

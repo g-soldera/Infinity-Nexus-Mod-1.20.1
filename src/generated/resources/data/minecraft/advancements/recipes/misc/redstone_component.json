@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_redstone_component": {
+    "has_redstone": {
       "conditions": {
         "items": [
           {
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_redstone_component",
+      "has_redstone",
       "has_the_recipe"
     ]
   ],

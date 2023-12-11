@@ -9,6 +9,7 @@ import com.Infinity.Nexus.Mod.utils.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -47,6 +48,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE.get())
                 .add(ModBlocksAdditions.RAW_NICKEL_BLOCK.get())
                 .add(ModBlocksAdditions.NICKEL_BLOCK.get())
+                //Zinc
+                .add(ModBlocksAdditions.ZINC_ORE.get())
+                .add(ModBlocksAdditions.DEEPSLATE_ZINC_ORE.get())
+                .add(ModBlocksAdditions.RAW_ZINC_BLOCK.get())
+                .add(ModBlocksAdditions.ZINC_BLOCK.get())
 
                 //Aluminum
                 .add(ModBlocksAdditions.ALUMINUM_ORE.get())
@@ -120,6 +126,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.RAW_NICKEL_BLOCK.get())
                 .add(ModBlocksAdditions.NICKEL_BLOCK.get())
 
+                //Zinc
+                .add(ModBlocksAdditions.ZINC_ORE.get())
+                .add(ModBlocksAdditions.DEEPSLATE_ZINC_ORE.get())
+                .add(ModBlocksAdditions.RAW_ZINC_BLOCK.get())
+                .add(ModBlocksAdditions.ZINC_BLOCK.get())
+
                 //Aluminum
                 .add(ModBlocksAdditions.ALUMINUM_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get())
@@ -139,6 +151,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.INFINITY_BLOCK.get())
 
                 .add(ModBlocksAdditions.ASPHALT.get())
+                .add(ModBlocksAdditions.STRUCTURAL_BLOCK.get())
                 .add(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get())
 
                 .add(ModBlocksAdditions.CRUSHER.get())
@@ -146,6 +159,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.ASSEMBLY.get())
                 .add(ModBlocksAdditions.SQUEEZER.get())
                 .add(ModBlocksAdditions.SMELTERY.get())
+                .add(ModBlocksAdditions.MINER.get())
                 .add(ModBlocksAdditions.GENERATOR.get())
                 .add(ModBlocksAdditions.FERMENTATION_BARREL.get())
 
@@ -171,6 +185,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(BlockTags.NEEDS_STONE_TOOL)
 
                 .add(ModBlocksAdditions.ASPHALT.get())
+                .add(ModBlocksAdditions.STRUCTURAL_BLOCK.get())
                 .add(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get())
 
                 .add(ModBlocksAdditions.CRUSHER.get())
@@ -224,6 +239,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.RAW_NICKEL_BLOCK.get())
                 .add(ModBlocksAdditions.NICKEL_BLOCK.get())
 
+                //Zinc
+                .add(ModBlocksAdditions.ZINC_ORE.get())
+                .add(ModBlocksAdditions.DEEPSLATE_ZINC_ORE.get())
+                .add(ModBlocksAdditions.RAW_ZINC_BLOCK.get())
+                .add(ModBlocksAdditions.ZINC_BLOCK.get())
+
                 //Aluminum
                 .add(ModBlocksAdditions.ALUMINUM_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get())
@@ -249,6 +270,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.TIN_ORE.get())
                 .add(ModBlocksAdditions.LEAD_ORE.get())
                 .add(ModBlocksAdditions.NICKEL_ORE.get())
+                .add(ModBlocksAdditions.ZINC_ORE.get())
                 .add(ModBlocksAdditions.ALUMINUM_ORE.get())
                 .add(ModBlocksAdditions.URANIUM_ORE.get())
                 .add(ModBlocksAdditions.INFINITY_ORE.get());
@@ -258,6 +280,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.DEEPSLATE_TIN_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_LEAD_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE.get())
+                .add(ModBlocksAdditions.DEEPSLATE_ZINC_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get());
@@ -267,6 +290,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.TIN_ORE.get())
                 .add(ModBlocksAdditions.LEAD_ORE.get())
                 .add(ModBlocksAdditions.NICKEL_ORE.get())
+                .add(ModBlocksAdditions.ZINC_ORE.get())
                 .add(ModBlocksAdditions.ALUMINUM_ORE.get())
                 .add(ModBlocksAdditions.URANIUM_ORE.get())
                 .add(ModBlocksAdditions.INFINITY_ORE.get())
@@ -274,6 +298,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.DEEPSLATE_TIN_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_LEAD_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE.get())
+                .add(ModBlocksAdditions.DEEPSLATE_ZINC_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get());
@@ -283,6 +308,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.TIN_ORE.get())
                 .add(ModBlocksAdditions.LEAD_ORE.get())
                 .add(ModBlocksAdditions.NICKEL_ORE.get())
+                .add(ModBlocksAdditions.ZINC_ORE.get())
                 .add(ModBlocksAdditions.ALUMINUM_ORE.get())
                 .add(ModBlocksAdditions.URANIUM_ORE.get())
                 .add(ModBlocksAdditions.INFINITY_ORE.get())
@@ -290,6 +316,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.DEEPSLATE_TIN_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_LEAD_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE.get())
+                .add(ModBlocksAdditions.DEEPSLATE_ZINC_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get());
@@ -299,6 +326,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.RAW_TIN_BLOCK.get())
                 .add(ModBlocksAdditions.RAW_LEAD_BLOCK.get())
                 .add(ModBlocksAdditions.RAW_NICKEL_BLOCK.get())
+                .add(ModBlocksAdditions.RAW_ZINC_BLOCK.get())
                 .add(ModBlocksAdditions.RAW_ALUMINUM_BLOCK.get())
                 .add(ModBlocksAdditions.RAW_URANIUM_BLOCK.get())
                 .add(ModBlocksAdditions.RAW_INFINITY_BLOCK.get())
@@ -307,6 +335,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.TIN_BLOCK.get())
                 .add(ModBlocksAdditions.LEAD_BLOCK.get())
                 .add(ModBlocksAdditions.NICKEL_BLOCK.get())
+                .add(ModBlocksAdditions.ZINC_BLOCK.get())
                 .add(ModBlocksAdditions.ALUMINUM_BLOCK.get())
                 .add(ModBlocksAdditions.URANIUM_BLOCK.get())
                 .add(ModBlocksAdditions.INFINITY_BLOCK.get())

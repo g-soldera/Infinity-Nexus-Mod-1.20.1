@@ -214,6 +214,9 @@
   "fluid_type.infinity_nexus_mod.sugarcane_juice": "Suco de Cana-de-Açúcar",
   "item.infinity_nexus_mod.bucket_sugarcane_juice": "Balde de Suco de Cana-de-Açúcar",
 
+  "fluid_type.infinity_nexus_mod.experience": "Experiência",
+  "item.infinity_nexus_mod.bucket_experience": "Balde de Experiência",
+
   "item.infinity_nexus_mod.alcohol_bottle": "Garrafa de Alcool",
   "item.infinity_nexus_mod.wine_bottle": "Garrafa de Vinho",
   "item.infinity_nexus_mod.vinegar_bottle": "Garrafa de Vinho",
@@ -287,5 +290,8 @@
 
   "item.infinity_nexus_mod.iron_dust": "Pó de Ferro",
   "item.infinity_nexus_mod.copper_dust": "Pó de Cobre",
-  "item.infinity_nexus_mod.gold_dust": "Pó de Ouro"
+  "item.infinity_nexus_mod.gold_dust": "Pó de Ouro",
+
+  "item.infinity_nexus_mod.linking_tool":"Ferramenta de ligação",
+  "tooltip.infinity_nexus.linking_tool": "§bSegure §eShift + Clique §bmirando em um inventário para selecionar o cofre de destino"
 }

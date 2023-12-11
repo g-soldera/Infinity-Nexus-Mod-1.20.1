@@ -31,6 +31,7 @@ public class ModTags {
 
     }
     public static class Items {
+        public static final TagKey<Item> PAXELS = forgeTag("paxels");
         public static final TagKey<Item> INFINITY_HELMET = tag("infinity_helmet");
         public static final TagKey<Item> INFINITY_CHESTPLATE = tag("infinity_chestplate");
         public static final TagKey<Item> INFINITY_LEGGINGS = tag("infinity_leggings");

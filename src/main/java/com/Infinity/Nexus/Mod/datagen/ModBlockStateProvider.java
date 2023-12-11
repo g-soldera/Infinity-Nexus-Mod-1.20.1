@@ -37,6 +37,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE);
         blockWithItem(ModBlocksAdditions.RAW_NICKEL_BLOCK);
 
+        blockWithItem(ModBlocksAdditions.ZINC_ORE);
+        blockWithItem(ModBlocksAdditions.DEEPSLATE_ZINC_ORE);
+        blockWithItem(ModBlocksAdditions.RAW_ZINC_BLOCK);
+
         blockWithItem(ModBlocksAdditions.ALUMINUM_ORE);
         blockWithItem(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE);
         blockWithItem(ModBlocksAdditions.RAW_ALUMINUM_BLOCK);
@@ -47,6 +51,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
 
         blockWithItem(ModBlocksAdditions.ASPHALT);
+        blockWithItem(ModBlocksAdditions.STRUCTURAL_BLOCK);
 
 
 
