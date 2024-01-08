@@ -6,6 +6,7 @@ import com.Infinity.Nexus.Mod.block.ModBlocksProgression;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
@@ -56,15 +57,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.STEEL_BLOCK.get()).pattern("###").pattern("###").pattern("###").define('#', ModItemsAdditions.STEEL_INGOT.get()).unlockedBy("has_steel_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.STEEL_INGOT.get()).build())).save(pWriter, "steel_block_from_ingot");
         //bronze
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.BRONZE_BLOCK.get()).pattern("###").pattern("###").pattern("###").define('#', ModItemsAdditions.BRONZE_INGOT.get()).unlockedBy("has_bronze_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.BRONZE_INGOT.get()).build())).save(pWriter, "bronze_block_from_ingot");
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.BASIC_COMPONENT.get())
-                .pattern("ABA")
-                .pattern("BCB")
-                .pattern("ABA")
-                .define('A', Items.IRON_NUGGET)
-                .define('B', ModItemsProgression.COPPER_WIRE.get())
-                .define('C', ModItemsAdditions.REDSTONE_COMPONENT.get())
-                .unlockedBy("has_copper_wire", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsProgression.COPPER_WIRE.get()).build()))
-                .save(pWriter, "basic_component");
 
 
 
@@ -124,6 +116,18 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_wood_casings", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksProgression.WOOD_MACHINE_CASING.get()).build()))
                 .save(pWriter, "squeezer");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.MINER.get())
+                .pattern("ABA")
+                .pattern("CDC")
+                .pattern("EEE")
+                .define('A', Items.NETHERITE_PICKAXE)
+                .define('B', Blocks.BARREL)
+                .define('C', ModItemsAdditions.BASIC_CIRCUIT.get())
+                .define('D', ModBlocksProgression.COPPER_MACHINE_CASING.get())
+                .define('E', Blocks.COPPER_BLOCK)
+                .unlockedBy("has_copper_casings", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksProgression.COPPER_MACHINE_CASING.get()).build()))
+                .save(pWriter, "miner");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.ASSEMBLY.get())
                 .pattern("ABA")
                 .pattern("CDC")
@@ -148,6 +152,18 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_wood_casings", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksProgression.WOOD_MACHINE_CASING.get()).build()))
                 .save(pWriter, "press");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.SMELTERY.get())
+                .pattern("ABA")
+                .pattern("CDC")
+                .pattern(" E ")
+                .define('A', Blocks.BLAST_FURNACE)
+                .define('B', Blocks.COPPER_BLOCK)
+                .define('C', Blocks.MAGMA_BLOCK)
+                .define('D', ModBlocksProgression.IRON_MACHINE_CASING.get())
+                .define('E', ModItemsAdditions.BASIC_CIRCUIT.get())
+                .unlockedBy("has_iron_casings", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksProgression.IRON_MACHINE_CASING.get()).build()))
+                .save(pWriter, "smeltery");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.FERMENTATION_BARREL.get())
                 .pattern("AB ")
                 .pattern("CDC")
@@ -169,6 +185,96 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_redstone", inventoryTrigger(ItemPredicate.Builder.item().of(Items.REDSTONE).build()))
                 .save(pWriter, "redstone_component");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.BASIC_COMPONENT.get())
+                .pattern("ABA")
+                .pattern("BCB")
+                .pattern("ABA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', ModItemsProgression.COPPER_WIRE.get())
+                .define('C', ModItemsAdditions.REDSTONE_COMPONENT.get())
+                .unlockedBy("has_redstone_component", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.REDSTONE_COMPONENT.get()).build()))
+                .save(pWriter, "basic_component");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.REINFORCED_COMPONENT.get())
+                .pattern("ABA")
+                .pattern("BCB")
+                .pattern("ABA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', ModItemsProgression.IRON_WIRE.get())
+                .define('C', ModItemsAdditions.BASIC_COMPONENT.get())
+                .unlockedBy("has_basic_component", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.BASIC_COMPONENT.get()).build()))
+                .save(pWriter, "reinforced_component");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.LOGIC_COMPONENT.get())
+                .pattern("ABA")
+                .pattern("BCB")
+                .pattern("ABA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', ModItemsProgression.STEEL_WIRE.get())
+                .define('C', ModItemsAdditions.REINFORCED_COMPONENT.get())
+                .unlockedBy("has_reinforced_component", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.REINFORCED_COMPONENT.get()).build()))
+                .save(pWriter, "logic_component");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.ADVANCED_COMPONENT.get())
+                .pattern("ABA")
+                .pattern("BCB")
+                .pattern("ABA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', ModItemsProgression.STEEL_WIRE.get())
+                .define('C', ModItemsAdditions.LOGIC_COMPONENT.get())
+                .unlockedBy("has_logic_component", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.LOGIC_COMPONENT.get()).build()))
+                .save(pWriter, "advanced_component");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.REFINED_COMPONENT.get())
+                .pattern("ABA")
+                .pattern("BCB")
+                .pattern("ABA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', ModItemsProgression.BRASS_WIRE.get())
+                .define('C', ModItemsAdditions.ADVANCED_COMPONENT.get())
+                .unlockedBy("has_advanced_component", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.ADVANCED_COMPONENT.get()).build()))
+                .save(pWriter, "refined_component");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INTEGRAL_COMPONENT.get())
+                .pattern("ABA")
+                .pattern("BCB")
+                .pattern("ABA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', ModItemsProgression.INDUSTRIAL_WIRE.get())
+                .define('C', ModItemsAdditions.REFINED_COMPONENT.get())
+                .unlockedBy("has_refined_component", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.REFINED_COMPONENT.get()).build()))
+                .save(pWriter, "integral_component");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_COMPONENT.get())
+                .pattern("ABA")
+                .pattern("BCB")
+                .pattern("ABA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', ModItemsProgression.INFINITY_WIRE.get())
+                .define('C', ModItemsAdditions.INTEGRAL_COMPONENT.get())
+                .unlockedBy("has_integral_component", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INTEGRAL_COMPONENT.get()).build()))
+                .save(pWriter, "infinity_component");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.SPEED_UPGRADE.get())
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("AAA")
+                .define('A', ModItemsAdditions.STEEL_INGOT.get())
+                .define('B', Items.REDSTONE)
+                .define('C', ModItemsAdditions.BASIC_CIRCUIT.get())
+                .unlockedBy("has_steel_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(Items.REDSTONE).build()))
+                .save(pWriter, "speed_upgrade");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.STRENGTH_UPGRADE.get())
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("AAA")
+                .define('A', ModItemsAdditions.STEEL_INGOT.get())
+                .define('B', Items.REDSTONE)
+                .define('C', ModItemsAdditions.ADVANCED_CIRCUIT.get())
+                .unlockedBy("has_steel_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(Items.REDSTONE).build()))
+                .save(pWriter, "strength_upgrade");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.BASIC_CIRCUIT.get())
                 .pattern("ABA")
                 .pattern("BCB")
@@ -179,7 +285,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_redstone", inventoryTrigger(ItemPredicate.Builder.item().of(Items.REDSTONE).build()))
                 .save(pWriter, "basic_circuit");
 
- ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.ADVANCED_CIRCUIT.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksProgression.WOOD_MACHINE_CASING.get())
+                .pattern("ABA")
+                .pattern("B B")
+                .pattern("ABA")
+                .define('A', Items.STICK)
+                .define('B', Blocks.OAK_PLANKS)
+                .unlockedBy("has_stick", inventoryTrigger(ItemPredicate.Builder.item().of(Items.STICK).build()))
+                .save(pWriter, "wood_machine_casing");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.ADVANCED_CIRCUIT.get())
                 .pattern("ABA")
                 .pattern("BCB")
                 .pattern("ABA")
@@ -188,6 +303,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE)
                 .unlockedBy("has_brass_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(Items.REDSTONE).build()))
                 .save(pWriter, "advanced_circuit");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.LINKING_TOOL.get())
+                .pattern("  A")
+                .pattern("BC ")
+                .pattern("D  ")
+                .define('A', Items.CHEST)
+                .define('B', Items.COPPER_INGOT)
+                .define('C', Items.ENDER_PEARL)
+                .define('D', Items.IRON_INGOT)
+                .unlockedBy("has_basic_enderpeal", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.BASIC_CIRCUIT.get()).build()))
+                .save(pWriter, "linking_tool");
+
+
+
 
 
         //infinity
@@ -324,10 +453,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     protected static void oreCooking(Consumer<FinishedRecipe> pFinishedRecipeConsumer, RecipeSerializer<? extends AbstractCookingRecipe> pCookingSerializer,
                                      List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTime, String pGroup, String pRecipeName) {
         for(ItemLike itemlike : pIngredients) {
-            SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), pCategory, pResult, pExperience, pCookingTime, pCookingSerializer).group(pGroup)
-                    .unlockedBy(getHasName(itemlike), has(itemlike))
-                    .save(pFinishedRecipeConsumer,  InfinityNexusMod.MOD_ID + ":" +(pResult) + pRecipeName + "_" + getItemName(itemlike));
+            SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), pCategory, pResult, pExperience, pCookingTime,
+                            pCookingSerializer).group(pGroup).unlockedBy(getHasName(itemlike), has(itemlike))
+                    .save(pFinishedRecipeConsumer, InfinityNexusMod.MOD_ID + ":" + getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike));
         }
-
     }
+
 }

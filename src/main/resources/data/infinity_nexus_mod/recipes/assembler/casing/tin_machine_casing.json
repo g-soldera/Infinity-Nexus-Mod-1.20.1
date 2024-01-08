@@ -4,7 +4,7 @@
   "energy": 1200,
   "ingredients": [
     {
-      "item": "infinity_nexus_mod:basic_component"
+      "item": "infinity_nexus_mod:reinforced_component"
     },
     {
       "item": "infinity_nexus_mod:tin_rod"

@@ -255,7 +255,14 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.URANIUM_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get())
                 .add(ModBlocksAdditions.RAW_URANIUM_BLOCK.get())
-                .add(ModBlocksAdditions.URANIUM_BLOCK.get());
+                .add(ModBlocksAdditions.URANIUM_BLOCK.get())
+
+                //Infinity
+                .add(ModBlocksAdditions.INFINITY_ORE.get())
+                .add(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get())
+                .add(ModBlocksAdditions.RAW_INFINITY_BLOCK.get())
+                .add(ModBlocksAdditions.INFINITY_BLOCK.get());
+
 
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
 

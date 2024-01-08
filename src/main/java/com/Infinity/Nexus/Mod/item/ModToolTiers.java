@@ -16,19 +16,19 @@ public class ModToolTiers {
             new ForgeTier(
                     7,
                     -1,
-                    25,
-                    25,
+                    20,
+                    -1,
                     70,
                     BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get())),
-            new ResourceLocation(InfinityNexusMod.MOD_ID, "infinity"), List.of(Tiers.NETHERITE), List.of());
+            new ResourceLocation(InfinityNexusMod.MOD_ID, "infinity"), List.of(Tiers.DIAMOND), List.of());
 
     public static final Tier IMPERIAL = TierSortingRegistry.registerTier(
             new ForgeTier(
                     8,
                     -1,
-                    30,
-                    30,
+                    25,
+                    -1,
                     80,
                     BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get())),
-            new ResourceLocation(InfinityNexusMod.MOD_ID, "imperial"), List.of(Tiers.NETHERITE), List.of());
+            new ResourceLocation(InfinityNexusMod.MOD_ID, "imperial"), List.of(Tiers.DIAMOND), List.of());
 }

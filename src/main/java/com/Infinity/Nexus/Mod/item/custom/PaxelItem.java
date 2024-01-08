@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +26,7 @@ import java.util.function.Function;
 public class PaxelItem extends ModPaxelItem {
     private boolean drop;
     private final Component translation;
-    private final MobEffectInstance[] effects =new MobEffectInstance[]{new MobEffectInstance(MobEffects.UNLUCK, 1, 1, false, false)};
+    private final MobEffectInstance[] effects =new MobEffectInstance[]{new MobEffectInstance(MobEffects.LUCK, 1, 1, false, false)};
     public PaxelItem(Tier tier, float damage, float attackSpeed, Function<Item.Properties, Item.Properties> properties, Component translation, boolean drop) {
         super(tier,damage,attackSpeed, properties);
         this.translation = translation;
@@ -69,4 +70,5 @@ public class PaxelItem extends ModPaxelItem {
     public boolean isEnchantable(ItemStack stack) {
         return true;
     }
+
 }

@@ -1,0 +1,21 @@
+{
+  "type": "infinity_nexus_mod:pressing",
+  "energy": 38400,
+  "duration": 1200,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:refined_component"
+    },
+    {
+      "item": "infinity_nexus_mod:mixed_metal_ingot",
+      "count": 1
+    },
+    {
+      "item": "infinity_nexus_mod:gold_sheet_cast"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:industrial_sheet",
+    "count": 1
+  }
+}

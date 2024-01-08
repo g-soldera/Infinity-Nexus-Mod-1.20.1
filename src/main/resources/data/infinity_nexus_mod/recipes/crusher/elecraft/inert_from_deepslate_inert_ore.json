@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:crushing",
+  "energy": 1200,
+  "duration": 1200,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:basic_component"
+    },
+    {
+      "item": "elementalcraft:deepslate_inert_crystal_ore",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "elementalcraft:inert_crystal",
+    "count": 2
+  }
+}

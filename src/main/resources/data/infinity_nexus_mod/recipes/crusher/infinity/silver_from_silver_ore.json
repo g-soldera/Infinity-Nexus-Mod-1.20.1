@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:crushing",
+  "energy": 4800,
+  "duration": 1200,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:logic_component"
+    },
+    {
+      "item": "infinity_nexus_mod:silver_ore",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:silver_dust",
+    "count": 2
+  }
+}

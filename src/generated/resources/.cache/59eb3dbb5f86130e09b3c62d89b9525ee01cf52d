@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-10T23:47:39.1829214	Loot Tables
+// 1.20.1	2024-01-06T23:23:17.9385334	Loot Tables
 f9a67308c28e23e46c1ddc9d8c836770051f6112 data/infinity_nexus_mod/loot_tables/blocks/aluminum_block.json
 899979f19cf97b6e901c7519504a666158405e75 data/infinity_nexus_mod/loot_tables/blocks/aluminum_machine_casing.json
 0823bf53e52fab2334df6b35191379d42a583479 data/infinity_nexus_mod/loot_tables/blocks/aluminum_ore.json
@@ -17,7 +17,7 @@ e8dfc83120ccde7bc995e57148566e87d1e0cfe5 data/infinity_nexus_mod/loot_tables/blo
 e19f32cf7b4d0720e65d6127ad36411533125cdb data/infinity_nexus_mod/loot_tables/blocks/deepslate_silver_ore.json
 663afe283d98674cac92fe10c6eee6746eaac12e data/infinity_nexus_mod/loot_tables/blocks/deepslate_tin_ore.json
 303e76848f157f1c2c1d26ab3376a8e4c8f809ff data/infinity_nexus_mod/loot_tables/blocks/deepslate_uranium_ore.json
-ae89f53202d826ca6c0edb8afe58e9b529742520 data/infinity_nexus_mod/loot_tables/blocks/deepslate_zinc_ore.json
+47f40cf8e21f4dc3da5d0efd244569405d4f1871 data/infinity_nexus_mod/loot_tables/blocks/deepslate_zinc_ore.json
 a9820c667326114adbcd50e54dc6ab7aeefa317e data/infinity_nexus_mod/loot_tables/blocks/explorar_portal.json
 81a49bd9761926becafcf4ee7936a8f452617f2c data/infinity_nexus_mod/loot_tables/blocks/explorar_portal_frame.json
 1878b7934fac1cbef299c679a88b849a0bb46604 data/infinity_nexus_mod/loot_tables/blocks/fermentation_barrel.json
@@ -61,4 +61,4 @@ ba20a29688c9d13f103de21a7953849852586df7 data/infinity_nexus_mod/loot_tables/blo
 46d4c10d222c7b7ff24456153b828b6efe3e1136 data/infinity_nexus_mod/loot_tables/blocks/uranium_ore.json
 3b239188c46ad657bab08f3bf53b3d6e6722933c data/infinity_nexus_mod/loot_tables/blocks/wood_machine_casing.json
 f414016b25be9bc8a23cb03a207f0c5f60257f93 data/infinity_nexus_mod/loot_tables/blocks/zinc_block.json
-323d2b71e53365b38be71f542367b45d921cf814 data/infinity_nexus_mod/loot_tables/blocks/zinc_ore.json
+a70c3e11cce999764f8c06c7bf84614cbcf901db data/infinity_nexus_mod/loot_tables/blocks/zinc_ore.json

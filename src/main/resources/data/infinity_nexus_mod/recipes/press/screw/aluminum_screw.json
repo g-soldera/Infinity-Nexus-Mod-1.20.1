@@ -1,0 +1,21 @@
+{
+  "type": "infinity_nexus_mod:pressing",
+  "energy": 19200,
+  "duration": 1200,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:advanced_component"
+    },
+    {
+      "item": "infinity_nexus_mod:aluminum_rod",
+      "count": 1
+    },
+    {
+      "item": "infinity_nexus_mod:gold_screw_cast"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:aluminum_screw",
+    "count": 2
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "type": "infinity_nexus_mod:assembler",
+  "duration": 12000,
+  "energy": 1200,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:logic_component"
+    },
+    {
+      "item": "infinity_nexus_mod:brass_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:brass_screw"
+    },
+    {
+      "item": "infinity_nexus_mod:brass_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:brass_sheet"
+    },
+    {
+      "item": "infinity_nexus_mod:brass_sheet"
+    },
+    {
+      "item": "infinity_nexus_mod:brass_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:brass_screw"
+    },
+    {
+      "item": "infinity_nexus_mod:brass_rod"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:brass_machine_casing",
+    "count": 1
+  }
+}

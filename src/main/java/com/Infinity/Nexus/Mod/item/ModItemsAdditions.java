@@ -75,7 +75,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> PORTAL_ACTIVATOR = ITEMS.register("catalyst",() -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> INFINITY_SWORD = ITEMS.register("infinity_sword",
-            () -> new ModSword(ModToolTiers.INFINITY, 50, 2,//+4
+            () -> new ModSword(ModToolTiers.INFINITY, 40, 0,//+4
                     new Item.Properties().stacksTo(1).fireResistant(),
                     Component.translatable("tooltip.infinity_nexus_mod.infinity_sword"),
                     new MobEffectInstance[]{
@@ -83,18 +83,18 @@ public class ModItemsAdditions {
                             new MobEffectInstance(MobEffects.WITHER, 200, 2)
             }));
     public static final RegistryObject<Item> INFINITY_3D_SWORD = ITEMS.register("infinity_3d_sword",
-            () -> new ModSword(ModToolTiers.INFINITY, 50, 2,//+4
+            () -> new ModSword(ModToolTiers.INFINITY, 40, 0,//+4
                     new Item.Properties().stacksTo(1).fireResistant(),
                     Component.translatable("tooltip.infinity_nexus_mod.infinity_3d_sword"),
                     new MobEffectInstance[]{
                             new MobEffectInstance(MobEffects.WEAKNESS, 200, 2),
                             new MobEffectInstance(MobEffects.WITHER, 200, 2)
                     }));
-    public static final RegistryObject<Item> INFINITY_PAXEL = ITEMS.register("infinity_paxel", () -> new PaxelItem(ModToolTiers.INFINITY, 45f, 25f, Item.Properties::fireResistant, Component.translatable("tooltip.infinity_nexus_mod.infinity_paxel"), false));
-    public static final RegistryObject<Item> INFINITY_PICKAXE = ITEMS.register("infinity_pickaxe", () -> new PickaxeItems(ModToolTiers.INFINITY, 25, 20, new Item.Properties().fireResistant()));
-    public static final RegistryObject<Item> INFINITY_SHOVEL = ITEMS.register("infinity_shovel", () -> new ShovelItems(ModToolTiers.INFINITY, 25, 20, new Item.Properties().fireResistant()));
-    public static final RegistryObject<Item> INFINITY_AXE = ITEMS.register("infinity_axe", () -> new AxeItems(ModToolTiers.INFINITY, 25, 20, new Item.Properties().fireResistant()));
-    public static final RegistryObject<Item> INFINITY_HOE = ITEMS.register("infinity_hoe", () -> new HoeItems(ModToolTiers.INFINITY, 25, 20, new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> INFINITY_PAXEL = ITEMS.register("infinity_paxel", () -> new PaxelItem(ModToolTiers.INFINITY, 50f, 8f, Item.Properties::fireResistant, Component.translatable("tooltip.infinity_nexus_mod.infinity_paxel"), false));
+    public static final RegistryObject<Item> INFINITY_PICKAXE = ITEMS.register("infinity_pickaxe", () -> new PickaxeItems(ModToolTiers.INFINITY, 20, 8, new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> INFINITY_SHOVEL = ITEMS.register("infinity_shovel", () -> new ShovelItems(ModToolTiers.INFINITY, 20, 8, new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> INFINITY_AXE = ITEMS.register("infinity_axe", () -> new AxeItems(ModToolTiers.INFINITY, 35, 8, new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> INFINITY_HOE = ITEMS.register("infinity_hoe", () -> new HoeItems(ModToolTiers.INFINITY, 10, 8, new Item.Properties().fireResistant()));
     public static final RegistryObject<Item> INFINITY_BOW = ITEMS.register("infinity_bow", () -> new ModBow(ModToolTiers.INFINITY, new Item.Properties().durability(-1).fireResistant(), 50));
 
     public static final RegistryObject<Item> INFINITY_HELMET = ITEMS.register("infinity_helmet", () -> new InfinityArmorItem(ModArmorMaterials.INFINITY, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()));
@@ -103,7 +103,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> INFINITY_BOOTS = ITEMS.register("infinity_boots", () -> new InfinityArmorItem(ModArmorMaterials.INFINITY, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()));
 
     public static final RegistryObject<Item> IMPERIAL_INFINITY_SWORD = ITEMS.register("imperial_infinity_sword",
-            () -> new ModSword(ModToolTiers.IMPERIAL, 60, 0,
+            () -> new ModSword(ModToolTiers.IMPERIAL, 50, 1,
                     new Item.Properties().stacksTo(1).fireResistant(),
                     Component.translatable("tooltip.infinity_nexus_mod.imperial_infinity_sword"),
                     new MobEffectInstance[]{
@@ -112,7 +112,7 @@ public class ModItemsAdditions {
                             new MobEffectInstance(MobEffects.POISON, 200, 3)
                     }));
     public static final RegistryObject<Item> IMPERIAL_INFINITY_3D_SWORD = ITEMS.register("imperial_infinity_3d_sword",
-            () -> new ModSword(ModToolTiers.IMPERIAL, 60, 0,
+            () -> new ModSword(ModToolTiers.IMPERIAL, 50, 1,
                     new Item.Properties().stacksTo(1).fireResistant(),
                     Component.translatable("tooltip.infinity_nexus_mod.imperial_infinity_3d_sword"),
                     new MobEffectInstance[]{
@@ -120,11 +120,11 @@ public class ModItemsAdditions {
                             new MobEffectInstance(MobEffects.WITHER, 200, 3),
                             new MobEffectInstance(MobEffects.POISON, 200, 3)
                     }));
-    public static final RegistryObject<Item> IMPERIAL_INFINITY_PAXEL = ITEMS.register("imperial_infinity_paxel", () -> new PaxelItem(ModToolTiers.IMPERIAL, 55f, 35f, Item.Properties::fireResistant, Component.translatable("tooltip.infinity_nexus_mod.imperial_infinity_paxel"), true));
-    public static final RegistryObject<Item> IMPERIAL_INFINITY_PICKAXE = ITEMS.register("imperial_infinity_pickaxe", () -> new PickaxeItems(ModToolTiers.IMPERIAL, 30,24, new Item.Properties().fireResistant()));
-    public static final RegistryObject<Item> IMPERIAL_INFINITY_SHOVEL = ITEMS.register("imperial_infinity_shovel", () -> new ShovelItems(ModToolTiers.IMPERIAL, 30,24, new Item.Properties().fireResistant()));
-    public static final RegistryObject<Item> IMPERIAL_INFINITY_AXE = ITEMS.register("imperial_infinity_axe", () -> new AxeItems(ModToolTiers.IMPERIAL, 30,24, new Item.Properties().fireResistant()));
-    public static final RegistryObject<Item> IMPERIAL_INFINITY_HOE = ITEMS.register("imperial_infinity_hoe", () -> new HoeItems(ModToolTiers.IMPERIAL, 30,24, new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> IMPERIAL_INFINITY_PAXEL = ITEMS.register("imperial_infinity_paxel", () -> new PaxelItem(ModToolTiers.IMPERIAL, 60f, 10f, Item.Properties::fireResistant, Component.translatable("tooltip.infinity_nexus_mod.imperial_infinity_paxel"), false));
+    public static final RegistryObject<Item> IMPERIAL_INFINITY_PICKAXE = ITEMS.register("imperial_infinity_pickaxe", () -> new PickaxeItems(ModToolTiers.IMPERIAL, 30,10, new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> IMPERIAL_INFINITY_SHOVEL = ITEMS.register("imperial_infinity_shovel", () -> new ShovelItems(ModToolTiers.IMPERIAL, 30,10, new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> IMPERIAL_INFINITY_AXE = ITEMS.register("imperial_infinity_axe", () -> new AxeItems(ModToolTiers.IMPERIAL, 45,10, new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> IMPERIAL_INFINITY_HOE = ITEMS.register("imperial_infinity_hoe", () -> new HoeItems(ModToolTiers.IMPERIAL, 15,10, new Item.Properties().fireResistant()));
     public static final RegistryObject<Item> IMPERIAL_INFINITY_BOW = ITEMS.register("imperial_infinity_bow", () -> new ModBow(ModToolTiers.IMPERIAL, new Item.Properties().durability(-1).fireResistant(),60));
 
     public static final RegistryObject<Item> IMPERIAL_INFINITY_HELMET = ITEMS.register("imperial_infinity_helmet", () -> new ImperialInfinityArmorItem(ModArmorMaterials.IMPERIAL, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
@@ -157,14 +157,14 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> VIPINFINITY_BAG = ITEMS.register("bag_vipinfinity", () -> new Item(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.EPIC)));
 
 
-    public static final RegistryObject<Item> REDSTONE_COMPONENT = ITEMS.register("redstone_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(20).rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> BASIC_COMPONENT = ITEMS.register("basic_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(40).rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> REINFORCED_COMPONENT = ITEMS.register("reinforced_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(80).rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> LOGIC_COMPONENT = ITEMS.register("logic_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(160).rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> ADVANCED_COMPONENT = ITEMS.register("advanced_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(320).rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> REFINED_COMPONENT = ITEMS.register("refined_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(640).rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> INTEGRAL_COMPONENT = ITEMS.register("integral_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(1280).rarity(Rarity.EPIC)));
-    public static final RegistryObject<Item> INFINITY_COMPONENT = ITEMS.register("infinity_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(-1).rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> REDSTONE_COMPONENT = ITEMS.register("redstone_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(1000).rarity(Rarity.COMMON), "§2Base Durability:§e 1000"));
+    public static final RegistryObject<Item> BASIC_COMPONENT = ITEMS.register("basic_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(2000).rarity(Rarity.COMMON), "§2Base Durability:§e 2000"));
+    public static final RegistryObject<Item> REINFORCED_COMPONENT = ITEMS.register("reinforced_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(4000).rarity(Rarity.UNCOMMON), "§2Base Durability:§e 4000"));
+    public static final RegistryObject<Item> LOGIC_COMPONENT = ITEMS.register("logic_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(8000).rarity(Rarity.UNCOMMON), "§2Base Durability:§e 8000"));
+    public static final RegistryObject<Item> ADVANCED_COMPONENT = ITEMS.register("advanced_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(16000).rarity(Rarity.RARE), "§2Base Durability:§e 16000"));
+    public static final RegistryObject<Item> REFINED_COMPONENT = ITEMS.register("refined_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(32000).rarity(Rarity.RARE), "§2Base Durability:§e 32000"));
+    public static final RegistryObject<Item> INTEGRAL_COMPONENT = ITEMS.register("integral_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(64000).rarity(Rarity.EPIC), "§2Base Durability:§e 64000"));
+    public static final RegistryObject<Item> INFINITY_COMPONENT = ITEMS.register("infinity_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(-1).rarity(Rarity.EPIC), "§2Base Durability:§e Infinity"));
 
     public static final RegistryObject<Item> BASIC_CIRCUIT = ITEMS.register("basic_circuit", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> ADVANCED_CIRCUIT = ITEMS.register("advanced_circuit", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.COMMON)));

@@ -27,6 +27,10 @@
     "infinity_nexus_mod:uranium_ore",
     "infinity_nexus_mod:deepslate_uranium_ore",
     "infinity_nexus_mod:raw_uranium_block",
-    "infinity_nexus_mod:uranium_block"
+    "infinity_nexus_mod:uranium_block",
+    "infinity_nexus_mod:infinity_ore",
+    "infinity_nexus_mod:deepslate_infinity_ore",
+    "infinity_nexus_mod:raw_infinity_block",
+    "infinity_nexus_mod:infinity_block"
   ]
 }

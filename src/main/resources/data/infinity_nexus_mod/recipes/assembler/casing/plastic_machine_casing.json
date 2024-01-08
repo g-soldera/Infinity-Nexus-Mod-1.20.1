@@ -1,0 +1,38 @@
+{
+  "type": "infinity_nexus_mod:assembler",
+  "duration": 12000,
+  "energy": 1200,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:integral_component"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:white_dye"
+    },
+    {
+      "item": "minecraft:white_dye"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:plastic_machine_casing",
+    "count": 1
+  }
+}

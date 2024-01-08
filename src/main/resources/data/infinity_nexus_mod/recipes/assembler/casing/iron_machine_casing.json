@@ -1,0 +1,38 @@
+{
+  "type": "infinity_nexus_mod:assembler",
+  "duration": 12000,
+  "energy": 1200,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:basic_component"
+    },
+    {
+      "item": "infinity_nexus_mod:iron_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:iron_screw"
+    },
+    {
+      "item": "infinity_nexus_mod:iron_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:iron_sheet"
+    },
+    {
+      "item": "infinity_nexus_mod:iron_sheet"
+    },
+    {
+      "item": "infinity_nexus_mod:iron_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:iron_screw"
+    },
+    {
+      "item": "infinity_nexus_mod:iron_rod"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:iron_machine_casing",
+    "count": 1
+  }
+}

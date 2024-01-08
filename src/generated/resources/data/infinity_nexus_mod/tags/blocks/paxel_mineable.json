@@ -56,6 +56,10 @@
     "infinity_nexus_mod:glass_machine_casing",
     "infinity_nexus_mod:steel_machine_casing",
     "infinity_nexus_mod:industrial_machine_casing",
-    "infinity_nexus_mod:infinity_machine_casing"
+    "infinity_nexus_mod:infinity_machine_casing",
+    "#minecraft:mineable/pickaxe",
+    "#minecraft:mineable/shovel",
+    "#minecraft:mineable/axe",
+    "#minecraft:mineable/hoe"
   ]
 }

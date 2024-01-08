@@ -1,0 +1,38 @@
+{
+  "type": "infinity_nexus_mod:assembler",
+  "duration": 12000,
+  "energy": 1200,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:logic_component"
+    },
+    {
+      "item": "infinity_nexus_mod:bronze_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:bronze_screw"
+    },
+    {
+      "item": "infinity_nexus_mod:bronze_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:bronze_sheet"
+    },
+    {
+      "item": "infinity_nexus_mod:bronze_sheet"
+    },
+    {
+      "item": "infinity_nexus_mod:bronze_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:bronze_screw"
+    },
+    {
+      "item": "infinity_nexus_mod:bronze_rod"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:bronze_machine_casing",
+    "count": 1
+  }
+}

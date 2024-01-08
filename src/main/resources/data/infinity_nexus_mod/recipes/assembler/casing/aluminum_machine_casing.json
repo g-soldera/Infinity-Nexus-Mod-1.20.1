@@ -1,0 +1,38 @@
+{
+  "type": "infinity_nexus_mod:assembler",
+  "duration": 12000,
+  "energy": 1200,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:advanced_component"
+    },
+    {
+      "item": "infinity_nexus_mod:aluminum_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:aluminum_screw"
+    },
+    {
+      "item": "infinity_nexus_mod:aluminum_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:aluminum_sheet"
+    },
+    {
+      "item": "infinity_nexus_mod:aluminum_sheet"
+    },
+    {
+      "item": "infinity_nexus_mod:aluminum_rod"
+    },
+    {
+      "item": "infinity_nexus_mod:aluminum_screw"
+    },
+    {
+      "item": "infinity_nexus_mod:aluminum_rod"
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:aluminum_machine_casing",
+    "count": 1
+  }
+}

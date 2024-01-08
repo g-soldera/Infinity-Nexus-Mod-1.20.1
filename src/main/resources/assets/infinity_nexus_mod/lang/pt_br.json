@@ -199,6 +199,9 @@
   "item.infinity_nexus_mod.integral_component": "Componente Integral",
   "item.infinity_nexus_mod.infinity_component": "Componente de Infinity",
 
+  "item.infinity_nexus_mod.basic_circuit": "Circuito Básico",
+  "item.infinity_nexus_mod.advanced_circuit": "Circuito Avançado",
+
   "item.infinity_nexus_mod.speed_upgrade": "Ampliação de Velocidade",
   "item.infinity_nexus_mod.strength_upgrade": "Ampliação de Força",
 

@@ -201,6 +201,9 @@
   "item.infinity_nexus_mod.integral_component": "Integral Component",
   "item.infinity_nexus_mod.infinity_component": "Infinity Component",
 
+  "item.infinity_nexus_mod.basic_circuit": "Basic Circuit",
+  "item.infinity_nexus_mod.advanced_circuit": "Advanced Circuit",
+
   "item.infinity_nexus_mod.speed_upgrade": "Speed Upgrade",
   "item.infinity_nexus_mod.strength_upgrade": "Strength Upgrade",
 

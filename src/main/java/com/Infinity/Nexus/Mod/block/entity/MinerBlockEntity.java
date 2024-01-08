@@ -50,10 +50,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -85,13 +82,13 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     private static final int LINK_SLOT = 15;
     private static final int FORTUNE_SLOT = 14;
     private static final int SMELTER_SLOT = 16;
-    private static final int capacity = 60000;
+    private static final int capacity = 100000;
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
 
 
     private ModEnergyStorage createEnergyStorage() {
-        return new ModEnergyStorage(capacity, 265) {
+        return new ModEnergyStorage(capacity, capacity) {
             @Override
             public void onEnergyChanged() {
                 setChanged();
@@ -116,7 +113,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 1800;
+    private int maxProgress = 80;
 
 
     public MinerBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -254,26 +251,41 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
+        pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel + 8), 3);
         if (!hasProgressFinished(machineLevel)) {
             increaseCraftingProgress();
             return;
         }
 
+        if (!hasEmptySlot()) {
+            return;
+        }
+
+        resetProgress();
         if(!hasComponent()){
             return;
         }
 
         setMaxProgress(machineLevel);
-        if (!hasEnoughEnergy()) {
+        if (!hasEnoughEnergy(machineLevel)) {
             return;
         }
         if(hasRecipe(pPos, machineLevel)) {
-            pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel + 8), 3);
             craftItem(pPos, machineLevel);
-            resetProgress();
             extractEnergy(this, machineLevel);
             setChanged(pLevel, pPos, pState);
         }
+    }
+
+    private boolean hasEmptySlot() {
+        boolean hasFreeSpace = false;
+        for (int slot : OUTPUT_SLOT) {
+            if(itemHandler.getStackInSlot(slot).isEmpty()) {
+                hasFreeSpace = true;
+                break;
+            }
+        }
+        return hasFreeSpace;
     }
 
     private boolean hasComponent() {
@@ -281,25 +293,30 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void setMaxProgress(int machineLevel) {
-        maxProgress = 180 - (machineLevel * 20);
+        maxProgress = 180 - (machineLevel * 20) - (Math.min(ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS), 2) * 10);
     }
 
     private void extractEnergy(MinerBlockEntity minerBlockEntity, int machineLevel) {
-        System.out.println(maxProgress);
-        int energy = (machineLevel * 100);
-        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS) + 1;
+        int energy = ((machineLevel + 1) * 1000);
+        int speed = Math.max(ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS), 2) + machineLevel;
         int strength = (ModUtils.getStrength(itemHandler, UPGRADE_SLOTS) * 10);
 
-        int var1 = ((energy + (machineLevel * 20)) / maxProgress) * (speed + machineLevel);
-        int var2 = Math.multiplyExact(strength, var1 / 100);
+        int var1 = energy * speed;
 
-        int extractEnergy = var1 - var2;
-
+        int extractEnergy = var1 + strength;
         minerBlockEntity.ENERGY_STORAGE.extractEnergy(Math.max(extractEnergy, 1), false);
     }
 
-    private boolean hasEnoughEnergy() {
-        return ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQ;
+    private boolean hasEnoughEnergy(int machineLevel) {
+
+        int energy = ((machineLevel + 1) * 1000);
+        int speed = Math.max(ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS), 2) + machineLevel;
+        int strength = (ModUtils.getStrength(itemHandler, UPGRADE_SLOTS) * 10);
+
+        int var1 = energy * speed;
+
+        int extractEnergy = var1 + strength;
+        return ENERGY_STORAGE.getEnergyStored() >= extractEnergy;
     }
 
     private void resetProgress() {
@@ -339,13 +356,16 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         //TODO INSERT RESULT
         int fortune = getFortuneLevel();
         ItemStack output = getOutputItem(pos, fortune, machineLevel);
+
+        if(output.getItem() == ModItemsAdditions.RAW_INFINITY.get() && machineLevel < 6){
+            return;
+        }
         insertItemOnInventory(output);
-        //level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY()+1, pos.getZ()+10, output));
+        level.playSound(null, this.getBlockPos(), SoundEvents.BEE_HURT, SoundSource.BLOCKS, 1.0f, 1.0f);
 
     }
 
     private boolean hasRecipe(BlockPos pos,int machineLevel) {
-        //TODO
         return MinerTierStructure.hasStructure(machineLevel+1, pos, level);
     }
 
@@ -360,8 +380,8 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         int endX = pos.getX() + radio;
         int endY = pos.getY() - 2;
         int endZ = pos.getZ() + radio;
-        System.out.println("Rarios: " + radio);
-        System.out.println("Level: " +((int) Math.floor((double) (machineLevel + 4) / 2) * 2));
+        //System.out.println("Rarios: " + radio);
+        //System.out.println("Level: " +((int) Math.floor((double) (machineLevel + 4) / 2) * 2));
 
         for (int x = startX; x <= endX; x++) {
             for (int y = startY; y <= endY; y++) {
@@ -371,11 +391,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                     ItemStack blockStack = new ItemStack(blockState.getBlock().asItem());
                     if (blockState.isAir() || isOre(blockStack)) {
                         ItemStack drop = getDrop(blockStack, fortune, 0);
-                        if (drop != null) {
-                            drops.add(drop);
-                        }else{
-                            drops.add(ItemStack.EMPTY);
-                        }
+                        drops.add(Objects.requireNonNullElse(drop, ItemStack.EMPTY));
                     }
                 }
             }
