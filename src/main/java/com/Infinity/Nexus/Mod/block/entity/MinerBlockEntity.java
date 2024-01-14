@@ -114,6 +114,9 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 80;
+    private int verify = 0;
+    private int maxVerify = 15;
+    private int structure;
 
 
     public MinerBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -124,6 +127,9 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                 return switch (pIndex) {
                     case 0 -> MinerBlockEntity.this.progress;
                     case 1 -> MinerBlockEntity.this.maxProgress;
+                    case 3 -> MinerBlockEntity.this.verify;
+                    case 4 -> MinerBlockEntity.this.maxVerify;
+                    case 5 -> MinerBlockEntity.this.structure;
                     default -> 0;
                 };
             }
@@ -133,12 +139,15 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                 switch (pIndex) {
                     case 0 -> MinerBlockEntity.this.progress = pValue;
                     case 1 -> MinerBlockEntity.this.maxProgress = pValue;
+                    case 3 -> MinerBlockEntity.this.verify = pValue;
+                    case 4 -> MinerBlockEntity.this.maxVerify = pValue;
+                    case 5 -> MinerBlockEntity.this.structure = pValue;
                 }
             }
 
             @Override
             public int getCount() {
-                return 2;
+                return 5;
             }
         };
     }
@@ -245,32 +254,35 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         }
 
         int machineLevel = getMachineLevel()-1 <= 0 ? 0 : getMachineLevel()-1; ;
-        pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel), 3);
 
         if (isRedstonePowered(pPos)) {
+            pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel), 3);
             return;
         }
 
-        pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel + 8), 3);
         if (!hasProgressFinished(machineLevel)) {
             increaseCraftingProgress();
             return;
         }
 
         if (!hasEmptySlot()) {
+            pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel), 3);
             return;
         }
 
         resetProgress();
         if(!hasComponent()){
+            pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel), 3);
             return;
         }
 
         setMaxProgress(machineLevel);
         if (!hasEnoughEnergy(machineLevel)) {
+            pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel), 3);
             return;
         }
         if(hasRecipe(pPos, machineLevel)) {
+            pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel + 8), 3);
             craftItem(pPos, machineLevel);
             extractEnergy(this, machineLevel);
             setChanged(pLevel, pPos, pState);
@@ -353,7 +365,6 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             component.shrink(1);
             level.playSound(null, this.getBlockPos(), SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
         }
-        //TODO INSERT RESULT
         int fortune = getFortuneLevel();
         ItemStack output = getOutputItem(pos, fortune, machineLevel);
 
@@ -361,12 +372,18 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
         insertItemOnInventory(output);
-        level.playSound(null, this.getBlockPos(), SoundEvents.BEE_HURT, SoundSource.BLOCKS, 1.0f, 1.0f);
+        level.playSound(null, this.getBlockPos(), SoundEvents.BEE_HURT, SoundSource.BLOCKS, 0.4f, 1.0f);
 
     }
 
     private boolean hasRecipe(BlockPos pos,int machineLevel) {
-        return MinerTierStructure.hasStructure(machineLevel+1, pos, level);
+
+        if(this.verify >= maxVerify) {
+           this.structure = MinerTierStructure.hasStructure(machineLevel+1, pos, level) ? 1 : 0;
+           this.verify = 0;
+        }
+        this.verify++;
+        return this.structure > 0;
     }
 
     private ItemStack getOutputItem(BlockPos pos, int fortune, int machineLevel) {
@@ -380,18 +397,25 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         int endX = pos.getX() + radio;
         int endY = pos.getY() - 2;
         int endZ = pos.getZ() + radio;
-        //System.out.println("Rarios: " + radio);
-        //System.out.println("Level: " +((int) Math.floor((double) (machineLevel + 4) / 2) * 2));
+
+        int randomX = startX + new Random().nextInt(endX - (startX-1));
+        int randomY = startY + new Random().nextInt(endY - (startY-1));
+        int randomZ = startZ + new Random().nextInt(endZ - (startZ-1));
+
+        BlockPos novoBlockPos = new BlockPos(randomX, randomY, randomZ);
 
         for (int x = startX; x <= endX; x++) {
             for (int y = startY; y <= endY; y++) {
                 for (int z = startZ; z <= endZ; z++) {
                     BlockPos blockPos = new BlockPos(x, y, z);
-                    BlockState blockState = level.getBlockState(blockPos);
-                    ItemStack blockStack = new ItemStack(blockState.getBlock().asItem());
-                    if (blockState.isAir() || isOre(blockStack)) {
-                        ItemStack drop = getDrop(blockStack, fortune, 0);
-                        drops.add(Objects.requireNonNullElse(drop, ItemStack.EMPTY));
+                    if (blockPos.equals(novoBlockPos)) {
+                        //level.setBlock(blockPos, Blocks.GOLD_BLOCK.defaultBlockState(), 3);
+                        BlockState blockState = level.getBlockState(blockPos);
+                        ItemStack blockStack = new ItemStack(blockState.getBlock().asItem());
+                        if (blockState.isAir() || isOre(blockStack)) {
+                            ItemStack drop = getDrop(blockStack, fortune, 0);
+                            drops.add(Objects.requireNonNullElse(drop, ItemStack.EMPTY));
+                        }
                     }
                 }
             }

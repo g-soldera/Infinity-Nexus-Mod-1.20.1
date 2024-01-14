@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "infinity_nexus_mod:infinity_singularity"
+    },
+    "B": {
+      "item": "infinity_nexus_mod:infinity_boots"
+    }
+  },
+  "pattern": [
+    "A A",
+    "ABA"
+  ],
+  "result": {
+    "item": "infinity_nexus_mod:imperial_infinity_boots"
+  },
+  "show_notification": true
+}

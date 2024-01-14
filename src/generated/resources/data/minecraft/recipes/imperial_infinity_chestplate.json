@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "infinity_nexus_mod:infinity_singularity"
+    },
+    "B": {
+      "item": "infinity_nexus_mod:infinity_chestplate"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "AAA",
+    "AAA"
+  ],
+  "result": {
+    "item": "infinity_nexus_mod:imperial_infinity_chestplate"
+  },
+  "show_notification": true
+}

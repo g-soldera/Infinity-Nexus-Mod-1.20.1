@@ -4,6 +4,6 @@
     "bottom": "infinity_nexus_mod:block/miner/miner_bottom_0",
     "front": "infinity_nexus_mod:block/base_machines/machine_side_1",
     "side": "infinity_nexus_mod:block/base_machines/machine_side_1",
-    "top": "infinity_nexus_mod:block/miner/miner_top_0"
+    "top": "infinity_nexus_mod:block/miner/miner_top_on_0"
   }
 }

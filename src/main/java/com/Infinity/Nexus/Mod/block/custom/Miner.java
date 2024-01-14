@@ -32,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Miner extends BaseEntityBlock {
+
     public static IntegerProperty LIT = IntegerProperty.create("lit", 0, 15);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);

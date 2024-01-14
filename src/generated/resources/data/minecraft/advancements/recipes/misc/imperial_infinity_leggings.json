@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_infinity_leggings": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "infinity_nexus_mod:infinity_leggings"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:imperial_infinity_leggings"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_infinity_leggings",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:imperial_infinity_leggings"
+    ]
+  },
+  "sends_telemetry_event": false
+}

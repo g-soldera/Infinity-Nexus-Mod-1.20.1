@@ -84,10 +84,11 @@ public class MinerTierStructure {
         for (int i = 0; i < altura; i++) {
             BlockPos pos = pilarPos.above(i);
             BlockState blockState = level.getBlockState(pos);
-            if (blockState.getBlock() != blocoComposicao && blockState.getBlock() == ModBlocksAdditions.STRUCTURAL_BLOCK.get() ||  blockState.is(Blocks.AIR)) {
-                //TODO
-                level.setBlockAndUpdate(pos, ModBlocksAdditions.STRUCTURAL_BLOCK.get().defaultBlockState());
+            if (blockState.getBlock() != blocoComposicao) {
                 hasPilars = false;
+                if(blockState.getBlock() == ModBlocksAdditions.STRUCTURAL_BLOCK.get() || blockState.is(Blocks.AIR)) {
+                    level.setBlockAndUpdate(pos, ModBlocksAdditions.STRUCTURAL_BLOCK.get().defaultBlockState());
+                }
             }
         }
         int minX = pPos.getX() - radius;
@@ -100,10 +101,11 @@ public class MinerTierStructure {
                 if (x == minX || x == maxX || z == minZ || z == maxZ) {
                     BlockPos pos = new BlockPos(x, pPos.getY(), z).below();
                     BlockState blockState = level.getBlockState(pos);
-                    if (blockState.getBlock() != blocoComposicao && blockState.getBlock() == ModBlocksAdditions.STRUCTURAL_BLOCK.get() || blockState.is(Blocks.AIR)) {
-                        //TODO
-                        level.setBlockAndUpdate(pos, ModBlocksAdditions.STRUCTURAL_BLOCK.get().defaultBlockState());
+                    if (blockState.getBlock() != blocoComposicao) {
                         hasArc = false;
+                        if(blockState.getBlock() == ModBlocksAdditions.STRUCTURAL_BLOCK.get() || blockState.is(Blocks.AIR)) {
+                            level.setBlockAndUpdate(pos, ModBlocksAdditions.STRUCTURAL_BLOCK.get().defaultBlockState());
+                        }
                     }
                 }
             }
@@ -112,10 +114,11 @@ public class MinerTierStructure {
             for (int i = 1; i <= radius; i++) {
                 BlockPos pos = pPos.below().offset(direction.getStepX() * i, direction.getStepY() * i, direction.getStepZ() * i);
                 BlockState blockState = level.getBlockState(pos);
-                if (blockState.getBlock() != blocoComposicao && direction != Direction.DOWN && direction != Direction.UP && blockState.is(Blocks.AIR) || blockState.getBlock() == ModBlocksAdditions.STRUCTURAL_BLOCK.get()) {
-                    //TODO
-                    level.setBlockAndUpdate(pos, ModBlocksAdditions.STRUCTURAL_BLOCK.get().defaultBlockState());
+                if (blockState.getBlock() != blocoComposicao && direction != Direction.DOWN && direction != Direction.UP) {
                     hasRadios = false;
+                    if (blockState.getBlock() == ModBlocksAdditions.STRUCTURAL_BLOCK.get() || blockState.is(Blocks.AIR)){
+                        level.setBlockAndUpdate(pos, ModBlocksAdditions.STRUCTURAL_BLOCK.get().defaultBlockState());
+                    }
                 }
             }
         }

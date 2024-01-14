@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-07T10:06:47.9301276	Item Models: infinity_nexus_mod
+// 1.20.1	2024-01-14T15:45:18.8112007	Item Models: infinity_nexus_mod
 824d76455174b66d08d4d6ded4bb595f84882c64 assets/infinity_nexus_mod/models/item/advanced_circuit.json
 b29efcd69af9275a22e943ae24a1a2f0281f7031 assets/infinity_nexus_mod/models/item/advanced_component.json
 a20840003cafb1e1379bba7de4fa5b3e8ecf3dc5 assets/infinity_nexus_mod/models/item/alcohol_bottle.json
@@ -33,6 +33,7 @@ e71875f02f5625e7edbf299ab18ad6070e5cba96 assets/infinity_nexus_mod/models/item/b
 be2eadb0ee84da953eefa0a2376678a5bbe579b6 assets/infinity_nexus_mod/models/item/bronze_sheet.json
 ea14552fafa76101ef1c905d7e9ffff931b0351d assets/infinity_nexus_mod/models/item/bronze_wire.json
 18a57b14bd2fb2920f2b32ca517af77fcfa6b7fe assets/infinity_nexus_mod/models/item/bucket_ethanol.json
+18ae6ab36805dd5adc72b68175e98068a95a4bc6 assets/infinity_nexus_mod/models/item/bucket_experience.json
 cffb8cfa2adbe4053a0cdef6d21889d903b1591d assets/infinity_nexus_mod/models/item/bucket_lubricant.json
 cf52d760290802a0663969910d914e469dd3b8fd assets/infinity_nexus_mod/models/item/bucket_oil.json
 a43bccb8abace67b004a71f492dff68448495895 assets/infinity_nexus_mod/models/item/bucket_sugarcane_juice.json

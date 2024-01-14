@@ -123,6 +123,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.BUCKET_VINEGAR);
         simpleItem(ModItemsAdditions.BUCKET_SUGARCANE_JUICE);
         simpleItem(ModItemsAdditions.BUCKET_WINE);
+        simpleItem(ModItemsAdditions.BUCKET_EXPERIENCE);
 
         simpleItem(ModItemsAdditions.ALCOHOL_BOTTLE);
         simpleItem(ModItemsAdditions.VINEGAR_BOTTLE);

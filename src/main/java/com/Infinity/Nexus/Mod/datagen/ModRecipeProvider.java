@@ -315,6 +315,178 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_basic_enderpeal", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.BASIC_CIRCUIT.get()).build()))
                 .save(pWriter, "linking_tool");
 
+        //Infinity
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_HELMET.get())
+                .pattern("AAA")
+                .pattern("A A")
+                .define('A', ModItemsAdditions.INFINITY_INGOT.get())
+                .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
+                .save(pWriter, "infinity_helmet");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_CHESTPLATE.get())
+                .pattern("A A")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ModItemsAdditions.INFINITY_INGOT.get())
+                .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
+                .save(pWriter, "infinity_chestplate");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_LEGGINGS.get())
+                .pattern("AAA")
+                .pattern("A A")
+                .pattern("A A")
+                .define('A', ModItemsAdditions.INFINITY_INGOT.get())
+                .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
+                .save(pWriter, "infinity_leggings");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_BOOTS.get())
+                .pattern("A A")
+                .pattern("A A")
+                .define('A', ModItemsAdditions.INFINITY_INGOT.get())
+                .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
+                .save(pWriter, "infinity_boots");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_SWORD.get())
+                .pattern("A")
+                .pattern("A")
+                .pattern("B")
+                .define('A', ModItemsAdditions.INFINITY_INGOT.get())
+                .define('B', Items.STICK)
+                .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
+                .save(pWriter, "infinity_sword");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_PICKAXE.get())
+                .pattern("AAA")
+                .pattern(" B ")
+                .pattern(" B ")
+                .define('A', ModItemsAdditions.INFINITY_INGOT.get())
+                .define('B', Items.STICK)
+                .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
+                .save(pWriter, "infinity_pickaxe");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_AXE.get())
+                .pattern("AA ")
+                .pattern("AB ")
+                .pattern(" B ")
+                .define('A', ModItemsAdditions.INFINITY_INGOT.get())
+                .define('B', Items.STICK)
+                .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
+                .save(pWriter, "infinity_axe");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_SHOVEL.get())
+                .pattern("A")
+                .pattern("B")
+                .pattern("B")
+                .define('A', ModItemsAdditions.INFINITY_INGOT.get())
+                .define('B', Items.STICK)
+                .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
+                .save(pWriter, "infinity_shovel");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_HOE.get())
+                .pattern("AA")
+                .pattern(" B")
+                .pattern(" B")
+                .define('A', ModItemsAdditions.INFINITY_INGOT.get())
+                .define('B', Items.STICK)
+                .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
+                .save(pWriter, "infinity_hoe");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_PAXEL.get(), 9)
+                .pattern("ABC")
+                .pattern(" D ")
+                .pattern(" E ")
+                .define('A', ModItemsAdditions.INFINITY_AXE.get())
+                .define('B', ModItemsAdditions.INFINITY_SWORD.get())
+                .define('C', ModItemsAdditions.INFINITY_PICKAXE.get())
+                .define('D', ModItemsAdditions.INFINITY_SHOVEL.get())
+                .define('E', ModItemsAdditions.INFINITY_HOE.get())
+                .unlockedBy("has_infinity_axe", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_AXE.get()).build()))
+                .save(pWriter, "infinity_paxel");
+
+        //Imperial
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_HELMET.get())
+                .pattern("AAA")
+                .pattern("ABA")
+                .define('A', ModItemsAdditions.INFINITY_SINGULARITY.get())
+                .define('B', ModItemsAdditions.INFINITY_HELMET.get())
+                .unlockedBy("has_infinity_helmet", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_HELMET.get()).build()))
+                .save(pWriter, "imperial_infinity_helmet");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_CHESTPLATE.get())
+                .pattern("ABA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ModItemsAdditions.INFINITY_SINGULARITY.get())
+                .define('B', ModItemsAdditions.INFINITY_CHESTPLATE.get())
+                .unlockedBy("has_infinity_chestplate", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_CHESTPLATE.get()).build()))
+                .save(pWriter, "imperial_infinity_chestplate");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS.get())
+                .pattern("AAA")
+                .pattern("ABA")
+                .pattern("A A")
+                .define('A', ModItemsAdditions.INFINITY_SINGULARITY.get())
+                .define('B', ModItemsAdditions.INFINITY_LEGGINGS.get())
+                .unlockedBy("has_infinity_leggings", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_LEGGINGS.get()).build()))
+                .save(pWriter, "imperial_infinity_leggings");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_BOOTS.get())
+                .pattern("A A")
+                .pattern("ABA")
+                .define('A', ModItemsAdditions.INFINITY_SINGULARITY.get())
+                .define('B', ModItemsAdditions.INFINITY_BOOTS.get())
+                .unlockedBy("has_infinity_boots", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_BOOTS.get()).build()))
+                .save(pWriter, "imperial_infinity_boots");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_SWORD.get())
+                .pattern("A")
+                .pattern("B")
+                .pattern("C")
+                .define('A', ModItemsAdditions.INFINITY_SINGULARITY.get())
+                .define('B', ModItemsAdditions.INFINITY_SWORD.get())
+                .define('C', Items.STICK)
+                .unlockedBy("has_infinity_sword", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_SWORD.get()).build()))
+                .save(pWriter, "imperial_infinity_sword");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_PICKAXE.get())
+                .pattern("BBB")
+                .pattern(" A ")
+                .pattern(" C ")
+                .define('A', ModItemsAdditions.INFINITY_PICKAXE.get())
+                .define('B', ModItemsAdditions.INFINITY_SINGULARITY.get())
+                .define('C', Items.STICK)
+                .unlockedBy("has_infinity_pickaxe", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_PICKAXE.get()).build()))
+                .save(pWriter, "imperial_infinity_pickaxe");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_SHOVEL.get())
+                .pattern("B")
+                .pattern("A")
+                .pattern("C")
+                .define('A', ModItemsAdditions.INFINITY_SHOVEL.get())
+                .define('B', ModItemsAdditions.INFINITY_SINGULARITY.get())
+                .define('C', Items.STICK)
+                .unlockedBy("has_infinity_shovel", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_SHOVEL.get()).build()))
+                .save(pWriter, "imperial_infinity_shovel");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_HOE.get())
+                .pattern("B")
+                .pattern("A")
+                .pattern("C")
+                .define('A', ModItemsAdditions.INFINITY_HOE.get())
+                .define('B', ModItemsAdditions.INFINITY_SINGULARITY.get())
+                .define('C', Items.STICK)
+                .unlockedBy("has_infinity_hoe", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_HOE.get()).build()))
+                .save(pWriter, "imperial_infinity_hoe");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_AXE.get())
+                .pattern("BB ")
+                .pattern("BA ")
+                .pattern(" C ")
+                .define('A', ModItemsAdditions.INFINITY_AXE.get())
+                .define('B', ModItemsAdditions.INFINITY_SINGULARITY.get())
+                .define('C', Items.STICK)
+                .unlockedBy("has_infinity_axe", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_AXE.get()).build()))
+                .save(pWriter, "imperial_infinity_axe");
 
 
 
@@ -426,6 +598,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         oreBlasting(pWriter, ZINC_SMELTING, RecipeCategory.MISC, ModItemsAdditions.ZINC_INGOT.get(), 0.25f, 100, "zinc_ingot");
         oreBlasting(pWriter, URANIUM_SMELTING, RecipeCategory.MISC, ModItemsAdditions.URANIUM_INGOT.get(), 0.25f, 100, "uranium_ingot");
         oreBlasting(pWriter, SILVER_SMELTING, RecipeCategory.MISC, ModItemsAdditions.SILVER_INGOT.get(), 0.25f, 100, "silver_ingot");
+        oreBlasting(pWriter, List.of(ModItemsAdditions.BRASS_DUST.get()), RecipeCategory.MISC, ModItemsAdditions.BRASS_INGOT.get(), 0.25f, 100, "brass_ingot");
+        oreBlasting(pWriter, List.of(ModItemsAdditions.STEEL_DUST.get()), RecipeCategory.MISC, ModItemsAdditions.STEEL_INGOT.get(), 0.25f, 100, "steel_ingot");
 
         simpleCookingRecipe(pWriter,"campfire_cooking", RecipeSerializer.SMOKING_RECIPE,5, ModItemsProgression.RAW_ROD_CLAY_MODEL.get(), ModItemsProgression.ROD_CLAY_MODEL.get(), 0.25f);
         simpleCookingRecipe(pWriter,"campfire_cooking",RecipeSerializer.SMOKING_RECIPE,5, ModItemsProgression.RAW_SCREW_CLAY_MODEL.get(), ModItemsProgression.SCREW_CLAY_MODEL.get(), 0.25f);
