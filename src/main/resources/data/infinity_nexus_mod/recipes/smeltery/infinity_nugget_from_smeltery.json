@@ -1,7 +1,7 @@
 {
   "type": "infinity_nexus_mod:melting",
   "energy": 1200,
-  "duration": 24000,
+  "duration": 2000,
   "ingredients": [
     {
       "item": "infinity_nexus_mod:integral_component",

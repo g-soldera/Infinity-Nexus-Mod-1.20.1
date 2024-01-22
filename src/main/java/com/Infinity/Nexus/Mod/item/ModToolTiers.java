@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.item;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.utils.ModTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Tier;
@@ -16,19 +17,19 @@ public class ModToolTiers {
             new ForgeTier(
                     7,
                     -1,
-                    20,
+                    30,
                     -1,
                     70,
-                    BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get())),
+                    ModTags.Blocks.MINEABLE_WITH_INFINITY, () -> Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get())),
             new ResourceLocation(InfinityNexusMod.MOD_ID, "infinity"), List.of(Tiers.DIAMOND), List.of());
 
     public static final Tier IMPERIAL = TierSortingRegistry.registerTier(
             new ForgeTier(
                     8,
                     -1,
-                    25,
+                    35,
                     -1,
                     80,
-                    BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get())),
+                    ModTags.Blocks.MINEABLE_WITH_INFINITY, () -> Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get())),
             new ResourceLocation(InfinityNexusMod.MOD_ID, "imperial"), List.of(Tiers.DIAMOND), List.of());
 }

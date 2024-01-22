@@ -1,7 +1,7 @@
 {
   "type": "infinity_nexus_mod:crushing",
   "energy": 1200,
-  "duration": 1200,
+  "duration": 800,
   "ingredients": [
     {
       "item": "infinity_nexus_mod:reinforced_component"

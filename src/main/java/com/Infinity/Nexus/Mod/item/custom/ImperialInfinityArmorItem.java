@@ -13,25 +13,31 @@ import net.minecraft.world.level.Level;
 
 
 public class ImperialInfinityArmorItem extends  ArmorItem{
+    private static int delay;
+    private static int maxDelay = 80*20;
     public ImperialInfinityArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties settings) {
         super(material, type, settings);
     }
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if(!pLevel.isClientSide() && pEntity instanceof Player) {
-            Player player = (Player) pEntity;
+        if(!pLevel.isClientSide() && pEntity instanceof Player player) {
             if (hasFullSuitOfArmorOn(player)) {
                 player.getAbilities().mayfly = true;
                 player.getAbilities().invulnerable = true;
                 player.getFoodData().setSaturation(20);
                 player.getFoodData().setFoodLevel(20);
-                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 200, 1, false, false));
-                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 1, false, false));
-                player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 200, 1, false, false));
-                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 1, false, false));
-                player.addEffect(new MobEffectInstance(MobEffects.LUCK, 200, 1, false, false));
-                player.addEffect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 200, 1, false, false));
+                if (delay >= maxDelay) {
+                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1000, 1, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1000, 1, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 1000, 1, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1000, 1, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.LUCK, 1000, 1, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 1000, 1, false, false));
+                    delay = 0;
+                }else{
+                    delay++;
+                }
                 player.onUpdateAbilities();
             }else{
                 player.getAbilities().flying = false;

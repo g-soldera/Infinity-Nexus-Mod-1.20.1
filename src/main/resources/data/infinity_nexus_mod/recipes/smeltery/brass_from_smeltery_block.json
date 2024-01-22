@@ -1,7 +1,7 @@
 {
   "type": "infinity_nexus_mod:melting",
   "energy": 1200,
-  "duration": 10000,
+  "duration": 1200,
   "ingredients": [
     {
       "item": "infinity_nexus_mod:advanced_component",
@@ -13,11 +13,11 @@
     },
     {
       "item": "minecraft:copper_block",
-      "count": 2
+      "count": 1
     }
   ],
   "output": {
-    "item": "infinity_nexus_mod:bronze_block",
+    "item": "infinity_nexus_mod:brass_block",
     "count": 3
   }
 }

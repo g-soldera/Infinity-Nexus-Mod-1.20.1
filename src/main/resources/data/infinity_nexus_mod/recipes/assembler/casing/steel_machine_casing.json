@@ -1,7 +1,7 @@
 {
   "type": "infinity_nexus_mod:assembler",
   "duration": 12000,
-  "energy": 1200,
+  "energy": 1000,
   "ingredients": [
     {
       "item": "infinity_nexus_mod:refined_component"

@@ -307,7 +307,10 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
     private void setMaxProgress() {
-        maxProgress = getCurrentRecipe().get().getDuration();
+            int duration = getCurrentRecipe().get().getDuration();
+            int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS);
+            maxProgress = duration / (speed + 1);
+            System.out.println(maxProgress);
     }
 
     private void extractEnergy(AssemblerBlockEntity assemblerBlockEntity) {
@@ -425,7 +428,13 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         if(this.FLUID_STORAGE.getFluidAmount() > 0) {
             speed++;
         };
-        progress += ((ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS)+1) + getMachineLevel()+1) + speed;
+        int modSpeed = ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS);
+        int machineLevel = getMachineLevel();
+
+        speed += modSpeed + machineLevel;
+
+        System.out.println(speed);
+        progress += speed;
     }
 
     public static int getInputSlot() {
