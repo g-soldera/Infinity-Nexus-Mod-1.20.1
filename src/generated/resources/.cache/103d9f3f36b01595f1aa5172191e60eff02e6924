@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-03T18:36:36.5259815	Registries
+// 1.20.1	2024-01-26T12:32:59.7325943	Registries
 f1d9920647b4b3e93eaf9ffd2c3e4d23026988c9 data/infinity_nexus_mod/forge/biome_modifier/aluminum_ore.json
 e502da4f84da53e0b639f6b5d42a7b31b0a461e3 data/infinity_nexus_mod/forge/biome_modifier/infinity_ore.json
 18db1702ede45446df765ff400385e0df43626fe data/infinity_nexus_mod/forge/biome_modifier/lead_ore.json
@@ -16,7 +16,7 @@ bbdcbd4d7607840603a2c3de30173b06dfede2a8 data/infinity_nexus_mod/worldgen/config
 f8f01eb60aa9bc3acc1a1fc248b1f84eeb2a469e data/infinity_nexus_mod/worldgen/configured_feature/overworld_uranium_ore.json
 2eaffc6c1636bd9dd95cc2aa79994b1c72fe2239 data/infinity_nexus_mod/worldgen/configured_feature/overworld_zinc_ore.json
 c37357cd1f76581755ce4e3823bbc27b8b59ad7b data/infinity_nexus_mod/worldgen/placed_feature/aluminum_ore_placed.json
-713e865a027071bede69e036aa428a521ba5f100 data/infinity_nexus_mod/worldgen/placed_feature/infinity_ore_placed.json
+b1b631b78cd2e67c2c671cc84e680b3498b3b428 data/infinity_nexus_mod/worldgen/placed_feature/infinity_ore_placed.json
 8ba8e2b3283abc565ba75e545e36c678b251234e data/infinity_nexus_mod/worldgen/placed_feature/lead_ore_placed.json
 16a3668e262d3741cd01d36d5f95ae0f724f9618 data/infinity_nexus_mod/worldgen/placed_feature/nickel_ore_placed.json
 b2ad5f215952e5f6cf309b032062aa4e87b4e86f data/infinity_nexus_mod/worldgen/placed_feature/silver_ore_placed.json

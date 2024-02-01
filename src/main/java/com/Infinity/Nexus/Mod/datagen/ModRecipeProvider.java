@@ -391,7 +391,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
                 .save(pWriter, "infinity_hoe");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_PAXEL.get(), 9)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_PAXEL.get())
                 .pattern("ABC")
                 .pattern(" D ")
                 .pattern(" E ")
@@ -487,6 +487,18 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Items.STICK)
                 .unlockedBy("has_infinity_axe", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_AXE.get()).build()))
                 .save(pWriter, "imperial_infinity_axe");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_PAXEL.get())
+                .pattern("ABC")
+                .pattern(" D ")
+                .pattern(" E ")
+                .define('A', ModItemsAdditions.IMPERIAL_INFINITY_AXE.get())
+                .define('B', ModItemsAdditions.IMPERIAL_INFINITY_SWORD.get())
+                .define('C', ModItemsAdditions.IMPERIAL_INFINITY_PICKAXE.get())
+                .define('D', ModItemsAdditions.IMPERIAL_INFINITY_SHOVEL.get())
+                .define('E', ModItemsAdditions.IMPERIAL_INFINITY_HOE.get())
+                .unlockedBy("has_imperial_infinity_axe", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.IMPERIAL_INFINITY_AXE.get()).build()))
+                .save(pWriter, "imperial_infinity_paxel");
 
 
 

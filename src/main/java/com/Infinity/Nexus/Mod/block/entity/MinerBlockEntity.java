@@ -115,7 +115,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     private int progress = 0;
     private int maxProgress = 80;
     private int verify = 0;
-    private int maxVerify = 15;
+    private int maxVerify = 7;
     private int structure;
 
 
@@ -358,21 +358,22 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void craftItem(BlockPos pos, int machineLevel) {
+            ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
+            if (component.getDamageValue() >= component.getMaxDamage() && component.getItem() != ModItemsAdditions.INFINITY_COMPONENT.get()) {
+                component.shrink(1);
+                level.playSound(null, this.getBlockPos(), SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
+            }
 
-        ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
-        component.hurt(1, this.level.random, null);
-        if (component.getDamageValue() >= component.getMaxDamage() && component.getItem() != ModItemsAdditions.INFINITY_COMPONENT.get()) {
-            component.shrink(1);
-            level.playSound(null, this.getBlockPos(), SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
-        }
-        int fortune = getFortuneLevel();
-        ItemStack output = getOutputItem(pos, fortune, machineLevel);
+            int fortune = getFortuneLevel();
+            ItemStack output = getOutputItem(pos, fortune, machineLevel);
 
-        if(output.getItem() == ModItemsAdditions.RAW_INFINITY.get() && machineLevel < 6){
-            return;
-        }
-        insertItemOnInventory(output);
-        level.playSound(null, this.getBlockPos(), SoundEvents.BEE_HURT, SoundSource.BLOCKS, 0.4f, 1.0f);
+            if ((output.getItem() == ModItemsAdditions.RAW_INFINITY.get() && machineLevel < 6) || (output.getItem() == Blocks.ANCIENT_DEBRIS.asItem() && machineLevel < 4)) {
+                return;
+            }
+            insertItemOnInventory(output);
+            component.hurt(1, this.level.random, null);
+            level.playSound(null, this.getBlockPos(), SoundEvents.BEE_HURT, SoundSource.BLOCKS, 0.4f, 1.0f);
+
 
     }
 
@@ -449,30 +450,53 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         try {
             if(itemHandler.getStackInSlot(LINK_SLOT).is(ModItemsAdditions.LINKING_TOOL.get())){
                 ItemStack linkingTool = itemHandler.getStackInSlot(LINK_SLOT).copy();
-                CompoundTag nbt = linkingTool.getOrCreateTag();
                 AtomicBoolean success = new AtomicBoolean(false);
-                BlockEntity blockEntity = this.level.getBlockEntity(new BlockPos(nbt.getInt("X"), nbt.getInt("Y"), nbt.getInt("Z")));
-                if (blockEntity != null && canLink(blockEntity)) {
-                    blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, getLinkedSide()).ifPresent(iItemHandler -> {
-                        for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
-                            if (ModUtils.canPlaceItemInContainer(itemStack.copy(), slot, iItemHandler) && iItemHandler.isItemValid(slot, itemStack.copy())) {
-                                iItemHandler.insertItem(slot, itemStack.copy(), false);
-                                success.set(true);
-                                break;
-                            }
-                        }
+                String name = linkingTool.getDisplayName().getString();
+                if(linkingTool.hasCustomHoverName()) {
+                    String[] parts = name.substring(1, name.length() - 1).split(",");
+                    int xl = 0;
+                    int yl = 0;
+                    int zl = 0;
+                    String facel = "up";
 
-                        for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
-                            for(int outputSlot : OUTPUT_SLOT){
-                                if(!itemHandler.getStackInSlot(outputSlot).isEmpty() && iItemHandler.isItemValid(slot, itemStack.copy()) && ModUtils.canPlaceItemInContainer(itemHandler.getStackInSlot(outputSlot).copy(), slot, iItemHandler)) {
-                                    iItemHandler.insertItem(slot, itemHandler.getStackInSlot(outputSlot).copy(), false);
-                                    itemHandler.extractItem(outputSlot, itemHandler.getStackInSlot(outputSlot).getCount(), false);
+                    for (String part : parts) {
+                        String[] keyValue = part.split("=");
+                        String key = keyValue[0].trim();
+                        String value = keyValue[1].trim();
+
+                        if (key.equals("x")) {
+                            xl = Integer.parseInt(value);
+                        } else if (key.equals("y")) {
+                            yl = Integer.parseInt(value);
+                        } else if (key.equals("z")) {
+                            zl = Integer.parseInt(value);
+                        } else if (key.equals("face")) {
+                            facel = value;
+                        }
+                    }
+                    BlockEntity blockEntity = this.level.getBlockEntity(new BlockPos(xl, yl, zl));
+                    if (blockEntity != null && canLink(blockEntity)) {
+                        blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, getLinkedSide(facel)).ifPresent(iItemHandler -> {
+                            for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
+                                if (ModUtils.canPlaceItemInContainer(itemStack.copy(), slot, iItemHandler) && iItemHandler.isItemValid(slot, itemStack.copy())) {
+                                    iItemHandler.insertItem(slot, itemStack.copy(), false);
                                     success.set(true);
                                     break;
                                 }
                             }
-                        }
-                    });
+
+                            for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
+                                for (int outputSlot : OUTPUT_SLOT) {
+                                    if (!itemHandler.getStackInSlot(outputSlot).isEmpty() && iItemHandler.isItemValid(slot, itemStack.copy()) && ModUtils.canPlaceItemInContainer(itemHandler.getStackInSlot(outputSlot).copy(), slot, iItemHandler)) {
+                                        iItemHandler.insertItem(slot, itemHandler.getStackInSlot(outputSlot).copy(), false);
+                                        itemHandler.extractItem(outputSlot, itemHandler.getStackInSlot(outputSlot).getCount(), false);
+                                        success.set(true);
+                                        break;
+                                    }
+                                }
+                            }
+                        });
+                    }
                 }
                 if(!success.get()) {
                     insertItemOnSelfInventory(itemStack);
@@ -482,24 +506,22 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             }
 
         }catch (Exception e){
-            System.out.println("&f[INM&f]&4: Failed to insert item in: " + this.getBlockPos());
-            e.printStackTrace();
+            System.out.println("§f[INM§f]§c: Failed to insert item in: " + this.getBlockPos());
         }
     }
-    private Direction getLinkedSide() {
-        int side = itemHandler.getStackInSlot(LINK_SLOT).getOrCreateTag().getInt("Side");
+    private Direction getLinkedSide(String side) {
         switch (side){
-            case 0:
+            case "up":
                 return Direction.UP;
-            case 1:
+            case "down":
                 return Direction.DOWN;
-            case 2:
+            case "north":
                 return Direction.NORTH;
-            case 3:
+            case "south":
                 return Direction.SOUTH;
-            case 4:
+            case "west":
                 return Direction.WEST;
-            case 5:
+            case "east":
                 return Direction.EAST;
             default:
                 return Direction.UP;

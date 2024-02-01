@@ -30,8 +30,8 @@ public class ModPlacedFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, INFINITY_ORE, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_INFINITY_ORE),
-                ModOrePlacement.commonOrePlacement(10,
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(70))));
+                ModOrePlacement.commonOrePlacement(12,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80))));
 
         register(context, LEAD_ORE, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_LEAD_ORE),
                 ModOrePlacement.commonOrePlacement(12,

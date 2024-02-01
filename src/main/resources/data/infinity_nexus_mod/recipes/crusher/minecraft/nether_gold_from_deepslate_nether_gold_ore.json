@@ -12,7 +12,7 @@
     }
   ],
   "output": {
-    "item": "minecraft:gold_nugget",
-    "count": 6
+    "item": "infinity_nexus_mod:gold_dust",
+    "count": 3
   }
 }

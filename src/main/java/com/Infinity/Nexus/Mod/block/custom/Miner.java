@@ -4,14 +4,18 @@ import com.Infinity.Nexus.Mod.block.entity.MinerBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
 import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
 import com.Infinity.Nexus.Mod.item.custom.UpgradeItem;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -30,6 +34,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class Miner extends BaseEntityBlock {
 
@@ -128,5 +134,17 @@ public class Miner extends BaseEntityBlock {
 
         return createTickerHelper(pBlockEntityType, ModBlockEntities.MINER_BE.get(),
                 (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1));
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> components, TooltipFlag flag) {
+            if (Screen.hasShiftDown()) {
+                components.add(Component.translatable("item.infinity_nexus.miner_description"));
+            } else {
+                components.add(Component.translatable("tooltip.infinity_nexus.pressShift"));
+            }
+
+            super.appendHoverText(stack, level, components, flag);
+
     }
 }

@@ -22,7 +22,7 @@ public class ItemDislocator extends Item {
     @Override
     public @NotNull InteractionResult useOn(UseOnContext pContext) {
         if (pContext.getLevel().isClientSide) {
-            System.out.println("Client side");
+            return InteractionResult.SUCCESS;
         }
         return InteractionResult.SUCCESS;
     }

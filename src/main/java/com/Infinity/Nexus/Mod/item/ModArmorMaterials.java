@@ -12,11 +12,11 @@ import java.util.function.Supplier;
 public enum ModArmorMaterials implements ArmorMaterial {
 
     IMPERIAL("imperial_infinity", -1,
-            new int[]{0,0,0,0}, 80, SoundEvents.ARMOR_EQUIP_NETHERITE, 0f, 0f, () -> {
+            new int[]{13,15,20,12}, 80, SoundEvents.ARMOR_EQUIP_NETHERITE, 15f, 30f, () -> {
         return Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get());
     }),
     INFINITY("infinity", -1,
-            new int[]{0,0,0,0},
+            new int[]{15,20,25,15},
             0, SoundEvents.ARMOR_EQUIP_DIAMOND, 0f, 0f, () ->{
         return Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get());
     });

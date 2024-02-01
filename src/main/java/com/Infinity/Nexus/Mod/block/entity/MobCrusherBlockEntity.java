@@ -33,6 +33,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -301,10 +302,10 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasMobInside(int machinelevel, BlockPos pPos, Level pLevel) {
-        List<Mob> mobs = new ArrayList<>(pLevel.getEntitiesOfClass(Mob.class, new AABB(pPos.offset(-machinelevel, 1, -machinelevel), pPos.offset(machinelevel,machinelevel,machinelevel))));
+        machinelevel = machinelevel + 1;
+        List<Mob> mobs = new ArrayList<>(pLevel.getEntitiesOfClass(Mob.class, new AABB(pPos.offset( machinelevel * -1, 0,  machinelevel * -1), pPos.offset(+machinelevel,3,+machinelevel))));
         return !mobs.isEmpty();
     }
-
     private void extractEnergy(MobCrusherBlockEntity mobCrusherBlockEntity) {
         int machineLevel = getMachineLevel() + 1;
         int maxProgress = mobCrusherBlockEntity.maxProgress;
@@ -439,7 +440,6 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
 
     private void renderArea(Level pLevel, BlockPos pPos, int machinelevel){
         AABB aabb = new AABB(pPos.offset(-machinelevel, 1, -machinelevel), pPos.offset(machinelevel,machinelevel,machinelevel));
-        System.out.println("Render Area: " + aabb);
         //render particles in aabb border
         pPos = this.getBlockPos();
        Objects.requireNonNull(this.getLevel()).addParticle(ParticleTypes.FLAME, pPos.getX() + 0.5D, pPos.getY() + 1D, pPos.getZ() + 0.5D, 0, 0, 0);
@@ -447,7 +447,8 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
 
     public void verifyMobs(Level pLevel, BlockPos pPos, int machinelevel) {
         try {
-            List<Mob> entities = pLevel.getEntitiesOfClass(Mob.class, new AABB(pPos.offset(-machinelevel, 1, -machinelevel), pPos.offset(machinelevel,machinelevel,machinelevel)));
+            machinelevel = machinelevel + 1;
+            List<Mob> entities = new ArrayList<>(pLevel.getEntitiesOfClass(Mob.class, new AABB(pPos.offset( machinelevel * -1, 0,  machinelevel * -1), pPos.offset(+machinelevel,3,+machinelevel))));
             if (!entities.isEmpty()) {
                 boolean hasFreeSlots = hasFreeSlots();
                 if(!hasFreeSlots && entities.size() > 30) {
@@ -462,9 +463,10 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
                         }
                     }
                 }
+                System.out.println(entities.size());
             }
         }catch (Exception e){
-            System.out.println("&f[INM&f]&4: Failed to kill mobs in: " + pPos);
+            System.out.println("§f[INM§f]§4: Failed to kill mobs in: " + pPos);
             e.printStackTrace();
         }
     }
@@ -476,22 +478,46 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
     private boolean hasFreeSlots() {
         AtomicInteger freeSlots = new AtomicInteger(0);
         ItemStack linkingTool = itemHandler.getStackInSlot(LINK_SLOT).copy();
-        CompoundTag nbt = linkingTool.getOrCreateTag();
-        BlockEntity blockEntity = this.level.getBlockEntity(new BlockPos(nbt.getInt("X"), nbt.getInt("Y"), nbt.getInt("Z")));
-        if (blockEntity != null) {
-            LazyOptional<IItemHandler> itemHandlerCap = blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, getLinkedSide());
-            if (!itemHandlerCap.isPresent()) {
-                return false;
-            }
+        String name = linkingTool.getDisplayName().getString();
 
-            itemHandlerCap.ifPresent(itemHandler -> {
-                for (int slot = 0; slot < itemHandler.getSlots(); slot++) {
-                    ItemStack stackInSlot = itemHandler.getStackInSlot(slot);
-                    if (stackInSlot.isEmpty()) {
-                        freeSlots.getAndIncrement();
-                    }
+        if(linkingTool.hasCustomHoverName()) {
+            String[] parts = name.substring(1, name.length() - 1).split(",");
+            int xl = 0;
+            int yl = 0;
+            int zl = 0;
+            String facel = "up";
+
+            for (String part : parts) {
+                String[] keyValue = part.split("=");
+                String key = keyValue[0].trim();
+                String value = keyValue[1].trim();
+
+                if (key.equals("x")) {
+                    xl = Integer.parseInt(value);
+                } else if (key.equals("y")) {
+                    yl = Integer.parseInt(value);
+                } else if (key.equals("z")) {
+                    zl = Integer.parseInt(value);
+                } else if (key.equals("face")) {
+                    facel = value;
                 }
-            });
+            }
+            BlockEntity blockEntity = this.level.getBlockEntity(new BlockPos(xl, yl, zl));
+            if (blockEntity != null) {
+                LazyOptional<IItemHandler> itemHandlerCap = blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, getLinkedSide(facel));
+                if (!itemHandlerCap.isPresent()) {
+                    return false;
+                }
+
+                itemHandlerCap.ifPresent(itemHandler -> {
+                    for (int slot = 0; slot < itemHandler.getSlots(); slot++) {
+                        ItemStack stackInSlot = itemHandler.getStackInSlot(slot);
+                        if (stackInSlot.isEmpty()) {
+                            freeSlots.getAndIncrement();
+                        }
+                    }
+                });
+            }
         }
         for (int slot : OUTPUT_SLOT) {
             if (this.itemHandler.getStackInSlot(slot).isEmpty()) {
@@ -501,65 +527,87 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         return freeSlots.get() > 0;
     }
 
-    private Direction getLinkedSide() {
-        int side = itemHandler.getStackInSlot(LINK_SLOT).getOrCreateTag().getInt("Side");
-        switch (side){
-            case 0:
-                return Direction.UP;
-            case 1:
-                return Direction.DOWN;
-            case 2:
-                return Direction.NORTH;
-            case 3:
-                return Direction.SOUTH;
-            case 4:
-                return Direction.WEST;
-            case 5:
-                return Direction.EAST;
-            default:
-                return Direction.UP;
-        }
-    }
-
     private void insertItemOnInventory(ItemStack itemStack) {
         try {
-                if(itemHandler.getStackInSlot(LINK_SLOT).is(ModItemsAdditions.LINKING_TOOL.get())){
-                    ItemStack linkingTool = itemHandler.getStackInSlot(LINK_SLOT).copy();
-                    CompoundTag nbt = linkingTool.getOrCreateTag();
-                    AtomicBoolean success = new AtomicBoolean(false);
-                    BlockEntity blockEntity = this.level.getBlockEntity(new BlockPos(nbt.getInt("X"), nbt.getInt("Y"), nbt.getInt("Z")));
-                    if (blockEntity != null && canLink(blockEntity)) {
-                        blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, getLinkedSide()).ifPresent(iItemHandler -> {
-                        for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
-                            if (ModUtils.canPlaceItemInContainer(itemStack.copy(), slot, iItemHandler) && iItemHandler.isItemValid(slot, itemStack.copy())) {
-                                iItemHandler.insertItem(slot, itemStack.copy(), false);
-                                success.set(true);
-                                break;
-                            }
-                        }
+            if(itemHandler.getStackInSlot(LINK_SLOT).is(ModItemsAdditions.LINKING_TOOL.get())){
+                ItemStack linkingTool = itemHandler.getStackInSlot(LINK_SLOT).copy();
+                AtomicBoolean success = new AtomicBoolean(false);
+                String name = linkingTool.getDisplayName().getString();
 
-                        for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
-                            for(int outputSlot : OUTPUT_SLOT){
-                                if(!itemHandler.getStackInSlot(outputSlot).isEmpty() && iItemHandler.isItemValid(slot, itemStack.copy()) && ModUtils.canPlaceItemInContainer(itemHandler.getStackInSlot(outputSlot).copy(), slot, iItemHandler)) {
-                                    iItemHandler.insertItem(slot, itemHandler.getStackInSlot(outputSlot).copy(), false);
-                                    itemHandler.extractItem(outputSlot, itemHandler.getStackInSlot(outputSlot).getCount(), false);
+                if(linkingTool.hasCustomHoverName()) {
+                    String[] parts = name.substring(1, name.length() - 1).split(",");
+                    int xl = 0;
+                    int yl = 0;
+                    int zl = 0;
+                    String facel = "up";
+
+                    for (String part : parts) {
+                        String[] keyValue = part.split("=");
+                        String key = keyValue[0].trim();
+                        String value = keyValue[1].trim();
+
+                        if (key.equals("x")) {
+                            xl = Integer.parseInt(value);
+                        } else if (key.equals("y")) {
+                            yl = Integer.parseInt(value);
+                        } else if (key.equals("z")) {
+                            zl = Integer.parseInt(value);
+                        } else if (key.equals("face")) {
+                            facel = value;
+                        }
+                    }
+                    BlockEntity blockEntity = this.level.getBlockEntity(new BlockPos(xl, yl, zl));
+                    if (blockEntity != null && canLink(blockEntity)) {
+                        blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, getLinkedSide(facel)).ifPresent(iItemHandler -> {
+                            for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
+                                if (ModUtils.canPlaceItemInContainer(itemStack.copy(), slot, iItemHandler) && iItemHandler.isItemValid(slot, itemStack.copy())) {
+                                    iItemHandler.insertItem(slot, itemStack.copy(), false);
                                     success.set(true);
                                     break;
                                 }
                             }
-                        }
-                    });
-                }
-                    if(!success.get()) {
-                        insertItemOnSelfInventory(itemStack);
+
+                            for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
+                                for (int outputSlot : OUTPUT_SLOT) {
+                                    if (!itemHandler.getStackInSlot(outputSlot).isEmpty() && iItemHandler.isItemValid(slot, itemStack.copy()) && ModUtils.canPlaceItemInContainer(itemHandler.getStackInSlot(outputSlot).copy(), slot, iItemHandler)) {
+                                        iItemHandler.insertItem(slot, itemHandler.getStackInSlot(outputSlot).copy(), false);
+                                        itemHandler.extractItem(outputSlot, itemHandler.getStackInSlot(outputSlot).getCount(), false);
+                                        success.set(true);
+                                        break;
+                                    }
+                                }
+                            }
+                        });
                     }
+                }
+                if(!success.get()) {
+                    insertItemOnSelfInventory(itemStack);
+                }
             }else{
                 insertItemOnSelfInventory(itemStack);
             }
 
         }catch (Exception e){
-            System.out.println("&f[INM&f]&4: Failed to insert item in: " + this.getBlockPos());
+            System.out.println("§f[INM§f]§4: Failed to insert item in: " + this.getBlockPos());
             e.printStackTrace();
+        }
+    }
+    private Direction getLinkedSide(String side) {
+        switch (side){
+            case "up":
+                return Direction.UP;
+            case "down":
+                return Direction.DOWN;
+            case "north":
+                return Direction.NORTH;
+            case "south":
+                return Direction.SOUTH;
+            case "west":
+                return Direction.WEST;
+            case "east":
+                return Direction.EAST;
+            default:
+                return Direction.UP;
         }
     }
     private void insertItemOnSelfInventory(ItemStack itemStack){

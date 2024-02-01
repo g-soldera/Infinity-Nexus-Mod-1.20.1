@@ -180,7 +180,6 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
         }
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-
     @Override
     public Component getDisplayName() {
         return Component.translatable("block.infinity_nexus_mod.generator").append(" LV "+ getMachineLevel());
@@ -300,11 +299,22 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void insertEnergy() {
-        this.ENERGY_STORAGE.receiveEnergy(ENERGY_TRANSFER, false);
+        try {
+            this.ENERGY_STORAGE.receiveEnergy(ENERGY_TRANSFER, false);
+        } catch (Exception e) {
+            System.out.println("&f[INM&f]&4: Failed to find energy cap.");
+            e.printStackTrace();
+        }
     }
 
     private boolean canInsertEnergy(GeneratorBlockEntity generatorBlockEntity) {
-        return (generatorBlockEntity.ENERGY_STORAGE.getEnergyStored() + ENERGY_TRANSFER) < generatorBlockEntity.ENERGY_STORAGE.getMaxEnergyStored();
+        try {
+            return (generatorBlockEntity.ENERGY_STORAGE.getEnergyStored() + ENERGY_TRANSFER) < generatorBlockEntity.ENERGY_STORAGE.getMaxEnergyStored();
+        } catch (Exception e) {
+            System.out.println("&f[INM&f]&4: Failed to find energy cap.");
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private boolean hasFuel(GeneratorBlockEntity generatorBlockEntity) {
@@ -392,5 +402,8 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
                 }
             }
         }
+    }
+    public int getSpace(){
+        return 0;
     }
 }

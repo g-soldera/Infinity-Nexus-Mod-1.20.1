@@ -296,5 +296,8 @@
   "item.infinity_nexus_mod.gold_dust": "Pó de Ouro",
 
   "item.infinity_nexus_mod.linking_tool":"Ferramenta de ligação",
-  "tooltip.infinity_nexus.linking_tool": "§bSegure §eShift + Clique §bmirando em um inventário para selecionar o cofre de destino"
+  "tooltip.infinity_nexus.linking_tool": "§bRenomeie este item usando o exemplo abaixo com as coordenadas de destino dos itens (raio de ação: 100 blocos).\n\n§ex=30,y=-51,z=-77,face=up\n\nLados permitidos:\n§bnorth, south, east, west, up, down.",
+  "item.infinity_nexus.miner_description": "§5Mineradora Multibloco.\n§bDeve ser colocada na altura correta em relação ao solo, dependendo do nível do componente instalado.\n§9Adicione energia e aguarde um pouco para que seja criado um exemplo de montagem.\n§fRedstone: 5° §a-> Copper.\n§fBasic: 5° §a-> Iron.\n§eReinforced: 7° §a-> Tin.\n§eLogic: 7° §a-> Nickel.\n§cAdvanced: 9° §a-> Brass.\n§cRefined: 9° §a-> Steel.\n§5Integral: 11° §a-> Industrial.\n§5Infinity: 11° §a-> Infinity.",
+  "item.infinity_nexus.mod_crusher_description": "Executa rapidamente e silenciosamente inimigos que estiverem acima; a área depende do componente instalado. Caso haja muitos inimigos dentro do raio de ação do Mob Crusher e seus compartimentos estiverem cheios, todos serão executados sem chance de drops.\n§fRedstone:  §a1x1.\n§fBasic: §a3x3.\n§eReinforced: §a5x5\n§eLogic: §a7x7.\n§cAdvanced: §a9x9.\n§cRefined: §a11x11.\n§5Integral: §a13x13.\n§5Infinity: §a15x15"
+
 }

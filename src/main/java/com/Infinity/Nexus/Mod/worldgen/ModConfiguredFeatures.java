@@ -65,7 +65,7 @@ public class ModConfiguredFeatures {
         );
 
 
-        register(context, OVERWORLD_INFINITY_ORE, Feature.ORE, new OreConfiguration(overworldInfinityOres, 1));
+        register(context, OVERWORLD_INFINITY_ORE, Feature.ORE, new OreConfiguration(overworldInfinityOres, 9));
         register(context, OVERWORLD_LEAD_ORE, Feature.ORE, new OreConfiguration(overworldLeadOres, 9));
         register(context, OVERWORLD_ALUMINUM_ORE, Feature.ORE, new OreConfiguration(overworldAluminumOres, 9));
         register(context, OVERWORLD_NICKEL_ORE, Feature.ORE, new OreConfiguration(overworldNickelOres, 9));

@@ -99,5 +99,31 @@ public class ModUtils {
 
         return true;
     }
-
+    public static int getMobCrusherLevel(ItemStack stack) {
+        if (stack.getItem() == ModItemsAdditions.REDSTONE_COMPONENT.get()) {
+            return 1;
+        }
+        if (stack.getItem() == ModItemsAdditions.BASIC_COMPONENT.get()) {
+            return 3;
+        }
+        if (stack.getItem() == ModItemsAdditions.REINFORCED_COMPONENT.get()) {
+            return 5;
+        }
+        if (stack.getItem() == ModItemsAdditions.LOGIC_COMPONENT.get()) {
+            return 7;
+        }
+        if (stack.getItem() == ModItemsAdditions.ADVANCED_COMPONENT.get()) {
+            return 9;
+        }
+        if (stack.getItem() == ModItemsAdditions.REFINED_COMPONENT.get()) {
+            return 11;
+        }
+        if (stack.getItem() == ModItemsAdditions.INTEGRAL_COMPONENT.get()) {
+            return 13;
+        }
+        if (stack.getItem() == ModItemsAdditions.INFINITY_COMPONENT.get()) {
+            return 15;
+        }
+        return 0;
+    }
 }

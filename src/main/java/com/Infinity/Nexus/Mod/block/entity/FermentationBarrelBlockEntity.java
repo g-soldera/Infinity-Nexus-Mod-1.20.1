@@ -256,7 +256,6 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
             //TODO
             if(iFluidHandlerItem.getContainer().getItem() instanceof BucketItem) {
                 if(this.FLUID_STORAGE_INPUT.getSpace() >= 1000){
-                    System.out.println("1000");
                     FluidStack stack = iFluidHandlerItem.drain(1000, IFluidHandler.FluidAction.EXECUTE);
                     this.FLUID_STORAGE_INPUT.fill(new FluidStack(stack.getFluid(), stack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
                     removeContainer(iFluidHandlerItem.getContainer(), 0);

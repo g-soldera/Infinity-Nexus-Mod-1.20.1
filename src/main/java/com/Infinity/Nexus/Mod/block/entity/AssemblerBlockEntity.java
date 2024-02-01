@@ -310,7 +310,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
             int duration = getCurrentRecipe().get().getDuration();
             int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS);
             maxProgress = duration / (speed + 1);
-            System.out.println(maxProgress);
     }
 
     private void extractEnergy(AssemblerBlockEntity assemblerBlockEntity) {
@@ -432,8 +431,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         int machineLevel = getMachineLevel();
 
         speed += modSpeed + machineLevel;
-
-        System.out.println(speed);
         progress += speed;
     }
 
