@@ -291,7 +291,7 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
         ItemStack result = recipe.get().getResultItem(null);
         int[] inputCount = recipe.get().getInputCount();
         //TODO
-        for(int i = 1; i < inputCount.length; i++){
+        for(int i = 1; i < recipe.get().getIngredients().size(); i++){
             this.itemHandler.extractItem(i-1, inputCount[i], false);
         }
 
