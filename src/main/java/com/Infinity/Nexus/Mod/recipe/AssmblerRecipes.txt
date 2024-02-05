@@ -42,26 +42,19 @@ public class AssemblerRecipes implements Recipe<SimpleContainer> {
         if (pLevel.isClientSide()) {
             return false;
         }
-        int matches = 0;
-        StringBuilder verifiedSlots = new StringBuilder();
+
         int componentSlot = AssemblerBlockEntity.getComponentSlot();
         ItemStack stack = pContainer.getItem(componentSlot);
 
-        // Para cada ingrediente na receita
         for (int i = 1; i < inputItems.size(); i++) {
-            // Compare com cada slot de 0 a 6
-            for (int j = 0; j < 8; j++) {
-                if (inputItems.get(i).test(pContainer.getItem(j)) && !verifiedSlots.toString().contains(String.valueOf(j))) {
-                    matches++;
-                    verifiedSlots.append(" ").append(j);
-                    break;
-                }
+
+            if (!inputItems.get(i).test(pContainer.getItem(i-1))) {
+                return false;
             }
+
         }
+
         if (ModUtils.getComponentLevel(stack) < ModUtils.getComponentLevel(inputItems.get(0).getItems()[0])) {
-            return false;
-        }
-        if (matches < 8) {
             return false;
         }
         return true;
@@ -70,6 +63,7 @@ public class AssemblerRecipes implements Recipe<SimpleContainer> {
     @Override
     public NonNullList<Ingredient> getIngredients() {
         return inputItems;
+
     }
     @Override
     public ItemStack assemble(SimpleContainer pContainer, RegistryAccess pRegistryAccess) {

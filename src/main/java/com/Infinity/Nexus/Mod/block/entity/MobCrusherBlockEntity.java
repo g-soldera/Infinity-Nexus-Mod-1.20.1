@@ -73,6 +73,12 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 120;
+    private int hasRedstoneSignal = 0;
+    private int stillCrafting = 0;
+    private int hasSlotFree = 0;
+    private int hasComponent = 0;
+    private int hasEnoughEnergy = 0;
+    private int hasRecipe = 0;
     private static final int ENERGY_CAPACITY = 60000;
     private static final int ENERGY_TRANSFER = 256;
     private static final int ENERGY_REQ = 32;
@@ -138,6 +144,14 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
                 return switch (pIndex) {
                     case 0 -> MobCrusherBlockEntity.this.progress;
                     case 1 -> MobCrusherBlockEntity.this.maxProgress;
+
+                    case 2 -> MobCrusherBlockEntity.this.hasRedstoneSignal;
+                    case 3 -> MobCrusherBlockEntity.this.stillCrafting;
+                    case 4 -> MobCrusherBlockEntity.this.hasSlotFree;
+                    case 5 -> MobCrusherBlockEntity.this.hasComponent;
+                    case 6 -> MobCrusherBlockEntity.this.hasEnoughEnergy;
+                    case 7 -> MobCrusherBlockEntity.this.hasRecipe;
+
                     default -> 0;
                 };
             }
@@ -147,12 +161,19 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
                 switch (pIndex) {
                     case 0 -> MobCrusherBlockEntity.this.progress = pValue;
                     case 1 -> MobCrusherBlockEntity.this.maxProgress = pValue;
+
+                    case 2 -> MobCrusherBlockEntity.this.hasRedstoneSignal = pValue;
+                    case 3 -> MobCrusherBlockEntity.this.stillCrafting = pValue;
+                    case 4 -> MobCrusherBlockEntity.this.hasSlotFree = pValue;
+                    case 5 -> MobCrusherBlockEntity.this.hasComponent = pValue;
+                    case 6 -> MobCrusherBlockEntity.this.hasEnoughEnergy = pValue;
+                    case 7 -> MobCrusherBlockEntity.this.hasRecipe = pValue;
                 }
             }
 
             @Override
             public int getCount() {
-                return 2;
+                return 8;
             }
         };
     }
@@ -197,6 +218,7 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
         lazyEnergyStorage = LazyOptional.of(() -> ENERGY_STORAGE);
         lazyFluidHandler = LazyOptional.of(() -> FLUID_STORAGE);
+
     }
 
     @Override
@@ -224,7 +246,6 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
     public Component getDisplayName() {
         return Component.translatable("block.infinity_nexus_mod.mob_crusher").append(" LV "+ getMachineLevel());
     }
-
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
@@ -244,13 +265,37 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
     public void setEnergyLevel(int energy) {
         this.ENERGY_STORAGE.setEnergy(energy);
     }
-
+    public int getHasRedstoneSignal() {
+        return data.get(2);
+    }
+    public int getStillCrafting() {
+        return data.get(3);
+    }
+    public int getHasSlotFree() {
+        return data.get(4);
+    }
+    public int getHasComponent() {
+        return data.get(5);
+    }
+    public int getHasEnoughEnergy() {
+        return data.get(6);
+    }
+    public int getHasRecipe() {
+        return data.get(7);
+    }
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
         pTag.putInt("mobCrusher.progress", progress);
         pTag.putInt("mobCrusher.energy", ENERGY_STORAGE.getEnergyStored());
         pTag = FLUID_STORAGE.writeToNBT(pTag);
+
+        pTag.putInt("mobCrusher.hasRedstoneSignal", getHasRedstoneSignal());
+        pTag.putInt("mobCrusher.stillCrafting", getStillCrafting());
+        pTag.putInt("mobCrusher.hasSlotFree", getHasSlotFree());
+        pTag.putInt("mobCrusher.hasComponent", getHasComponent());
+        pTag.putInt("mobCrusher.hasEnoughEnergy", getHasEnoughEnergy());
+        pTag.putInt("mobCrusher.hasRecipe", getHasRecipe());
 
         super.saveAdditional(pTag);
     }
@@ -261,10 +306,16 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         progress = pTag.getInt("mobCrusher.progress");
         ENERGY_STORAGE.setEnergy(pTag.getInt("mobCrusher.energy"));
         FLUID_STORAGE.readFromNBT(pTag);
+
+        hasRedstoneSignal = pTag.getInt("mobCrusher.hasRedstoneSignal");
+        stillCrafting = pTag.getInt("mobCrusher.stillCrafting");
+        hasSlotFree = pTag.getInt("mobCrusher.hasSlotFree");
+        hasComponent = pTag.getInt("mobCrusher.hasComponent");
+        hasEnoughEnergy = pTag.getInt("mobCrusher.hasEnoughEnergy");
+        hasRecipe = pTag.getInt("mobCrusher.hasRecipe");
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
-
         if (pLevel.isClientSide) {
             renderArea(pLevel, pPos, getMachineLevel());
             return;
@@ -274,27 +325,35 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         pLevel.setBlock(pPos, pState.setValue(MobCrusher.LIT, machineLevel), 3);
 
         if (isRedstonePowered(pPos)) {
+            this.data.set(2, 1);
             return;
         }
+        this.data.set(2, 0);
 
         setMaxProgress();
         if (!hasEnoughEnergy()) {
+            this.data.set(6, 0);
             return;
         }
+        this.data.set(6, 1);
 
         if(!hasMobInside(machineLevel, pPos, pLevel)) {
+            this.data.set(7, 0);
             return;
         }
+        this.data.set(7, 1);
 
         increaseCraftingProgress();
 
         if (hasProgressFinished()) {
+            this.data.set(3, 1);
             pLevel.setBlock(pPos, pState.setValue(MobCrusher.LIT, machineLevel+8), 3);
             verifyMobs(pLevel, pPos, machineLevel);
             extractEnergy(this);
             setChanged(pLevel, pPos, pState);
             resetProgress();
         }
+        this.data.set(3, 0);
     }
 
     private void setMaxProgress() {
@@ -329,6 +388,11 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private int getMachineLevel(){
+        if(ModUtils.isComponent(this.itemHandler.getStackInSlot(COMPONENT_SLOT))){
+            this.data.set(5, 1);
+        }else{
+            this.data.set(5, 0);
+        }
         return ModUtils.getComponentLevel(this.itemHandler.getStackInSlot(COMPONENT_SLOT));
     }
 
@@ -449,12 +513,14 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         try {
             machinelevel = machinelevel + 1;
             List<Mob> entities = new ArrayList<>(pLevel.getEntitiesOfClass(Mob.class, new AABB(pPos.offset( machinelevel * -1, 0,  machinelevel * -1), pPos.offset(+machinelevel,3,+machinelevel))));
+            this.data.set(4,0);
             if (!entities.isEmpty()) {
                 boolean hasFreeSlots = hasFreeSlots();
                 if(!hasFreeSlots && entities.size() > 30) {
                     entities.forEach(Entity::discard);
                     notifyOwner();
                 }else if(hasFreeSlots){
+                    this.data.set(4,1);
                     for (Mob entity : entities) {
                         if (entity != null) {
                             if (entity.isAlive()) {
@@ -463,7 +529,6 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
                         }
                     }
                 }
-                System.out.println(entities.size());
             }
         }catch (Exception e){
             System.out.println("§f[INM§f]§4: Failed to kill mobs in: " + pPos);
@@ -480,26 +545,29 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         ItemStack linkingTool = itemHandler.getStackInSlot(LINK_SLOT).copy();
         String name = linkingTool.getDisplayName().getString();
 
-        if(linkingTool.hasCustomHoverName()) {
+        if (linkingTool != null && !linkingTool.isEmpty() || linkingTool.hasCustomHoverName()) {
             String[] parts = name.substring(1, name.length() - 1).split(",");
             int xl = 0;
             int yl = 0;
             int zl = 0;
             String facel = "up";
 
-            for (String part : parts) {
-                String[] keyValue = part.split("=");
-                String key = keyValue[0].trim();
-                String value = keyValue[1].trim();
+            if(parts.length == 4) {
+                for (String part : parts) {
+                    String[] keyValue = part.split("=");
+                    //linha 492 abaixo
+                    String key = keyValue[0].trim();
+                    String value = keyValue[1].trim();
 
-                if (key.equals("x")) {
-                    xl = Integer.parseInt(value);
-                } else if (key.equals("y")) {
-                    yl = Integer.parseInt(value);
-                } else if (key.equals("z")) {
-                    zl = Integer.parseInt(value);
-                } else if (key.equals("face")) {
-                    facel = value;
+                    if (key.equals("x")) {
+                        xl = Integer.parseInt(value);
+                    } else if (key.equals("y")) {
+                        yl = Integer.parseInt(value);
+                    } else if (key.equals("z")) {
+                        zl = Integer.parseInt(value);
+                    } else if (key.equals("face")) {
+                        facel = value;
+                    }
                 }
             }
             BlockEntity blockEntity = this.level.getBlockEntity(new BlockPos(xl, yl, zl));

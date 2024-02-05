@@ -1,7 +1,9 @@
 package com.Infinity.Nexus.Mod.screen.mobcrusher;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.MobCrusherBlockEntity;
+import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.screen.renderer.EnergyInfoArea;
 import com.Infinity.Nexus.Mod.screen.renderer.FluidTankRenderer;
 import com.Infinity.Nexus.Mod.screen.renderer.InfoArea;
@@ -14,6 +16,8 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -70,9 +74,73 @@ public class MobCrusherScreen extends AbstractContainerScreen<MobCrusherMenu> im
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
+        int index = y;
+
+        int hasRedstoneSignal = menu.getBlockEntity().getHasRedstoneSignal();
+        int hasComponent = menu.getBlockEntity().getHasComponent();
+        int hasEnoughEnergy = menu.getBlockEntity().getHasEnoughEnergy();
+        int hasSlotFree = menu.getBlockEntity().getHasSlotFree();
+        int hasRecipe = menu.getBlockEntity().getHasRecipe();
+
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
+
+        if (hasRedstoneSignal == 1) {
+            guiGraphics.drawString(this.font, "Redstone: [ON]", x + 196, index, 0XFF0000);
+            guiGraphics.renderFakeItem(new ItemStack(Items.REDSTONE), x + 178, index-4);
+            index += 15;
+        }else{
+            guiGraphics.drawString(this.font, "Redstone: [Ok]", x + 196, index, 0X00FF00);
+            guiGraphics.renderFakeItem(new ItemStack(Items.REDSTONE), x + 178, index - 4);
+            index += 15;
+        }
+        if (hasComponent == 0){
+            guiGraphics.drawString(this.font, "Component: [Missing]", x + 196, index, 0XFF0000);
+            guiGraphics.renderFakeItem(new ItemStack(ModItemsAdditions.REDSTONE_COMPONENT.get()), x + 178, index - 4);
+            index += 15;
+        }else {
+            guiGraphics.drawString(this.font, "Component: [Ok]", x + 196, index, 0X00FF00);
+            guiGraphics.renderFakeItem(new ItemStack(ModItemsAdditions.REDSTONE_COMPONENT.get()), x + 178, index - 4);
+            index += 15;
+        }
+        if (hasEnoughEnergy == 0){
+            guiGraphics.drawString(this.font, "Energy: [Missing]", x + 196, index, 0XFF0000);
+            guiGraphics.renderFakeItem(new ItemStack(Items.REDSTONE), x + 178, index - 4);
+            index += 15;
+        }else {
+            guiGraphics.drawString(this.font, "Energy: [Ok]", x + 196, index, 0X00FF00);
+            guiGraphics.renderFakeItem(new ItemStack(Items.REDSTONE), x + 178, index - 4);
+            index += 15;
+        }
+        if (hasSlotFree == 0){
+            guiGraphics.drawString(this.font, "Slot: [Missing]", x + 196, index, 0XFF0000);
+            guiGraphics.renderFakeItem(new ItemStack(Items.CHEST), x + 178, index - 4);
+            index += 15;
+        }else {
+            guiGraphics.drawString(this.font, "Slot: [Ok]", x + 196, index, 0X00FF00);
+            guiGraphics.renderFakeItem(new ItemStack(Items.CHEST), x + 178, index - 4);
+            index += 15;
+        }
+        if (hasRecipe == 1){
+            guiGraphics.drawString(this.font, "Mobs: [Scanning]", x + 196, index, 0XFF0000);
+            guiGraphics.renderFakeItem(new ItemStack(Items.CRAFTING_TABLE), x + 178, index - 4);
+            index += 15;
+        }else {
+            guiGraphics.drawString(this.font, "Mobs: [Scanning]", x + 196, index, 0XFF0000);
+            guiGraphics.renderFakeItem(new ItemStack(Items.CRAFTING_TABLE), x + 178, index - 4);
+            index += 15;
+        }
+        if (hasRedstoneSignal == 0 && hasComponent == 1 && hasEnoughEnergy == 1
+                && hasSlotFree == 1){
+            guiGraphics.drawString(this.font, "Crafting: [Ok]", x + 196, index, 0X00FF00);
+            guiGraphics.renderFakeItem(new ItemStack(Items.CRAFTING_TABLE), x + 178, index - 4);
+        }else {
+            guiGraphics.drawString(this.font, "Crafting: [OFF]", x + 196, index, 0XFF0000);
+            guiGraphics.renderFakeItem(new ItemStack(Items.CRAFTING_TABLE), x + 178, index - 4);
+        }
     }
     private void renderFluidAreaTooltips(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y,
                                          FluidStack stack, int offsetX, int offsetY, FluidTankRenderer renderer) {

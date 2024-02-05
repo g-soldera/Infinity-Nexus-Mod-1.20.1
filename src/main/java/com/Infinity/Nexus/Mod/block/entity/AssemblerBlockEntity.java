@@ -225,7 +225,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         FLUID_STORAGE.readFromNBT(pTag);
     }
     public boolean canInsert(int slots, ItemStack stack) {
-        return this.itemHandler.getStackInSlot(slots).getCount() < 1
+        return this.itemHandler.getStackInSlot(slots).isEmpty()
                 && !(stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get())
                 && !(stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get());
     }
@@ -281,7 +281,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
-        setMaxProgress();
+        setMaxProgress(machineLevel);
         if (!hasEnoughEnergy()) {
             return;
         }
@@ -306,10 +306,14 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
            transferItemFluidToTank(FLUID_ITEM_INPUT_SLOT);
         }
     }
-    private void setMaxProgress() {
-            int duration = getCurrentRecipe().get().getDuration();
-            int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS);
-            maxProgress = duration / (speed + 1);
+    private void setMaxProgress(int machineLevel) {
+            int duration = getCurrentRecipe().get().getDuration() / 13;
+            int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS) + (machineLevel + 1);
+
+            int modifiers = (13 - speed);
+
+            duration = modifiers * duration;
+            maxProgress = Math.max(duration, 20);
     }
 
     private void extractEnergy(AssemblerBlockEntity assemblerBlockEntity) {
@@ -424,13 +428,18 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
     private void increaseCraftingProgress() {
         int speed = 0;
-        if(this.FLUID_STORAGE.getFluidAmount() > 0) {
+        if (this.FLUID_STORAGE.getFluidAmount() > 0) {
             speed++;
-        };
+        }
         int modSpeed = ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS);
         int machineLevel = getMachineLevel();
 
         speed += modSpeed + machineLevel;
+
+        double incrementPercentage = 0.1 * machineLevel;
+        double speedIncrement = speed * incrementPercentage;
+        speed += (int) speedIncrement;
+
         progress += speed;
     }
 

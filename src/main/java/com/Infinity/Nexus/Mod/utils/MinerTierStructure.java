@@ -2,23 +2,12 @@ package com.Infinity.Nexus.Mod.utils;
 
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.ModBlocksProgression;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class MinerTierStructure {
 
@@ -81,13 +70,14 @@ public class MinerTierStructure {
         boolean hasPilars = true;
         boolean hasArc = true;
         boolean hasRadios = true;
+
         for (int i = 0; i < altura; i++) {
             BlockPos pos = pilarPos.above(i);
             BlockState blockState = level.getBlockState(pos);
             if (blockState.getBlock() != blocoComposicao) {
                 hasPilars = false;
                 if(blockState.getBlock() == ModBlocksAdditions.STRUCTURAL_BLOCK.get() || blockState.is(Blocks.AIR)) {
-                    level.setBlockAndUpdate(pos, ModBlocksAdditions.STRUCTURAL_BLOCK.get().defaultBlockState());
+                        level.setBlockAndUpdate(pos, ModBlocksAdditions.STRUCTURAL_BLOCK.get().defaultBlockState());
                 }
             }
         }
@@ -104,7 +94,7 @@ public class MinerTierStructure {
                     if (blockState.getBlock() != blocoComposicao) {
                         hasArc = false;
                         if(blockState.getBlock() == ModBlocksAdditions.STRUCTURAL_BLOCK.get() || blockState.is(Blocks.AIR)) {
-                            level.setBlockAndUpdate(pos, ModBlocksAdditions.STRUCTURAL_BLOCK.get().defaultBlockState());
+                                level.setBlockAndUpdate(pos, ModBlocksAdditions.STRUCTURAL_BLOCK.get().defaultBlockState());
                         }
                     }
                 }
@@ -117,7 +107,7 @@ public class MinerTierStructure {
                 if (blockState.getBlock() != blocoComposicao && direction != Direction.DOWN && direction != Direction.UP) {
                     hasRadios = false;
                     if (blockState.getBlock() == ModBlocksAdditions.STRUCTURAL_BLOCK.get() || blockState.is(Blocks.AIR)){
-                        level.setBlockAndUpdate(pos, ModBlocksAdditions.STRUCTURAL_BLOCK.get().defaultBlockState());
+                            level.setBlockAndUpdate(pos, ModBlocksAdditions.STRUCTURAL_BLOCK.get().defaultBlockState());
                     }
                 }
             }

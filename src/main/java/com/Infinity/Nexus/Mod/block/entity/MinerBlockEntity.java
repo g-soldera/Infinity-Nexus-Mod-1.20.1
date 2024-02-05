@@ -35,6 +35,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -58,6 +59,9 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(17) {
         @Override
         protected void onContentsChanged(int slot) {
+            if(slot == getComponentSlot()){
+                makeStructure();
+            }
             setChanged();
         }
 
@@ -75,13 +79,12 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             };
         }
     };
-
     private static final int[] OUTPUT_SLOT = {0,1,2,3,4,5,6,7,8};
     private static final int[] UPGRADE_SLOTS = {9,10,11,12};
     private static final int COMPONENT_SLOT = 13;
     private static final int LINK_SLOT = 15;
     private static final int FORTUNE_SLOT = 14;
-    private static final int SMELTER_SLOT = 16;
+    private static final int STRUCTURE_SLOT = 16;
     private static final int capacity = 100000;
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
@@ -115,8 +118,15 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     private int progress = 0;
     private int maxProgress = 80;
     private int verify = 0;
-    private int maxVerify = 7;
-    private int structure;
+    private int maxVerify = 15;
+    private int structure = 0;
+
+    private int hasRedstoneSignal = 0;
+    private int stillCrafting = 0;
+    private int hasSlotFree = 0;
+    private int hasComponent = 0;
+    private int hasEnoughEnergy = 0;
+    private int hasRecipe = 0;
 
 
     public MinerBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -127,9 +137,16 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                 return switch (pIndex) {
                     case 0 -> MinerBlockEntity.this.progress;
                     case 1 -> MinerBlockEntity.this.maxProgress;
-                    case 3 -> MinerBlockEntity.this.verify;
-                    case 4 -> MinerBlockEntity.this.maxVerify;
-                    case 5 -> MinerBlockEntity.this.structure;
+                    case 2 -> MinerBlockEntity.this.verify;
+                    case 3 -> MinerBlockEntity.this.maxVerify;
+                    case 4 -> MinerBlockEntity.this.structure;
+
+                    case 5 -> MinerBlockEntity.this.hasRedstoneSignal;
+                    case 6 -> MinerBlockEntity.this.stillCrafting;
+                    case 7 -> MinerBlockEntity.this.hasSlotFree;
+                    case 8 -> MinerBlockEntity.this.hasComponent;
+                    case 9 -> MinerBlockEntity.this.hasEnoughEnergy;
+                    case 10 -> MinerBlockEntity.this.hasRecipe;
                     default -> 0;
                 };
             }
@@ -139,17 +156,25 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                 switch (pIndex) {
                     case 0 -> MinerBlockEntity.this.progress = pValue;
                     case 1 -> MinerBlockEntity.this.maxProgress = pValue;
-                    case 3 -> MinerBlockEntity.this.verify = pValue;
-                    case 4 -> MinerBlockEntity.this.maxVerify = pValue;
-                    case 5 -> MinerBlockEntity.this.structure = pValue;
+                    case 2 -> MinerBlockEntity.this.verify = pValue;
+                    case 3 -> MinerBlockEntity.this.maxVerify = pValue;
+                    case 4 -> MinerBlockEntity.this.structure = pValue;
+
+                    case 5 -> MinerBlockEntity.this.hasRedstoneSignal = pValue;
+                    case 6 -> MinerBlockEntity.this.stillCrafting = pValue;
+                    case 7 -> MinerBlockEntity.this.hasSlotFree = pValue;
+                    case 8 -> MinerBlockEntity.this.hasComponent = pValue;
+                    case 9 -> MinerBlockEntity.this.hasEnoughEnergy = pValue;
+                    case 10 -> MinerBlockEntity.this.hasRecipe = pValue;
                 }
             }
 
             @Override
             public int getCount() {
-                return 5;
+                return 9;
             }
         };
+
     }
 
     @Override
@@ -220,7 +245,9 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
         return new MinerMenu(pContainerId, pPlayerInventory, this, this.data);
     }
-
+    public static int getStructureSlot() {
+        return STRUCTURE_SLOT;
+    }
     public IEnergyStorage getEnergyStorage() {
         return ENERGY_STORAGE;
     }
@@ -229,11 +256,41 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         this.ENERGY_STORAGE.setEnergy(energy);
     }
 
+    public int getHasRedstoneSignal() {
+        return data.get(5);
+    }
+    public int getStillCrafting() {
+        return data.get(6);
+    }
+    public int getHasSlotFree() {
+        return data.get(7);
+    }
+    public int getHasComponent() {
+        return data.get(8);
+    }
+    public int getHasEnoughEnergy() {
+        return data.get(9);
+    }
+    public int getHasRecipe() {
+        return data.get(10);
+    }
+    public int getHasStructure() {
+        return data.get(4);
+    }
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
         pTag.putInt("miner.progress", progress);
         pTag.putInt("miner.energy", ENERGY_STORAGE.getEnergyStored());
+
+        pTag.putInt("miner.hasStructure", getHasStructure());
+
+        pTag.putInt("miner.hasRedstoneSignal", getHasRedstoneSignal());
+        pTag.putInt("miner.stillCrafting", getStillCrafting());
+        pTag.putInt("miner.hasSlotFree", getHasSlotFree());
+        pTag.putInt("miner.hasComponent", getHasComponent());
+        pTag.putInt("miner.hasEnoughEnergy", getHasEnoughEnergy());
+        pTag.putInt("miner.hasRecipe", getHasRecipe());
 
         super.saveAdditional(pTag);
     }
@@ -244,6 +301,15 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
         progress = pTag.getInt("miner.progress");
         ENERGY_STORAGE.setEnergy(pTag.getInt("miner.energy"));
+
+        structure = pTag.getInt("miner.hasStructure");
+
+        hasRedstoneSignal = pTag.getInt("miner.hasRedstoneSignal");
+        stillCrafting = pTag.getInt("miner.stillCrafting");
+        hasSlotFree = pTag.getInt("miner.hasSlotFree");
+        hasComponent = pTag.getInt("miner.hasComponent");
+        hasEnoughEnergy = pTag.getInt("miner.hasEnoughEnergy");
+        hasRecipe = pTag.getInt("miner.hasRecipe");
     }
 
 
@@ -252,41 +318,52 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         if (pLevel.isClientSide) {
             return;
         }
-
         int machineLevel = getMachineLevel()-1 <= 0 ? 0 : getMachineLevel()-1; ;
 
         if (isRedstonePowered(pPos)) {
+            this.data.set(5, 1);
             pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel), 3);
             return;
         }
+        this.data.set(5, 0);
 
         if (!hasProgressFinished(machineLevel)) {
+            this.data.set(6, 0);
             increaseCraftingProgress();
             return;
         }
+        this.data.set(6, 1);
 
         if (!hasEmptySlot()) {
+            this.data.set(7, 0);
             pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel), 3);
             return;
         }
+        this.data.set(7, 1);
 
         resetProgress();
         if(!hasComponent()){
+            this.data.set(8, 0);
             pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel), 3);
             return;
         }
+        this.data.set(8, 1);
 
         setMaxProgress(machineLevel);
         if (!hasEnoughEnergy(machineLevel)) {
+            this.data.set(9, 0);
             pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel), 3);
             return;
         }
+        this.data.set(9, 1);
         if(hasRecipe(pPos, machineLevel)) {
+            this.data.set(10, 1);
             pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel + 8), 3);
             craftItem(pPos, machineLevel);
             extractEnergy(this, machineLevel);
             setChanged(pLevel, pPos, pState);
         }
+        this.data.set(10, 0);
     }
 
     private boolean hasEmptySlot() {
@@ -367,8 +444,11 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             int fortune = getFortuneLevel();
             ItemStack output = getOutputItem(pos, fortune, machineLevel);
 
-            if ((output.getItem() == ModItemsAdditions.RAW_INFINITY.get() && machineLevel < 6) || (output.getItem() == Blocks.ANCIENT_DEBRIS.asItem() && machineLevel < 4)) {
+            if ((output.getItem() == ModItemsAdditions.RAW_INFINITY.get() && machineLevel < 6)) {
                 return;
+            }
+            if((output.getItem() == Blocks.ANCIENT_DEBRIS.asItem() && machineLevel < 4)) {
+                output = new ItemStack(Items.NETHERITE_SCRAP);
             }
             insertItemOnInventory(output);
             component.hurt(1, this.level.random, null);
@@ -381,6 +461,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
 
         if(this.verify >= maxVerify) {
            this.structure = MinerTierStructure.hasStructure(machineLevel+1, pos, level) ? 1 : 0;
+           this.data.set(4, structure);
            this.verify = 0;
         }
         this.verify++;
@@ -576,6 +657,11 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         super.onDataPacket(net, pkt);
     }
+
+    private void makeStructure() {
+        MinerTierStructure.hasStructure(getMachineLevel(), this.getBlockPos(), this.level);
+    }
+
     public void setMachineLevel(ItemStack itemStack, Player player) {
         {
             if (this.itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
@@ -592,6 +678,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             }
             assert level != null;
             level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_NETHERITE, SoundSource.BLOCKS, 1.0f, 1.0f);
+            MinerTierStructure.hasStructure(getMachineLevel(), this.getBlockPos(), this.level);
         }
 
     }

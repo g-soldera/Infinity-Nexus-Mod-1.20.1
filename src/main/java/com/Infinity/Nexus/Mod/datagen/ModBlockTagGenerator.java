@@ -75,6 +75,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.ASPHALT.get())
                 .add(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get())
 
+                .add(ModBlocksAdditions.MOB_CRUSHER.get())
                 .add(ModBlocksAdditions.CRUSHER.get())
                 .add(ModBlocksAdditions.PRESS.get())
                 .add(ModBlocksAdditions.ASSEMBLY.get())
@@ -154,6 +155,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.STRUCTURAL_BLOCK.get())
                 .add(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get())
 
+                .add(ModBlocksAdditions.MOB_CRUSHER.get())
                 .add(ModBlocksAdditions.CRUSHER.get())
                 .add(ModBlocksAdditions.PRESS.get())
                 .add(ModBlocksAdditions.ASSEMBLY.get())
@@ -188,6 +190,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.STRUCTURAL_BLOCK.get())
                 .add(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get())
 
+                .add(ModBlocksAdditions.MOB_CRUSHER.get())
                 .add(ModBlocksAdditions.CRUSHER.get())
                 .add(ModBlocksAdditions.PRESS.get())
                 .add(ModBlocksAdditions.ASSEMBLY.get())

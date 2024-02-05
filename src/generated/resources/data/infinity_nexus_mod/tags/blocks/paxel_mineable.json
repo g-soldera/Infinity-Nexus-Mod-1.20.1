@@ -34,6 +34,7 @@
     "infinity_nexus_mod:infinity_block",
     "infinity_nexus_mod:asphalt",
     "infinity_nexus_mod:explorar_portal_frame",
+    "infinity_nexus_mod:mob_crusher",
     "infinity_nexus_mod:crusher",
     "infinity_nexus_mod:press",
     "infinity_nexus_mod:assembler",
@@ -56,10 +57,6 @@
     "infinity_nexus_mod:glass_machine_casing",
     "infinity_nexus_mod:steel_machine_casing",
     "infinity_nexus_mod:industrial_machine_casing",
-    "infinity_nexus_mod:infinity_machine_casing",
-    "#minecraft:mineable/pickaxe",
-    "#minecraft:mineable/shovel",
-    "#minecraft:mineable/axe",
-    "#minecraft:mineable/hoe"
+    "infinity_nexus_mod:infinity_machine_casing"
   ]
 }

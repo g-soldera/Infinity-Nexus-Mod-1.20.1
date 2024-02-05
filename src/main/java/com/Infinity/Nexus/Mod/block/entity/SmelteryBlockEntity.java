@@ -88,12 +88,12 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == 1 || i == 2 || i == 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == 1 || i == 2 || i == 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == 1 || i == 2 || i == 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == 1 || i == 2 || i == 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == 1 || i == 2 || i == 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == 1 || i == 2 || i == 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
 
     protected final ContainerData data;
     private int progress = 0;
@@ -238,7 +238,7 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
             resetProgress();
             return;
         }
-        setMaxProgress();
+        setMaxProgress(machineLevel);
         if (!hasEnoughEnergy()) {
             return;
         }
@@ -254,8 +254,14 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
-    private void setMaxProgress() {
-        this.maxProgress = getCurrentRecipe().get().getDuration();
+    private void setMaxProgress(int machineLevel) {
+        int duration = getCurrentRecipe().get().getDuration() / 12;
+        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS) + (machineLevel + 1);
+
+        int modifiers = (12 - speed);
+
+        duration = modifiers * duration;
+        maxProgress = Math.max(duration, 20);
     }
 
     private void extractEnergy(SmelteryBlockEntity smelteryBlockEntity) {
@@ -346,7 +352,17 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
         return progress >= maxProgress;
     }
     private void increaseCraftingProgress() {
-        progress += ((ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS)+1) + getMachineLevel()+1);
+        int speed = 0;
+        int modSpeed = ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS);
+        int machineLevel = getMachineLevel();
+
+        speed += modSpeed + machineLevel;
+
+        double incrementPercentage = 0.1 * machineLevel;
+        double speedIncrement = speed * incrementPercentage;
+        speed += (int) speedIncrement;
+
+        progress += speed;
     }
 
     public static int getInputSlot() {
