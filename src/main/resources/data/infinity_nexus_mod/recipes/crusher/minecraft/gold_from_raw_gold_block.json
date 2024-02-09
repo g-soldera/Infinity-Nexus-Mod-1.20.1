@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:crushing",
+  "energy": 2400,
+  "duration": 1600,
+  "ingredients": [
+    {
+      "tag": "infinity_nexus_mod:up_1"
+    },
+    {
+      "item": "minecraft:raw_gold_block",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:gold_dust",
+    "count": 9
+  }
+}

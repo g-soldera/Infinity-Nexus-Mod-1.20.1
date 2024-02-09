@@ -2,6 +2,7 @@ package com.Infinity.Nexus.Mod.item.custom;
 
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModPaxelItem;
+import com.Infinity.Nexus.Mod.utils.ModTags;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -27,6 +28,7 @@ public class PaxelItem extends ModPaxelItem {
     private boolean drop;
     private final Component translation;
     private final MobEffectInstance[] effects =new MobEffectInstance[]{new MobEffectInstance(MobEffects.LUCK, 1, 1, false, false)};
+
     public PaxelItem(Tier tier, float damage, float attackSpeed, Function<Item.Properties, Item.Properties> properties, Component translation, boolean drop) {
         super(tier,damage,attackSpeed, properties);
         this.translation = translation;

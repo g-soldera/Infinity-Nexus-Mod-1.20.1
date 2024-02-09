@@ -4,7 +4,7 @@
   "duration": 800,
   "ingredients": [
     {
-      "item": "infinity_nexus_mod:advanced_component"
+      "tag": "infinity_nexus_mod:up_5"
     },
     {
       "item": "infinity_nexus_mod:steel_ingot",

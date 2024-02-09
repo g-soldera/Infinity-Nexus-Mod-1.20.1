@@ -315,6 +315,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_basic_enderpeal", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.BASIC_CIRCUIT.get()).build()))
                 .save(pWriter, "linking_tool");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.ITEM_DISLOCATOR.get())
+                .pattern("A A")
+                .pattern("B B")
+                .pattern("BBB")
+                .define('A', ModItemsAdditions.INFINITY_NUGGET.get())
+                .define('B', Items.IRON_INGOT)
+                .unlockedBy("has_redstone", inventoryTrigger(ItemPredicate.Builder.item().of(Items.REDSTONE).build()))
+                .save(pWriter, "item_dislocator");
         //Infinity
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_HELMET.get())
                 .pattern("AAA")
@@ -363,6 +371,25 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.STICK)
                 .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
                 .save(pWriter, "infinity_pickaxe");
+
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_HAMMER.get())
+                .pattern("AAA")
+                .pattern("ABA")
+                .pattern(" B ")
+                .define('A', ModItemsAdditions.INFINITY_INGOT.get())
+                .define('B', Items.STICK)
+                .unlockedBy("has_infinity_block", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.INFINITY_BLOCK.get()).build()))
+                .save(pWriter, "infinity_hammer");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_HAMMER.get())
+                .pattern("AAA")
+                .pattern(" B ")
+                .pattern(" B ")
+                .define('A', ModBlocksAdditions.INFINITY_BLOCK.get())
+                .define('B', Items.STICK)
+                .unlockedBy("has_infinity_block", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.INFINITY_BLOCK.get()).build()))
+                .save(pWriter, "imperial_infinity_hammer");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_AXE.get())
                 .pattern("AA ")

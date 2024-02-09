@@ -4,7 +4,7 @@
   "duration": 800,
   "ingredients": [
     {
-      "item": "infinity_nexus_mod:redstone_component"
+      "tag": "infinity_nexus_mod:up_1"
     },
     {
       "item": "minecraft:nether_gold_ore",
@@ -13,6 +13,6 @@
   ],
   "output": {
     "item": "infinity_nexus_mod:gold_dust",
-    "count": 3
+    "count": 2
   }
 }

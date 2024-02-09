@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:crushing",
+  "energy": 1200,
+  "duration": 800,
+  "ingredients": [
+    {
+      "tag": "infinity_nexus_mod:up_2"
+    },
+    {
+      "item": "ae2:charged_certus_quartz_crystal",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "ae2:cetus_quartz_dust",
+    "count": 1
+  }
+}

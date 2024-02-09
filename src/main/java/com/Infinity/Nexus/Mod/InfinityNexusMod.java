@@ -5,6 +5,7 @@ import com.Infinity.Nexus.Mod.block.ModBlocksProgression;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
 import com.Infinity.Nexus.Mod.fluid.ModFluidType;
 import com.Infinity.Nexus.Mod.fluid.ModFluids;
+import com.Infinity.Nexus.Mod.item.ModItemProperties;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.loot.ModLootModifiers;
@@ -105,6 +106,8 @@ public class InfinityNexusMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
+            ModItemProperties.addCustomItemProperties();
+
             MenuScreens.register(ModMenuTypes.MOB_CRUSHER_MENU.get(), MobCrusherScreen::new);
             MenuScreens.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
             MenuScreens.register(ModMenuTypes.PRESS_MENU.get(), PressScreen::new);
@@ -131,6 +134,7 @@ public class InfinityNexusMod
             ItemBlockRenderTypes.setRenderLayer(ModFluids.WINE_FLOWING.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.EXPERIENCE_SOURCE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.EXPERIENCE_FLOWING.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.STRUCTURAL_BLOCK.get(), RenderType.translucent());
 
         }
     }

@@ -70,7 +70,6 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> RAW_URANIUM = ITEMS.register("raw_uranium",() -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> INFINITY_SINGULARITY = ITEMS.register("infinity_singularity",() -> new Item(new Item.Properties()));
-
     public static final RegistryObject<Item> ITEM_DISLOCATOR = ITEMS.register("item_dislocator",() -> new ItemDislocator(new Item.Properties()));
     public static final RegistryObject<Item> PORTAL_ACTIVATOR = ITEMS.register("catalyst",() -> new Item(new Item.Properties()));
 
@@ -90,7 +89,8 @@ public class ModItemsAdditions {
                             new MobEffectInstance(MobEffects.WEAKNESS, 200, 2),
                             new MobEffectInstance(MobEffects.WITHER, 200, 2)
                     }));
-    public static final RegistryObject<Item> INFINITY_PAXEL = ITEMS.register("infinity_paxel", () -> new PaxelItem(ModToolTiers.INFINITY, 50f, 18f, Item.Properties::fireResistant, Component.translatable("tooltip.infinity_nexus_mod.infinity_paxel"), false));
+    public static final RegistryObject<Item> INFINITY_HAMMER = ITEMS.register("infinity_hammer", () -> new HammerItem(ModToolTiers.INFINITY, 35f, 8f, new Item.Properties().durability(-1)));
+    public static final RegistryObject<Item> INFINITY_PAXEL = ITEMS.register("infinity_paxel", () -> new PaxelItem(ModToolTiers.INFINITY, 50f, 18f, Item.Properties::fireResistant, Component.translatable("tooltip.infinity_nexus_mod.infinity_paxel"), true));
     public static final RegistryObject<Item> INFINITY_PICKAXE = ITEMS.register("infinity_pickaxe", () -> new PickaxeItems(ModToolTiers.INFINITY, 20, 12, new Item.Properties().fireResistant()));
     public static final RegistryObject<Item> INFINITY_SHOVEL = ITEMS.register("infinity_shovel", () -> new ShovelItems(ModToolTiers.INFINITY, 20, 8, new Item.Properties().fireResistant()));
     public static final RegistryObject<Item> INFINITY_AXE = ITEMS.register("infinity_axe", () -> new AxeItems(ModToolTiers.INFINITY, 35, 8, new Item.Properties().fireResistant()));
@@ -120,7 +120,8 @@ public class ModItemsAdditions {
                             new MobEffectInstance(MobEffects.WITHER, 200, 3),
                             new MobEffectInstance(MobEffects.POISON, 200, 3)
                     }));
-    public static final RegistryObject<Item> IMPERIAL_INFINITY_PAXEL = ITEMS.register("imperial_infinity_paxel", () -> new PaxelItem(ModToolTiers.IMPERIAL, 60f, 20f, Item.Properties::fireResistant, Component.translatable("tooltip.infinity_nexus_mod.imperial_infinity_paxel"), false));
+    public static final RegistryObject<Item> IMPERIAL_INFINITY_HAMMER = ITEMS.register("imperial_infinity_hammer", () -> new HammerItem(ModToolTiers.IMPERIAL, 40f, 10f, new Item.Properties().durability(-1)));
+    public static final RegistryObject<Item> IMPERIAL_INFINITY_PAXEL = ITEMS.register("imperial_infinity_paxel", () -> new PaxelItem(ModToolTiers.IMPERIAL, 60f, 20f, Item.Properties::fireResistant, Component.translatable("tooltip.infinity_nexus_mod.infinity_paxel"), true));
     public static final RegistryObject<Item> IMPERIAL_INFINITY_PICKAXE = ITEMS.register("imperial_infinity_pickaxe", () -> new PickaxeItems(ModToolTiers.IMPERIAL, 30,15, new Item.Properties().fireResistant()));
     public static final RegistryObject<Item> IMPERIAL_INFINITY_SHOVEL = ITEMS.register("imperial_infinity_shovel", () -> new ShovelItems(ModToolTiers.IMPERIAL, 30,10, new Item.Properties().fireResistant()));
     public static final RegistryObject<Item> IMPERIAL_INFINITY_AXE = ITEMS.register("imperial_infinity_axe", () -> new AxeItems(ModToolTiers.IMPERIAL, 45,10, new Item.Properties().fireResistant()));

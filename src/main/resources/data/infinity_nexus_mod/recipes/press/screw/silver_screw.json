@@ -4,7 +4,7 @@
   "duration": 800,
   "ingredients": [
     {
-      "item": "infinity_nexus_mod:logic_component"
+      "tag": "infinity_nexus_mod:up_4"
     },
     {
       "item": "infinity_nexus_mod:silver_rod",

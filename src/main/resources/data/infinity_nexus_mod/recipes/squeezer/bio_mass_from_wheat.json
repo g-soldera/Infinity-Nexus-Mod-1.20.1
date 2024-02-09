@@ -6,7 +6,7 @@
   "fluidAmount": 10,
   "ingredients": [
     {
-      "item": "infinity_nexus_mod:basic_component"
+      "tag": "infinity_nexus_mod:up_2"
     },
     {
       "item": "minecraft:wheat_seeds",

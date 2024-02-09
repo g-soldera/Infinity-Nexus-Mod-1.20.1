@@ -78,6 +78,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.ITEM_DISLOCATOR);
         simpleItem(ModItemsAdditions.PORTAL_ACTIVATOR);
         simpletools(ModItemsAdditions.INFINITY_SWORD);
+        simpletools(ModItemsAdditions.INFINITY_HAMMER);
         simpletools(ModItemsAdditions.INFINITY_PAXEL);
         simpletools(ModItemsAdditions.INFINITY_PICKAXE);
         simpletools(ModItemsAdditions.INFINITY_AXE);
@@ -88,6 +89,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.INFINITY_LEGGINGS);
         simpleItem(ModItemsAdditions.INFINITY_BOOTS);
         simpletools(ModItemsAdditions.IMPERIAL_INFINITY_SWORD);
+        simpletools(ModItemsAdditions.IMPERIAL_INFINITY_HAMMER);
         simpletools(ModItemsAdditions.IMPERIAL_INFINITY_PAXEL);
         simpletools(ModItemsAdditions.IMPERIAL_INFINITY_PICKAXE);
         simpletools(ModItemsAdditions.IMPERIAL_INFINITY_AXE);

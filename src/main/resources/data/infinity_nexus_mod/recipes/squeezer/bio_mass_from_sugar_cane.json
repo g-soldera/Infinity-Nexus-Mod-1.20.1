@@ -6,7 +6,7 @@
   "fluidAmount": 15,
   "ingredients": [
     {
-      "item": "infinity_nexus_mod:reinforced_component"
+      "tag": "infinity_nexus_mod:up_3"
     },
     {
       "item": "minecraft:sugar_cane",

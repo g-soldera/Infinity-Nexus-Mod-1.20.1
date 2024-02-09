@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:crushing",
+  "energy": 2400,
+  "duration": 800,
+  "ingredients": [
+    {
+      "tag": "infinity_nexus_mod:up_2"
+    },
+    {
+      "item": "mekanism:block_raw_uranium",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "mekanism:dust_uranium",
+    "count": 9
+  }
+}

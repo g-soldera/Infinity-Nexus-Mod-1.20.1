@@ -1,0 +1,81 @@
+{
+  "type": "silentgear:standard",
+  "simple": true,
+  "availability": {
+    "tier": 5,
+    "categories": [
+      "metal"
+    ],
+    "visible": true,
+    "gear_blacklist": [],
+    "can_salvage": false
+  },
+  "crafting_items": {
+    "main": {
+      "item": "infinity_nexus_mod:infinity_ingot"
+    }
+  },
+  "name": {
+    "text": "§x§a§b§1§4§e§9I§x§9§3§1§1§c§8N§x§7§a§0§e§a§6F§x§6§2§0§b§8§5I§x§4§9§0§9§6§4N§x§3§1§0§6§4§3I§x§1§8§0§3§2§1T§x§0§0§0§0§0§0Y"
+  },
+  "stats": {
+    "main": {
+      "durability": 5000.0,
+      "armor_durability": 60.0,
+      "enchantability": 80.0,
+      "rarity": 90.0,
+      "chargeability": 1.5,
+      "harvest_level": 7.0,
+      "harvest_speed": 150.0,
+      "melee_damage": 45.0,
+      "magic_damage": 3.5,
+      "attack_speed": 3.0,
+      "ranged_damage": 25.0,
+      "ranged_speed": 0.5,
+      "armor": 64.0,
+      "armor_toughness": 18.0,
+      "magic_armor": 24.0
+    }
+  },
+  "traits": {
+    "main": [
+      {
+        "name": "silentgear:chilled",
+        "level": 5
+      },
+      {
+        "name": "silentgear:mighty",
+        "level": 5
+      },
+      {
+        "name": "silentgear:renew",
+        "level": 3
+      },
+      {
+        "name": "silentgear:adamant",
+        "level": 3
+      },
+      {
+        "name": "silentgear:light",
+        "level": 4
+      }
+    ]
+  },
+  "model": {
+    "main/all": [
+      {
+        "texture": "silentgear:main_generic_hc",
+        "color": "#FF2044"
+      },
+      {
+        "texture": "silentgear:_highlight"
+      }
+    ],
+    "main/fragment": [
+      {
+        "texture": "silentgear:metal",
+        "color": "#FF2044"
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:crushing",
+  "energy": 1200,
+  "duration": 800,
+  "ingredients": [
+    {
+      "tag": "infinity_nexus_mod:up_1"
+    },
+    {
+      "item": "minecraft:cobblestone",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "minecraft:sand",
+    "count": 1
+  }
+}

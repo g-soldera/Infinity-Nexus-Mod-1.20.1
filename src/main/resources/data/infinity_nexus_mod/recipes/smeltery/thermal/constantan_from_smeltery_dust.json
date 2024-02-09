@@ -1,0 +1,23 @@
+{
+  "type": "infinity_nexus_mod:melting",
+  "energy": 1200,
+  "duration": 800,
+  "ingredients": [
+    {
+      "tag": "infinity_nexus_mod:up_1",
+      "count": 1
+    },
+    {
+      "item": "infinity_nexus_mod:nickel_dust",
+      "count": 1
+    },
+    {
+      "item": "infinity_nexus_mod:copper_dust",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "thermal:constantan_ingot",
+    "count": 2
+  }
+}

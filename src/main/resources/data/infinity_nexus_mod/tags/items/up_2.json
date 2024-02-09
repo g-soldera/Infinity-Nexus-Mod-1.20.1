@@ -1,0 +1,12 @@
+{
+  "replace": true,
+  "values": [
+    "infinity_nexus_mod:basic_component",
+    "infinity_nexus_mod:reinforced_component",
+    "infinity_nexus_mod:logic_component",
+    "infinity_nexus_mod:advanced_component",
+    "infinity_nexus_mod:refined_component",
+    "infinity_nexus_mod:integral_component",
+    "infinity_nexus_mod:infinity_component"
+  ]
+}

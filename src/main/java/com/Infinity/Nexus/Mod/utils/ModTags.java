@@ -13,14 +13,12 @@ import net.minecraft.world.level.material.Fluid;
 public class ModTags {
 
     public static class Blocks {
-        public static final TagKey<Block> MINEABLE_WITH_INFINITY = tag("paxel_infinity");
-        public static final TagKey<Block> MINEABLE_WITH_PAXEL = tag("paxel_mineable");
+        public static final TagKey<Block> PAXEL_MINEABLE = tag("mineable/paxel_mineable");
         public static final TagKey<Block> FORGE_STORAGE_BLOCKS = forgeTag("storage_blocks");
         public static final TagKey<Block> FORGE_ORES = forgeTag("ores");
         public static final TagKey<Block> FORGE_ORES_SINGULAR = forgeTag("ore_rates/singular");
         public static final TagKey<Block> FORGE_ORES_IN_GROUND_STONE = forgeTag("ore_in_ground/stone");
         public static final TagKey<Block> FORGE_ORES_IN_GROUND_DEEPSLATE = forgeTag("ore_in_ground/deepslate");
-
 
 
         private static TagKey<Block> tag(String name) {
@@ -45,6 +43,14 @@ public class ModTags {
         public static final TagKey<Item> FORGE_ROD = forgeTag("rods");
         public static final TagKey<Item> FORGE_SCREW = forgeTag("screws");
         public static final TagKey<Item> FORGE_WIRES = forgeTag("wires");
+        public static final TagKey<Item> UP_1 = tag("up_1");
+        public static final TagKey<Item> UP_2 = tag("up_2");
+        public static final TagKey<Item> UP_3 = tag("up_3");
+        public static final TagKey<Item> UP_4 = tag("up_4");
+        public static final TagKey<Item> UP_5 = tag("up_5");
+        public static final TagKey<Item> UP_6 = tag("up_6");
+        public static final TagKey<Item> UP_7 = tag("up_7");
+        public static final TagKey<Item> UP_8 = tag("up_8");
 
 
         private static TagKey<Item> tag(String name) {

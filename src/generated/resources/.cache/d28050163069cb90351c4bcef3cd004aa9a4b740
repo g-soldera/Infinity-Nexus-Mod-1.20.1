@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-14T15:45:18.8112007	Item Models: infinity_nexus_mod
+// 1.20.1	2024-02-08T22:18:46.6940193	Item Models: infinity_nexus_mod
 824d76455174b66d08d4d6ded4bb595f84882c64 assets/infinity_nexus_mod/models/item/advanced_circuit.json
 b29efcd69af9275a22e943ae24a1a2f0281f7031 assets/infinity_nexus_mod/models/item/advanced_component.json
 a20840003cafb1e1379bba7de4fa5b3e8ecf3dc5 assets/infinity_nexus_mod/models/item/alcohol_bottle.json
@@ -58,6 +58,7 @@ e78de908d941dee67ecb76a568abb2453f91d2a7 assets/infinity_nexus_mod/models/item/g
 18933f40c25e8225eeec218bc00995f0f8ec3703 assets/infinity_nexus_mod/models/item/imperial_infinity_axe.json
 b0eadd458ac9d923b7791bb73f70b07fd1075be0 assets/infinity_nexus_mod/models/item/imperial_infinity_boots.json
 29e4b98df508040d82bcae0b895ae42a13de9cfb assets/infinity_nexus_mod/models/item/imperial_infinity_chestplate.json
+193aac3a9cd8f627e2c943f295e078a6f77ee580 assets/infinity_nexus_mod/models/item/imperial_infinity_hammer.json
 a2d0e873698d90e2528d07fd4cfa2ae63b0d2a74 assets/infinity_nexus_mod/models/item/imperial_infinity_helmet.json
 040165e253c298892a7d5360d8120207fb619c66 assets/infinity_nexus_mod/models/item/imperial_infinity_hoe.json
 567d0b702d13969ff8d835b24a1206ec0ccbc615 assets/infinity_nexus_mod/models/item/imperial_infinity_leggings.json
@@ -74,6 +75,7 @@ ef013d52368a95784b07c49ed0dd01920e2777b5 assets/infinity_nexus_mod/models/item/i
 8dc7d91615a56c5867c4a61bf20473187d1a4dd2 assets/infinity_nexus_mod/models/item/infinity_chestplate.json
 f031452026ca610d42f2a3410a729992f14b2271 assets/infinity_nexus_mod/models/item/infinity_component.json
 c84556afe08c865a29a8e63aaab8210de9a64b19 assets/infinity_nexus_mod/models/item/infinity_dust.json
+8c3a4190af8db339b405254088300b2f99310339 assets/infinity_nexus_mod/models/item/infinity_hammer.json
 0db0380c78dc00943279d9aa72cfbe8660d27e3d assets/infinity_nexus_mod/models/item/infinity_helmet.json
 ebc055f88131a425e15fd709249f59e2c3f2c781 assets/infinity_nexus_mod/models/item/infinity_hoe.json
 ee6394259fafec05ee3b867c8e5de264f606f129 assets/infinity_nexus_mod/models/item/infinity_ingot.json

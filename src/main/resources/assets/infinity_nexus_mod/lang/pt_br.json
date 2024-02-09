@@ -35,6 +35,7 @@
   "item.infinity_nexus.infinity_armor": "§bArmadura completa concede: §6Voo Criativo §5- Regeneração and §5 Absorção",
   "item.infinity_nexus_mod.imperial_infinity_sword": "Espada Imperial de Infinity",
   "tooltip.infinity_nexus_mod.imperial_infinity_sword": "§eCausa os efeitos §7Fraqueza §ee §9Definhamento §equando atinge",
+  "item.infinity_nexus_mod.imperial_infinity_hammer": "Martelo Imperial de Infinity",
   "item.infinity_nexus_mod.imperial_infinity_pickaxe": "Picareta Imperial de Infinity",
   "item.infinity_nexus_mod.imperial_infinity_shovel": "Pá Imperial de Infinity",
   "item.infinity_nexus_mod.imperial_infinity_axe": "Machado Imperial de Infinity",
@@ -50,6 +51,7 @@
   "item.infinity_nexus.imperial_infinity_armor": "§bConcede uma armadura completa com:\n§5- Voo no Modo Criativo\n§5- Absorção\n§5- Visão Noturna\n§5- Velocidade de Escavação\n§5- Aumento de Dano\n§5- Sorte\n§5- Velocidade de Movimento",
   "item.infinity_nexus_mod.infinity_sword": "Espada de Infinity",
   "tooltip.infinity_nexus_mod.infinity_sword": "§eCausa os efeitos §7Fraqueza §ee §9Definhamento §equando atinge",
+  "item.infinity_nexus_mod.infinity_hammer": "Martelo de Infinity",
   "item.infinity_nexus_mod.infinity_pickaxe": "Picareta de Infinity",
   "item.infinity_nexus_mod.infinity_shovel": "Pá de Infinity",
   "item.infinity_nexus_mod.infinity_axe": "Machado de Infinity",
@@ -208,6 +210,9 @@
   "fluid_type.infinity_nexus_mod.lubricant": "Lubrificante",
   "item.infinity_nexus_mod.bucket_lubricant": "Balde de Lubrificante",
 
+  "fluid_type.infinity_nexus_mod.oil": "Óleo",
+  "item.infinity_nexus_mod.bucket_oil": "Balde de Óleo",
+
   "fluid_type.infinity_nexus_mod.ethanol": "Alcool",
   "item.infinity_nexus_mod.bucket_ethanol": "Balde de Alcool",
 
@@ -298,6 +303,7 @@
   "item.infinity_nexus_mod.linking_tool":"Ferramenta de ligação",
   "tooltip.infinity_nexus.linking_tool": "§bRenomeie este item usando o exemplo abaixo com as coordenadas de destino dos itens (raio de ação: 100 blocos).\n\n§ex=30,y=-51,z=-77,face=up\n\nLados permitidos:\n§bnorth, south, east, west, up, down.",
   "item.infinity_nexus.miner_description": "§5Mineradora Multibloco.\n§bDeve ser colocada na altura correta em relação ao solo, dependendo do nível do componente instalado.\n§9Adicione energia e aguarde um pouco para que seja criado um exemplo de montagem.\n§fRedstone: 5° §a-> Copper.\n§fBasic: 5° §a-> Iron.\n§eReinforced: 7° §a-> Tin.\n§eLogic: 7° §a-> Nickel.\n§cAdvanced: 9° §a-> Brass.\n§cRefined: 9° §a-> Steel.\n§5Integral: 11° §a-> Industrial.\n§5Infinity: 11° §a-> Infinity.",
-  "item.infinity_nexus.mod_crusher_description": "Executa rapidamente e silenciosamente inimigos que estiverem acima; a área depende do componente instalado. Caso haja muitos inimigos dentro do raio de ação do Mob Crusher e seus compartimentos estiverem cheios, todos serão executados sem chance de drops.\n§fRedstone:  §a1x1.\n§fBasic: §a3x3.\n§eReinforced: §a5x5\n§eLogic: §a7x7.\n§cAdvanced: §a9x9.\n§cRefined: §a11x11.\n§5Integral: §a13x13.\n§5Infinity: §a15x15"
+  "item.infinity_nexus.mod_crusher_description": "Executa rapidamente e silenciosamente inimigos que estiverem acima; a área depende do componente instalado. Caso haja muitos inimigos dentro do raio de ação do Mob Crusher e seus compartimentos estiverem cheios, todos serão executados sem chance de drops.\n§fRedstone:  §a1x1.\n§fBasic: §a3x3.\n§eReinforced: §a5x5\n§eLogic: §a7x7.\n§cAdvanced: §a9x9.\n§cRefined: §a11x11.\n§5Integral: §a13x13.\n§5Infinity: §a15x15",
 
+  "infinity_nexus_mod.jei_information": "Esta máquina precisa de um componente para funcionar."
 }

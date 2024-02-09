@@ -36,6 +36,7 @@
   "item.infinity_nexus.infinity_armor":"§bFull Armor Grant: §6Creative fly §5 Regeneration and §5 Absorption",
   "item.infinity_nexus_mod.imperial_infinity_sword": "Imperial Infinity Sword",
   "tooltip.infinity_nexus_mod.imperial_infinity_sword":  "§eInflict effects §7Weakness §eand §9Wither §eon hit",
+  "item.infinity_nexus_mod.imperial_infinity_hammer": "Imperial Infinity Hammer",
   "item.infinity_nexus_mod.imperial_infinity_pickaxe": "Imperial Infinity Pickaxe",
   "item.infinity_nexus_mod.imperial_infinity_shovel": "Imperial Infinity Shovel",
   "item.infinity_nexus_mod.imperial_infinity_axe": "Imperial Infinity Axe",
@@ -52,6 +53,7 @@
   "item.infinity_nexus.imperial_infinity_armor":"§bFull Armor Grant:\n§5- Creative Fly\n§5- Absorption\n§5- Night Vision\n§5- Dig Speed\n§5- Damage Boost\n§5- Luck\n§5- Movement Speed",
   "item.infinity_nexus_mod.infinity_sword": "Infinity Sword",
   "tooltip.infinity_nexus_mod.infinity_sword":  "§eInflict effects §7Weakness §eand §9Wither §eon hit",
+  "item.infinity_nexus_mod.infinity_hammer": "Infinity Hammer",
   "item.infinity_nexus_mod.infinity_pickaxe": "Infinity Pickaxe",
   "item.infinity_nexus_mod.infinity_shovel": "Infinity Shovel",
   "item.infinity_nexus_mod.infinity_axe": "Infinity Axe",
@@ -207,6 +209,9 @@
   "item.infinity_nexus_mod.speed_upgrade": "Speed Upgrade",
   "item.infinity_nexus_mod.strength_upgrade": "Strength Upgrade",
 
+  "fluid_type.infinity_nexus_mod.oil": "Oil",
+  "item.infinity_nexus_mod.bucket_oil": "Oil Bucket",
+
   "fluid_type.infinity_nexus_mod.lubricant": "Fluid Lubricant",
   "item.infinity_nexus_mod.bucket_lubricant": "Bucket Lubricant",
 
@@ -334,5 +339,7 @@
   "tooltip.infinity_nexus.linking_tool": "§bRename this item using the example below with the destination coordinates of the items (action radius: 100 blocks).\n\n§ex=30,y=80,z=-77,face=up\nAllowed sides:\n\n§bnorth, south, east, west, up, down.",
   "block.infinity_nexus_mod.miner": "Miner",
   "item.infinity_nexus.miner_description": "§5Multiblock Miner.\n§bIt must be placed at the correct height relative to the ground, depending on the level of the installed component.\n§9Add energy and wait a bit for an assembly example to be created.\n§fRedstone: 5th §a-> Copper.\n§fBasic: 5th §a-> Iron.\n§eReinforced: 7th §a-> Tin.\n§eLogic: 7th §a-> Nickel.\n§cAdvanced: 9th §a-> Brass.\n§cRefined: 9th §a-> Steel.\n§5Integral: 11th §a-> Industrial.\n§5Infinity: 11th §a-> Infinity.",
-  "item.infinity_nexus.mod_crusher_description": "Executes quickly and silently enemies that are above. The area depends on the installed component. In case there are many enemies within the action radius of the Mob Crusher and its slots are full, all will be executed without a chance for drops.\n§fRedstone:  §a1x1.\n§fBasic: §a3x3.\n§eReinforced: §a5x5\n§eLogic: §a7x7.\n§cAdvanced: §a9x9.\n§cRefined: §a11x11.\n§5Integral: §a13x13.\n§5Infinity: §a15x15"
+  "item.infinity_nexus.mod_crusher_description": "Executes quickly and silently enemies that are above. The area depends on the installed component. In case there are many enemies within the action radius of the Mob Crusher and its slots are full, all will be executed without a chance for drops.\n§fRedstone:  §a1x1.\n§fBasic: §a3x3.\n§eReinforced: §a5x5\n§eLogic: §a7x7.\n§cAdvanced: §a9x9.\n§cRefined: §a11x11.\n§5Integral: §a13x13.\n§5Infinity: §a15x15",
+
+  "infinity_nexus_mod.jei_information": "This machine needs a component to function."
 }

@@ -4,7 +4,7 @@
   "energy": 1000,
   "ingredients": [
     {
-      "item": "infinity_nexus_mod:integral_component"
+      "tag": "infinity_nexus_mod:up_7"
     },
     {
       "item": "minecraft:slime_ball"

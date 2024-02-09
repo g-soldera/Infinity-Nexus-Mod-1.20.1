@@ -8,7 +8,9 @@ import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.utils.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -23,86 +25,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        this.tag(ModTags.Blocks.MINEABLE_WITH_PAXEL)
-
-                //Silver
-                .add(ModBlocksAdditions.SILVER_ORE.get())
-                .add(ModBlocksAdditions.DEEPSLATE_SILVER_ORE.get())
-                .add(ModBlocksAdditions.RAW_SILVER_BLOCK.get())
-                .add(ModBlocksAdditions.SILVER_BLOCK.get())
-
-                //TIN
-                .add(ModBlocksAdditions.TIN_ORE.get())
-                .add(ModBlocksAdditions.DEEPSLATE_TIN_ORE.get())
-                .add(ModBlocksAdditions.RAW_TIN_BLOCK.get())
-                .add(ModBlocksAdditions.TIN_BLOCK.get())
-
-                //Lead
-                .add(ModBlocksAdditions.LEAD_ORE.get())
-                .add(ModBlocksAdditions.DEEPSLATE_LEAD_ORE.get())
-                .add(ModBlocksAdditions.RAW_LEAD_BLOCK.get())
-                .add(ModBlocksAdditions.LEAD_BLOCK.get())
-
-                //Nickel
-                .add(ModBlocksAdditions.NICKEL_ORE.get())
-                .add(ModBlocksAdditions.DEEPSLATE_NICKEL_ORE.get())
-                .add(ModBlocksAdditions.RAW_NICKEL_BLOCK.get())
-                .add(ModBlocksAdditions.NICKEL_BLOCK.get())
-                //Zinc
-                .add(ModBlocksAdditions.ZINC_ORE.get())
-                .add(ModBlocksAdditions.DEEPSLATE_ZINC_ORE.get())
-                .add(ModBlocksAdditions.RAW_ZINC_BLOCK.get())
-                .add(ModBlocksAdditions.ZINC_BLOCK.get())
-
-                //Aluminum
-                .add(ModBlocksAdditions.ALUMINUM_ORE.get())
-                .add(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get())
-                .add(ModBlocksAdditions.RAW_ALUMINUM_BLOCK.get())
-                .add(ModBlocksAdditions.ALUMINUM_BLOCK.get())
-
-                //Uranium
-                .add(ModBlocksAdditions.URANIUM_ORE.get())
-                .add(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get())
-                .add(ModBlocksAdditions.RAW_URANIUM_BLOCK.get())
-                .add(ModBlocksAdditions.URANIUM_BLOCK.get())
-
-                //Infinity
-                .add(ModBlocksAdditions.INFINITY_ORE.get())
-                .add(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get())
-                .add(ModBlocksAdditions.RAW_INFINITY_BLOCK.get())
-                .add(ModBlocksAdditions.INFINITY_BLOCK.get())
-
-                .add(ModBlocksAdditions.ASPHALT.get())
-                .add(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get())
-
-                .add(ModBlocksAdditions.MOB_CRUSHER.get())
-                .add(ModBlocksAdditions.CRUSHER.get())
-                .add(ModBlocksAdditions.PRESS.get())
-                .add(ModBlocksAdditions.ASSEMBLY.get())
-                .add(ModBlocksAdditions.SQUEEZER.get())
-                .add(ModBlocksAdditions.SMELTERY.get())
-                .add(ModBlocksAdditions.GENERATOR.get())
-                .add(ModBlocksAdditions.FERMENTATION_BARREL.get())
-
-                .add(ModBlocksProgression.WOOD_MACHINE_CASING.get())
-                .add(ModBlocksProgression.COPPER_MACHINE_CASING.get())
-                .add(ModBlocksProgression.SILVER_MACHINE_CASING.get())
-                .add(ModBlocksProgression.TIN_MACHINE_CASING.get())
-                .add(ModBlocksProgression.LEAD_MACHINE_CASING.get())
-                .add(ModBlocksProgression.NICKEL_MACHINE_CASING.get())
-                .add(ModBlocksProgression.BRASS_MACHINE_CASING.get())
-                .add(ModBlocksProgression.BRONZE_MACHINE_CASING.get())
-                .add(ModBlocksProgression.ALUMINUM_MACHINE_CASING.get())
-                .add(ModBlocksProgression.GOLD_MACHINE_CASING.get())
-                .add(ModBlocksProgression.IRON_MACHINE_CASING.get())
-                .add(ModBlocksProgression.PLASTIC_MACHINE_CASING.get())
-                .add(ModBlocksProgression.GLASS_MACHINE_CASING.get())
-                .add(ModBlocksProgression.STEEL_MACHINE_CASING.get())
-                .add(ModBlocksProgression.INDUSTRIAL_MACHINE_CASING.get())
-                .add(ModBlocksProgression.INFINITY_MACHINE_CASING.get());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-
                 //Silver
                 .add(ModBlocksAdditions.SILVER_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_SILVER_ORE.get())

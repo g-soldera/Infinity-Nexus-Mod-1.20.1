@@ -107,12 +107,12 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
 
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap = Map.of(
-            Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 8, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-            Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 8, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-            Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 8, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-            Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 8, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-            Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 8, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-            Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 8, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
+            Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+            Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+            Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+            Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+            Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
+            Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
 
     protected final ContainerData data;
     private int progress = 0;
@@ -419,7 +419,6 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         if(!(stack.getItem() instanceof BlockItem)) {
             return null;
         }
-        //TODO Get Drop From stack block
         IFFakePlayer player = new IFFakePlayer((ServerLevel) this.level);
         Block block = ((BlockItem) stack.getItem()).getBlock();
         AtomicReference<ItemStack> dropItem = new AtomicReference<ItemStack>(ItemStack.EMPTY);
@@ -444,11 +443,19 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             int fortune = getFortuneLevel();
             ItemStack output = getOutputItem(pos, fortune, machineLevel);
 
-            if ((output.getItem() == ModItemsAdditions.RAW_INFINITY.get() && machineLevel < 6)) {
-                return;
+            if ((output.getItem() == ModItemsAdditions.RAW_INFINITY.get())) {
+                if(machineLevel < 6){
+                    return;
+                }
+                output = new ItemStack(ModItemsAdditions.RAW_INFINITY.get());
             }
-            if((output.getItem() == Blocks.ANCIENT_DEBRIS.asItem() && machineLevel < 4)) {
-                output = new ItemStack(Items.NETHERITE_SCRAP);
+            if((output.getItem() == Blocks.ANCIENT_DEBRIS.asItem())) {
+                if(machineLevel < 4){
+                    return;
+            }
+                if(machineLevel < 6){
+                    output = new ItemStack(Items.NETHERITE_SCRAP);
+                }
             }
             insertItemOnInventory(output);
             component.hurt(1, this.level.random, null);

@@ -5,23 +5,26 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Vanishable;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class ModPaxelItem extends DiggerItem {
+public class ModPaxelItem extends DiggerItem implements Vanishable {
 
     public ModPaxelItem(Tier tier, float damage, float attackSpeed, Function<Properties, Properties> properties) {
-        super(damage, attackSpeed, tier, ModTags.Blocks.MINEABLE_WITH_PAXEL, properties.apply(new Properties()
+        super(damage, attackSpeed, tier, ModTags.Blocks.PAXEL_MINEABLE, properties.apply(new Properties()
                 .defaultDurability((int) (tier.getUses() * 1.5))
         ));
     }

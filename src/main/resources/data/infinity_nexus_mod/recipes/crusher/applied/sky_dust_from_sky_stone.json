@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:crushing",
+  "energy": 1200,
+  "duration": 800,
+  "ingredients": [
+    {
+      "tag": "infinity_nexus_mod:up_2"
+    },
+    {
+      "item": "ae2:sky_stone_block",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "ae2:sky_dust",
+    "count": 1
+  }
+}

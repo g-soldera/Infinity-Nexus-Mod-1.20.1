@@ -4,7 +4,7 @@
   "duration": 800,
   "ingredients": [
     {
-      "item": "infinity_nexus_mod:redstone_component"
+      "tag": "infinity_nexus_mod:up_1"
     },
     {
       "item": "minecraft:deepslate_iron_ore",
