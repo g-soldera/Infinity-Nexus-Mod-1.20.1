@@ -4,15 +4,15 @@
   "duration": 800,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_1"
+      "tag": "infinity_nexus_mod:up_2"
     },
     {
-      "item": "minecraft:bone",
+      "item": "minecraft:ancient_debris",
       "count": 1
     }
   ],
   "output": {
-    "item": "minecraft:bone_meal",
-    "count": 3
+    "item": "minecraft:natherite_scrap",
+    "count": 2
   }
 }

@@ -11,11 +11,14 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.Optional;
 
@@ -98,6 +101,9 @@ public class MinerScreen extends AbstractContainerScreen<MinerMenu> {
         int hasSlotFree = menu.getBlockEntity().getHasSlotFree();
         int hasRecipe = menu.getBlockEntity().getHasRecipe();
 
+        String hasLink = menu.getBlockEntity().getHasLink();
+        ItemStack linkedBlock = menu.getBlockEntity().getLikedBlock();
+
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
@@ -156,12 +162,21 @@ public class MinerScreen extends AbstractContainerScreen<MinerMenu> {
             guiGraphics.renderFakeItem(new ItemStack(Items.CRAFTING_TABLE), x + 178, index - 4);
             index += 15;
         }
+        if (linkedBlock != null && linkedBlock.getItem() != Items.AIR){
+            guiGraphics.drawString(this.font, hasLink, x + 196, index, 0X00FF00);
+            guiGraphics.renderFakeItem(linkedBlock, x + 178, index - 4);
+            index += 15;
+        }else{
+            guiGraphics.drawString(this.font, hasLink, x + 196, index, 0XFF0000);
+            guiGraphics.renderFakeItem(new ItemStack(ModItemsAdditions.LINKING_TOOL.get()), x + 178, index - 4);
+            index += 15;
+        }
         if (hasRedstoneSignal == 0 && hasComponent == 1 && hasEnoughEnergy == 1 &&
                 hasStructure == 1 && hasSlotFree == 1 && hasRecipe == 0){
-            guiGraphics.drawString(this.font, "Crafting: [ON]", x + 196, index, 0X00FF00);
+            guiGraphics.drawString(this.font, "Mining: [ON]", x + 196, index, 0X00FF00);
             guiGraphics.renderFakeItem(new ItemStack(Items.CRAFTING_TABLE), x + 178, index - 4);
         }else {
-            guiGraphics.drawString(this.font, "Crafting: [OFF]", x + 196, index, 0XFF0000);
+            guiGraphics.drawString(this.font, "Mining: [OFF]", x + 196, index, 0XFF0000);
             guiGraphics.renderFakeItem(new ItemStack(Items.CRAFTING_TABLE), x + 178, index - 4);
         }
 

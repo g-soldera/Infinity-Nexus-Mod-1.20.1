@@ -4,15 +4,15 @@
   "duration": 800,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_1"
+      "tag": "infinity_nexus_mod:up_4"
     },
     {
-      "item": "minecraft:bone",
+      "item": "infinity_nexus_mod:zinc_ore",
       "count": 1
     }
   ],
   "output": {
-    "item": "minecraft:bone_meal",
-    "count": 3
+    "item": "infinity_nexus_mod:zinc_dust",
+    "count": 2
   }
 }

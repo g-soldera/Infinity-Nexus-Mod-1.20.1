@@ -363,6 +363,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
                 .save(pWriter, "infinity_sword");
 
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_BOW.get())
+                .pattern(" AB")
+                .pattern("A B")
+                .pattern(" AB")
+                .define('A', ModItemsAdditions.INFINITY_INGOT.get())
+                .define('B', Items.STRING)
+                .unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build()))
+                .save(pWriter, "infinity_bow");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.INFINITY_PICKAXE.get())
                 .pattern("AAA")
                 .pattern(" B ")
@@ -474,6 +484,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Items.STICK)
                 .unlockedBy("has_infinity_sword", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_SWORD.get()).build()))
                 .save(pWriter, "imperial_infinity_sword");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_BOW.get())
+                .pattern(" AB")
+                .pattern("C B")
+                .pattern(" AB")
+                .define('A', ModItemsAdditions.INFINITY_SINGULARITY.get())
+                .define('B', Items.STICK)
+                .define('C', ModItemsAdditions.INFINITY_BOW.get())
+                .unlockedBy("has_infinity_bow", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_BOW.get()).build()))
+                .save(pWriter, "imperial_infinity_bow");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_PICKAXE.get())
                 .pattern("BBB")

@@ -8,11 +8,13 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -107,10 +109,12 @@ public class Miner extends BaseEntityBlock {
                         pPlayer.closeContainer();
                         return InteractionResult.FAIL;
                 }
+                ((MinerBlockEntity) entity).resetVerify();
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
         }
+
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 
@@ -135,7 +139,24 @@ public class Miner extends BaseEntityBlock {
         return createTickerHelper(pBlockEntityType, ModBlockEntities.MINER_BE.get(),
                 (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1));
     }
+    @Override
+    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
+        Player player = pPlacer instanceof Player ? (Player) pPlacer : null;
+        if (player != null) {
+            MinerBlockEntity miner = ((MinerBlockEntity) pLevel.getBlockEntity(pPos));
 
+            // Criar um novo NBT e adicionar o UUID do jogador
+            CompoundTag nbt = new CompoundTag();
+            nbt.putUUID("ownerUUID", player.getUUID());
+            nbt.putInt("ownerNotifyDelay", 0);
+            nbt.putInt("ownerNotifyMaxDelay", 6000);
+
+            // Definir a NBT do bloco
+            miner.setCustomBlockData(nbt);
+        }
+
+        super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
+    }
     @Override
     public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> components, TooltipFlag flag) {
             if (Screen.hasShiftDown()) {

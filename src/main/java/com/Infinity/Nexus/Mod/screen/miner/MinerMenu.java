@@ -20,7 +20,7 @@ public class MinerMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public MinerMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(9));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(15));
     }
 
     public MinerMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {

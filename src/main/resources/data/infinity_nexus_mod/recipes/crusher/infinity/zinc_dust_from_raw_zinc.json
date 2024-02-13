@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:crushing",
+  "energy": 4800,
+  "duration": 800,
+  "ingredients": [
+    {
+      "tag": "infinity_nexus_mod:up_4"
+    },
+    {
+      "item": "infinity_nexus_mod:raw_zinc",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:zinc_dust",
+    "count": 1
+  }
+}

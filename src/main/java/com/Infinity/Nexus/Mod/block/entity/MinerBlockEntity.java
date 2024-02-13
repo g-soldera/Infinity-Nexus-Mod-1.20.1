@@ -56,6 +56,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class MinerBlockEntity extends BlockEntity implements MenuProvider {
+    private CompoundTag customBlockData;
     private final ItemStackHandler itemHandler = new ItemStackHandler(17) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -128,6 +129,11 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     private int hasEnoughEnergy = 0;
     private int hasRecipe = 0;
 
+    private int linkx = 0;
+    private int linky = 0;
+    private int linkz = 0;
+    private int linkFace = 0;
+
 
     public MinerBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.MINER_BE.get(), pPos, pBlockState);
@@ -147,6 +153,12 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                     case 8 -> MinerBlockEntity.this.hasComponent;
                     case 9 -> MinerBlockEntity.this.hasEnoughEnergy;
                     case 10 -> MinerBlockEntity.this.hasRecipe;
+
+                    case 11 -> MinerBlockEntity.this.linkx;
+                    case 12 -> MinerBlockEntity.this.linky;
+                    case 13 -> MinerBlockEntity.this.linkz;
+                    case 14 -> MinerBlockEntity.this.linkFace;
+
                     default -> 0;
                 };
             }
@@ -166,12 +178,17 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                     case 8 -> MinerBlockEntity.this.hasComponent = pValue;
                     case 9 -> MinerBlockEntity.this.hasEnoughEnergy = pValue;
                     case 10 -> MinerBlockEntity.this.hasRecipe = pValue;
+
+                    case 11 -> MinerBlockEntity.this.linkx = pValue;
+                    case 12 -> MinerBlockEntity.this.linky = pValue;
+                    case 13 -> MinerBlockEntity.this.linkz = pValue;
+                    case 14 -> MinerBlockEntity.this.linkFace = pValue;
                 }
             }
 
             @Override
             public int getCount() {
-                return 9;
+                return 15;
             }
         };
 
@@ -277,6 +294,29 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     public int getHasStructure() {
         return data.get(4);
     }
+    public int getlinkx() {
+        return data.get(11);
+    }
+    public int getlinky() {
+        return data.get(12);
+    }
+    public int getlinkz() {
+        return data.get(13);
+    }
+    public int getlinkFace() {
+        return data.get(14);
+    }
+    public String getHasLink() {
+        if(this.data.get(11) != 0 || this.data.get(12) != 0 || this.data.get(13) != 0) {
+            return "X: " +this.data.get(11) + ", Y: " + this.data.get(12) + ", Z: " + this.data.get(13);
+        } else {
+            return "[Unlinked]";
+
+        }
+    }
+    public ItemStack getLikedBlock() {
+        return new ItemStack(level.getBlockState(new BlockPos(this.data.get(11), this.data.get(12), this.data.get(13))).getBlock().asItem());
+    }
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
@@ -291,6 +331,11 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         pTag.putInt("miner.hasComponent", getHasComponent());
         pTag.putInt("miner.hasEnoughEnergy", getHasEnoughEnergy());
         pTag.putInt("miner.hasRecipe", getHasRecipe());
+
+        pTag.putInt("miner.linkx", getlinkx());
+        pTag.putInt("miner.linky", getlinky());
+        pTag.putInt("miner.linkz", getlinkz());
+        pTag.putInt("miner.linkFace", getlinkFace());
 
         super.saveAdditional(pTag);
     }
@@ -310,6 +355,11 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         hasComponent = pTag.getInt("miner.hasComponent");
         hasEnoughEnergy = pTag.getInt("miner.hasEnoughEnergy");
         hasRecipe = pTag.getInt("miner.hasRecipe");
+
+        linkx = pTag.getInt("miner.linkx");
+        linky = pTag.getInt("miner.linky");
+        linkz = pTag.getInt("miner.linkz");
+        linkFace = pTag.getInt("miner.linkFace");
     }
 
 
@@ -337,6 +387,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         if (!hasEmptySlot()) {
             this.data.set(7, 0);
             pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel), 3);
+            notifyOwner(machineLevel, pLevel);
             return;
         }
         this.data.set(7, 1);
@@ -365,7 +416,19 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         }
         this.data.set(10, 0);
     }
+    private void notifyOwner(int machineLevel, Level pLevel) {
+        try{
+            if(this.customBlockData != null && this.customBlockData.getInt("ownerNotifyDelay") >= this.customBlockData.getInt("ownerNotifyMaxDelay")){
+                Player player = pLevel.getPlayerByUUID(this.customBlockData.getUUID("ownerUUID"));
+                player.playNotifySound(SoundEvents.NOTE_BLOCK_GUITAR.get(), SoundSource.BLOCKS, 5.0F, 1.0F);
+                player.sendSystemMessage(Component.literal("§e[§fMiner LVL:§"+ + (machineLevel + 1) + " "+ (machineLevel+1) + "§e] §bOs Slots estão Cheios! §e[§5"+ this.getBlockPos().getX()+", "+ this.getBlockPos().getY()+", "+ this.getBlockPos().getZ() + "§e]"));
+                this.customBlockData.putInt("ownerNotifyDelay", 0);
+            }
+            this.customBlockData.putInt("ownerNotifyDelay", this.customBlockData.getInt("ownerNotifyDelay")+1);
+        }catch(Exception e){
 
+        }
+    }
     private boolean hasEmptySlot() {
         boolean hasFreeSpace = false;
         for (int slot : OUTPUT_SLOT) {
@@ -540,6 +603,9 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                 ItemStack linkingTool = itemHandler.getStackInSlot(LINK_SLOT).copy();
                 AtomicBoolean success = new AtomicBoolean(false);
                 String name = linkingTool.getDisplayName().getString();
+                this.data.set(11, 0);
+                this.data.set(12, 0);
+                this.data.set(13, 0);
                 if(linkingTool.hasCustomHoverName()) {
                     String[] parts = name.substring(1, name.length() - 1).split(",");
                     int xl = 0;
@@ -554,13 +620,21 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
 
                         if (key.equals("x")) {
                             xl = Integer.parseInt(value);
+                            this.data.set(11, xl);
                         } else if (key.equals("y")) {
                             yl = Integer.parseInt(value);
+                            this.data.set(12, yl);
                         } else if (key.equals("z")) {
                             zl = Integer.parseInt(value);
+                            this.data.set(13, zl);
                         } else if (key.equals("face")) {
                             facel = value;
                         }
+                    }
+                    if(facel.equals("debug")){
+                        Player player = level.getPlayerByUUID(this.customBlockData.getUUID("ownerUUID"));
+                        player.sendSystemMessage(Component.literal("Pos: " + this.data.get(11) + " " + this.data.get(12) + " " + this.data.get(13) + " " + facel));
+                        player.sendSystemMessage(Component.literal("Name: " + name));
                     }
                     BlockEntity blockEntity = this.level.getBlockEntity(new BlockPos(xl, yl, zl));
                     if (blockEntity != null && canLink(blockEntity)) {
@@ -702,5 +776,12 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                 }
             }
         }
+    }
+    public void resetVerify() {
+        this.data.set(2, this.data.get(3));
+    }
+
+    public void setCustomBlockData(CompoundTag nbt) {
+        this.customBlockData = nbt;
     }
 }

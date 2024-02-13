@@ -4,15 +4,15 @@
   "duration": 800,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_1"
+      "tag": "infinity_nexus_mod:up_2"
     },
     {
-      "item": "minecraft:bone",
+      "item": "minecraft:amethyst_block",
       "count": 1
     }
   ],
   "output": {
-    "item": "minecraft:bone_meal",
+    "item": "minecraft:amethyst_shard",
     "count": 3
   }
 }
