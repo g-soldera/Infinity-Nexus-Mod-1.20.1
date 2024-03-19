@@ -1,6 +1,6 @@
 {
   "type": "infinity_nexus_mod:assembler",
-  "duration": 1500,
+  "duration": 130,
   "energy": 1000,
   "ingredients": [
     {
@@ -10,10 +10,10 @@
       "item": "infinity_nexus_mod:copper_rod"
     },
     {
-      "item": "infinity_nexus_mod:copper_screw"
+      "item": "minecraft:amethyst_shard"
     },
     {
-      "item": "infinity_nexus_mod:copper_rod"
+      "item": "infinity_nexus_mod:copper_screw"
     },
     {
       "item": "infinity_nexus_mod:copper_sheet"
@@ -22,10 +22,10 @@
       "item": "infinity_nexus_mod:copper_sheet"
     },
     {
-      "item": "infinity_nexus_mod:copper_rod"
+      "item": "infinity_nexus_mod:copper_screw"
     },
     {
-      "item": "infinity_nexus_mod:copper_screw"
+      "item": "infinity_nexus_mod:wood_machine_casing"
     },
     {
       "item": "infinity_nexus_mod:copper_rod"

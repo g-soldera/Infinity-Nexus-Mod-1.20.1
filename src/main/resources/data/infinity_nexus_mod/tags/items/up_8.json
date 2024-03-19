@@ -1,6 +1,7 @@
 {
   "replace": true,
   "values": [
-    "infinity_nexus_mod:infinity_component"
+    "infinity_nexus_mod:infinity_component",
+    "infinity_nexus_mod:ancestral_component"
   ]
 }

@@ -154,7 +154,6 @@ dependencies {
     // at runtime, use the full JEI jar for Forge
     runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
 
-
     runtimeOnly(fg.deobf("curse.maven:mekanism-268560:4807067"))
 
 

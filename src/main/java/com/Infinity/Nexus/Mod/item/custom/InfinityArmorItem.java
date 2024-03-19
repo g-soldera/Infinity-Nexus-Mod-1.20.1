@@ -24,8 +24,7 @@ public class InfinityArmorItem extends ArmorItem {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-
-        if(!pLevel.isClientSide() && pEntity instanceof Player player) {
+        if(!pLevel.isClientSide() && pEntity instanceof Player player && pSlotId < 4) {
                 if (hasFullSuitOfArmorOn(player)) {
                     player.getAbilities().mayfly = true;
                     //Ad player effects

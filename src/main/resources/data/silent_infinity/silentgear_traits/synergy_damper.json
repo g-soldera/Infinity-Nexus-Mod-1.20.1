@@ -10,7 +10,7 @@
   "cancels_with": [
     "just_gems:synergy_booster"
   ],
-  "synergy_multi": -0.05,
+  "synergy_multi": 0.05,
   "applicable_range": {
     "min": 1.049
   }

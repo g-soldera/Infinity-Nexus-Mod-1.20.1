@@ -80,7 +80,7 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
     private int hasEnoughEnergy = 0;
     private int hasRecipe = 0;
     private static final int ENERGY_CAPACITY = 60000;
-    private static final int ENERGY_TRANSFER = 256;
+    private static final int ENERGY_TRANSFER = 640;
     private static final int ENERGY_REQ = 32;
     private final FluidTank FLUID_STORAGE = createFluidStorage();
     private static final int FluidStorageCapacity = 10000;
@@ -347,7 +347,7 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
 
         if (hasProgressFinished()) {
             this.data.set(3, 1);
-            pLevel.setBlock(pPos, pState.setValue(MobCrusher.LIT, machineLevel+8), 3);
+            pLevel.setBlock(pPos, pState.setValue(MobCrusher.LIT, machineLevel+9), 3);
             verifyMobs(pLevel, pPos, machineLevel);
             extractEnergy(this);
             setChanged(pLevel, pPos, pState);
@@ -356,9 +356,6 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         this.data.set(3, 0);
     }
 
-    private void setMaxProgress() {
-        maxProgress = 100 - ((getMachineLevel()+1) * 10);
-    }
 
     private boolean hasMobInside(int machinelevel, BlockPos pPos, Level pLevel) {
         machinelevel = machinelevel + 1;
@@ -406,7 +403,9 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
     private void increaseCraftingProgress() {
         progress ++;
     }
-
+    private void setMaxProgress() {
+        maxProgress = 20;
+    }
     @Nullable
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {

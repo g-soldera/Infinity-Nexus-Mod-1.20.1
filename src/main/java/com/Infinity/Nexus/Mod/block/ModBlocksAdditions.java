@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -67,26 +68,43 @@ public class ModBlocksAdditions {
     public static final RegistryObject<Block> EXPLORAR_PORTAL_FRAME = registerBlock("explorar_portal_frame", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> EXPLORAR_PORTAL = registerBlock("explorar_portal", () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_PORTAL).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.SPORE_BLOSSOM)));
 
-    public static final RegistryObject<Block> ASPHALT = registerBlock("asphalt", () -> new Asphalt(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> ASPHALT = registerBlock("asphalt", () -> new Asphalt(BlockBehaviour.Properties.copy(Blocks.LADDER).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> STRUCTURAL_BLOCK = registerBlock("structural_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).replaceable().noLootTable().noOcclusion().noCollission().noParticlesOnBreak()));
 
     public static final RegistryObject<Block> MOB_CRUSHER = registerBlock("mob_crusher", () -> new MobCrusher(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(MobCrusher.LIT) >= 8 ? 2 : 0).noOcclusion()));
     public static final RegistryObject<Block> CRUSHER = registerBlock("crusher", () -> new Crusher(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Crusher.LIT) >= 8 ? 2 : 0).noOcclusion()));
     public static final RegistryObject<Block> PRESS = registerBlock("press", () -> new Press(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Press.LIT) >= 8 ? 2 : 0).noOcclusion()));
     public static final RegistryObject<Block> ASSEMBLY = registerBlock("assembler", () -> new Assembler(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Assembler.LIT) >= 8 ? 2 : 0).noOcclusion()));
+    public static final RegistryObject<Block> FACTORY = registerBlock("factory", () -> new Factory(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Factory.LIT) >= 8 ? 2 : 0).noOcclusion()));
     public static final RegistryObject<Block> SQUEEZER = registerBlock("squeezer", () -> new Squeezer(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Squeezer.LIT) >= 8 ? 2 : 0).noOcclusion()));
     public static final RegistryObject<Block> SMELTERY = registerBlock("smeltery", () -> new Smeltery(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Smeltery.LIT) >= 8 ? 2 : 0).noOcclusion()));
     public static final RegistryObject<Block> MINER = registerBlock("miner", () -> new Miner(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Miner.LIT) >= 8 ? 2 : 0).noOcclusion()));
     public static final RegistryObject<Block> GENERATOR = registerBlock("generator", () -> new Generator(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Generator.LIT) >= 8 ? 2 : 0).noOcclusion()));
+    public static final RegistryObject<Block> RECYCLER = registerBlock("recycler", () -> new Recycler(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Recycler.LIT) >= 8 ? 2 : 0).noOcclusion()));
+    public static final RegistryObject<Block> MATTER_CONDENSER = registerBlock("matter_condenser", () -> new MatterCondenser(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(MatterCondenser.LIT) >= 8 ? 2 : 0).noOcclusion()));
 
+    public static final RegistryObject<Block> SOLAR = registerBlock("solar", () -> new Solar(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(1.0f, 6.0f).lightLevel((state) -> state.getValue(Solar.LIT) > 0 ? 2 : 0).noOcclusion()));
     public static final RegistryObject<Block> FERMENTATION_BARREL = registerBlock("fermentation_barrel", () -> new FermentationBarrel(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).strength(1.0f, 6.0f).noOcclusion()));
+
     public static final RegistryObject<LiquidBlock> LUBRICANT = BLOCKS.register("lubricant", () -> new LiquidBlock(ModFluids.LUBRICANT_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
     public static final RegistryObject<LiquidBlock> ETHANOL = BLOCKS.register("ethanol", () -> new LiquidBlock(ModFluids.ETHANOL_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
-    public static final RegistryObject<LiquidBlock> OIL = BLOCKS.register("oil", () -> new LiquidBlock(ModFluids.OIL_FLOWING, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+    public static final RegistryObject<LiquidBlock> OIL = BLOCKS.register("oil", () -> new LiquidBlock(ModFluids.OIL_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
     public static final RegistryObject<LiquidBlock> VINEGAR = BLOCKS.register("vinegar", () -> new LiquidBlock(ModFluids.VINEGAR_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
     public static final RegistryObject<LiquidBlock> SUGARCANE_JUICE = BLOCKS.register("sugarcane_juice", () -> new LiquidBlock(ModFluids.SUGARCANE_JUICE_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
     public static final RegistryObject<LiquidBlock> WINE = BLOCKS.register("wine", () -> new LiquidBlock(ModFluids.WINE_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
     public static final RegistryObject<LiquidBlock> EXPERIENCE = BLOCKS.register("experience", () -> new LiquidBlock(ModFluids.EXPERIENCE_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+    public static final RegistryObject<LiquidBlock> STARLIQUID = BLOCKS.register("starliquid", () -> new LiquidBlock(ModFluids.STARLIQUID_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+
+    public static final RegistryObject<Block> PURPLE_LIGHT_CRYSTAL = registerBlock("purple_light_crystal", () -> new LightCrystal(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(2.0f, 6.0f).sound(SoundType.GLASS).lightLevel((state) -> 15).noOcclusion(), BlockSetType.POLISHED_BLACKSTONE, 1, true));
+    public static final RegistryObject<Block> YELLOW_LIGHT_CRYSTAL = registerBlock("yellow_light_crystal", () -> new LightCrystal(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(2.0f, 6.0f).sound(SoundType.GLASS).lightLevel((state) -> 15).noOcclusion(), BlockSetType.POLISHED_BLACKSTONE, 1, true));
+    public static final RegistryObject<Block> WHITE_LIGHT_CRYSTAL = registerBlock("white_light_crystal", () -> new LightCrystal(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(2.0f, 6.0f).sound(SoundType.GLASS).lightLevel((state) -> 15).noOcclusion(), BlockSetType.POLISHED_BLACKSTONE, 1, true));
+    public static final RegistryObject<Block> RED_LIGHT_CRYSTAL = registerBlock("red_light_crystal", () -> new LightCrystal(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(2.0f, 6.0f).sound(SoundType.GLASS).lightLevel((state) -> 15).noOcclusion(), BlockSetType.POLISHED_BLACKSTONE, 1, true));
+    public static final RegistryObject<Block> ORANGE_LIGHT_CRYSTAL = registerBlock("orange_light_crystal", () -> new LightCrystal(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(2.0f, 6.0f).sound(SoundType.GLASS).lightLevel((state) -> 15).noOcclusion(), BlockSetType.POLISHED_BLACKSTONE, 1, true));
+    public static final RegistryObject<Block> PINK_LIGHT_CRYSTAL = registerBlock("pink_light_crystal", () -> new LightCrystal(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(2.0f, 6.0f).sound(SoundType.GLASS).lightLevel((state) -> 15).noOcclusion(), BlockSetType.POLISHED_BLACKSTONE, 1, true));
+    public static final RegistryObject<Block> GREEN_LIGHT_CRYSTAL = registerBlock("green_light_crystal", () -> new LightCrystal(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(2.0f, 6.0f).sound(SoundType.GLASS).lightLevel((state) -> 15).noOcclusion(), BlockSetType.POLISHED_BLACKSTONE, 1, true));
+    public static final RegistryObject<Block> BLUE_LIGHT_CRYSTAL = registerBlock("blue_light_crystal", () -> new LightCrystal(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(2.0f, 6.0f).sound(SoundType.GLASS).lightLevel((state) -> 15).noOcclusion(), BlockSetType.POLISHED_BLACKSTONE, 1, true));
+
+
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

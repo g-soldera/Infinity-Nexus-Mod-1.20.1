@@ -23,6 +23,7 @@ public class ComponentItem extends Item {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(Component.literal(durability));
+        pTooltipComponents.add(Component.translatable("chat.infinity_nexus_mod.component_install"));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
     @Override
@@ -34,4 +35,5 @@ public class ComponentItem extends Item {
     public int getEnchantmentValue() {
         return 1;
     }
+
 }

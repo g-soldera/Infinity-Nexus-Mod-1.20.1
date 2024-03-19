@@ -65,7 +65,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
     private static final int[] UPGRADE_SLOTS = {3, 4, 5, 6};
     private static final int COMPONENT_SLOT = 7;
     private static final int capacity = 60000;
-    private static final int maxTransfer = 500;
+    private static final int maxTransfer = 640;
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
 
@@ -233,7 +233,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         if (!hasEnoughEnergy()) {
             return;
         }
-        pLevel.setBlock(pPos, pState.setValue(Press.LIT, machineLevel+8), 3);
+        pLevel.setBlock(pPos, pState.setValue(Press.LIT, machineLevel+9), 3);
         increaseCraftingProgress();
         extractEnergy(this);
         setChanged(pLevel, pPos, pState);
@@ -243,16 +243,6 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
             craftItem();
             resetProgress();
         }
-    }
-
-    private void setMaxProgress(int machineLevel) {
-        int duration = getCurrentRecipe().get().getDuration() / 12;
-        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS) + (machineLevel + 1);
-
-        int modifiers = (12 - speed);
-
-        duration = modifiers * duration;
-        maxProgress = Math.max(duration, 20);
     }
 
     private void extractEnergy(PressBlockEntity pressBlockEntity) {
@@ -289,7 +279,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
             component.shrink(1);
             level.playSound(null, this.getBlockPos(), SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
         }
-
+        level.playSound(null, this.getBlockPos(), SoundEvents.ANVIL_FALL, SoundSource.BLOCKS, 1.0f, 1.0f);
         this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(),
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
     }
@@ -334,19 +324,15 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void increaseCraftingProgress() {
-        int speed = 0;
-        int modSpeed = ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS);
-        int machineLevel = getMachineLevel();
-
-        speed += modSpeed + machineLevel;
-
-        double incrementPercentage = 0.1 * machineLevel;
-        double speedIncrement = speed * incrementPercentage;
-        speed += (int) speedIncrement;
-
-        progress += speed;
+        progress ++;
     }
+    private void setMaxProgress(int machineLevel) {
+        int duration = getCurrentRecipe().get().getDuration();
+        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS);
 
+        duration = duration / Math.max((machineLevel + speed), 1);
+        maxProgress = Math.max(duration, 5);
+    }
     public static int getInputSlot() {
         return INPUT_SLOT;
     }

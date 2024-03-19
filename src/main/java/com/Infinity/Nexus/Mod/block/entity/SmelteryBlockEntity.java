@@ -71,7 +71,7 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
 
 
     private ModEnergyStorage createEnergyStorage() {
-        return new ModEnergyStorage(capacity, 265) {
+        return new ModEnergyStorage(capacity, 640) {
             @Override
             public void onEnergyChanged() {
                 setChanged();
@@ -243,7 +243,7 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
-        pLevel.setBlock(pPos, pState.setValue(Smeltery.LIT, machineLevel+8), 3);
+        pLevel.setBlock(pPos, pState.setValue(Smeltery.LIT, machineLevel+9), 3);
         increaseCraftingProgress();
         extractEnergy(this);
         setChanged(pLevel, pPos, pState);
@@ -252,16 +252,6 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
             craftItem();
             resetProgress();
         }
-    }
-
-    private void setMaxProgress(int machineLevel) {
-        int duration = getCurrentRecipe().get().getDuration() / 12;
-        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS) + (machineLevel + 1);
-
-        int modifiers = (12 - speed);
-
-        duration = modifiers * duration;
-        maxProgress = Math.max(duration, 20);
     }
 
     private void extractEnergy(SmelteryBlockEntity smelteryBlockEntity) {
@@ -348,21 +338,17 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasProgressFinished() {
-        maxProgress = getCurrentRecipe().get().getDuration();
         return progress >= maxProgress;
     }
     private void increaseCraftingProgress() {
-        int speed = 0;
-        int modSpeed = ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS);
-        int machineLevel = getMachineLevel();
+        progress ++;
+    }
+    private void setMaxProgress(int machineLevel) {
+        int duration = getCurrentRecipe().get().getDuration();
+        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS);
 
-        speed += modSpeed + machineLevel;
-
-        double incrementPercentage = 0.1 * machineLevel;
-        double speedIncrement = speed * incrementPercentage;
-        speed += (int) speedIncrement;
-
-        progress += speed;
+        duration = duration / Math.max((machineLevel + speed), 1);
+        maxProgress = Math.max(duration, 5);
     }
 
     public static int getInputSlot() {

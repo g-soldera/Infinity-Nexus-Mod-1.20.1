@@ -4,8 +4,8 @@ import com.Infinity.Nexus.Mod.block.custom.Crusher;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.CrusherRecipes;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherMenu;
-import com.Infinity.Nexus.Mod.utils.ModUtils;
 import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
+import com.Infinity.Nexus.Mod.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -35,14 +35,11 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Optional;
-
-import static com.Infinity.Nexus.Mod.block.custom.Crusher.LIT;
 
 public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(7) {
@@ -67,7 +64,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
 
 
     private ModEnergyStorage createEnergyStorage() {
-        return new ModEnergyStorage(capacity, 265) {
+        return new ModEnergyStorage(capacity, 640) {
             @Override
             public void onEnergyChanged() {
                 setChanged();
@@ -241,7 +238,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
-        pLevel.setBlock(pPos, pState.setValue(Crusher.LIT, machineLevel+8), 3);
+        pLevel.setBlock(pPos, pState.setValue(Crusher.LIT, machineLevel+9), 3);
         increaseCraftingProgress();
         extractEnergy(this);
         setChanged(pLevel, pPos, pState);
@@ -250,16 +247,6 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
             craftItem();
             resetProgress();
         }
-    }
-
-    private void setMaxProgress(int machineLevel) {
-        int duration = getCurrentRecipe().get().getDuration() / 12;
-        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS) + (machineLevel + 1);
-
-        int modifiers = (12 - speed);
-
-        duration = modifiers * duration;
-        maxProgress = Math.max(duration, 20);
     }
 
     private void extractEnergy(CrusherBlockEntity crusherBlockEntity) {
@@ -337,23 +324,18 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasProgressFinished() {
-        maxProgress = getCurrentRecipe().get().getDuration();
         return progress >= maxProgress;
     }
     private void increaseCraftingProgress() {
-        int speed = 0;
-        int modSpeed = ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS);
-        int machineLevel = getMachineLevel();
-
-        speed += modSpeed + machineLevel;
-
-        double incrementPercentage = 0.1 * machineLevel;
-        double speedIncrement = speed * incrementPercentage;
-        speed += (int) speedIncrement;
-
-        progress += speed;
+        progress ++;
     }
+    private void setMaxProgress(int machineLevel) {
+        int duration = getCurrentRecipe().get().getDuration();
+        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS);
 
+        duration = duration / Math.max((machineLevel + speed), 1);
+        maxProgress = Math.max(duration, 5);
+    }
     public static int getInputSlot() {
         return INPUT_SLOT;
     }

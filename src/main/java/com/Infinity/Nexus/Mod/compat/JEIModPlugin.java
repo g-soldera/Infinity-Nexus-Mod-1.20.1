@@ -2,16 +2,18 @@ package com.Infinity.Nexus.Mod.compat;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
+import com.Infinity.Nexus.Mod.item.ModCrystalItems;
+import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.recipe.*;
 import com.Infinity.Nexus.Mod.screen.assembler.AssemblerScreen;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherScreen;
+import com.Infinity.Nexus.Mod.screen.factory.FactoryScreen;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelScreen;
 import com.Infinity.Nexus.Mod.screen.press.PressScreen;
 import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryScreen;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerScreen;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -19,7 +21,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 
-import java.awt.*;
 import java.util.List;
 
 @JeiPlugin
@@ -36,6 +37,7 @@ public class JEIModPlugin implements IModPlugin {
         registration.addRecipeCategories(new CrusherCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new PressCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new AssemblerCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new FactoryCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new SqueezerCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new SmelteryCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new FermentationBarrelCategory(registration.getJeiHelpers().getGuiHelper()));
@@ -50,32 +52,47 @@ public class JEIModPlugin implements IModPlugin {
         List<CrusherRecipes> crusherRecipes = recipeManager.getAllRecipesFor(CrusherRecipes.Type.INSTANCE);
         List<PressRecipes> pressRecipes = recipeManager.getAllRecipesFor(PressRecipes.Type.INSTANCE);
         List<AssemblerRecipes> assemblyRecipes = recipeManager.getAllRecipesFor(AssemblerRecipes.Type.INSTANCE);
+        List<FactoryRecipes> factoryRecipes = recipeManager.getAllRecipesFor(FactoryRecipes.Type.INSTANCE);
         List<SqueezerRecipes> squeezerRecipes = recipeManager.getAllRecipesFor(SqueezerRecipes.Type.INSTANCE);
         List<SmelteryRecipes> smelteryRecipes = recipeManager.getAllRecipesFor(SmelteryRecipes.Type.INSTANCE);
         List<FermentationBarrelRecipes> fermentationBarrelRecipes = recipeManager.getAllRecipesFor(FermentationBarrelRecipes.Type.INSTANCE);
 
-
+        try {
         registration.addRecipes(CrusherCategory.CRUSHER_TYPE, crusherRecipes);
         System.out.println("Registry: " + crusherRecipes.size() +" "+ Component.translatable("block.infinity_nexus_mod.crusher"));
         registration.addRecipes(PressCategory.PRESS_TYPE, pressRecipes);
         System.out.println("Registry: " + pressRecipes.size() +" "+ Component.translatable("block.infinity_nexus_mod.press"));
         registration.addRecipes(AssemblerCategory.ASSEMBLY_TYPE, assemblyRecipes);
         System.out.println("Registry: " + assemblyRecipes.size() +" "+ Component.translatable("block.infinity_nexus_mod.assembler"));
+        registration.addRecipes(FactoryCategory.FACTORY_TYPE, factoryRecipes);
+        System.out.println("Registry: " + factoryRecipes.size() +" "+ Component.translatable("block.infinity_nexus_mod.factory"));
         registration.addRecipes(SqueezerCategory.SQUEEZER_TYPE, squeezerRecipes);
         System.out.println("Registry: " + squeezerRecipes.size() +" "+ Component.translatable("block.infinity_nexus_mod.squeezer"));
         registration.addRecipes(SmelteryCategory.SMELTERY_TYPE, smelteryRecipes);
         System.out.println("Registry: " + smelteryRecipes.size() +" "+ Component.translatable("block.infinity_nexus_mod.smeltery"));
         registration.addRecipes(FermentationBarrelCategory.FERMENTATION_BARREL_TYPE, fermentationBarrelRecipes);
         System.out.println("Registry: " + fermentationBarrelRecipes.size() +" "+ Component.translatable("block.infinity_nexus_mod.fermentation_barrel"));
-
+        }catch (Exception ignored){
+        }
         registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.CRUSHER.get()), Component.translatable("infinity_nexus_mod.jei_information"));
         registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.PRESS.get()), Component.translatable("infinity_nexus_mod.jei_information"));
         registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.ASSEMBLY.get()), Component.translatable("infinity_nexus_mod.jei_information"));
+        registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.FACTORY.get()), Component.translatable("infinity_nexus_mod.jei_information"));
         registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.SQUEEZER.get()), Component.translatable("infinity_nexus_mod.jei_information"));
         registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.SMELTERY.get()), Component.translatable("infinity_nexus_mod.jei_information"));
         registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.GENERATOR.get()), Component.translatable("infinity_nexus_mod.jei_information"));
         registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.MOB_CRUSHER.get()), Component.translatable("infinity_nexus_mod.jei_information"));
         registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.MINER.get()), Component.translatable("infinity_nexus_mod.jei_information"));
+
+        registration.addItemStackInfo(new ItemStack(ModCrystalItems.AMBER_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §51"));
+        registration.addItemStackInfo(new ItemStack(ModCrystalItems.MARINE_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §52"));
+        registration.addItemStackInfo(new ItemStack(ModCrystalItems.CITRIUM_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §53"));
+        registration.addItemStackInfo(new ItemStack(ModCrystalItems.RUBIUM_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §54"));
+        registration.addItemStackInfo(new ItemStack(ModCrystalItems.DEMETRIUM_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §55"));
+        registration.addItemStackInfo(new ItemStack(ModCrystalItems.AGATE_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §56"));
+        registration.addItemStackInfo(new ItemStack(ModCrystalItems.DARIUM_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §57"));
+
+        registration.addItemStackInfo(new ItemStack(ModItemsProgression.STABLE_MATTER.get()), Component.translatable("item.infinity_nexus.stable_matter").append(" §5107MFE"));
 
     }
 
@@ -89,6 +106,7 @@ public class JEIModPlugin implements IModPlugin {
         registration.addRecipeCatalyst(ModBlocksAdditions.CRUSHER.get().asItem().getDefaultInstance(), CrusherCategory.CRUSHER_TYPE);
         registration.addRecipeCatalyst(ModBlocksAdditions.PRESS.get().asItem().getDefaultInstance(), PressCategory.PRESS_TYPE);
         registration.addRecipeCatalyst(ModBlocksAdditions.ASSEMBLY.get().asItem().getDefaultInstance(), AssemblerCategory.ASSEMBLY_TYPE);
+        registration.addRecipeCatalyst(ModBlocksAdditions.FACTORY.get().asItem().getDefaultInstance(), FactoryCategory.FACTORY_TYPE);
         registration.addRecipeCatalyst(ModBlocksAdditions.SQUEEZER.get().asItem().getDefaultInstance(), SqueezerCategory.SQUEEZER_TYPE);
         registration.addRecipeCatalyst(ModBlocksAdditions.SMELTERY.get().asItem().getDefaultInstance(), SmelteryCategory.SMELTERY_TYPE);
         registration.addRecipeCatalyst(ModBlocksAdditions.FERMENTATION_BARREL.get().asItem().getDefaultInstance(), FermentationBarrelCategory.FERMENTATION_BARREL_TYPE);
@@ -99,6 +117,7 @@ public class JEIModPlugin implements IModPlugin {
        registration.addRecipeClickArea(CrusherScreen.class,162, -10,8,9, CrusherCategory.CRUSHER_TYPE);
        registration.addRecipeClickArea(PressScreen.class,162, -10,8,9, PressCategory.PRESS_TYPE);
        registration.addRecipeClickArea(AssemblerScreen.class,162, -10,8,9, AssemblerCategory.ASSEMBLY_TYPE);
+       registration.addRecipeClickArea(FactoryScreen.class,162, -38,8,9, FactoryCategory.FACTORY_TYPE);
        registration.addRecipeClickArea(SqueezerScreen.class,162, -10,8,9, SqueezerCategory.SQUEEZER_TYPE);
        registration.addRecipeClickArea(SmelteryScreen.class,162, -10,8,9, SmelteryCategory.SMELTERY_TYPE);
        registration.addRecipeClickArea(FermentationBarrelScreen.class,162, -10,8,9, FermentationBarrelCategory.FERMENTATION_BARREL_TYPE);

@@ -1,7 +1,7 @@
 {
   "type": "infinity_nexus_mod:crushing",
   "energy": 3600,
-  "duration": 800,
+  "duration": 130,
   "ingredients": [
     {
       "tag": "infinity_nexus_mod:up_3"

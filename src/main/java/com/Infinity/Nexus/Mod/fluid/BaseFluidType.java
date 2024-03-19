@@ -38,6 +38,26 @@ public class BaseFluidType extends FluidType {
         this.fogColor = fogColor;
     }
 
+    @Override
+    public int getDensity() {
+        return super.getDensity();
+    }
+
+    @Override
+    public int getTemperature() {
+        return super.getTemperature();
+    }
+
+    @Override
+    public int getViscosity() {
+        return super.getViscosity();
+    }
+
+    @Override
+    public int getLightLevel() {
+        return super.getLightLevel();
+    }
+
     public ResourceLocation getStillTexture() {
         return stillTexture;
     }

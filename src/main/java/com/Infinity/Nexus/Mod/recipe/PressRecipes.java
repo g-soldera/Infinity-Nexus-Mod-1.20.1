@@ -49,7 +49,7 @@ public class PressRecipes implements Recipe<SimpleContainer> {
         }
         int componentSlot = PressBlockEntity.getComponentSlot();
         ItemStack stack = pContainer.getItem(componentSlot);
-        return (inputItems.get(0).test(stack) || ModUtils.getComponentLevel(stack) >= ModUtils.getComponentLevel(inputItems.get(0).getItems()[0])) &&
+        return (inputItems.get(0).test(stack)) &&
                 (inputItems.get(1).test(pContainer.getItem(0)))&&
                 inputItems.get(2).test(pContainer.getItem(1));
     }

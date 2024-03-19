@@ -3,8 +3,11 @@ package com.Infinity.Nexus.Mod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.ModBlocksProgression;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
+import com.Infinity.Nexus.Mod.entity.ModEntities;
+import com.Infinity.Nexus.Mod.entity.client.AsgreonRenderer;
 import com.Infinity.Nexus.Mod.fluid.ModFluidType;
 import com.Infinity.Nexus.Mod.fluid.ModFluids;
+import com.Infinity.Nexus.Mod.item.ModCrystalItems;
 import com.Infinity.Nexus.Mod.item.ModItemProperties;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
@@ -13,13 +16,17 @@ import com.Infinity.Nexus.Mod.networking.ModMessages;
 import com.Infinity.Nexus.Mod.recipe.ModRecipes;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
 import com.Infinity.Nexus.Mod.screen.assembler.AssemblerScreen;
+import com.Infinity.Nexus.Mod.screen.condenser.CondenserScreen;
+import com.Infinity.Nexus.Mod.screen.factory.FactoryScreen;
 import com.Infinity.Nexus.Mod.screen.miner.MinerScreen;
 import com.Infinity.Nexus.Mod.screen.mobcrusher.MobCrusherScreen;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherScreen;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelScreen;
 import com.Infinity.Nexus.Mod.screen.generator.GeneratorScreen;
 import com.Infinity.Nexus.Mod.screen.press.PressScreen;
+import com.Infinity.Nexus.Mod.screen.recycler.RecyclerScreen;
 import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryScreen;
+import com.Infinity.Nexus.Mod.screen.solar.solar.SolarScreen;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerScreen;
 import com.Infinity.Nexus.Mod.tab.ModTabAdditions;
 import com.Infinity.Nexus.Mod.tab.ModTabProgression;
@@ -27,6 +34,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -57,6 +65,7 @@ public class InfinityNexusMod
 
         ModItemsAdditions.register(modEventBus);
         ModItemsProgression.register(modEventBus);
+        ModCrystalItems.register(modEventBus);
 
         ModTabAdditions.register(modEventBus);
         ModTabProgression.register(modEventBus);
@@ -67,7 +76,7 @@ public class InfinityNexusMod
         ModMenuTypes.register(modEventBus);
 
         ModRecipes.register(modEventBus);
-        //ModEntities.register(modEventBus);
+        ModEntities.register(modEventBus);
 
         ModFluids.register(modEventBus);
         ModFluidType.register(modEventBus);
@@ -111,11 +120,15 @@ public class InfinityNexusMod
             MenuScreens.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
             MenuScreens.register(ModMenuTypes.PRESS_MENU.get(), PressScreen::new);
             MenuScreens.register(ModMenuTypes.ASSEMBLY_MENU.get(), AssemblerScreen::new);
+            MenuScreens.register(ModMenuTypes.FACTORY_MENU.get(), FactoryScreen::new);
             MenuScreens.register(ModMenuTypes.SQUEEZER_MENU.get(), SqueezerScreen::new);
             MenuScreens.register(ModMenuTypes.SMELTERY_MENU.get(), SmelteryScreen::new);
             MenuScreens.register(ModMenuTypes.GENERATOR_MENU.get(), GeneratorScreen::new);
             MenuScreens.register(ModMenuTypes.MINER_MENU.get(), MinerScreen::new);
             MenuScreens.register(ModMenuTypes.FERMENTATION_BARREL_MENU.get(), FermentationBarrelScreen::new);
+            MenuScreens.register(ModMenuTypes.RECYCLER_MENU.get(), RecyclerScreen::new);
+            MenuScreens.register(ModMenuTypes.MATTER_CONDENSER_MENU.get(), CondenserScreen::new);
+            MenuScreens.register(ModMenuTypes.SOLAR_MENU.get(), SolarScreen::new);
 
 
 
@@ -133,14 +146,26 @@ public class InfinityNexusMod
             ItemBlockRenderTypes.setRenderLayer(ModFluids.WINE_FLOWING.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.EXPERIENCE_SOURCE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.EXPERIENCE_FLOWING.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.STRUCTURAL_BLOCK.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.STARLIQUID_SOURCE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.STARLIQUID_FLOWING.get(), RenderType.translucent());
+
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.STRUCTURAL_BLOCK.get(), RenderType.cutoutMipped());
+
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.RED_LIGHT_CRYSTAL.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.BLUE_LIGHT_CRYSTAL.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.GREEN_LIGHT_CRYSTAL.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.YELLOW_LIGHT_CRYSTAL.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.PURPLE_LIGHT_CRYSTAL.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.ORANGE_LIGHT_CRYSTAL.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.WHITE_LIGHT_CRYSTAL.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.PINK_LIGHT_CRYSTAL.get(), RenderType.translucent());
+
+            EntityRenderers.register(ModEntities.ASGREON.get(), AsgreonRenderer::new);
 
         }
     }
     private void setup(final FMLCommonSetupEvent event)
     {
-
-
         LOGGER.info("   §4_____§5_   __§9__________§3_   ______§b_______  __");
         LOGGER.info("  §4/_  _§5/ | / §9/ ____/  _§3/ | / /  _§b/_  __| \\/ /");
         LOGGER.info("   §4/ /§5/  |/ §9/ /_   / /§3/  |/ // /  §b/ /   \\  / ");

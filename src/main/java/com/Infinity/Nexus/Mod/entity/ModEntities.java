@@ -13,7 +13,7 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, InfinityNexusMod.MOD_ID);
 
     public static final RegistryObject<EntityType<Asgreon>> ASGREON = ENTITIES_TYPES.register("asgreon",
-            () -> EntityType.Builder.of(Asgreon::new, MobCategory.CREATURE).sized(2.5f, 2.5f).build("asgreon"));
+            () -> EntityType.Builder.of(Asgreon::new, MobCategory.CREATURE).sized(1.5f, 4.8f).build("asgreon"));
 
     public static void register(IEventBus eventBus){
         ENTITIES_TYPES.register(eventBus);

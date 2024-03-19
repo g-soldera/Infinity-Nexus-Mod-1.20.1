@@ -1,6 +1,8 @@
 package com.Infinity.Nexus.Mod.datagen;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
+import com.Infinity.Nexus.Mod.item.ModCrystalItems;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import net.minecraft.data.PackOutput;
@@ -45,6 +47,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.BRONZE_NUGGET);
         simpleItem(ModItemsAdditions.STEEL_NUGGET);
 
+        simpleItem(ModItemsAdditions.INFINIUM_STELLARUM_INGOT);
         simpleItem(ModItemsAdditions.INFINITY_DUST);
         simpleItem(ModItemsAdditions.IRON_DUST);
         simpleItem(ModItemsAdditions.COPPER_DUST);
@@ -115,6 +118,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.REFINED_COMPONENT);
         simpleItem(ModItemsAdditions.INTEGRAL_COMPONENT);
         simpleItem(ModItemsAdditions.INFINITY_COMPONENT);
+        simpleItem(ModItemsAdditions.ANCESTRAL_COMPONENT);
 
         simpleItem(ModItemsAdditions.BASIC_CIRCUIT);
         simpleItem(ModItemsAdditions.ADVANCED_CIRCUIT);
@@ -126,6 +130,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.BUCKET_SUGARCANE_JUICE);
         simpleItem(ModItemsAdditions.BUCKET_WINE);
         simpleItem(ModItemsAdditions.BUCKET_EXPERIENCE);
+        simpleItem(ModItemsAdditions.BUCKET_STARLIQUID);
 
         simpleItem(ModItemsAdditions.ALCOHOL_BOTTLE);
         simpleItem(ModItemsAdditions.VINEGAR_BOTTLE);
@@ -206,9 +211,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.INFINITY_SHEET);
 
         simpleItem(ModItemsProgression.BIO_MASS);
+        simpleItem(ModItemsProgression.RESIDUAL_MATTER);
+        simpleItem(ModItemsProgression.STABLE_MATTER);
 
         simpleItem(ModItemsAdditions.TERRAIN_MARKER);
         simpleItem(ModItemsAdditions.LINKING_TOOL);
+        simpleItem(ModItemsAdditions.HAMMER_RANGE_UPGRADE);
+        simpleItem(ModItemsAdditions.STAR_FRAGMENT);
+
+        simpleItem(ModCrystalItems.AMBER_CRYSTAL);
+        simpleItem(ModCrystalItems.MARINE_CRYSTAL);
+        simpleItem(ModCrystalItems.CITRIUM_CRYSTAL);
+        simpleItem(ModCrystalItems.RUBIUM_CRYSTAL);
+        simpleItem(ModCrystalItems.DEMETRIUM_CRYSTAL);
+        simpleItem(ModCrystalItems.AGATE_CRYSTAL);
+        simpleItem(ModCrystalItems.DARIUM_CRYSTAL);
+
+        withExistingParent(ModItemsAdditions.ASGREON_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){

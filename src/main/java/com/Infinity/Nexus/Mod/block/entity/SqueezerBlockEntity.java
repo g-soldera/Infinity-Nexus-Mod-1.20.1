@@ -1,7 +1,6 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
 import com.Infinity.Nexus.Mod.block.custom.Squeezer;
-import com.Infinity.Nexus.Mod.fluid.ModFluids;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.SqueezerRecipes;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerMenu;
@@ -29,9 +28,7 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -39,7 +36,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -49,7 +45,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
@@ -79,7 +74,7 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
     private static final int[] UPGRADE_SLOTS = {4, 5, 6, 7};
     private static final int COMPONENT_SLOT = 8;
     private static final int capacity = 60000;
-    private static final int maxTransfer = 500;
+    private static final int maxTransfer = 640;
     private static final int fluidCapacity = 5000;
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
@@ -281,7 +276,6 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
             fillUpOnFluid(FLUID_SLOT);
 
             int machineLevel = getMachineLevel() - 1 <= 0 ? 0 : getMachineLevel() - 1;
-            ;
             pLevel.setBlock(pPos, pState.setValue(Squeezer.LIT, machineLevel), 3);
             if (isRedstonePowered(pPos)) {
                 return;
@@ -298,7 +292,7 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
             if(!canInsertOutputFluid()){
                 return;
             }
-            pLevel.setBlock(pPos, pState.setValue(Squeezer.LIT, machineLevel + 8), 3);
+            pLevel.setBlock(pPos, pState.setValue(Squeezer.LIT, machineLevel + 9), 3);
             increaseCraftingProgress();
             extractEnergy(this);
             setChanged(pLevel, pPos, pState);
@@ -370,16 +364,6 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
         return iFluidHandlerItem.getFluidInTank(0).isFluidEqual(FLUID_STORAGE.getFluid())
                 && iFluidHandlerItem.getFluidInTank(0).getAmount() < iFluidHandlerItem.getTankCapacity(0)
                 || iFluidHandlerItem.getFluidInTank(0).isEmpty();
-    }
-
-    private void setMaxProgress(int machineLevel) {
-        int duration = getCurrentRecipe().get().getDuration() / 12;
-        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS) + (machineLevel + 1);
-
-        int modifiers = (12 - speed);
-
-        duration = modifiers * duration;
-        maxProgress = Math.max(duration, 20);
     }
 
     private void extractEnergy(SqueezerBlockEntity squeezerBlockEntity) {
@@ -462,17 +446,14 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void increaseCraftingProgress() {
-        int speed = 0;
-        int modSpeed = ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS);
-        int machineLevel = getMachineLevel();
+        progress ++;
+    }
+    private void setMaxProgress(int machineLevel) {
+        int duration = getCurrentRecipe().get().getDuration();
+        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS);
 
-        speed += modSpeed + machineLevel;
-
-        double incrementPercentage = 0.1 * machineLevel;
-        double speedIncrement = speed * incrementPercentage;
-        speed += (int) speedIncrement;
-
-        progress += speed;
+        duration = duration / Math.max((machineLevel + speed), 1);
+        maxProgress = Math.max(duration, 5);
     }
 
     public static int getInputSlot() {

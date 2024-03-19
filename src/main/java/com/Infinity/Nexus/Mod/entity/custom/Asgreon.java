@@ -2,10 +2,8 @@ package com.Infinity.Nexus.Mod.entity.custom;
 
 import com.Infinity.Nexus.Mod.entity.ModEntities;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -18,8 +16,10 @@ import org.jetbrains.annotations.Nullable;
 public class Asgreon  extends Animal {
     public  final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
+    private int damageTimeout = 120;
     public Asgreon(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        this.setMaxUpStep(1f);
     }
 
     @Override
@@ -38,8 +38,10 @@ public class Asgreon  extends Animal {
         return Animal.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 350d)
                 .add(Attributes.MOVEMENT_SPEED, 0.15d)
+                .add(Attributes.FOLLOW_RANGE, 16d)
                 .add(Attributes.ARMOR_TOUGHNESS, 0.1f)
-                .add(Attributes.ATTACK_DAMAGE, 2f);
+                .add(Attributes.ATTACK_DAMAGE, 2f)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 22f);
     }
 
     @Nullable
@@ -47,6 +49,20 @@ public class Asgreon  extends Animal {
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
         return ModEntities.ASGREON.get().create(pLevel);
     }
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if (this.isInvulnerable()) {
+            return false;
+        }
+        if (damageTimeout == 0) {
+            damageTimeout = 120;
+        }
+        System.out.println(pAmount);
+        return super.hurt(pSource, pAmount);
+    }
+
+
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
@@ -69,11 +85,19 @@ public class Asgreon  extends Animal {
     }
 
     @Override
+    public boolean isInvulnerable() {
+        return this.damageTimeout > 0;
+    }
+
+    @Override
     public void tick() {
         super.tick();
 
         if (this.level().isClientSide()) {
             this.setupAnimationStates();
+        }
+        if(damageTimeout > 0){
+            --damageTimeout;
         }
     }
 }

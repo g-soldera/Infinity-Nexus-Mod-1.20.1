@@ -29,6 +29,7 @@ public class ModFluids {
             () -> new ForgeFlowingFluid.Source(ModFluids.OIL_FLUID_PROPERTIES));
     public static final RegistryObject<FlowingFluid> OIL_FLOWING = FLUIDS.register("flowing_oil_water_fluid",
             () -> new ForgeFlowingFluid.Flowing(ModFluids.OIL_FLUID_PROPERTIES));
+
     public static final RegistryObject<FlowingFluid> VINEGAR_SOURCE = FLUIDS.register("vinegar_water_fluid",
             () -> new ForgeFlowingFluid.Source(ModFluids.VINEGAR_FLUID_PROPERTIES));
     public static final RegistryObject<FlowingFluid> VINEGAR_FLOWING = FLUIDS.register("flowing_vinegar_water_fluid",
@@ -48,6 +49,11 @@ public class ModFluids {
             () -> new ForgeFlowingFluid.Source(ModFluids.EXPERIENCE_FLUID_PROPERTIES));
     public static final RegistryObject<FlowingFluid> EXPERIENCE_FLOWING = FLUIDS.register("flowing_experience_water_fluid",
             () -> new ForgeFlowingFluid.Flowing(ModFluids.EXPERIENCE_FLUID_PROPERTIES));
+
+    public static final RegistryObject<FlowingFluid> STARLIQUID_SOURCE = FLUIDS.register("starliquid_water_fluid",
+            () -> new ForgeFlowingFluid.Source(ModFluids.STARLIQUID_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> STARLIQUID_FLOWING = FLUIDS.register("flowing_starliquid_water_fluid",
+            () -> new ForgeFlowingFluid.Flowing(ModFluids.STARLIQUID_FLUID_PROPERTIES));
 
     public static final ForgeFlowingFluid.Properties LUBRICANT_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
         ModFluidType.LUBRICANT, LUBRICANT_SOURCE, LUBRICANT_FLOWING)
@@ -77,6 +83,10 @@ public class ModFluids {
         ModFluidType.EXPERIENCE, EXPERIENCE_SOURCE, EXPERIENCE_FLOWING)
             .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocksAdditions.EXPERIENCE)
             .bucket(ModItemsAdditions.BUCKET_EXPERIENCE);
+    public static final ForgeFlowingFluid.Properties STARLIQUID_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+        ModFluidType.STARLIQUID, STARLIQUID_SOURCE, STARLIQUID_FLOWING)
+            .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocksAdditions.STARLIQUID)
+            .bucket(ModItemsAdditions.BUCKET_STARLIQUID);
 
 
     public static void register(IEventBus eventBus) {

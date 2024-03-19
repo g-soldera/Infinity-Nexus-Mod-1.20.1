@@ -152,23 +152,23 @@
   "item.infinity_nexus_mod.infinity_dust": "Pó de Infinity",
   "item.infinity_nexus_mod.infinity_nugget": "Pepita de Infinity",
 
-  "block.infinity_nexus_mod.wood_machine_casing": "Carcaça de Máquina de Madeira",
-  "block.infinity_nexus_mod.copper_machine_casing": "Carcaça de Máquina de Cobre",
-  "block.infinity_nexus_mod.silver_machine_casing": "Carcaça de Máquina de Prata",
-  "block.infinity_nexus_mod.tin_machine_casing": "Carcaça de Máquina de Estanho",
-  "block.infinity_nexus_mod.lead_machine_casing": "Carcaça de Máquina de Chumbo",
-  "block.infinity_nexus_mod.nickel_machine_casing": "Carcaça de Máquina de Níquel",
-  "block.infinity_nexus_mod.zinc_machine_casing": "Carcaça de Máquina de Zinco",
-  "block.infinity_nexus_mod.brass_machine_casing": "Carcaça de Máquina de Latão",
-  "block.infinity_nexus_mod.bronze_machine_casing": "Carcaça de Máquina de Bronze",
-  "block.infinity_nexus_mod.iron_machine_casing": "Carcaça de Máquina de Ferro",
-  "block.infinity_nexus_mod.glass_machine_casing": "Carcaça de Máquina de Vidro",
-  "block.infinity_nexus_mod.plastic_machine_casing": "Carcaça de Máquina de Plástico",
-  "block.infinity_nexus_mod.gold_machine_casing": "Carcaça de Máquina de Ouro",
-  "block.infinity_nexus_mod.steel_machine_casing": "Carcaça de Máquina de Aço",
-  "block.infinity_nexus_mod.aluminum_machine_casing": "Carcaça de Máquina de Alumínio",
-  "block.infinity_nexus_mod.industrial_machine_casing": "Carcaça de Máquina Industrial",
-  "block.infinity_nexus_mod.infinity_machine_casing": "Carcaça de Máquina de Infinity",
+  "block.infinity_nexus_mod.wood_machine_casing": "Estrutura de Madeira",
+  "block.infinity_nexus_mod.copper_machine_casing": "Estrutura de Cobre",
+  "block.infinity_nexus_mod.silver_machine_casing": "Estrutura de Prata",
+  "block.infinity_nexus_mod.tin_machine_casing": "Estrutura de Estanho",
+  "block.infinity_nexus_mod.lead_machine_casing": "Estrutura de Chumbo",
+  "block.infinity_nexus_mod.nickel_machine_casing": "Estrutura de Níquel",
+  "block.infinity_nexus_mod.zinc_machine_casing": "Estrutura de Zinco",
+  "block.infinity_nexus_mod.brass_machine_casing": "Estrutura de Latão",
+  "block.infinity_nexus_mod.bronze_machine_casing": "Estrutura de Bronze",
+  "block.infinity_nexus_mod.iron_machine_casing": "Estrutura de Ferro",
+  "block.infinity_nexus_mod.glass_machine_casing": "Estrutura de Vidro",
+  "block.infinity_nexus_mod.plastic_machine_casing": "Estrutura de Plástico",
+  "block.infinity_nexus_mod.gold_machine_casing": "Estrutura de Ouro",
+  "block.infinity_nexus_mod.steel_machine_casing": "Estrutura de Aço",
+  "block.infinity_nexus_mod.aluminum_machine_casing": "Estrutura de Alumínio",
+  "block.infinity_nexus_mod.industrial_machine_casing": "Estrutura Industrial",
+  "block.infinity_nexus_mod.infinity_machine_casing": "Estrutura de Infinity",
 
   "block.infinity_nexus_mod.molten_infinity_bucket": "Infinity Derretido",
   "fluid.infinity_nexus_mod.molten_infinity": "Infinity Derretido",
@@ -200,6 +200,7 @@
   "item.infinity_nexus_mod.refined_component": "Componente Refinado",
   "item.infinity_nexus_mod.integral_component": "Componente Integral",
   "item.infinity_nexus_mod.infinity_component": "Componente de Infinity",
+  "item.infinity_nexus_mod.ancestral_component": "Componente Ancestral",
 
   "item.infinity_nexus_mod.basic_circuit": "Circuito Básico",
   "item.infinity_nexus_mod.advanced_circuit": "Circuito Avançado",
@@ -225,6 +226,9 @@
   "fluid_type.infinity_nexus_mod.experience": "Experiência",
   "item.infinity_nexus_mod.bucket_experience": "Balde de Experiência",
 
+  "fluid_type.infinity_nexus_mod.starliquid": "Estrela Liquida",
+  "item.infinity_nexus_mod.bucket_starliquid": "Balde de Estrela Liquida",
+
   "item.infinity_nexus_mod.alcohol_bottle": "Garrafa de Alcool",
   "item.infinity_nexus_mod.wine_bottle": "Garrafa de Vinho",
   "item.infinity_nexus_mod.vinegar_bottle": "Garrafa de Vinho",
@@ -237,6 +241,7 @@
   "block.infinity_nexus_mod.crusher": "Triturador",
   "block.infinity_nexus_mod.press": "Prensa",
   "block.infinity_nexus_mod.assembler": "Fabricadora",
+  "block.infinity_nexus_mod.factory": "Fábrica",
   "block.infinity_nexus_mod.squeezer": "Espremedor",
   "block.infinity_nexus_mod.generator": "Gerador",
   "block.infinity_nexus_mod.fermentation_barrel": "Barril de Fermentação",
@@ -298,12 +303,56 @@
 
   "item.infinity_nexus_mod.iron_dust": "Pó de Ferro",
   "item.infinity_nexus_mod.copper_dust": "Pó de Cobre",
+  "item.infinity_nexus_mod.copper_nugget": "Pepita de Cobre",
   "item.infinity_nexus_mod.gold_dust": "Pó de Ouro",
+
+  "block.infinity_nexus_mod.null": "New Machine Name",
+  "block.infinity_nexus_mod.mob_crusher": "Matador de Mobs",
 
   "item.infinity_nexus_mod.linking_tool":"Ferramenta de ligação",
   "tooltip.infinity_nexus.linking_tool": "§bRenomeie este item usando o exemplo abaixo com as coordenadas de destino dos itens (raio de ação: 100 blocos).\n\n§ex=30,y=-51,z=-77,face=up\n\nLados permitidos:\n§bnorth, south, east, west, up, down.",
-  "item.infinity_nexus.miner_description": "§5Mineradora Multibloco.\n§bDeve ser colocada na altura correta em relação ao solo, dependendo do nível do componente instalado.\n§9Adicione energia e aguarde um pouco para que seja criado um exemplo de montagem.\n§fRedstone: 5° §a-> Copper.\n§fBasic: 5° §a-> Iron.\n§eReinforced: 7° §a-> Tin.\n§eLogic: 7° §a-> Nickel.\n§cAdvanced: 9° §a-> Brass.\n§cRefined: 9° §a-> Steel.\n§5Integral: 11° §a-> Industrial.\n§5Infinity: 11° §a-> Infinity.",
+  "item.infinity_nexus.miner_description": "§5Mineradora Multibloco.\n§bDeve ser colocada na altura correta em relação ao solo, dependendo do nível do componente instalado.\n§9Adicione energia e aguarde um pouco para que seja criado um exemplo de montagem.\n§fRedstone: 5° §a-> Wood or Copper.\n§fBasic: 5° §a-> Iron or Gold.\n§eReinforced: 7° §a-> Tin or Lead.\n§eLogic: 7° §a-> Nickel or Brass.\n§cAdvanced: 9° §a-> Bronze, Glass or Steel.\n§cRefined: 9° §a-> Aluminum, Silver or Plástic.\n§5Integral: 11° §a-> Industrial.\n§5Infinity: 11° §a-> Infinity.",
   "item.infinity_nexus.mod_crusher_description": "Executa rapidamente e silenciosamente inimigos que estiverem acima; a área depende do componente instalado. Caso haja muitos inimigos dentro do raio de ação do Mob Crusher e seus compartimentos estiverem cheios, todos serão executados sem chance de drops.\n§fRedstone:  §a1x1.\n§fBasic: §a3x3.\n§eReinforced: §a5x5\n§eLogic: §a7x7.\n§cAdvanced: §a9x9.\n§cRefined: §a11x11.\n§5Integral: §a13x13.\n§5Infinity: §a15x15",
 
-  "infinity_nexus_mod.jei_information": "Esta máquina precisa de um componente para funcionar."
+  "infinity_nexus_mod.jei_information": "§9Esta máquina precisa de um componente para funcionar.",
+  "item.infinity_nexus.crystal_description": "§9Este item é obtido ao atraves da mineradora tier",
+  "item.infinity_nexus.stable_matter": "§9Pode ser obtido no Condensador de Matéria usando aproximadamente ",
+
+  "item.infinity_nexus_mod.amber_crystal": "Crystal de Ambar",
+  "item.infinity_nexus_mod.marine_crystal": "Crystal Marinho",
+  "item.infinity_nexus_mod.citrium_crystal": "Crystal de Citrino",
+  "item.infinity_nexus_mod.rubium_crystal": "Crystal Rubio",
+  "item.infinity_nexus_mod.demetrium_crystal": "Crystal de Demetrio",
+  "item.infinity_nexus_mod.agate_crystal": "Crystal de Agata",
+  "item.infinity_nexus_mod.darium_crystal": "Crystal de Dario",
+
+  "block.infinity_nexus_mod.purple_light_crystal": "Crystal Luminoso Roxo",
+  "block.infinity_nexus_mod.yellow_light_crystal": "Crystal Luminoso Amarelo",
+  "block.infinity_nexus_mod.white_light_crystal": "Crystal Luminoso Branco",
+  "block.infinity_nexus_mod.red_light_crystal": "Crystal Luminoso Vermelho",
+  "block.infinity_nexus_mod.orange_light_crystal": "Crystal Luminoso Laranja",
+  "block.infinity_nexus_mod.pink_light_crystal": "Crystal Luminoso Rosa",
+  "block.infinity_nexus_mod.green_light_crystal": "Crystal Luminoso Verde",
+  "block.infinity_nexus_mod.blue_light_crystal": "Crystal Luminoso Azul",
+
+  "item.infinity_nexus_mod.asgreon_spawn_egg": "Ovo invocado de Asgreon",
+
+  "chat.infinity_nexus_mod.component_install": "Clique com o botão direito em uma máquina para instalar este componente de nível.",
+
+  "block.infinity_nexus_mod.recycler": "Reciclador",
+  "block.infinity_nexus_mod.matter_condenser": "Condensador de Matéria",
+
+  "item.infinity_nexus_mod.residual_matter": "Matéria Residual",
+  "item.infinity_nexus_mod.stable_matter": "Matéria Estavel",
+
+  "item.infinity_nexus_mod.hammer_range_upgrade": "Ampliação de área para Hammer",
+
+  "block.infinity_nexus_mod.solar": "Base de painel solar",
+  "item.infinity_nexus_mod.solar_pane": "Painel Solar",
+  "item.infinity_nexus_mod.solar_pane_advanced": "Painel Solar Avancado",
+  "item.infinity_nexus_mod.solar_pane_ultimate": "Painel Solar Ultimamente",
+  "item.infinity_nexus_mod.solar_pane_quantum": "Painel Solar Qauntum",
+  "tooltip.infinity_nexus.solar_upgrade": "Gera energia apartir da luz solar quando colocado em uma base de painel solar.",
+
+  "item.infinity_nexus_mod.infinium_stellarum_ingot": "§6Lingote de Infinium Stellarum"
 }

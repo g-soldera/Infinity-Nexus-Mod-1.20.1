@@ -20,6 +20,15 @@ public class ModTags {
         public static final TagKey<Block> FORGE_ORES_IN_GROUND_STONE = forgeTag("ore_in_ground/stone");
         public static final TagKey<Block> FORGE_ORES_IN_GROUND_DEEPSLATE = forgeTag("ore_in_ground/deepslate");
 
+        public static final TagKey<Block> MINER_STRUCTURE_0 = tag("machine_tier_0");
+        public static final TagKey<Block> MINER_STRUCTURE_1 = tag("machine_tier_1");
+        public static final TagKey<Block> MINER_STRUCTURE_2 = tag("machine_tier_2");
+        public static final TagKey<Block> MINER_STRUCTURE_3 = tag("machine_tier_3");
+        public static final TagKey<Block> MINER_STRUCTURE_4 = tag("machine_tier_4");
+        public static final TagKey<Block> MINER_STRUCTURE_5 = tag("machine_tier_5");
+        public static final TagKey<Block> MINER_STRUCTURE_6 = tag("machine_tier_6");
+        public static final TagKey<Block> MINER_STRUCTURE_7 = tag("machine_tier_7");
+
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(InfinityNexusMod.MOD_ID, name));
@@ -51,6 +60,16 @@ public class ModTags {
         public static final TagKey<Item> UP_6 = tag("up_6");
         public static final TagKey<Item> UP_7 = tag("up_7");
         public static final TagKey<Item> UP_8 = tag("up_8");
+        public static final TagKey<Item> UP_9 = tag("up_9");
+
+        public static final TagKey<Item> MINER_STRUCTURE_0 = tag("machine_tier_0");
+        public static final TagKey<Item> MINER_STRUCTURE_1 = tag("machine_tier_1");
+        public static final TagKey<Item> MINER_STRUCTURE_2 = tag("machine_tier_2");
+        public static final TagKey<Item> MINER_STRUCTURE_3 = tag("machine_tier_3");
+        public static final TagKey<Item> MINER_STRUCTURE_4 = tag("machine_tier_4");
+        public static final TagKey<Item> MINER_STRUCTURE_5 = tag("machine_tier_5");
+        public static final TagKey<Item> MINER_STRUCTURE_6 = tag("machine_tier_6");
+        public static final TagKey<Item> MINER_STRUCTURE_7 = tag("machine_tier_7");
 
 
         private static TagKey<Item> tag(String name) {

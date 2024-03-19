@@ -2,13 +2,17 @@ package com.Infinity.Nexus.Mod.screen;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.screen.assembler.AssemblerMenu;
-import com.Infinity.Nexus.Mod.screen.miner.MinerMenu;
-import com.Infinity.Nexus.Mod.screen.mobcrusher.MobCrusherMenu;
+import com.Infinity.Nexus.Mod.screen.condenser.CondenserMenu;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherMenu;
+import com.Infinity.Nexus.Mod.screen.factory.FactoryMenu;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelMenu;
 import com.Infinity.Nexus.Mod.screen.generator.GeneratorMenu;
+import com.Infinity.Nexus.Mod.screen.miner.MinerMenu;
+import com.Infinity.Nexus.Mod.screen.mobcrusher.MobCrusherMenu;
 import com.Infinity.Nexus.Mod.screen.press.PressMenu;
+import com.Infinity.Nexus.Mod.screen.recycler.RecyclerMenu;
 import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryMenu;
+import com.Infinity.Nexus.Mod.screen.solar.solar.SolarMenu;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -34,6 +38,9 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<AssemblerMenu>> ASSEMBLY_MENU =
             registerMenuType("assembler_menu", AssemblerMenu::new);
 
+    public static final RegistryObject<MenuType<FactoryMenu>> FACTORY_MENU =
+            registerMenuType("factory_menu", FactoryMenu::new);
+
     public static final RegistryObject<MenuType<SqueezerMenu>> SQUEEZER_MENU =
             registerMenuType("squeezer_menu", SqueezerMenu::new);
 
@@ -47,6 +54,17 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<FermentationBarrelMenu>> FERMENTATION_BARREL_MENU =
             registerMenuType("fermentation_barre_menu", FermentationBarrelMenu::new);
+    public static final RegistryObject<MenuType<RecyclerMenu>> RECYCLER_MENU =
+            registerMenuType("recycler_menu", RecyclerMenu::new);
+    public static final RegistryObject<MenuType<CondenserMenu>> MATTER_CONDENSER_MENU =
+            registerMenuType("condenser_menu", CondenserMenu::new);
+
+    //Solar
+    public static final RegistryObject<MenuType<SolarMenu>> SOLAR_MENU = registerMenuType("solar_menu", SolarMenu::new);
+    //public static final RegistryObject<MenuType<SolarAdvancedMenu>> SOLAR_ADVANCED_MENU = registerMenuType("solar_advanced_menu", SolarAdvancedMenu::new);
+    //public static final RegistryObject<MenuType<SolarUltimateMenu>> SOLAR_ULTIMATE_MENU = registerMenuType("solar_ultimate_menu", SolarUltimateMenu::new);
+    //public static final RegistryObject<MenuType<SolarQuantumMenu>> SOLAR_QUANTUM_MENU = registerMenuType("solar_quantum_menu", SolarQuantumMenu::new);
+
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));

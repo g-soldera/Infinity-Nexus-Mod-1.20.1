@@ -72,11 +72,15 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksAdditions.PRESS.get());
         this.dropSelf(ModBlocksAdditions.CRUSHER.get());
         this.dropSelf(ModBlocksAdditions.ASSEMBLY.get());
+        this.dropSelf(ModBlocksAdditions.FACTORY.get());
         this.dropSelf(ModBlocksAdditions.SQUEEZER.get());
         this.dropSelf(ModBlocksAdditions.SMELTERY.get());
         this.dropSelf(ModBlocksAdditions.MINER.get());
         this.dropSelf(ModBlocksAdditions.GENERATOR.get());
         this.dropSelf(ModBlocksAdditions.FERMENTATION_BARREL.get());
+        this.dropSelf(ModBlocksAdditions.RECYCLER.get());
+        this.dropSelf(ModBlocksAdditions.MATTER_CONDENSER.get());
+        this.dropSelf(ModBlocksAdditions.SOLAR.get());
 
 
         this.dropSelf(ModBlocksProgression.WOOD_MACHINE_CASING.get());
@@ -120,6 +124,17 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
 
         this.add(ModBlocksAdditions.URANIUM_ORE.get(), block -> createOreDrop( ModBlocksAdditions.URANIUM_ORE.get(), ModItemsAdditions.RAW_URANIUM.get()));
         this.add(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get(), block -> createOreDrop( ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get(), ModItemsAdditions.RAW_URANIUM.get()));
+
+        this.dropSelf(ModBlocksAdditions.PURPLE_LIGHT_CRYSTAL.get());
+        this.dropSelf(ModBlocksAdditions.YELLOW_LIGHT_CRYSTAL.get());
+        this.dropSelf(ModBlocksAdditions.WHITE_LIGHT_CRYSTAL.get());
+        this.dropSelf(ModBlocksAdditions.RED_LIGHT_CRYSTAL.get());
+        this.dropSelf(ModBlocksAdditions.ORANGE_LIGHT_CRYSTAL.get());
+        this.dropSelf(ModBlocksAdditions.PINK_LIGHT_CRYSTAL.get());
+        this.dropSelf(ModBlocksAdditions.GREEN_LIGHT_CRYSTAL.get());
+        this.dropSelf(ModBlocksAdditions.BLUE_LIGHT_CRYSTAL.get());
+
+
     }
 
     @Override

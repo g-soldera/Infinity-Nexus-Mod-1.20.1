@@ -1,7 +1,7 @@
 {
   "type": "infinity_nexus_mod:crushing",
   "energy": 1200,
-  "duration": 800,
+  "duration": 130,
   "ingredients": [
     {
       "tag": "infinity_nexus_mod:up_2"
@@ -12,7 +12,7 @@
     }
   ],
   "output": {
-    "item": "minecraft:natherite_scrap",
+    "item": "minecraft:netherite_scrap",
     "count": 2
   }
 }

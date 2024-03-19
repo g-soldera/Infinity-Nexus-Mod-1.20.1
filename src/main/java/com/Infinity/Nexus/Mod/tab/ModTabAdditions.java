@@ -2,6 +2,7 @@ package com.Infinity.Nexus.Mod.tab;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
+import com.Infinity.Nexus.Mod.item.ModCrystalItems;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -24,12 +25,22 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.CRUSHER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.PRESS.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ASSEMBLY.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.FACTORY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SQUEEZER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SMELTERY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.GENERATOR.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.MOB_CRUSHER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.MINER.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.RECYCLER.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.MATTER_CONDENSER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.FERMENTATION_BARREL.get()));
+                        //-------------------------//-------------------------//
+                        //Solar
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.SOLAR.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.SOLAR_PANE.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.SOLAR_PANE_ADVANCED.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.SOLAR_PANE_ULTIMATE.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.SOLAR_PANE_QUANTUM.get()));
                         //-------------------------//-------------------------//
                         //ingots
                         pOutput.accept(new ItemStack(ModItemsAdditions.SILVER_INGOT.get()));
@@ -43,6 +54,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.ALUMINUM_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.URANIUM_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_INGOT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINIUM_STELLARUM_INGOT.get()));
                         //nuggets
                         pOutput.accept(new ItemStack(ModItemsAdditions.COPPER_NUGGET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.SILVER_NUGGET.get()));
@@ -101,7 +113,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ALUMINUM_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.URANIUM_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.INFINITY_ORE.get()));
-                        //deepslates
+                        //deepslates ores
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_SILVER_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_TIN_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_LEAD_ORE.get()));
@@ -110,7 +122,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_ALUMINUM_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get()));
-
+                        //infinity tools
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_SWORD.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_PAXEL.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_HAMMER.get()));
@@ -120,12 +132,12 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_HOE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_BOW.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_3D_SWORD.get()));
-
+                        //infinity armor
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_HELMET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_CHESTPLATE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_LEGGINGS.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_BOOTS.get()));
-
+                        //imperial tools
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_SWORD.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_PAXEL.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_HAMMER.get()));
@@ -135,7 +147,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_HOE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_BOW.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_3D_SWORD.get()));
-
+                        //imperial armor
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_HELMET.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_CHESTPLATE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS.get()));
@@ -161,6 +173,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.REFINED_COMPONENT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INTEGRAL_COMPONENT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_COMPONENT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ANCESTRAL_COMPONENT.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.SPEED_UPGRADE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.STRENGTH_UPGRADE.get()));
@@ -171,6 +184,27 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.TERRAIN_MARKER.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.LINKING_TOOL.get()));
 
+                        pOutput.accept(new ItemStack(ModItemsAdditions.ASGREON_SPAWN_EGG.get()));
+
+                        //Lights
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.RED_LIGHT_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.ORANGE_LIGHT_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.YELLOW_LIGHT_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.GREEN_LIGHT_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.BLUE_LIGHT_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.PURPLE_LIGHT_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.PINK_LIGHT_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.WHITE_LIGHT_CRYSTAL.get()));
+
+                        pOutput.accept(new ItemStack(ModCrystalItems.AMBER_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModCrystalItems.MARINE_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModCrystalItems.CITRIUM_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModCrystalItems.RUBIUM_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModCrystalItems.DEMETRIUM_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModCrystalItems.AGATE_CRYSTAL.get()));
+                        pOutput.accept(new ItemStack(ModCrystalItems.DARIUM_CRYSTAL.get()));
+
+                        pOutput.accept(new ItemStack(ModItemsAdditions.STAR_FRAGMENT.get()));
 
                         //-------------------------//-------------------------//
                     })

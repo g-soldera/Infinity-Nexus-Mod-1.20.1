@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.utils;
 
 import com.Infinity.Nexus.Mod.block.entity.WrappedHandler;
+import com.Infinity.Nexus.Mod.item.ModCrystalItems;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
 import net.minecraft.core.Direction;
@@ -38,6 +39,9 @@ public class ModUtils {
         }
         if (stack.getItem() == ModItemsAdditions.INFINITY_COMPONENT.get()) {
             return 8;
+        }
+        if (stack.getItem() == ModItemsAdditions.ANCESTRAL_COMPONENT.get()) {
+            return 9;
         }
         return 0;
     }
@@ -99,31 +103,34 @@ public class ModUtils {
 
         return true;
     }
-    public static int getMobCrusherLevel(ItemStack stack) {
-        if (stack.getItem() == ModItemsAdditions.REDSTONE_COMPONENT.get()) {
-            return 1;
-        }
-        if (stack.getItem() == ModItemsAdditions.BASIC_COMPONENT.get()) {
-            return 3;
-        }
-        if (stack.getItem() == ModItemsAdditions.REINFORCED_COMPONENT.get()) {
-            return 5;
-        }
-        if (stack.getItem() == ModItemsAdditions.LOGIC_COMPONENT.get()) {
-            return 7;
-        }
-        if (stack.getItem() == ModItemsAdditions.ADVANCED_COMPONENT.get()) {
-            return 9;
-        }
-        if (stack.getItem() == ModItemsAdditions.REFINED_COMPONENT.get()) {
-            return 11;
-        }
-        if (stack.getItem() == ModItemsAdditions.INTEGRAL_COMPONENT.get()) {
-            return 13;
-        }
-        if (stack.getItem() == ModItemsAdditions.INFINITY_COMPONENT.get()) {
-            return 15;
-        }
-        return 0;
+
+    public static ItemStack getComponentItem(int value) {
+        return switch (value) {
+            case 1 -> new ItemStack(ModItemsAdditions.REDSTONE_COMPONENT.get());
+            case 2 -> new ItemStack(ModItemsAdditions.BASIC_COMPONENT.get());
+            case 3 -> new ItemStack(ModItemsAdditions.REINFORCED_COMPONENT.get());
+            case 4 -> new ItemStack(ModItemsAdditions.LOGIC_COMPONENT.get());
+            case 5 -> new ItemStack(ModItemsAdditions.ADVANCED_COMPONENT.get());
+            case 6 -> new ItemStack(ModItemsAdditions.REFINED_COMPONENT.get());
+            case 7 -> new ItemStack(ModItemsAdditions.INTEGRAL_COMPONENT.get());
+            case 8 -> new ItemStack(ModItemsAdditions.INFINITY_COMPONENT.get());
+            case 9 -> new ItemStack(ModItemsAdditions.ANCESTRAL_COMPONENT.get());
+            default -> ItemStack.EMPTY;
+        };
+    }
+    public static ItemStack getCrystalType(int value) {
+        return switch (value) {
+            case 1 -> new ItemStack(ModCrystalItems.AMBER_CRYSTAL.get());
+            case 2 -> new ItemStack(ModCrystalItems.MARINE_CRYSTAL.get());
+            case 3 -> new ItemStack(ModCrystalItems.CITRIUM_CRYSTAL.get());
+            case 4 -> new ItemStack(ModCrystalItems.RUBIUM_CRYSTAL.get());
+            case 5 -> new ItemStack(ModCrystalItems.DEMETRIUM_CRYSTAL.get());
+            case 6 -> new ItemStack(ModCrystalItems.AGATE_CRYSTAL.get());
+            default -> new ItemStack(ModCrystalItems.DARIUM_CRYSTAL.get());
+        };
+    }
+
+    public static boolean isSolarComponent(ItemStack stack) {
+        return true;
     }
 }

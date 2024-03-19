@@ -1,16 +1,16 @@
 {
   "type": "infinity_nexus_mod:assembler",
-  "duration": 1500,
+  "duration": 130,
   "energy": 1000,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_7"
+      "tag": "infinity_nexus_mod:up_5"
     },
     {
       "item": "minecraft:glass"
     },
     {
-      "item": "minecraft:glass"
+      "item": "infinity_nexus_mod:rubium_crystal"
     },
     {
       "item": "minecraft:glass"
@@ -25,7 +25,7 @@
       "item": "minecraft:glass"
     },
     {
-      "item": "minecraft:glass"
+      "tag": "infinity_nexus_mod:machine_tier_3"
     },
     {
       "item": "minecraft:glass"

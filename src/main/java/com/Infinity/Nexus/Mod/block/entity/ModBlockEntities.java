@@ -27,6 +27,10 @@ public class ModBlockEntities {
             BLOCK_ENTITY.register("assembly_block_entity", () ->
                     BlockEntityType.Builder.of(AssemblerBlockEntity::new, ModBlocksAdditions.ASSEMBLY.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<FactoryBlockEntity>> FACTORY_BE =
+            BLOCK_ENTITY.register("factory_block_entity", () ->
+                    BlockEntityType.Builder.of(FactoryBlockEntity::new, ModBlocksAdditions.FACTORY.get()).build(null));
+
     public static final RegistryObject<BlockEntityType<SqueezerBlockEntity>> SQUEEZER_BE =
             BLOCK_ENTITY.register("squeezer_block_entity", () ->
                     BlockEntityType.Builder.of(SqueezerBlockEntity::new, ModBlocksAdditions.SQUEEZER.get()).build(null));
@@ -46,6 +50,15 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<FermentationBarrelBlockEntity>> FERMENTATION_BE =
             BLOCK_ENTITY.register("fermentation_barrel_block_entity", () ->
                     BlockEntityType.Builder.of(FermentationBarrelBlockEntity::new, ModBlocksAdditions.FERMENTATION_BARREL.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RecyclerBlockEntity>> RECYCLER_BE =
+            BLOCK_ENTITY.register("recycler_block_entity", () ->
+                    BlockEntityType.Builder.of(RecyclerBlockEntity::new, ModBlocksAdditions.RECYCLER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<MatterCondenserBlockEntity>> MATTER_CONDENSER_BE =
+            BLOCK_ENTITY.register("matter_condenser_block_entity", () ->
+                    BlockEntityType.Builder.of(MatterCondenserBlockEntity::new, ModBlocksAdditions.MATTER_CONDENSER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<SolarBlockEntity>> SOLAR_BE =
+            BLOCK_ENTITY.register("solar_block_entity", () ->
+                    BlockEntityType.Builder.of(SolarBlockEntity::new, ModBlocksAdditions.SOLAR.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITY.register(eventBus);

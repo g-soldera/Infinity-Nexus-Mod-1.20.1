@@ -1,6 +1,6 @@
 {
   "type": "infinity_nexus_mod:assembler",
-  "duration": 1500,
+  "duration": 260,
   "energy": 1000,
   "ingredients": [
     {
@@ -10,10 +10,10 @@
       "item": "infinity_nexus_mod:infinity_rod"
     },
     {
-      "item": "infinity_nexus_mod:infinity_screw"
+      "item": "infinity_nexus_mod:darium_crystal"
     },
     {
-      "item": "infinity_nexus_mod:infinity_rod"
+      "item": "infinity_nexus_mod:infinity_screw"
     },
     {
       "item": "infinity_nexus_mod:infinity_sheet"
@@ -22,10 +22,10 @@
       "item": "infinity_nexus_mod:infinity_sheet"
     },
     {
-      "item": "infinity_nexus_mod:infinity_rod"
+      "item": "infinity_nexus_mod:infinity_screw"
     },
     {
-      "item": "infinity_nexus_mod:infinity_screw"
+      "tag": "infinity_nexus_mod:machine_tier_7"
     },
     {
       "item": "infinity_nexus_mod:infinity_rod"

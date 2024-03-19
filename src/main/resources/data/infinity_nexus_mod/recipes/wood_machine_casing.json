@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "minecraft:stick"
+    "#": {
+      "tag": "minecraft:planks"
     },
-    "B": {
-      "item": "minecraft:oak_planks"
+    "$": {
+      "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "ABA",
-    "B B",
-    "ABA"
+    "$#$",
+    "# #",
+    "$#$"
   ],
   "result": {
     "item": "infinity_nexus_mod:wood_machine_casing"

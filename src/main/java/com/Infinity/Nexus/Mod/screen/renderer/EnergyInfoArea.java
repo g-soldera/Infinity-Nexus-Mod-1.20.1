@@ -15,6 +15,7 @@ import java.util.List;
  *
  *  Slightly Modified Version by: Kaupenjoe
  */
+
 public class EnergyInfoArea {
     private final int xPos;
     private final int yPos;

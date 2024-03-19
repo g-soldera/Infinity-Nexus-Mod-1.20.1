@@ -1,7 +1,7 @@
 {
   "type": "infinity_nexus_mod:squeezing",
   "energy": 1200,
-  "duration": 1200,
+  "duration": 130,
   "fluidType": "infinity_nexus_mod:lubricant_water_fluid",
   "fluidAmount": 10,
   "ingredients": [

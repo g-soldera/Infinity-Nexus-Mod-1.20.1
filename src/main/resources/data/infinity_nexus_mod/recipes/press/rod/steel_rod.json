@@ -1,7 +1,7 @@
 {
   "type": "infinity_nexus_mod:pressing",
   "energy": 4800,
-  "duration": 800,
+  "duration": 130,
   "ingredients": [
     {
       "tag": "infinity_nexus_mod:up_3"

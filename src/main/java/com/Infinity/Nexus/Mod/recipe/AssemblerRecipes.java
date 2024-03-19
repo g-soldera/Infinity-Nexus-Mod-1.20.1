@@ -4,6 +4,7 @@ import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.AssemblerBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Mod.utils.ModTags;
 import com.Infinity.Nexus.Mod.utils.ModUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -58,13 +59,10 @@ public class AssemblerRecipes implements Recipe<SimpleContainer> {
                 }
             }
         }
-        if (ModUtils.getComponentLevel(stack) < ModUtils.getComponentLevel(inputItems.get(0).getItems()[0])) {
-            return false;
-        }
         if (matches < 8) {
             return false;
         }
-        return true;
+        return inputItems.get(0).test(stack);
     }
 
     @Override

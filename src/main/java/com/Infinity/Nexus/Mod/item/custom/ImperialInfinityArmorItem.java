@@ -21,10 +21,9 @@ public class ImperialInfinityArmorItem extends  ArmorItem{
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if(!pLevel.isClientSide() && pEntity instanceof Player player) {
+        if(!pLevel.isClientSide() && pEntity instanceof Player player && pSlotId < 4) {
             if (hasFullSuitOfArmorOn(player)) {
                 player.getAbilities().mayfly = true;
-                player.getAbilities().invulnerable = true;
                 player.getFoodData().setSaturation(20);
                 player.getFoodData().setFoodLevel(20);
                 if (delay >= maxDelay) {
@@ -42,12 +41,10 @@ public class ImperialInfinityArmorItem extends  ArmorItem{
             }else{
                 player.getAbilities().flying = false;
                 player.getAbilities().mayfly = false;
-                player.getAbilities().invulnerable = false;
                 player.onUpdateAbilities();
             }
         }
     }
-
 
     private boolean hasFullSuitOfArmorOn(Player player) {
         Item boots = player.getInventory().getArmor(0).getItem();

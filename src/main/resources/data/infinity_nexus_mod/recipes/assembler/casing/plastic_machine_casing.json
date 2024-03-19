@@ -1,16 +1,16 @@
 {
   "type": "infinity_nexus_mod:assembler",
-  "duration": 1500,
+  "duration": 130,
   "energy": 1000,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_7"
+      "tag": "infinity_nexus_mod:up_6"
     },
     {
       "item": "minecraft:slime_ball"
     },
     {
-      "item": "minecraft:paper"
+      "item": "infinity_nexus_mod:demetrium_crystal"
     },
     {
       "item": "minecraft:slime_ball"
@@ -25,7 +25,7 @@
       "item": "minecraft:slime_ball"
     },
     {
-      "item": "minecraft:paper"
+      "tag": "infinity_nexus_mod:machine_tier_4"
     },
     {
       "item": "minecraft:slime_ball"

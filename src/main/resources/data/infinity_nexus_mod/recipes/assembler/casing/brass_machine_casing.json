@@ -1,6 +1,6 @@
 {
   "type": "infinity_nexus_mod:assembler",
-  "duration": 1500,
+  "duration": 130,
   "energy": 1000,
   "ingredients": [
     {
@@ -10,10 +10,10 @@
       "item": "infinity_nexus_mod:brass_rod"
     },
     {
-      "item": "infinity_nexus_mod:brass_screw"
+      "item": "infinity_nexus_mod:citrine_crystal"
     },
     {
-      "item": "infinity_nexus_mod:brass_rod"
+      "item": "infinity_nexus_mod:brass_screw"
     },
     {
       "item": "infinity_nexus_mod:brass_sheet"
@@ -22,10 +22,10 @@
       "item": "infinity_nexus_mod:brass_sheet"
     },
     {
-      "item": "infinity_nexus_mod:brass_rod"
+      "item": "infinity_nexus_mod:brass_screw"
     },
     {
-      "item": "infinity_nexus_mod:brass_screw"
+      "tag": "infinity_nexus_mod:machine_tier_2"
     },
     {
       "item": "infinity_nexus_mod:brass_rod"

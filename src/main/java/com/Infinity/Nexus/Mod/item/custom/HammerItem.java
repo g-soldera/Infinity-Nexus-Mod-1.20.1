@@ -1,25 +1,32 @@
 package com.Infinity.Nexus.Mod.item.custom;
 
+import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.utils.ModTags;
+import com.Infinity.Nexus.Mod.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.DiggerItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.Vanishable;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class HammerItem extends DiggerItem implements Vanishable {
     public HammerItem(Tier pTier, float pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
         super(pAttackDamageModifier, pAttackSpeedModifier, pTier, ModTags.Blocks.PAXEL_MINEABLE, pProperties);
     }
-
     public static List<BlockPos> getBlocksToBeDestroyed(int range, BlockPos initalBlockPos, ServerPlayer player) {
         List<BlockPos> positions = new ArrayList<>();
 
@@ -56,6 +63,47 @@ public class HammerItem extends DiggerItem implements Vanishable {
 
 
         return positions;
+    }
+    @Override
+    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+        if (context.getLevel().isClientSide()) {
+            return super.onItemUseFirst(stack, context);
+        }
+
+        Player player = context.getPlayer();
+        if (player == null) {
+            return super.onItemUseFirst(stack, context);
+        }
+
+        int maxUses = 6;
+        int currentUses = stack.getOrCreateTag().getInt("range");
+
+        if(player.getOffhandItem().getItem() == ModItemsAdditions.HAMMER_RANGE_UPGRADE.get()) {
+            if (currentUses < maxUses) {
+                int range = currentUses + 1;
+                player.getOffhandItem().shrink(1);
+                stack.getOrCreateTag().putInt("range", range);
+
+                int increasedArea = (range * 2) + (player.getMainHandItem().getItem() == ModItemsAdditions.INFINITY_HAMMER.get() ? 3 : 5);
+                player.sendSystemMessage(Component.literal("§e[§cINM§e]§b: Área aumentada para §f" + increasedArea + "x" + increasedArea));
+            } else {
+                player.sendSystemMessage(Component.literal("§e[§cINM§e]§b: Você atingiu o máximo de usos para este item."));
+            }
+        } else if (player.getOffhandItem().getItem() == ModItemsAdditions.ADVANCED_CIRCUIT.get()) {
+            if (currentUses > 0) {
+                int range = currentUses - 1;
+                int decreasedArea = (range * 2) + (player.getMainHandItem().getItem() == ModItemsAdditions.INFINITY_HAMMER.get() ? 3 : 5);
+                player.getOffhandItem().shrink(1);
+                context.getLevel().addFreshEntity(new ItemEntity(context.getLevel(), context.getClickedPos().getX(), context.getClickedPos().getY(), context.getClickedPos().getZ(), ModItemsAdditions.HAMMER_RANGE_UPGRADE.get().getDefaultInstance()));
+                player.sendSystemMessage(Component.literal("§e[§cINM§e]§b: Área diminuida para §f" + decreasedArea + "x" + decreasedArea));
+                stack.getOrCreateTag().putInt("range", range);
+            }else{
+                player.sendSystemMessage(Component.literal("§e[§cINM§e]§b: Nao ha nenhum upgrade para remover."));
+            }
+        }
+
+
+        return super.onItemUseFirst(stack, context);
     }
 
     @Override

@@ -1,14 +1,16 @@
 package com.Infinity.Nexus.Mod.events;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
-//import com.Infinity.Nexus.Mod.command.Progression;
+import com.Infinity.Nexus.Mod.command.Teste;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.custom.HammerItem;
+import com.Infinity.Nexus.Mod.item.custom.ImperialInfinityArmorItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,7 +23,7 @@ import java.util.Set;
 public class ModEvents {
     @SubscribeEvent
     public static void onCommandRegister(RegisterCommandsEvent event) {
-        //new Progression(event.getDispatcher());
+        new Teste(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }
@@ -34,6 +36,7 @@ public class ModEvents {
     public static void onHammerUsage(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
         ItemStack mainHandItem = player.getMainHandItem();
+        int range = mainHandItem.getOrCreateTag().getInt("range");
 
         if (mainHandItem.getItem() instanceof HammerItem hammer && player instanceof ServerPlayer serverPlayer) {
             BlockPos initalBlockPos = event.getPos();
@@ -41,7 +44,7 @@ public class ModEvents {
                 return;
             }
             if(mainHandItem.getItem() == ModItemsAdditions.INFINITY_HAMMER.get()) {
-                for (BlockPos pos : HammerItem.getBlocksToBeDestroyed(1, initalBlockPos, serverPlayer)) {
+                for (BlockPos pos : HammerItem.getBlocksToBeDestroyed(range+1, initalBlockPos, serverPlayer)) {
                     if (pos == initalBlockPos || !hammer.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos))) {
                         continue;
                     }
@@ -53,7 +56,7 @@ public class ModEvents {
                 }
             }
             if(mainHandItem.getItem() == ModItemsAdditions.IMPERIAL_INFINITY_HAMMER.get()) {
-                for (BlockPos pos : HammerItem.getBlocksToBeDestroyed(2, initalBlockPos, serverPlayer)) {
+                for (BlockPos pos : HammerItem.getBlocksToBeDestroyed(range+2, initalBlockPos, serverPlayer)) {
                     if (pos == initalBlockPos || !hammer.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos))) {
                         continue;
                     }
