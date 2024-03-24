@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
 import com.Infinity.Nexus.Mod.block.custom.FermentationBarrel;
+import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.FermentationBarrelRecipes;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelMenu;
 import com.Infinity.Nexus.Mod.utils.ModUtils;
@@ -276,7 +277,11 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
                 this.itemHandler.getStackInSlot(fluidInputSlot).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
     }
     private void setMaxProgress() {
-        maxProgress = getCurrentRecipe().get().getDuration();
+        int time = getCurrentRecipe().get().getDuration();
+        if(itemHandler.getStackInSlot(INPUT_SLOT).getItem() == ModItemsAdditions.INFINITY_INGOT.get()){
+            time = time * itemHandler.getStackInSlot(INPUT_SLOT).getCount();
+        }
+        maxProgress = time;
     }
 
 
@@ -286,13 +291,32 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
 
     private void craftItem() {
         Optional<FermentationBarrelRecipes> recipe = getCurrentRecipe();
-        //TODO: Fix
+        int recipeFluidAmount = recipe.get().getInputFluidStack().getAmount();
+        int recipeInputCount = recipe.get().getInputCount();
+        int recipeResultCount = recipe.get().getResultItem(null).getCount();
+        Item stack = recipe.get().getResultItem(null).getItem();
+        int inputSlot = itemHandler.getStackInSlot(INPUT_SLOT).getCount();
 
-            level.playSound(null, this.getBlockPos(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0f, 1.0f);
-            this.FLUID_STORAGE_INPUT.drain(recipe.get().getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
 
-            itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(recipe.get().getResultItem(null).getItem(),recipe.get().getResultItem(null).getCount() + itemHandler.getStackInSlot(3).getCount()));
-            itemHandler.getStackInSlot(2).shrink(recipe.get().getInputCount());
+            if(itemHandler.getStackInSlot(INPUT_SLOT).getItem().equals(ModItemsAdditions.INFINITY_INGOT.get())){
+                for(int i = 0; i < inputSlot; i++){
+                    if(inputFluidHandler.getFluidAmount() >= recipeFluidAmount && itemHandler.getStackInSlot(INPUT_SLOT).getCount() > 0){
+                        this.FLUID_STORAGE_INPUT.drain(recipeFluidAmount, IFluidHandler.FluidAction.EXECUTE);
+
+                        itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(stack, recipeResultCount + itemHandler.getStackInSlot(OUTPUT_SLOT).getCount()));
+                        itemHandler.getStackInSlot(INPUT_SLOT).shrink(recipeInputCount);
+                    }else{
+                        break;
+                    }
+                }
+            }else {
+                this.FLUID_STORAGE_INPUT.drain(recipeFluidAmount, IFluidHandler.FluidAction.EXECUTE);
+
+                itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(stack, recipeResultCount + itemHandler.getStackInSlot(OUTPUT_SLOT).getCount()));
+                itemHandler.getStackInSlot(INPUT_SLOT).shrink(recipeInputCount);
+            }
+
+        level.playSound(null, this.getBlockPos(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0f, 1.0f);
     }
 
     private boolean hasRecipe() {

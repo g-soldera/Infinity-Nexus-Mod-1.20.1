@@ -301,6 +301,8 @@ public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvi
 
         component.hurt(1, this.level.random, null);
         this.itemHandler.insertItem(OUTPUT_SLOT, new ItemStack(ModItemsProgression.STABLE_MATTER.get()), false);
+
+        level.playSound(null, this.getBlockPos(), SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 0.1f, 1.0f);
     }
 
     private int getMachineLevel(){

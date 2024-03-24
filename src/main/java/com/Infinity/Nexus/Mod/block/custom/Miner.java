@@ -2,6 +2,7 @@ package com.Infinity.Nexus.Mod.block.custom;
 
 import com.Infinity.Nexus.Mod.block.entity.MinerBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
+import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
 import com.Infinity.Nexus.Mod.item.custom.UpgradeItem;
 import net.minecraft.client.gui.screens.Screen;
@@ -142,7 +143,7 @@ public class Miner extends BaseEntityBlock {
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
         Player player = pPlacer instanceof Player ? (Player) pPlacer : null;
-        if (player != null) {
+        if (player != null && pLevel.isClientSide()) {
             MinerBlockEntity miner = ((MinerBlockEntity) pLevel.getBlockEntity(pPos));
 
             // Criar um novo NBT e adicionar o UUID do jogador

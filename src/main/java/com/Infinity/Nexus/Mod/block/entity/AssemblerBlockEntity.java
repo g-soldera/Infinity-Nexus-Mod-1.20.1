@@ -392,8 +392,9 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         }
 
         //TODO Extract lubrifier
-        this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(),
-                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
+        this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(), this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
+
+        level.playSound(null, this.getBlockPos(), SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 0.1f, 1.0f);
     }
 
     private boolean hasRecipe() {

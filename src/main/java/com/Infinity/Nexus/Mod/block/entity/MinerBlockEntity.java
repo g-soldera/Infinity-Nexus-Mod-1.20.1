@@ -6,6 +6,7 @@ import com.Infinity.Nexus.Mod.fakePlayer.IFFakePlayer;
 import com.Infinity.Nexus.Mod.item.ModCrystalItems;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
+import com.Infinity.Nexus.Mod.item.custom.PickaxeItems;
 import com.Infinity.Nexus.Mod.screen.miner.MinerMenu;
 import com.Infinity.Nexus.Mod.utils.MinerTierStructure;
 import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
@@ -36,10 +37,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -492,8 +491,9 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         IFFakePlayer player = new IFFakePlayer((ServerLevel) this.level);
         Block block = ((BlockItem) stack.getItem()).getBlock();
         AtomicReference<ItemStack> dropItem = new AtomicReference<ItemStack>(ItemStack.EMPTY);
+        ItemStack pickaxe = getPickaxe( fortune);
 
-        List<ItemStack> drops = new ArrayList<>(Block.getDrops(block.defaultBlockState(), (ServerLevel) level, this.getBlockPos(), null, player, player.getItemInHandPickaxe(InteractionHand.MAIN_HAND, fortune, luck)));
+        List<ItemStack> drops = new ArrayList<>(Block.getDrops(block.defaultBlockState(), (ServerLevel) level, this.getBlockPos(), null, player, player.getItemInHandPickaxe(pickaxe, InteractionHand.MAIN_HAND, fortune, luck)));
 
         drops.forEach(stack1 -> {
             int drop = new Random().nextInt(drops.size());
@@ -501,6 +501,15 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
 
         });
         return dropItem.get();
+    }
+
+    private ItemStack getPickaxe(int fortune) {
+        ItemStack pickaxe = itemHandler.getStackInSlot(FORTUNE_SLOT);
+        if (!(pickaxe.getItem() instanceof PickaxeItem)) {
+            pickaxe = new ItemStack(Items.NETHERITE_PICKAXE);
+            pickaxe.enchant(Enchantments.BLOCK_FORTUNE, fortune);
+        }
+        return pickaxe;
     }
 
     private void craftItem(BlockPos pos, int machineLevel) {
@@ -527,11 +536,25 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                     output = new ItemStack(Items.NETHERITE_SCRAP);
                 }
             }
+            Random random = new Random();
+            int randomTier = random.nextInt(100);
+            int random1 = random.nextInt(100);
 
-            insertItemOnInventory(new Random().nextInt(100) <= (machineLevel+2) ? new ItemStack(ModUtils.getCrystalType(machineLevel + 1).getItem()) : output);
+            if(random1 < 10) {
+                int[] chance = {100, 61, 38, 23, 14, 9, 5, 3, 1};
+                for (int i = 1; i < machineLevel + 2; i++) {
+                    if (randomTier < chance[chance.length - i]) {
+                        insertItemOnInventory(new ItemStack(ModUtils.getCrystalType(chance.length - i).getItem()));
+                        break;
+                    }
+                }
+            }
+
+            insertItemOnInventory(randomTier <= 1? new ItemStack(ModUtils.getCrystalType(1).getItem()) : output);
+
 
             component.hurt(1, this.level.random, null);
-            level.playSound(null, this.getBlockPos(), SoundEvents.BEE_HURT, SoundSource.BLOCKS, 0.4f, 1.0f);
+            level.playSound(null, this.getBlockPos(), SoundEvents.BEE_HURT, SoundSource.BLOCKS, 0.1f, 1.0f);
 
 
     }
@@ -570,7 +593,6 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                 for (int z = startZ; z <= endZ; z++) {
                     BlockPos blockPos = new BlockPos(x, y, z);
                     if (blockPos.equals(novoBlockPos)) {
-                        //level.setBlock(blockPos, Blocks.GOLD_BLOCK.defaultBlockState(), 3);
                         BlockState blockState = level.getBlockState(blockPos);
                         ItemStack blockStack = new ItemStack(blockState.getBlock().asItem());
                         if (blockState.isAir() || isOre(blockStack)) {
@@ -800,7 +822,6 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     public void setCustomBlockData(CompoundTag nbt) {
         this.customBlockData = nbt;
     }
-
     public int getTierLevel() {
         return this.getMachineLevel();
     }

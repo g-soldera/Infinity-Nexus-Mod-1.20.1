@@ -404,6 +404,8 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
         }
         FluidStack fluidStack = recipe.get().getFluid();
         this.FLUID_STORAGE.fill(new FluidStack(fluidStack, fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+
+        level.playSound(null, this.getBlockPos(), SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 0.1f, 1.0f);
     }
 
     private boolean hasRecipe() {

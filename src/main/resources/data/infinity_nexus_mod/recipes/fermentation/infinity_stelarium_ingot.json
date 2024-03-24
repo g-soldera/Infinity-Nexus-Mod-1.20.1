@@ -1,0 +1,17 @@
+{
+  "type": "infinity_nexus_mod:fermentation",
+  "duration": 240,
+  "fluidInputType": "infinity_nexus_mod:starliquid_water_fluid",
+  "fluidInputAmount": 250,
+  "ingredients": [
+    {
+      "item": "infinity_nexus_mod:infinity_ingot",
+      "count": 1
+    }
+  ],
+  "output":
+  {
+    "item": "infinity_nexus_mod:infinium_stellarum_ingot",
+    "count": 1
+  }
+}
