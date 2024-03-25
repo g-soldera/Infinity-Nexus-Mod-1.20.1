@@ -13,7 +13,7 @@ import net.minecraft.world.level.material.Fluid;
 public class ModTags {
 
     public static class Blocks {
-        public static final TagKey<Block> PAXEL_MINEABLE = tag("mineable/paxel_mineable");
+        public static final TagKey<Block> PAXEL_MINEABLE = tag("mineable/paxel_infinity");
         public static final TagKey<Block> FORGE_STORAGE_BLOCKS = forgeTag("storage_blocks");
         public static final TagKey<Block> FORGE_ORES = forgeTag("ores");
         public static final TagKey<Block> FORGE_ORES_SINGULAR = forgeTag("ore_rates/singular");
