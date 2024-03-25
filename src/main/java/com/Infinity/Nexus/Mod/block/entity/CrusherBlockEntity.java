@@ -368,10 +368,12 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
             }else{
                 ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
                 this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-                player.getMainHandItem().shrink(1);
-                this.setChanged();
                 ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), component);
-                this.level.addFreshEntity(itemEntity);
+                if (!player.isCreative()) {
+                    player.getMainHandItem().shrink(1);
+                    this.level.addFreshEntity(itemEntity);
+                }
+                this.setChanged();
             }
             assert level != null;
             level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_NETHERITE, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -383,8 +385,12 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         {
             for(int i = 0; i < UPGRADE_SLOTS.length; i++ ){
                 if (this.itemHandler.getStackInSlot(UPGRADE_SLOTS[i]).isEmpty()) {
-                    this.itemHandler.setStackInSlot(UPGRADE_SLOTS[i], itemStack.copy());
-                    player.getMainHandItem().shrink(1);
+                    ItemStack stack = itemStack.copy();
+                    stack.setCount(1);
+                    this.itemHandler.setStackInSlot(UPGRADE_SLOTS[i], stack);
+                    if (!player.isCreative()) {
+                        player.getMainHandItem().shrink(1);
+                    }
                     assert level != null;
                     level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_TURTLE, SoundSource.BLOCKS, 1.0f, 1.0f);
                     this.setChanged();

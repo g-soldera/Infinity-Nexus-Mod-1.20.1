@@ -301,12 +301,14 @@ public class SolarBlockEntity extends BlockEntity implements MenuProvider {
             player.getMainHandItem().shrink(1);
             this.setChanged();
         }else{
-            ItemStack upgrade = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
+            ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
             this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-            player.getMainHandItem().shrink(1);
+            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), component);
+            if (!player.isCreative()) {
+                player.getMainHandItem().shrink(1);
+                this.level.addFreshEntity(itemEntity);
+            }
             this.setChanged();
-            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), upgrade);
-            this.level.addFreshEntity(itemEntity);
         }
         assert level != null;
         level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_NETHERITE, SoundSource.BLOCKS, 1.0f, 1.0f);

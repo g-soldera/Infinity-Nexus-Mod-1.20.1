@@ -13,7 +13,7 @@
       "item": "infinity_nexus_mod:infinity_block"
     },
     {
-      "item": "infinity_nexus_mod:infinity_block"
+      "item": "infinity_nexus_mod:stable_matter"
     },
     {
       "item": "infinity_nexus_mod:infinity_block"
@@ -28,7 +28,10 @@
       "item": "infinity_nexus_mod:infinity_block"
     },
     {
-      "item": "infinity_nexus_mod:infinity_block"
+      "item": "infinity_nexus_mod:stable_matter"
+    },
+    {
+      "item": "infinity_nexus_mod:stable_matter"
     },
     {
       "item": "infinity_nexus_mod:infinity_block"
@@ -43,10 +46,7 @@
       "item": "infinity_nexus_mod:infinity_block"
     },
     {
-      "item": "infinity_nexus_mod:infinity_block"
-    },
-    {
-      "item": "infinity_nexus_mod:infinity_block"
+      "item": "infinity_nexus_mod:stable_matter"
     },
     {
       "item": "infinity_nexus_mod:infinity_block"

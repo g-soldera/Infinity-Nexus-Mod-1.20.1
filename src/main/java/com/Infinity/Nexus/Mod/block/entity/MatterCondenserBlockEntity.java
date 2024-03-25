@@ -379,10 +379,12 @@ public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvi
             }else{
                 ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
                 this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-                player.getMainHandItem().shrink(1);
-                this.setChanged();
                 ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), component);
-                this.level.addFreshEntity(itemEntity);
+                if (!player.isCreative()) {
+                    player.getMainHandItem().shrink(1);
+                    this.level.addFreshEntity(itemEntity);
+                }
+                this.setChanged();
             }
             assert level != null;
             level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_NETHERITE, SoundSource.BLOCKS, 1.0f, 1.0f);

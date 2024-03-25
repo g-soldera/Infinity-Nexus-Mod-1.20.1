@@ -5,8 +5,13 @@ import com.Infinity.Nexus.Mod.item.ModCrystalItems;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -14,7 +19,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import java.util.Map;
 
 public class ModUtils {
-
     public static int getComponentLevel(ItemStack stack) {
         if (stack.getItem() == ModItemsAdditions.REDSTONE_COMPONENT.get()) {
             return 1;
@@ -45,8 +49,6 @@ public class ModUtils {
         }
         return 0;
     }
-
-
     public static int getSpeed(ItemStackHandler itemHandler, int[] upgradeSlots) {
         int speed = 0;
         for (int i : upgradeSlots) {
@@ -65,7 +67,6 @@ public class ModUtils {
         }
         return strength;
     }
-
     public static boolean isUpgrade(ItemStack stack) {
         return stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get()
                 || stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get();
@@ -74,7 +75,6 @@ public class ModUtils {
     public static boolean isComponent(ItemStack stack) {
         return stack.getItem() instanceof ComponentItem;
     }
-
     public static boolean canPlaceItemInContainer(ItemStack itemStack, int slotIndex, IItemHandler iItemHandler) {
         ItemStack slotStack = iItemHandler.getStackInSlot(slotIndex);
 
@@ -103,7 +103,6 @@ public class ModUtils {
 
         return true;
     }
-
     public static ItemStack getComponentItem(int value) {
         return switch (value) {
             case 1 -> new ItemStack(ModItemsAdditions.REDSTONE_COMPONENT.get());
@@ -129,8 +128,8 @@ public class ModUtils {
             default -> new ItemStack(ModCrystalItems.DARIUM_CRYSTAL.get());
         };
     }
-
     public static boolean isSolarComponent(ItemStack stack) {
         return true;
     }
+
 }
