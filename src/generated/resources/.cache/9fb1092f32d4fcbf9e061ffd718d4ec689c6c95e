@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-01T20:05:43.8572502	Recipes
+// 1.20.1	2024-03-27T00:37:59.0974969	Recipes
 fee615835d53581e01b29c6f43b4f4181d353e67 data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot.json
 8ba69b00c384b85b687b57eb7986ade8d6d1d5e5 data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot_from_blasting_aluminum_dust.json
 25d67609fb62f0ece675817fe330e52c13650e6f data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot_from_blasting_aluminum_ore.json
@@ -259,6 +259,7 @@ a7b5c7f82ce7e83d210a74442c615e0454a3cba9 data/minecraft/advancements/recipes/mis
 5df31b8df9cd3ad896aebcdd69fd937d466eb3b7 data/minecraft/advancements/recipes/misc/smeltery.json
 a89d00c8720f660d3070736360df5e3dc980d293 data/minecraft/advancements/recipes/misc/speed_upgrade.json
 843fd2e1c60140b67fe9d8440f535b1d3d3595c0 data/minecraft/advancements/recipes/misc/squeezer.json
+edd13c0a0e128e7582c105a6d7a2380d407055dd data/minecraft/advancements/recipes/misc/star.json
 4a30aba474e47a9dc5be8cd85cb97747dbc8da16 data/minecraft/advancements/recipes/misc/steel_block_from_ingot.json
 f110330ef7659dd5c99c7ed20edca0294a677e31 data/minecraft/advancements/recipes/misc/steel_ingot.json
 b5731e08893152d0cfff99570d8fc3cda335be31 data/minecraft/advancements/recipes/misc/steel_nugget.json
@@ -373,6 +374,7 @@ aac45a8bd88d96502cec24c0245673765208dc6a data/minecraft/recipes/silver_block_fro
 f6e808169608fae782d26016ffeafa33ac80255b data/minecraft/recipes/smeltery.json
 8611b16a346fadab8289877b2747c75fff73484b data/minecraft/recipes/speed_upgrade.json
 5627cc338668681dadce1cc115d7451cfffd3cfa data/minecraft/recipes/squeezer.json
+70e96c046a253d16343ffda39cc962a3e5d86094 data/minecraft/recipes/star.json
 3d0364b7866f227a2325de3d2e0a78f762b84041 data/minecraft/recipes/steel_block_from_ingot.json
 97cc18bc49176f417a936a92a98793bb1e05c85e data/minecraft/recipes/steel_ingot.json
 e22ae16b2ae81bb3f76f4e5e67007639bfc7a700 data/minecraft/recipes/steel_nugget.json

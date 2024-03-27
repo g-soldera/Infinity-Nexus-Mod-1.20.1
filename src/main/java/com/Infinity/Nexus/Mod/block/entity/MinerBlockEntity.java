@@ -513,13 +513,12 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void craftItem(BlockPos pos, int machineLevel) {
-            ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
-        if (component.getDamageValue() >= component.getMaxDamage() && component.getItem() != ModItemsAdditions.INFINITY_COMPONENT.get()) {
-                component.shrink(1);
-                level.playSound(null, this.getBlockPos(), SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
-            }
 
-            int fortune = getFortuneLevel();
+        ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
+
+        ModUtils.UseComponent(component, level, this.getBlockPos());
+
+        int fortune = getFortuneLevel();
             ItemStack output = getOutputItem(pos, fortune, machineLevel);
 
             if ((output.getItem() == ModItemsAdditions.RAW_INFINITY.get())) {
@@ -551,9 +550,6 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             }
 
             insertItemOnInventory(randomTier <= 1? new ItemStack(ModUtils.getCrystalType(1).getItem()) : output);
-
-
-            component.hurt(1, this.level.random, null);
             level.playSound(null, this.getBlockPos(), SoundEvents.BEE_HURT, SoundSource.BLOCKS, 0.1f, 1.0f);
 
 

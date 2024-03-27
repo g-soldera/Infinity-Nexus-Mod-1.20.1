@@ -279,11 +279,8 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         this.itemHandler.extractItem(INPUT_SLOT, recipe.get().getInputCount(), false);
 
         ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
-        component.hurt(1, this.level.random, null);
-        if (component.getDamageValue() >= component.getMaxDamage() && component.getItem() != ModItemsAdditions.INFINITY_COMPONENT.get()) {
-            component.shrink(1);
-            level.playSound(null, this.getBlockPos(), SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
-        }
+
+        ModUtils.UseComponent(component, level, this.getBlockPos());
 
         this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(),
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));

@@ -462,6 +462,11 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
     private  void execute(Mob mob, BlockPos pPos, int machineLevel) {
+
+        ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
+
+        ModUtils.UseComponent(component, level, this.getBlockPos());
+
         Player player = new IFFakePlayer((ServerLevel) this.level);
         DamageSource source = player.damageSources().playerAttack(player);
         LootTable table = Objects.requireNonNull(this.level.getServer()).getLootData().getLootTable(mob.getLootTable());

@@ -182,12 +182,12 @@
   "block.infinity_nexus_mod.infinity_block": "Bloco de Infinity",
   "block.infinity_nexus_mod.raw_infinity_block": "Bloco de Infinity Cru",
   "block.infinity_nexus_mod.infinity_ore": "Minério de Infinity",
-  "block.infinity_nexus_mod.deepslate_infinity_ore": "Minério de Infinity do Abluso",
+  "block.infinity_nexus_mod.deepslate_infinity_ore": "Minério de Infinity de Ardósia",
 
   "item.minecraft.potion.effect.freeze_potion": "Poção de Congelamento",
   "item.minecraft.splash_potion.effect.freeze_potion": "Poção de Congelamento Arremessável",
   "item.minecraft.lingering_potion.effect.freeze_potion": "Poção de Congelamento Persistente",
-  "item.minecraft.tipped_arrow.effect.freeze_potion": "Arrow of Freeze Potion",
+  "item.minecraft.tipped_arrow.effect.freeze_potion": "Flecha de Congelamento",
   "effect.infinity_nexus_mod.freeze": "Congelamento",
 
   "tooltip.infinity_nexus.wipe": "§4Wip",
@@ -220,8 +220,8 @@
   "fluid_type.infinity_nexus_mod.vinegar": "Vinho",
   "item.infinity_nexus_mod.bucket_vinegar": "Balde de Vinho",
 
-  "fluid_type.infinity_nexus_mod.sugarcane_juice": "Suco de Cana-de-Açúcar",
-  "item.infinity_nexus_mod.bucket_sugarcane_juice": "Balde de Suco de Cana-de-Açúcar",
+  "fluid_type.infinity_nexus_mod.sugarcane_juice": "Guarapa",
+  "item.infinity_nexus_mod.bucket_sugarcane_juice": "Balde de Garapa",
 
   "fluid_type.infinity_nexus_mod.experience": "Experiência",
   "item.infinity_nexus_mod.bucket_experience": "Balde de Experiência",
@@ -232,7 +232,7 @@
   "item.infinity_nexus_mod.alcohol_bottle": "Garrafa de Alcool",
   "item.infinity_nexus_mod.wine_bottle": "Garrafa de Vinho",
   "item.infinity_nexus_mod.vinegar_bottle": "Garrafa de Vinho",
-  "item.infinity_nexus_mod.sugarcane_juice_bottle": "Garrafa de Suco de Cana-de-Açúcar",
+  "item.infinity_nexus_mod.sugarcane_juice_bottle": "Caldo de Cana",
 
   "item.infinity_nexus_mod.bio_mass": "Biomassa",
 
@@ -312,10 +312,10 @@
   "item.infinity_nexus_mod.linking_tool":"Ferramenta de ligação",
   "tooltip.infinity_nexus.linking_tool": "§bRenomeie este item usando o exemplo abaixo com as coordenadas de destino dos itens (raio de ação: 100 blocos).\n\n§ex=30,y=-51,z=-77,face=up\n\nLados permitidos:\n§bnorth, south, east, west, up, down.",
   "item.infinity_nexus.miner_description": "§5Mineradora Multibloco.\n§bDeve ser colocada na altura correta em relação ao solo, dependendo do nível do componente instalado.\n§9Adicione energia e aguarde um pouco para que seja criado um exemplo de montagem.\n§fRedstone: 5° §a-> Wood or Copper.\n§fBasic: 5° §a-> Iron or Gold.\n§eReinforced: 7° §a-> Tin or Lead.\n§eLogic: 7° §a-> Nickel or Brass.\n§cAdvanced: 9° §a-> Bronze, Glass or Steel.\n§cRefined: 9° §a-> Aluminum, Silver or Plástic.\n§5Integral: 11° §a-> Industrial.\n§5Infinity: 11° §a-> Infinity.",
-  "item.infinity_nexus.mod_crusher_description": "Executa rapidamente e silenciosamente inimigos que estiverem acima; a área depende do componente instalado. Caso haja muitos inimigos dentro do raio de ação do Mob Crusher e seus compartimentos estiverem cheios, todos serão executados sem chance de drops.\n§fRedstone:  §a1x1.\n§fBasic: §a3x3.\n§eReinforced: §a5x5\n§eLogic: §a7x7.\n§cAdvanced: §a9x9.\n§cRefined: §a11x11.\n§5Integral: §a13x13.\n§5Infinity: §a15x15",
+  "item.infinity_nexus.mod_crusher_description": "Executa rapidamente e silenciosamente inimigos que estiverem acima. A área depende do componente instalado. Caso haja muitos inimigos dentro do raio de ação do Mob Crusher e seus compartimentos estiverem cheios, todos serão executados sem chance de drops.\n§fRedstone:  §a1x1.\n§fBasic: §a3x3.\n§eReinforced: §a5x5\n§eLogic: §a7x7.\n§cAdvanced: §a9x9.\n§cRefined: §a11x11.\n§5Integral: §a13x13.\n§5Infinity: §a15x15",
 
   "infinity_nexus_mod.jei_information": "§9Esta máquina precisa de um componente para funcionar.",
-  "item.infinity_nexus.crystal_description": "§9Este item é obtido ao atraves da mineradora tier",
+  "item.infinity_nexus.crystal_description": "§9Este item é obtido atraves da mineradora tier",
   "item.infinity_nexus.stable_matter": "§9Pode ser obtido no Condensador de Matéria usando aproximadamente ",
 
   "item.infinity_nexus_mod.amber_crystal": "Crystal de Ambar",
@@ -326,16 +326,16 @@
   "item.infinity_nexus_mod.agate_crystal": "Crystal de Agata",
   "item.infinity_nexus_mod.darium_crystal": "Crystal de Dario",
 
-  "block.infinity_nexus_mod.purple_light_crystal": "Crystal Luminoso Roxo",
-  "block.infinity_nexus_mod.yellow_light_crystal": "Crystal Luminoso Amarelo",
-  "block.infinity_nexus_mod.white_light_crystal": "Crystal Luminoso Branco",
-  "block.infinity_nexus_mod.red_light_crystal": "Crystal Luminoso Vermelho",
-  "block.infinity_nexus_mod.orange_light_crystal": "Crystal Luminoso Laranja",
-  "block.infinity_nexus_mod.pink_light_crystal": "Crystal Luminoso Rosa",
-  "block.infinity_nexus_mod.green_light_crystal": "Crystal Luminoso Verde",
-  "block.infinity_nexus_mod.blue_light_crystal": "Crystal Luminoso Azul",
+  "block.infinity_nexus_mod.purple_light_crystal": "Cristal Luminoso Roxo",
+  "block.infinity_nexus_mod.yellow_light_crystal": "Cristal Luminoso Amarelo",
+  "block.infinity_nexus_mod.white_light_crystal": "Cristal Luminoso Branco",
+  "block.infinity_nexus_mod.red_light_crystal": "Cristal Luminoso Vermelho",
+  "block.infinity_nexus_mod.orange_light_crystal": "Cristal Luminoso Laranja",
+  "block.infinity_nexus_mod.pink_light_crystal": "Cristal Luminoso Rosa",
+  "block.infinity_nexus_mod.green_light_crystal": "Cristal Luminoso Verde",
+  "block.infinity_nexus_mod.blue_light_crystal": "Cristal Luminoso Azul",
 
-  "item.infinity_nexus_mod.asgreon_spawn_egg": "Ovo invocado de Asgreon",
+  "item.infinity_nexus_mod.asgreon_spawn_egg": "Ovo invocador de Asgreon",
 
   "chat.infinity_nexus_mod.component_install": "Clique com o botão direito em uma máquina para instalar este componente de nível.",
 
@@ -347,12 +347,14 @@
 
   "item.infinity_nexus_mod.hammer_range_upgrade": "Ampliação de área para Hammer",
 
+  "item.infinity_nexus_mod.star_fragment": "Fragmento de Estrela do Nether",
+
   "block.infinity_nexus_mod.solar": "Base de painel solar",
   "item.infinity_nexus_mod.solar_pane": "Painel Solar",
-  "item.infinity_nexus_mod.solar_pane_advanced": "Painel Solar Avancado",
-  "item.infinity_nexus_mod.solar_pane_ultimate": "Painel Solar Ultimamente",
-  "item.infinity_nexus_mod.solar_pane_quantum": "Painel Solar Qauntum",
-  "tooltip.infinity_nexus.solar_upgrade": "Gera energia apartir da luz solar quando colocado em uma base de painel solar.",
+  "item.infinity_nexus_mod.solar_pane_advanced": "Painel Solar Avançado",
+  "item.infinity_nexus_mod.solar_pane_ultimate": "Painel Solar Ultimate",
+  "item.infinity_nexus_mod.solar_pane_quantum": "Painel Solar Quantum",
+  "tooltip.infinity_nexus.solar_upgrade": "Gera energia a partir da luz solar quando colocado em uma base de painel solar.",
 
   "item.infinity_nexus_mod.infinium_stellarum_ingot": "§6Lingote de Infinium Stellarum"
 }

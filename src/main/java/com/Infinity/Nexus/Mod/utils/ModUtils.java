@@ -4,6 +4,7 @@ import com.Infinity.Nexus.Mod.block.entity.WrappedHandler;
 import com.Infinity.Nexus.Mod.item.ModCrystalItems;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -132,4 +133,28 @@ public class ModUtils {
         return true;
     }
 
+    public static void UseComponent(ItemStack component, Level level, BlockPos pos) {
+
+        if (component.getItem() == ModItemsAdditions.ANCESTRAL_COMPONENT.get()) {
+            int uses = component.getOrCreateTag().contains("Uses") ? component.getOrCreateTag().getInt("Uses") : 10;
+            if (uses <= 1 && !component.getOrCreateTag().getBoolean("isInfinite")) {
+                component.shrink(1);
+                level.playSound(null, pos, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 1.0f, 1.0f);
+            } else {
+                if (component.getOrCreateTag().getBoolean("isInfinite")) {
+                    component.getOrCreateTag().putInt("Uses", (uses - 1));
+                } else {
+                    component.getOrCreateTag().putInt("Uses", (uses - 1));
+                    component.hurt(1, level.random, null);
+                }
+            }
+        } else {
+            if (component.getDamageValue() >= component.getMaxDamage() && component.getItem() != ModItemsAdditions.INFINITY_COMPONENT.get()) {
+                component.shrink(1);
+                level.playSound(null, pos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
+            } else {
+                component.hurt(1, level.random, null);
+            }
+        }
+    }
 }

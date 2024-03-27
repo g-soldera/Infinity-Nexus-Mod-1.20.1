@@ -293,13 +293,11 @@ public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvi
     }
 
     private void craftItem() {
-        ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
-        if (component.getDamageValue() >= component.getMaxDamage() && component.getItem() != ModItemsAdditions.INFINITY_COMPONENT.get()) {
-            component.shrink(1);
-            level.playSound(null, this.getBlockPos(), SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
-        }
 
-        component.hurt(1, this.level.random, null);
+        ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
+
+        ModUtils.UseComponent(component, level, this.getBlockPos());
+
         this.itemHandler.insertItem(OUTPUT_SLOT, new ItemStack(ModItemsProgression.STABLE_MATTER.get()), false);
 
         level.playSound(null, this.getBlockPos(), SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 0.1f, 1.0f);

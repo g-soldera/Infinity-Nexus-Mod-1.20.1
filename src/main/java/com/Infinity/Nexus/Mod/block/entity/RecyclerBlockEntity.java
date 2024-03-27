@@ -249,12 +249,10 @@ public class RecyclerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void craftItem() {
+
         ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
-        if (component.getDamageValue() >= component.getMaxDamage() && component.getItem() != ModItemsAdditions.INFINITY_COMPONENT.get()) {
-            component.shrink(1);
-            level.playSound(null, this.getBlockPos(), SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
-        }
-        component.hurt(1, this.level.random, null);
+
+        ModUtils.UseComponent(component, level, this.getBlockPos());
 
         itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
         int chance = new Random().nextInt(100);

@@ -133,6 +133,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('E', ModItemsAdditions.IMPERIAL_INFINITY_HOE.get())
                 .unlockedBy("has_imperial_infinity_axe", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.IMPERIAL_INFINITY_AXE.get()).build()))
                 .save(pWriter, "imperial_infinity_paxel");
+        //Star
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.NETHER_STAR)
+                .pattern(" A ")
+                .pattern("AAA")
+                .pattern(" A ")
+                .define('A', ModItemsAdditions.STAR_FRAGMENT.get())
+                .unlockedBy("has_star_fragment", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.STAR_FRAGMENT.get()).build()))
+                .save(pWriter, "star");
 
         //Light
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.RED_LIGHT_CRYSTAL.get()).pattern("AAA").pattern("ABA").pattern("CCC").define('A', Blocks.GLASS).define('B', ModCrystalItems.DARIUM_CRYSTAL.get()).define('C', Blocks.QUARTZ_SLAB).unlockedBy("has_red_light_crystal", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.RED_LIGHT_CRYSTAL.get()).build())).save(pWriter, "red_light_crystal");
