@@ -69,9 +69,7 @@ public class IFFakePlayer extends FakePlayer {
     public ItemStack getItemInHand(InteractionHand pHand) {
         return new ItemStack(Items.NETHERITE_SWORD);
     }
-    public ItemStack getItemInHandPickaxe(ItemStack pickaxe, InteractionHand pHand, int fortune, float luck) {
-        return pickaxe;
-    }
+
 
     public boolean placeBlock(Level world, BlockPos pos, ItemStack stack) {
         this.setItemInHand(InteractionHand.MAIN_HAND, stack);

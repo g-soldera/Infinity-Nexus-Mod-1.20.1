@@ -391,7 +391,9 @@ public class FactoryBlockEntity extends BlockEntity implements MenuProvider {
         {
             if (this.itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
                 this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-                player.getMainHandItem().shrink(1);
+                if (!player.isCreative()) {
+                    player.getMainHandItem().shrink(1);
+                }
                 this.setChanged();
             }else{
                 ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);

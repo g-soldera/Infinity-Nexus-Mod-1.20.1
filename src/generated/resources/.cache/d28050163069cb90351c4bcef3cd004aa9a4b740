@@ -1,6 +1,7 @@
-// 1.20.1	2024-03-16T12:23:30.586465	Item Models: infinity_nexus_mod
+// 1.20.1	2024-03-27T21:22:26.0212806	Item Models: infinity_nexus_mod
 824d76455174b66d08d4d6ded4bb595f84882c64 assets/infinity_nexus_mod/models/item/advanced_circuit.json
 b29efcd69af9275a22e943ae24a1a2f0281f7031 assets/infinity_nexus_mod/models/item/advanced_component.json
+55d7f9dca162b66c9a5d69cad550b27f15fbd7c2 assets/infinity_nexus_mod/models/item/advanced_solar_core.json
 2254611794c21e20cb35a9b5017727fb5357e9fd assets/infinity_nexus_mod/models/item/agate_crystal.json
 a20840003cafb1e1379bba7de4fa5b3e8ecf3dc5 assets/infinity_nexus_mod/models/item/alcohol_bottle.json
 905e42921099055099972ea8393d2938746cdc58 assets/infinity_nexus_mod/models/item/aluminum_dust.json
@@ -154,6 +155,7 @@ f2335455ea4519971ae0f1964ce9f88e56e6ea35 assets/infinity_nexus_mod/models/item/s
 1dd5ad2e5776576cab07697fccd7ab92ffdb1c87 assets/infinity_nexus_mod/models/item/silver_screw.json
 55b72f595e181010bb53d1ff61206dea96b1687a assets/infinity_nexus_mod/models/item/silver_sheet.json
 d1da49ff3d7db8be075027285258e50a67812768 assets/infinity_nexus_mod/models/item/silver_wire.json
+87fde3de038eee26b7c4cd78066acb4a841b9d6a assets/infinity_nexus_mod/models/item/solar_core.json
 062e9945b2e52a969a15d72f8c2e8940c31783c1 assets/infinity_nexus_mod/models/item/speed_upgrade.json
 4ed6f0c0e833f27483081d7b875ec1b10db92ca0 assets/infinity_nexus_mod/models/item/stable_matter.json
 af27193b38e1a4e9cd540c562eeae9e2903c51f6 assets/infinity_nexus_mod/models/item/star_fragment.json

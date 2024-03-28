@@ -211,6 +211,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.INFINITY_SHEET);
 
         simpleItem(ModItemsProgression.BIO_MASS);
+        simpleItem(ModItemsProgression.SOLAR_CORE);
+        simpleItem(ModItemsProgression.ADVANCED_SOLAR_CORE);
         simpleItem(ModItemsProgression.RESIDUAL_MATTER);
         simpleItem(ModItemsProgression.STABLE_MATTER);
 

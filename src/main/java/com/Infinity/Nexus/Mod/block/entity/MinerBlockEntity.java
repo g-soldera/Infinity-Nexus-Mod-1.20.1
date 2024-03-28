@@ -38,6 +38,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -484,16 +485,16 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         List<TagKey<Item>> tags = stack.getTags().toList();
                 return tags.toString().contains("forge:ores");
     }
-    private ItemStack getDrop(ItemStack stack, int fortune, float luck) {
+    private ItemStack getDrop(ItemStack stack) {
         if(!(stack.getItem() instanceof BlockItem)) {
             return null;
         }
         IFFakePlayer player = new IFFakePlayer((ServerLevel) this.level);
         Block block = ((BlockItem) stack.getItem()).getBlock();
         AtomicReference<ItemStack> dropItem = new AtomicReference<ItemStack>(ItemStack.EMPTY);
-        ItemStack pickaxe = getPickaxe( fortune);
+        ItemStack pickaxe = getPickaxe();
 
-        List<ItemStack> drops = new ArrayList<>(Block.getDrops(block.defaultBlockState(), (ServerLevel) level, this.getBlockPos(), null, player, player.getItemInHandPickaxe(pickaxe, InteractionHand.MAIN_HAND, fortune, luck)));
+        List<ItemStack> drops = new ArrayList<>(Block.getDrops(block.defaultBlockState(), (ServerLevel) level, this.getBlockPos(), null, player, pickaxe));
 
         drops.forEach(stack1 -> {
             int drop = new Random().nextInt(drops.size());
@@ -503,12 +504,13 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         return dropItem.get();
     }
 
-    private ItemStack getPickaxe(int fortune) {
-        ItemStack pickaxe = itemHandler.getStackInSlot(FORTUNE_SLOT);
-        if (!(pickaxe.getItem() instanceof PickaxeItem)) {
-            pickaxe = new ItemStack(Items.NETHERITE_PICKAXE);
-            pickaxe.enchant(Enchantments.BLOCK_FORTUNE, fortune);
-        }
+    private ItemStack getPickaxe() {
+        ItemStack enchantedItem = itemHandler.getStackInSlot(FORTUNE_SLOT);
+        ItemStack pickaxe = new ItemStack(Items.NETHERITE_PICKAXE);
+        Map<Enchantment, Integer> enchantments = enchantedItem.getAllEnchantments();
+
+        enchantments.forEach(pickaxe::enchant);
+
         return pickaxe;
     }
 
@@ -592,7 +594,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                         BlockState blockState = level.getBlockState(blockPos);
                         ItemStack blockStack = new ItemStack(blockState.getBlock().asItem());
                         if (blockState.isAir() || isOre(blockStack)) {
-                            ItemStack drop = getDrop(blockStack, fortune, 0);
+                            ItemStack drop = getDrop(blockStack);
                             drops.add(Objects.requireNonNullElse(drop, ItemStack.EMPTY));
                         }
                     }
@@ -781,7 +783,9 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         {
             if (this.itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
                 this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-                player.getMainHandItem().shrink(1);
+                if (!player.isCreative()) {
+                    player.getMainHandItem().shrink(1);
+                }
                 this.setChanged();
             }else{
                 ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);

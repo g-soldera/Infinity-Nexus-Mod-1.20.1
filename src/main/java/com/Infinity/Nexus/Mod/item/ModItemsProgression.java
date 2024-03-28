@@ -96,6 +96,8 @@ public class ModItemsProgression {
 
 
     public static final RegistryObject<Item> BIO_MASS = ITEMS.register("bio_mass", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SOLAR_CORE = ITEMS.register("solar_core", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ADVANCED_SOLAR_CORE = ITEMS.register("advanced_solar_core", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RESIDUAL_MATTER = ITEMS.register("residual_matter", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> STABLE_MATTER = ITEMS.register("stable_matter", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 

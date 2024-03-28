@@ -4,6 +4,7 @@ import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.item.ModCrystalItems;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -205,6 +206,9 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModCrystalItems.DARIUM_CRYSTAL.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.STAR_FRAGMENT.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.RESIDUAL_MATTER.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.SOLAR_CORE.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.ADVANCED_SOLAR_CORE.get()));
 
                         //-------------------------//-------------------------//
                     })
