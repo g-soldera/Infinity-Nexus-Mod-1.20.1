@@ -94,6 +94,7 @@ public class ModBlocksAdditions {
     public static final RegistryObject<LiquidBlock> WINE = BLOCKS.register("wine", () -> new LiquidBlock(ModFluids.WINE_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
     public static final RegistryObject<LiquidBlock> EXPERIENCE = BLOCKS.register("experience", () -> new LiquidBlock(ModFluids.EXPERIENCE_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
     public static final RegistryObject<LiquidBlock> STARLIQUID = BLOCKS.register("starliquid", () -> new LiquidBlock(ModFluids.STARLIQUID_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+    public static final RegistryObject<LiquidBlock> POTATO_JUICE = BLOCKS.register("potato_juice", () -> new LiquidBlock(ModFluids.POTATO_JUICE_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
 
     public static final RegistryObject<Block> PURPLE_LIGHT_CRYSTAL = registerBlock("purple_light_crystal", () -> new LightCrystal(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(2.0f, 6.0f).sound(SoundType.GLASS).lightLevel((state) -> 15).noOcclusion(), BlockSetType.POLISHED_BLACKSTONE, 1, true));
     public static final RegistryObject<Block> YELLOW_LIGHT_CRYSTAL = registerBlock("yellow_light_crystal", () -> new LightCrystal(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(2.0f, 6.0f).sound(SoundType.GLASS).lightLevel((state) -> 15).noOcclusion(), BlockSetType.POLISHED_BLACKSTONE, 1, true));

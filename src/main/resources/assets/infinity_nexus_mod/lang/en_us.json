@@ -234,10 +234,11 @@
   "fluid_type.infinity_nexus_mod.wine": "Wine",
   "item.infinity_nexus_mod.bucket_wine": "Bucket Wine",
 
-  "item.infinity_nexus_mod.alcohol_bottle": "Alcohol Bottle",
-  "item.infinity_nexus_mod.vinegar_bottle": "Vinegar Bottle",
-  "item.infinity_nexus_mod.sugarcane_juice_bottle": "Sugarcane Juice Bottle",
-  "item.infinity_nexus_mod.wine_bottle": "Wine Bottle",
+  "item.infinity_nexus_mod.alcohol_bottle": "Alcohol",
+  "item.infinity_nexus_mod.alcohol_bottle.effect.empty": "Alcohol",
+  "item.infinity_nexus_mod.vinegar_bottle": "Vinegar",
+  "item.infinity_nexus_mod.sugarcane_juice_bottle": "Sugarcane Juice",
+  "item.infinity_nexus_mod.wine_bottle": "Wine",
 
   "item.infinity_nexus_mod.bio_mass": "Bio Mass",
 
@@ -391,5 +392,14 @@
   "item.infinity_nexus_mod.solar_pane_quantum": "Quantum Solar Panel",
   "tooltip.infinity_nexus.solar_upgrade": "Generate energy from solar light when placed on a solar panel.",
 
-  "item.infinity_nexus_mod.infinium_stellarum_ingot": "§6Infinium Stellarum Ingot"
+  "item.infinity_nexus_mod.infinium_stellarum_ingot": "§6Infinium Stellarum Ingot",
+
+  "item.infinity_nexus_mod.solar_core": "Solar Core",
+  "item.infinity_nexus_mod.advanced_solar_core": "Advanced Solar Core",
+  "item.infinity_nexus_mod.plastic": "Bio Plastic",
+  "item.infinity_nexus_mod.plastic_goo": "Plastic Ball",
+
+  "item.infinity_nexus_mod.starch": "Starch",
+  "item.infinity_nexus_mod.strainer": "Strainer"
+
 }

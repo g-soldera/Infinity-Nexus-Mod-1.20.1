@@ -2,24 +2,25 @@ package com.Infinity.Nexus.Mod.item.custom;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ModSword extends SwordItem{
+public class ModSword extends SwordItem {
 
     private final Component translation;
     private final MobEffectInstance[] effects;
 
-    public ModSword(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties,
-                    Component tooltip, MobEffectInstance[] effects) {
+    public ModSword(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties, Component tooltip, MobEffectInstance[] effects) {
         super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
 
         this.translation = tooltip;
@@ -44,6 +45,12 @@ public class ModSword extends SwordItem{
 
         super.appendHoverText(stack, level, components, flag);
     }
+
+    @Override
+    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+        return super.onItemUseFirst(stack, context);
+    }
+
     @Override
     public boolean isEnchantable(ItemStack stack) {
         return true;

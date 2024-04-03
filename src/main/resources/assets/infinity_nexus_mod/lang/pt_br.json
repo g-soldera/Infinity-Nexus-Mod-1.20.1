@@ -229,9 +229,10 @@
   "fluid_type.infinity_nexus_mod.starliquid": "Estrela Liquida",
   "item.infinity_nexus_mod.bucket_starliquid": "Balde de Estrela Liquida",
 
-  "item.infinity_nexus_mod.alcohol_bottle": "Garrafa de Alcool",
-  "item.infinity_nexus_mod.wine_bottle": "Garrafa de Vinho",
-  "item.infinity_nexus_mod.vinegar_bottle": "Garrafa de Vinho",
+  "item.infinity_nexus_mod.alcohol_bottle": "Alcool",
+  "item.infinity_nexus_mod.alcohol_bottle.effect.empty": "Alcool",
+  "item.infinity_nexus_mod.wine_bottle": "Vinho",
+  "item.infinity_nexus_mod.vinegar_bottle": "Vinagre",
   "item.infinity_nexus_mod.sugarcane_juice_bottle": "Caldo de Cana",
 
   "item.infinity_nexus_mod.bio_mass": "Biomassa",
@@ -356,5 +357,13 @@
   "item.infinity_nexus_mod.solar_pane_quantum": "Painel Solar Quantum",
   "tooltip.infinity_nexus.solar_upgrade": "Gera energia a partir da luz solar quando colocado em uma base de painel solar.",
 
-  "item.infinity_nexus_mod.infinium_stellarum_ingot": "§6Lingote de Infinium Stellarum"
+  "item.infinity_nexus_mod.infinium_stellarum_ingot": "§6Lingote de Infinium Stellarum",
+
+  "item.infinity_nexus_mod.solar_core": "Nucleo Solar",
+  "item.infinity_nexus_mod.advanced_solar_core": "Nucleo Solar Avançado",
+  "item.infinity_nexus_mod.plastic": "Plástico Biodegradavel",
+  "item.infinity_nexus_mod.plastic_goo": "Gosma Plástica",
+
+  "item.infinity_nexus_mod.starch": "Amido",
+  "item.infinity_nexus_mod.strainer": "Coador"
 }

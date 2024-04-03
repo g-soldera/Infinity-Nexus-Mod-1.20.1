@@ -161,10 +161,15 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.BUCKET_LUBRICANT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.BUCKET_POTATO_JUICE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.ALCOHOL_BOTTLE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.WINE_BOTTLE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.VINEGAR_BOTTLE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.SUGARCANE_JUICE_BOTTLE.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.STARCH.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.STRAINER.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.PLASTIC_GOO.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.GLYCERIN.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.REDSTONE_COMPONENT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BASIC_COMPONENT.get()));
@@ -184,6 +189,7 @@ public class ModTabAdditions {
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.TERRAIN_MARKER.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.LINKING_TOOL.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.HAMMER_RANGE_UPGRADE.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.ASGREON_SPAWN_EGG.get()));
 
@@ -196,7 +202,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.PURPLE_LIGHT_CRYSTAL.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.PINK_LIGHT_CRYSTAL.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.WHITE_LIGHT_CRYSTAL.get()));
-
+                        //Crystal
                         pOutput.accept(new ItemStack(ModCrystalItems.AMBER_CRYSTAL.get()));
                         pOutput.accept(new ItemStack(ModCrystalItems.MARINE_CRYSTAL.get()));
                         pOutput.accept(new ItemStack(ModCrystalItems.CITRIUM_CRYSTAL.get()));
@@ -209,6 +215,9 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsProgression.RESIDUAL_MATTER.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.SOLAR_CORE.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.ADVANCED_SOLAR_CORE.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.BIO_MASS.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.STABLE_MATTER.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.PLASTIC.get()));
 
                         //-------------------------//-------------------------//
                     })

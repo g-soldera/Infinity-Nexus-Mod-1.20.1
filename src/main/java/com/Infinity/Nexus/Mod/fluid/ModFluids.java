@@ -55,6 +55,11 @@ public class ModFluids {
     public static final RegistryObject<FlowingFluid> STARLIQUID_FLOWING = FLUIDS.register("flowing_starliquid_water_fluid",
             () -> new ForgeFlowingFluid.Flowing(ModFluids.STARLIQUID_FLUID_PROPERTIES));
 
+    public static final RegistryObject<FlowingFluid> POTATO_JUICE_SOURCE = FLUIDS.register("potato_juice_water_fluid",
+            () -> new ForgeFlowingFluid.Source(ModFluids.POTATO_JUICE_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> POTATO_JUICE_FLOWING = FLUIDS.register("flowing_potato_juice_water_fluid",
+            () -> new ForgeFlowingFluid.Flowing(ModFluids.POTATO_JUICE_FLUID_PROPERTIES));
+
     public static final ForgeFlowingFluid.Properties LUBRICANT_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
         ModFluidType.LUBRICANT, LUBRICANT_SOURCE, LUBRICANT_FLOWING)
             .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocksAdditions.LUBRICANT)
@@ -87,6 +92,10 @@ public class ModFluids {
         ModFluidType.STARLIQUID, STARLIQUID_SOURCE, STARLIQUID_FLOWING)
             .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocksAdditions.STARLIQUID)
             .bucket(ModItemsAdditions.BUCKET_STARLIQUID);
+    public static final ForgeFlowingFluid.Properties POTATO_JUICE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            ModFluidType.POTATO_JUICE, POTATO_JUICE_SOURCE, POTATO_JUICE_FLOWING)
+            .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocksAdditions.POTATO_JUICE)
+            .bucket(ModItemsAdditions.BUCKET_POTATO_JUICE);
 
 
     public static void register(IEventBus eventBus) {

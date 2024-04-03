@@ -23,18 +23,22 @@ public class FermentationBarrelRecipes implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final int duration;
     private final FluidStack inputFluidStack;
+    private final FluidStack outputFluidStack;
     private final NonNullList<Ingredient> input;
     private final int inputCount;
     private final ItemStack output;
+    private final boolean recipeType;
 
 
-    public FermentationBarrelRecipes(NonNullList<Ingredient> input,int inputCount, FluidStack inputFluidStack, ItemStack output, ResourceLocation id, int duration) {
+    public FermentationBarrelRecipes(NonNullList<Ingredient> input,int inputCount, FluidStack inputFluidStack, FluidStack outputFluidStack, ItemStack output, ResourceLocation id, int duration, boolean recipeType) {
         this.id = id;
         this.duration = duration;
         this.inputFluidStack = inputFluidStack;
+        this.outputFluidStack = outputFluidStack;
         this.input = input;
         this.inputCount = inputCount;
         this.output = output;
+        this.recipeType = recipeType;
     }
 
 
@@ -68,6 +72,9 @@ public class FermentationBarrelRecipes implements Recipe<SimpleContainer> {
     public FluidStack getInputFluidStack() {
         return inputFluidStack;
     }
+    public FluidStack getOutputFluidStack() {
+        return outputFluidStack;
+    }
 
 
     @Override
@@ -92,6 +99,11 @@ public class FermentationBarrelRecipes implements Recipe<SimpleContainer> {
     public int getInputCount() {
         return inputCount;
     }
+
+    public boolean getRecipeType() {
+        return recipeType;
+    }
+
     public static class Type implements RecipeType<FermentationBarrelRecipes> {
         public static final Type INSTANCE = new Type();
         public static final String ID = "fermentation";
@@ -111,8 +123,11 @@ public class FermentationBarrelRecipes implements Recipe<SimpleContainer> {
 
             int inputCount = ingredients.get(0).getAsJsonObject().get("count").getAsInt();
 
-            FluidStack input = new FluidStack(Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(new ResourceLocation(pSerializedRecipe.get("fluidInputType").getAsString()))),
+            FluidStack inputFluid = new FluidStack(Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(new ResourceLocation(pSerializedRecipe.get("fluidInputType").getAsString()))),
                     pSerializedRecipe.get("fluidInputAmount").getAsInt());
+
+            FluidStack outputFluid = new FluidStack(Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(new ResourceLocation(pSerializedRecipe.get("fluidOutputType").getAsString()))),
+                    pSerializedRecipe.get("fluidOutputAmount").getAsInt());
 
             NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
             for (int i = 0; i < ingredients.size(); i++) {
@@ -120,8 +135,9 @@ public class FermentationBarrelRecipes implements Recipe<SimpleContainer> {
             }
 
             int duration = pSerializedRecipe.get("duration").getAsInt();
+            boolean type = pSerializedRecipe.get("fermenting").getAsBoolean();
 
-            return new FermentationBarrelRecipes(inputs,inputCount, input, output, pRecipeId, duration);
+            return new FermentationBarrelRecipes(inputs, inputCount, inputFluid, outputFluid, output, pRecipeId, duration, type);
         }
 
         @Override
@@ -135,9 +151,11 @@ public class FermentationBarrelRecipes implements Recipe<SimpleContainer> {
             }
             int inputCount = pBuffer.readInt();
             int duration = pBuffer.readInt();
+            boolean type = pBuffer.readBoolean();
+            FluidStack inputFluid = pBuffer.readFluidStack();
             FluidStack outputFluid = pBuffer.readFluidStack();
             ItemStack output = pBuffer.readItem();
-            return new FermentationBarrelRecipes(inputs,inputCount, outputFluid, output, pRecipeId, duration);
+            return new FermentationBarrelRecipes(inputs, inputCount,inputFluid, outputFluid, output, pRecipeId, duration, type);
         }
 
         @Override
@@ -152,6 +170,8 @@ public class FermentationBarrelRecipes implements Recipe<SimpleContainer> {
             //3
             pBuffer.writeInt(pRecipe.inputCount);
             pBuffer.writeInt(pRecipe.duration);
+            pBuffer.writeBoolean(pRecipe.recipeType);
+            pBuffer.writeFluidStack(pRecipe.inputFluidStack);
             pBuffer.writeFluidStack(pRecipe.inputFluidStack);
             pBuffer.writeItemStack(pRecipe.getResultItem(null), false);
         }

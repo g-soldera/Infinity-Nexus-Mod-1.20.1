@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 public class Factory extends BaseEntityBlock {
     public static IntegerProperty LIT = IntegerProperty.create("lit", 0, 17);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final VoxelShape SHAPE = Block.box(3, 0, 3, 13, 10, 13);
+    public static final VoxelShape SHAPE = Block.box(3, 0, 3, 13, 16, 13);
 
     public Factory(Properties pProperties) {
         super(pProperties);

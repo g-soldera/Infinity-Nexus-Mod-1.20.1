@@ -11,7 +11,10 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -120,28 +123,30 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_PICKAXE.get()).pattern("BBB").pattern(" A ").pattern(" C ").define('A', ModItemsAdditions.INFINITY_PICKAXE.get()).define('B', ModItemsAdditions.INFINITY_SINGULARITY.get()).define('C', Items.STICK).unlockedBy("has_infinity_pickaxe", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_PICKAXE.get()).build())).save(pWriter, "imperial_infinity_pickaxe");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_SHOVEL.get()).pattern("B").pattern("A").pattern("C").define('A', ModItemsAdditions.INFINITY_SHOVEL.get()).define('B', ModItemsAdditions.INFINITY_SINGULARITY.get()).define('C', Items.STICK).unlockedBy("has_infinity_shovel", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_SHOVEL.get()).build())).save(pWriter, "imperial_infinity_shovel");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_HOE.get()).pattern("B").pattern("A").pattern("C").define('A', ModItemsAdditions.INFINITY_HOE.get()).define('B', ModItemsAdditions.INFINITY_SINGULARITY.get()).define('C', Items.STICK).unlockedBy("has_infinity_hoe", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_HOE.get()).build())).save(pWriter, "imperial_infinity_hoe");
-
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_AXE.get()).pattern("BB ").pattern("BA ").pattern(" C ").define('A', ModItemsAdditions.INFINITY_AXE.get()).define('B', ModItemsAdditions.INFINITY_SINGULARITY.get()).define('C', Items.STICK).unlockedBy("has_infinity_axe", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_AXE.get()).build())).save(pWriter, "imperial_infinity_axe");
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_PAXEL.get())
-                .pattern("ABC")
-                .pattern(" D ")
-                .pattern(" E ")
-                .define('A', ModItemsAdditions.IMPERIAL_INFINITY_AXE.get())
-                .define('B', ModItemsAdditions.IMPERIAL_INFINITY_SWORD.get())
-                .define('C', ModItemsAdditions.IMPERIAL_INFINITY_PICKAXE.get())
-                .define('D', ModItemsAdditions.IMPERIAL_INFINITY_SHOVEL.get())
-                .define('E', ModItemsAdditions.IMPERIAL_INFINITY_HOE.get())
-                .unlockedBy("has_imperial_infinity_axe", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.IMPERIAL_INFINITY_AXE.get()).build()))
-                .save(pWriter, "imperial_infinity_paxel");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.IMPERIAL_INFINITY_PAXEL.get()).pattern("ABC").pattern(" D ").pattern(" E ").define('A', ModItemsAdditions.IMPERIAL_INFINITY_AXE.get()).define('B', ModItemsAdditions.IMPERIAL_INFINITY_SWORD.get()).define('C', ModItemsAdditions.IMPERIAL_INFINITY_PICKAXE.get()).define('D', ModItemsAdditions.IMPERIAL_INFINITY_SHOVEL.get()).define('E', ModItemsAdditions.IMPERIAL_INFINITY_HOE.get()).unlockedBy("has_imperial_infinity_axe", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.IMPERIAL_INFINITY_AXE.get()).build())).save(pWriter, "imperial_infinity_paxel");
         //Star
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.NETHER_STAR)
-                .pattern(" A ")
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.NETHER_STAR).pattern(" A ").pattern("AAA").pattern(" A ").define('A', ModItemsAdditions.STAR_FRAGMENT.get()).unlockedBy("has_star_fragment", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.STAR_FRAGMENT.get()).build())).save(pWriter, "star");
+        //Solar
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.SOLAR.get()).pattern("AAA").pattern("ABA").pattern("CCC").define('A', ModItemsProgression.COPPER_WIRE.get()).define('B', Items.CAULDRON).define('C', Items.IRON_INGOT).unlockedBy("has_solar", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.SOLAR.get()).build())).save(pWriter, "solar");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.SOLAR_PANE.get()).pattern("AAA").pattern("BCB").define('A', Items.AMETHYST_SHARD).define('B', ModItemsAdditions.BASIC_CIRCUIT.get()).define('C', ModItemsProgression.COPPER_WIRE.get()).unlockedBy("has_solar_pane", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.SOLAR_PANE.get()).build())).save(pWriter, "solar_pane");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.SOLAR_PANE_ADVANCED.get()).pattern("AAA").pattern("ABA").pattern("AAA").define('A', ModItemsAdditions.SOLAR_PANE.get()).define('B', ModItemsAdditions.ADVANCED_CIRCUIT.get()).unlockedBy("has_solar_pane_advanced", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.SOLAR_PANE_ADVANCED.get()).build())).save(pWriter, "solar_pane_advanced");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.SOLAR_PANE_ULTIMATE.get()).pattern("AAA").pattern("ABA").pattern("AAA").define('A', ModItemsAdditions.SOLAR_PANE_ADVANCED.get()).define('B', ModItemsProgression.SOLAR_CORE.get()).unlockedBy("has_solar_pane_ultimate", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.SOLAR_PANE_ULTIMATE.get()).build())).save(pWriter, "solar_pane_ultimate");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.SOLAR_PANE_QUANTUM.get()).pattern("AAA").pattern("ABA").pattern("AAA").define('A', ModItemsAdditions.SOLAR_PANE.get()).define('B', ModItemsProgression.ADVANCED_SOLAR_CORE.get()).unlockedBy("has_solar_pane_quantum", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.SOLAR_PANE_QUANTUM.get()).build())).save(pWriter, "solar_pane_quantum");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsProgression.SOLAR_CORE.get()).pattern("AAA").pattern("BCB").pattern("EDE").define('A', ModCrystalItems.DEMETRIUM_CRYSTAL.get()).define('B', ModItemsAdditions.ADVANCED_CIRCUIT.get()).define('C', ModItemsAdditions.LOGIC_COMPONENT.get()).define('D', ModItemsProgression.STABLE_MATTER.get()).define('E', ModItemsAdditions.INFINITY_NUGGET.get()).unlockedBy("has_solar_core", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsProgression.SOLAR_CORE.get()).build())).save(pWriter, "solar_core");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsProgression.ADVANCED_SOLAR_CORE.get())
                 .pattern("AAA")
-                .pattern(" A ")
-                .define('A', ModItemsAdditions.STAR_FRAGMENT.get())
-                .unlockedBy("has_star_fragment", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.STAR_FRAGMENT.get()).build()))
-                .save(pWriter, "star");
+                .pattern("BCB")
+                .pattern("EDE")
+                .define('A', ModCrystalItems.DARIUM_CRYSTAL.get())
+                .define('B', ModItemsProgression.SOLAR_CORE.get())
+                .define('C', ModItemsAdditions.REFINED_COMPONENT.get())
+                .define('D', ModItemsAdditions.INFINIUM_STELLARUM_INGOT.get())
+                .define('E', ModItemsProgression.STABLE_MATTER.get())
+                .unlockedBy("has_advanced_solar_core", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsProgression.ADVANCED_SOLAR_CORE.get()).build()))
+                .save(pWriter, "advanced_solar_core");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsProgression.INDUSTRIAL_SHEET.get()).pattern("A").pattern("A").pattern("A").define('A', ModItemsProgression.PLASTIC.get()).unlockedBy("has_industrial_sheet", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsProgression.INDUSTRIAL_SHEET.get()).build())).save(pWriter, "industrial_sheet");
         //Light
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.RED_LIGHT_CRYSTAL.get()).pattern("AAA").pattern("ABA").pattern("CCC").define('A', Blocks.GLASS).define('B', ModCrystalItems.DARIUM_CRYSTAL.get()).define('C', Blocks.QUARTZ_SLAB).unlockedBy("has_red_light_crystal", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.RED_LIGHT_CRYSTAL.get()).build())).save(pWriter, "red_light_crystal");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.BLUE_LIGHT_CRYSTAL.get()).pattern("AAA").pattern("ABA").pattern("CCC").define('A', Blocks.GLASS).define('B', ModCrystalItems.MARINE_CRYSTAL.get()).define('C', Blocks.QUARTZ_SLAB).unlockedBy("has_blue_light_crystal", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.BLUE_LIGHT_CRYSTAL.get()).build())).save(pWriter, "blue_light_crystal");
@@ -174,51 +179,45 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.STEEL_INGOT.get(), 9).requires(ModBlocksAdditions.STEEL_BLOCK.get()).unlockedBy("has_steel_ingot_from_block", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.STEEL_BLOCK.get()).build())).save(pWriter);
         //uranium
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.URANIUM_INGOT.get(), 9).requires(ModBlocksAdditions.URANIUM_BLOCK.get()).unlockedBy("has_uranium_ingot_from_block", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.URANIUM_BLOCK.get()).build())).save(pWriter);
-
         //infinity
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.INFINITY_NUGGET.get(), 9)
-                        .requires(ModItemsAdditions.INFINITY_INGOT.get()).unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItemsAdditions.INFINITY_INGOT.get()).build())).save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.INFINITY_NUGGET.get(), 9).requires(ModItemsAdditions.INFINITY_INGOT.get()).unlockedBy("has_infinity_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.INFINITY_INGOT.get()).build())).save(pWriter);
         //lead
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.LEAD_NUGGET.get(), 9)
-                        .requires(ModItemsAdditions.LEAD_INGOT.get()).unlockedBy("has_lead_ingot", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItemsAdditions.LEAD_INGOT.get()).build())).save(pWriter);
-       //aluminum
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.ALUMINUM_NUGGET.get(), 9)
-                        .requires(ModItemsAdditions.ALUMINUM_INGOT.get()).unlockedBy("has_aluminum_ingot", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItemsAdditions.ALUMINUM_INGOT.get()).build())).save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.LEAD_NUGGET.get(), 9).requires(ModItemsAdditions.LEAD_INGOT.get()).unlockedBy("has_lead_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.LEAD_INGOT.get()).build())).save(pWriter);
+        //aluminum
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.ALUMINUM_NUGGET.get(), 9).requires(ModItemsAdditions.ALUMINUM_INGOT.get()).unlockedBy("has_aluminum_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.ALUMINUM_INGOT.get()).build())).save(pWriter);
         //tin
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.TIN_NUGGET.get(), 9)
-                        .requires(ModItemsAdditions.TIN_INGOT.get()).unlockedBy("has_tin_ingot", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItemsAdditions.TIN_INGOT.get()).build())).save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.TIN_NUGGET.get(), 9).requires(ModItemsAdditions.TIN_INGOT.get()).unlockedBy("has_tin_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.TIN_INGOT.get()).build())).save(pWriter);
         //nickel
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.NICKEL_NUGGET.get(), 9)
-                        .requires(ModItemsAdditions.NICKEL_INGOT.get()).unlockedBy("has_nickel_ingot", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItemsAdditions.NICKEL_INGOT.get()).build())).save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.NICKEL_NUGGET.get(), 9).requires(ModItemsAdditions.NICKEL_INGOT.get()).unlockedBy("has_nickel_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.NICKEL_INGOT.get()).build())).save(pWriter);
         //zinc
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.ZINC_NUGGET.get(), 9)
-                        .requires(ModItemsAdditions.ZINC_INGOT.get()).unlockedBy("has_zinc_ingot", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItemsAdditions.ZINC_INGOT.get()).build())).save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.ZINC_NUGGET.get(), 9).requires(ModItemsAdditions.ZINC_INGOT.get()).unlockedBy("has_zinc_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.ZINC_INGOT.get()).build())).save(pWriter);
         //bronze
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.BRONZE_NUGGET.get(), 9)
-                        .requires(ModItemsAdditions.BRONZE_INGOT.get()).unlockedBy("has_bronze_ingot", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItemsAdditions.BRONZE_INGOT.get()).build())).save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.BRONZE_NUGGET.get(), 9).requires(ModItemsAdditions.BRONZE_INGOT.get()).unlockedBy("has_bronze_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.BRONZE_INGOT.get()).build())).save(pWriter);
         //steel
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.STEEL_NUGGET.get(), 9)
-                        .requires(ModItemsAdditions.STEEL_INGOT.get()).unlockedBy("has_steel_ingot", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItemsAdditions.STEEL_INGOT.get()).build())).save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.STEEL_NUGGET.get(), 9).requires(ModItemsAdditions.STEEL_INGOT.get()).unlockedBy("has_steel_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.STEEL_INGOT.get()).build())).save(pWriter);
         //uranium
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.URANIUM_NUGGET.get(), 9)
-                        .requires(ModItemsAdditions.URANIUM_INGOT.get()).unlockedBy("has_uranium_ingot", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItemsAdditions.URANIUM_INGOT.get()).build())).save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.URANIUM_NUGGET.get(), 9).requires(ModItemsAdditions.URANIUM_INGOT.get()).unlockedBy("has_uranium_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.URANIUM_INGOT.get()).build())).save(pWriter);
         //silver
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.SILVER_NUGGET.get(), 9)
-                        .requires(ModItemsAdditions.SILVER_INGOT.get()).unlockedBy("has_silver_ingot", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItemsAdditions.SILVER_INGOT.get()).build())).save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.SILVER_NUGGET.get(), 9).requires(ModItemsAdditions.SILVER_INGOT.get()).unlockedBy("has_silver_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.SILVER_INGOT.get()).build())).save(pWriter);
         //brass
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.BRASS_NUGGET.get(), 9)
                         .requires(ModItemsAdditions.BRASS_INGOT.get()).unlockedBy("has_brass_ingot", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItemsAdditions.BRASS_INGOT.get()).build())).save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.GLYCERIN.get(), 1)
+                        .requires(ModItemsAdditions.ALCOHOL_BOTTLE.get())
+                        .requires(Items.SUGAR)
+                        .requires(Items.HONEY_BOTTLE)
+                        .unlockedBy("has_alcohol", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItemsAdditions.ALCOHOL_BOTTLE.get()).build())).save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.PLASTIC_GOO.get(), 1)
+                        .requires(ModItemsAdditions.GLYCERIN.get())
+                        .requires(ModItemsAdditions.VINEGAR_BOTTLE.get())
+                        .requires(ModItemsAdditions.STARCH.get(), 4)
+                        .requires(Items.POTION)
+                        .unlockedBy("has_glycerin", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItemsAdditions.GLYCERIN.get()).build())).save(pWriter);
 
         nineBlockStorageRecipes(pWriter, RecipeCategory.MISC, ModItemsAdditions.RAW_INFINITY.get(), RecipeCategory.MISC, ModBlocksAdditions.RAW_INFINITY_BLOCK.get());
         nineBlockStorageRecipes(pWriter, RecipeCategory.MISC, ModItemsAdditions.RAW_LEAD.get(), RecipeCategory.MISC, ModBlocksAdditions.RAW_LEAD_BLOCK.get());
@@ -261,6 +260,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         oreBlasting(pWriter, SILVER_SMELTING, RecipeCategory.MISC, ModItemsAdditions.SILVER_INGOT.get(), 0.25f, 100, "silver_ingot");
         oreBlasting(pWriter, List.of(ModItemsAdditions.BRASS_DUST.get()), RecipeCategory.MISC, ModItemsAdditions.BRASS_INGOT.get(), 0.25f, 100, "brass_ingot");
         oreBlasting(pWriter, List.of(ModItemsAdditions.STEEL_DUST.get()), RecipeCategory.MISC, ModItemsAdditions.STEEL_INGOT.get(), 0.25f, 100, "steel_ingot");
+
+        oreBlasting(pWriter, List.of(ModItemsAdditions.PLASTIC_GOO.get()), RecipeCategory.MISC, ModItemsProgression.PLASTIC.get(), 0.15f, 10, "plastic");
 
         simpleCookingRecipe(pWriter,"campfire_cooking", RecipeSerializer.SMOKING_RECIPE,5, ModItemsProgression.RAW_ROD_CLAY_MODEL.get(), ModItemsProgression.ROD_CLAY_MODEL.get(), 0.25f);
         simpleCookingRecipe(pWriter,"campfire_cooking",RecipeSerializer.SMOKING_RECIPE,5, ModItemsProgression.RAW_SCREW_CLAY_MODEL.get(), ModItemsProgression.SCREW_CLAY_MODEL.get(), 0.25f);

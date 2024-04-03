@@ -122,6 +122,10 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         simpleItem(ModItemsAdditions.BASIC_CIRCUIT);
         simpleItem(ModItemsAdditions.ADVANCED_CIRCUIT);
+        simpleItem(ModItemsAdditions.STARCH);
+        simpleItem(ModItemsAdditions.STRAINER);
+        simpleItem(ModItemsAdditions.PLASTIC_GOO);
+        simpleItem(ModItemsAdditions.GLYCERIN);
 
         simpleItem(ModItemsAdditions.BUCKET_LUBRICANT);
         simpleItem(ModItemsAdditions.BUCKET_ETHANOL);
@@ -131,6 +135,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.BUCKET_WINE);
         simpleItem(ModItemsAdditions.BUCKET_EXPERIENCE);
         simpleItem(ModItemsAdditions.BUCKET_STARLIQUID);
+        simpleItem(ModItemsAdditions.BUCKET_POTATO_JUICE);
 
         simpleItem(ModItemsAdditions.ALCOHOL_BOTTLE);
         simpleItem(ModItemsAdditions.VINEGAR_BOTTLE);
@@ -215,11 +220,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.ADVANCED_SOLAR_CORE);
         simpleItem(ModItemsProgression.RESIDUAL_MATTER);
         simpleItem(ModItemsProgression.STABLE_MATTER);
+        simpleItem(ModItemsProgression.PLASTIC);
 
         simpleItem(ModItemsAdditions.TERRAIN_MARKER);
         simpleItem(ModItemsAdditions.LINKING_TOOL);
         simpleItem(ModItemsAdditions.HAMMER_RANGE_UPGRADE);
-        simpleItem(ModItemsAdditions.STAR_FRAGMENT);
 
         simpleItem(ModCrystalItems.AMBER_CRYSTAL);
         simpleItem(ModCrystalItems.MARINE_CRYSTAL);

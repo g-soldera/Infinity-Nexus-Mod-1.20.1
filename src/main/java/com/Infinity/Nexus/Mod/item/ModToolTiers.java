@@ -20,7 +20,7 @@ public class ModToolTiers {
                     30,
                     -1,
                     70,
-                    BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get())),
+                    ModTags.Blocks.PAXEL_MINEABLE, () -> Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get())),
             new ResourceLocation(InfinityNexusMod.MOD_ID, "infinity"), List.of(Tiers.NETHERITE), List.of());
 
     public static final Tier IMPERIAL = TierSortingRegistry.registerTier(
@@ -30,7 +30,7 @@ public class ModToolTiers {
                     35,
                     -1,
                     80,
-                    BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get())),
+                    ModTags.Blocks.PAXEL_MINEABLE, () -> Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get())),
             new ResourceLocation(InfinityNexusMod.MOD_ID, "imperial"), List.of(Tiers.NETHERITE), List.of());
 
 }

@@ -65,10 +65,14 @@ public class FermentationBarrelCategory implements IRecipeCategory<FermentationB
     public void setRecipe(IRecipeLayoutBuilder builder, FermentationBarrelRecipes recipe, IFocusGroup focuses) {
         ItemStack input =  recipe.getIngredients().get(0).getItems()[0];
         input.setCount(recipe.getInputCount());
+        boolean fermenting = recipe.getRecipeType();
     //TODO
 
         builder.addSlot(RecipeIngredientRole.INPUT, 62, 6).setFluidRenderer(SqueezerBlockEntity.getFluidCapacity(), true,16,62).addFluidStack(recipe.getInputFluidStack().getFluid(),recipe.getInputFluidStack().getAmount());
         builder.addSlot(RecipeIngredientRole.CATALYST, 116, 6).addItemStack(input);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 52).addItemStack(recipe.getResultItem(null));
+        if(!fermenting) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 98, 6).setFluidRenderer(SqueezerBlockEntity.getFluidCapacity(), true,16,62).addFluidStack(recipe.getOutputFluidStack().getFluid(),recipe.getOutputFluidStack().getAmount());
+        }
     }
 }

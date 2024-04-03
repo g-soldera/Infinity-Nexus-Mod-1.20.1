@@ -63,6 +63,11 @@ public class ModFluidType {
             new Vector3f(224f / 225f, 56f / 225f, 208f / 255f),
             FluidType.Properties.create().lightLevel(0).density(1024).viscosity(1024).temperature(3000)));
 
+    public static final RegistryObject<FluidType> POTATO_JUICE = registryFluidType("potato_juice",
+            new BaseFluidType(WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, 0xA1683D20,
+            new Vector3f(224f / 225f, 56f / 225f, 208f / 255f),
+            FluidType.Properties.create().lightLevel(0).density(1024).viscosity(1024).temperature(0)));
+
 
     public static RegistryObject<FluidType> registryFluidType(String name, FluidType fluidType) {
         return FLUID_TYPES.register(name,()-> fluidType);

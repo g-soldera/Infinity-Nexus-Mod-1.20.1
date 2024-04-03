@@ -109,7 +109,6 @@ public class ModTabProgression {
                         pOutput.accept(new ItemStack(ModItemsProgression.INDUSTRIAL_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INFINITY_SHEET.get()));
 
-                        pOutput.accept(new ItemStack(ModItemsProgression.BIO_MASS.get()));
 
 
                         //-------------------------//-------------------------//

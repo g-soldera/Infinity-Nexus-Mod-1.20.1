@@ -25,6 +25,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -252,6 +253,8 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
                 if(this.FLUID_STORAGE_INPUT.getSpace() >= 1000){
                     FluidStack stack = iFluidHandlerItem.drain(1000, IFluidHandler.FluidAction.EXECUTE);
                     this.FLUID_STORAGE_INPUT.fill(new FluidStack(stack.getFluid(), stack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+                    this.itemHandler.extractItem(INPUT_FLUID_ITEM, 1, false);
+                    this.itemHandler.setStackInSlot(INPUT_FLUID_ITEM, Items.BUCKET.getDefaultInstance());
                     removeContainer(iFluidHandlerItem.getContainer(), 0);
                 }
             }else if(this.FLUID_STORAGE_INPUT.getSpace() >= 10 || this.FLUID_STORAGE_INPUT.getSpace() >= iFluidHandlerItem.getContainer().getCount()) {
@@ -266,8 +269,10 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
 
     private void removeContainer(ItemStack container, int fluid) {
         if(fluid <= 0 || container.getItem() instanceof BucketItem) {
-            this.itemHandler.extractItem(INPUT_FLUID_ITEM, 1, false);
-            this.itemHandler.setStackInSlot(OUTPUT_FLUID_ITEM, container);
+            if(itemHandler.getStackInSlot(OUTPUT_FLUID_ITEM).isEmpty()) {
+                this.itemHandler.extractItem(INPUT_FLUID_ITEM, 1, false);
+                this.itemHandler.setStackInSlot(OUTPUT_FLUID_ITEM, container);
+            }
         }
 
     }
@@ -291,30 +296,40 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
 
     private void craftItem() {
         Optional<FermentationBarrelRecipes> recipe = getCurrentRecipe();
-        int recipeFluidAmount = recipe.get().getInputFluidStack().getAmount();
+        boolean isFermentationRecipe = recipe.get().getRecipeType();
+        int recipeFluidInputAmount = recipe.get().getInputFluidStack().getAmount();
         int recipeInputCount = recipe.get().getInputCount();
         int recipeResultCount = recipe.get().getResultItem(null).getCount();
         Item stack = recipe.get().getResultItem(null).getItem();
-        int inputSlot = itemHandler.getStackInSlot(INPUT_SLOT).getCount();
 
-
-            if(itemHandler.getStackInSlot(INPUT_SLOT).getItem().equals(ModItemsAdditions.INFINITY_INGOT.get())){
-                for(int i = 0; i < inputSlot; i++){
-                    if(inputFluidHandler.getFluidAmount() >= recipeFluidAmount && itemHandler.getStackInSlot(INPUT_SLOT).getCount() > 0){
-                        this.FLUID_STORAGE_INPUT.drain(recipeFluidAmount, IFluidHandler.FluidAction.EXECUTE);
+        if(!isFermentationRecipe) {
+            int inputSlot = itemHandler.getStackInSlot(INPUT_SLOT).getCount();
+            if (itemHandler.getStackInSlot(INPUT_SLOT).getItem().equals(ModItemsAdditions.INFINITY_INGOT.get())) {
+                for (int i = 0; i < inputSlot; i++) {
+                    if (inputFluidHandler.getFluidAmount() >= recipeFluidInputAmount && itemHandler.getStackInSlot(INPUT_SLOT).getCount() > 0) {
+                        this.FLUID_STORAGE_INPUT.drain(recipeFluidInputAmount, IFluidHandler.FluidAction.EXECUTE);
 
                         itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(stack, recipeResultCount + itemHandler.getStackInSlot(OUTPUT_SLOT).getCount()));
                         itemHandler.getStackInSlot(INPUT_SLOT).shrink(recipeInputCount);
-                    }else{
+                    } else {
                         break;
                     }
                 }
-            }else {
-                this.FLUID_STORAGE_INPUT.drain(recipeFluidAmount, IFluidHandler.FluidAction.EXECUTE);
+            } else {
+                this.FLUID_STORAGE_INPUT.drain(recipeFluidInputAmount, IFluidHandler.FluidAction.EXECUTE);
 
                 itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(stack, recipeResultCount + itemHandler.getStackInSlot(OUTPUT_SLOT).getCount()));
                 itemHandler.getStackInSlot(INPUT_SLOT).shrink(recipeInputCount);
             }
+        }else{
+            int recipeFluidOutputAmount = recipe.get().getOutputFluidStack().getAmount();
+            FluidStack recipeFluidOutput = recipe.get().getOutputFluidStack();
+            recipeFluidOutput.setAmount(recipeFluidOutputAmount);
+            this.FLUID_STORAGE_INPUT.drain(recipeFluidInputAmount, IFluidHandler.FluidAction.EXECUTE);
+            this.FLUID_STORAGE_INPUT.fill(recipeFluidOutput, IFluidHandler.FluidAction.EXECUTE);
+
+            itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(stack, recipeResultCount + itemHandler.getStackInSlot(OUTPUT_SLOT).getCount()));
+        }
 
         level.playSound(null, this.getBlockPos(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0f, 1.0f);
     }

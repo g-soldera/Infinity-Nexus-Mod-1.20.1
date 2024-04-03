@@ -66,7 +66,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(17) {
         @Override
         protected void onContentsChanged(int slot) {
-            if(slot == getComponentSlot()){
+            if (slot == getComponentSlot()) {
                 makeStructure();
             }
             setChanged();
@@ -75,8 +75,8 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0,1,2,3,4,5,6,7,8 -> !ModUtils.isUpgrade(stack) || !ModUtils.isComponent(stack);
-                case 9,10,11,12 -> ModUtils.isUpgrade(stack);
+                case 0, 1, 2, 3, 4, 5, 6, 7, 8 -> !ModUtils.isUpgrade(stack) || !ModUtils.isComponent(stack);
+                case 9, 10, 11, 12 -> ModUtils.isUpgrade(stack);
                 case 13 -> ModUtils.isComponent(stack);
                 //TODO
                 case 14 -> true;
@@ -86,8 +86,8 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             };
         }
     };
-    private static final int[] OUTPUT_SLOT = {0,1,2,3,4,5,6,7,8};
-    private static final int[] UPGRADE_SLOTS = {9,10,11,12};
+    private static final int[] OUTPUT_SLOT = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+    private static final int[] UPGRADE_SLOTS = {9, 10, 11, 12};
     private static final int COMPONENT_SLOT = 13;
     private static final int LINK_SLOT = 15;
     private static final int FORTUNE_SLOT = 14;
@@ -113,13 +113,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     private LazyOptional<IEnergyStorage> lazyEnergyStorage = LazyOptional.empty();
 
 
-    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap = Map.of(
-            Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-            Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-            Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-            Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-            Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-            Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
+    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap = Map.of(Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))), Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))), Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))), Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))), Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))), Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i < 9, (i, s) -> !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
 
     protected final ContainerData data;
     private int progress = 0;
@@ -260,7 +254,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.infinity_nexus_mod.miner").append(" LV "+ getMachineLevel());
+        return Component.translatable("block.infinity_nexus_mod.miner").append(" LV " + getMachineLevel());
     }
 
     @Nullable
@@ -268,9 +262,11 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
         return new MinerMenu(pContainerId, pPlayerInventory, this, this.data);
     }
+
     public static int getStructureSlot() {
         return STRUCTURE_SLOT;
     }
+
     public IEnergyStorage getEnergyStorage() {
         return ENERGY_STORAGE;
     }
@@ -282,47 +278,60 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     public int getHasRedstoneSignal() {
         return data.get(5);
     }
+
     public int getStillCrafting() {
         return data.get(6);
     }
+
     public int getHasSlotFree() {
         return data.get(7);
     }
+
     public int getHasComponent() {
         return data.get(8);
     }
+
     public int getHasEnoughEnergy() {
         return data.get(9);
     }
+
     public int getHasRecipe() {
         return data.get(10);
     }
+
     public int getHasStructure() {
         return data.get(4);
     }
+
     public int getlinkx() {
         return data.get(11);
     }
+
     public int getlinky() {
         return data.get(12);
     }
+
     public int getlinkz() {
         return data.get(13);
     }
+
     public int getlinkFace() {
         return data.get(14);
     }
+
     public String getHasLink() {
-        if(this.data.get(11) != 0 || this.data.get(12) != 0 || this.data.get(13) != 0) {
-            return "X: " +this.data.get(11) + ", Y: " + this.data.get(12) + ", Z: " + this.data.get(13);
+        if (this.data.get(11) != 0 || this.data.get(12) != 0 || this.data.get(13) != 0) {
+            return "X: " + this.data.get(11) + ", Y: " + this.data.get(12) + ", Z: " + this.data.get(13);
         } else {
             return "[Unlinked]";
 
         }
     }
+
     public ItemStack getLikedBlock() {
         return new ItemStack(level.getBlockState(new BlockPos(this.data.get(11), this.data.get(12), this.data.get(13))).getBlock().asItem());
     }
+
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
@@ -374,8 +383,8 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         if (pLevel.isClientSide) {
             return;
         }
-        int machineLevel = getMachineLevel()-1 <= 0 ? 0 : getMachineLevel()-1;
-        if(structure == 0){
+        int machineLevel = getMachineLevel() - 1 <= 0 ? 0 : getMachineLevel() - 1;
+        if (structure == 0) {
             pLevel.setBlock(pPos, pState.setValue(Generator.LIT, machineLevel), 3);
         }
 
@@ -402,7 +411,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         this.data.set(7, 1);
 
         resetProgress();
-        if(!hasComponent()){
+        if (!hasComponent()) {
             this.data.set(8, 0);
             pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel), 3);
             return;
@@ -416,7 +425,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
         this.data.set(9, 1);
-        if(hasRecipe(pPos, machineLevel)) {
+        if (hasRecipe(pPos, machineLevel)) {
             this.data.set(10, 1);
             pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel + 9), 3);
             craftItem(pPos, machineLevel);
@@ -425,25 +434,25 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         }
         this.data.set(10, 0);
     }
+
     private void notifyOwner(int machineLevel, Level pLevel) {
-        try{
-            if(this.customBlockData != null && this.customBlockData.getInt("ownerNotifyDelay") >= this.customBlockData.getInt("ownerNotifyMaxDelay")){
+        try {
+            if (this.customBlockData != null && this.customBlockData.getInt("ownerNotifyDelay") >= this.customBlockData.getInt("ownerNotifyMaxDelay")) {
                 Player player = pLevel.getPlayerByUUID(this.customBlockData.getUUID("ownerUUID"));
                 player.playNotifySound(SoundEvents.NOTE_BLOCK_GUITAR.get(), SoundSource.BLOCKS, 5.0F, 1.0F);
-                player.sendSystemMessage(Component.literal("§e[§fMiner LVL:§"+ + (machineLevel + 1) + " "+ (machineLevel+1) + "§e] §bOs Slots estão Cheios! §e[§5"+ this.getBlockPos().getX()+", "+ this.getBlockPos().getY()+", "+ this.getBlockPos().getZ() + "§e]")
-                        .setStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp "+player.getName().getString() + " "+ this.getBlockPos().getX()+" "+ (this.getBlockPos().getY() +2)+" "+ this.getBlockPos().getZ()))
-                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("Clique para teleportar.")))));
+                player.sendSystemMessage(Component.literal("§e[§fMiner LVL:§" + +(machineLevel + 1) + " " + (machineLevel + 1) + "§e] §bOs Slots estão Cheios! §e[§5" + this.getBlockPos().getX() + ", " + this.getBlockPos().getY() + ", " + this.getBlockPos().getZ() + "§e]").setStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp " + player.getName().getString() + " " + this.getBlockPos().getX() + " " + (this.getBlockPos().getY() + 2) + " " + this.getBlockPos().getZ())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("Clique para teleportar.")))));
                 this.customBlockData.putInt("ownerNotifyDelay", 0);
             }
-            this.customBlockData.putInt("ownerNotifyDelay", this.customBlockData.getInt("ownerNotifyDelay")+1);
-        }catch(Exception e){
+            this.customBlockData.putInt("ownerNotifyDelay", this.customBlockData.getInt("ownerNotifyDelay") + 1);
+        } catch (Exception e) {
 
         }
     }
+
     private boolean hasEmptySlot() {
         boolean hasFreeSpace = false;
         for (int slot : OUTPUT_SLOT) {
-            if(itemHandler.getStackInSlot(slot).isEmpty()) {
+            if (itemHandler.getStackInSlot(slot).isEmpty()) {
                 hasFreeSpace = true;
                 break;
             }
@@ -481,12 +490,14 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     private void resetProgress() {
         progress = 0;
     }
+
     private boolean isOre(ItemStack stack) {
         List<TagKey<Item>> tags = stack.getTags().toList();
-                return tags.toString().contains("forge:ores");
+        return tags.toString().contains("forge:ores");
     }
+
     private ItemStack getDrop(ItemStack stack) {
-        if(!(stack.getItem() instanceof BlockItem)) {
+        if (!(stack.getItem() instanceof BlockItem)) {
             return null;
         }
         IFFakePlayer player = new IFFakePlayer((ServerLevel) this.level);
@@ -498,7 +509,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
 
         drops.forEach(stack1 -> {
             int drop = new Random().nextInt(drops.size());
-                dropItem.set(drops.get(drop).copy());
+            dropItem.set(drops.get(drop).copy());
 
         });
         return dropItem.get();
@@ -521,48 +532,48 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         ModUtils.UseComponent(component, level, this.getBlockPos());
 
         int fortune = getFortuneLevel();
-            ItemStack output = getOutputItem(pos, fortune, machineLevel);
+        ItemStack output = getOutputItem(pos, fortune, machineLevel);
 
-            if ((output.getItem() == ModItemsAdditions.RAW_INFINITY.get())) {
-                if(machineLevel < 6){
-                    return;
-                }
-                output = new ItemStack(ModItemsAdditions.RAW_INFINITY.get());
+        if ((output.getItem() == ModItemsAdditions.RAW_INFINITY.get())) {
+            if (machineLevel < 6) {
+                return;
             }
-            if((output.getItem() == Blocks.ANCIENT_DEBRIS.asItem())) {
-                if(machineLevel < 4){
-                    return;
+            output = new ItemStack(ModItemsAdditions.RAW_INFINITY.get());
+        }
+        if ((output.getItem() == Blocks.ANCIENT_DEBRIS.asItem())) {
+            if (machineLevel < 4) {
+                return;
             }
-                if(machineLevel < 6){
-                    output = new ItemStack(Items.NETHERITE_SCRAP);
-                }
+            if (machineLevel < 6) {
+                output = new ItemStack(Items.NETHERITE_SCRAP);
             }
-            Random random = new Random();
-            int randomTier = random.nextInt(100);
-            int random1 = random.nextInt(100);
+        }
+        Random random = new Random();
+        int randomTier = random.nextInt(100);
+        int random1 = random.nextInt(100);
 
-            if(random1 < 10) {
-                int[] chance = {100, 61, 38, 23, 14, 9, 5, 3, 1};
-                for (int i = 1; i < machineLevel + 2; i++) {
-                    if (randomTier < chance[chance.length - i]) {
-                        insertItemOnInventory(new ItemStack(ModUtils.getCrystalType(chance.length - i).getItem()));
-                        break;
-                    }
+        if (random1 < 10) {
+            int[] chance = {100, 61, 38, 23, 14, 9, 5, 3, 1};
+            for (int i = 1; i < machineLevel + 2; i++) {
+                if (randomTier < chance[chance.length - i]) {
+                    insertItemOnInventory(new ItemStack(ModUtils.getCrystalType(chance.length - i).getItem()));
+                    break;
                 }
             }
+        }
 
-            insertItemOnInventory(randomTier <= 1? new ItemStack(ModUtils.getCrystalType(1).getItem()) : output);
-            level.playSound(null, this.getBlockPos(), SoundEvents.BEE_HURT, SoundSource.BLOCKS, 0.1f, 1.0f);
+        insertItemOnInventory(randomTier <= 1 ? new ItemStack(ModUtils.getCrystalType(1).getItem()) : output);
+        level.playSound(null, this.getBlockPos(), SoundEvents.BEE_HURT, SoundSource.BLOCKS, 0.1f, 1.0f);
 
 
     }
 
-    private boolean hasRecipe(BlockPos pos,int machineLevel) {
+    private boolean hasRecipe(BlockPos pos, int machineLevel) {
 
-        if(this.verify >= maxVerify) {
-           this.structure = MinerTierStructure.hasStructure(machineLevel+1, pos, level) ? 1 : 0;
-           this.data.set(4, structure);
-           this.verify = 0;
+        if (this.verify >= maxVerify) {
+            this.structure = MinerTierStructure.hasStructure(machineLevel + 1, pos, level) ? 1 : 0;
+            this.data.set(4, structure);
+            this.verify = 0;
         }
         this.verify++;
         return this.structure > 0;
@@ -570,9 +581,10 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
 
     private ItemStack getOutputItem(BlockPos pos, int fortune, int machineLevel) {
         List<ItemStack> drops = new ArrayList<>();
-        int radio = ((int) Math.floor((double) machineLevel / 2)+1);
+        int radio = ((int) Math.floor((double) machineLevel / 2) + 1);
 
-        int startX = pos.getX() - radio;;
+        int startX = pos.getX() - radio;
+        ;
         int startY = pos.getY() - ((int) Math.floor((double) (machineLevel + 4) / 2) * 2);
         int startZ = pos.getZ() - radio;
 
@@ -580,9 +592,9 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         int endY = pos.getY() - 2;
         int endZ = pos.getZ() + radio;
 
-        int randomX = startX + new Random().nextInt(endX - (startX-1));
-        int randomY = startY + new Random().nextInt(endY - (startY-1));
-        int randomZ = startZ + new Random().nextInt(endZ - (startZ-1));
+        int randomX = startX + new Random().nextInt(endX - (startX - 1));
+        int randomY = startY + new Random().nextInt(endY - (startY - 1));
+        int randomZ = startZ + new Random().nextInt(endZ - (startZ - 1));
 
         BlockPos novoBlockPos = new BlockPos(randomX, randomY, randomZ);
 
@@ -601,7 +613,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                 }
             }
         }
-        if(drops.isEmpty()){
+        if (drops.isEmpty()) {
             drops.add(ItemStack.EMPTY);
         }
         return drops.get(new Random().nextInt(drops.size()));
@@ -626,16 +638,17 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         return enchantmentLevel;
 
     }
+
     private void insertItemOnInventory(ItemStack itemStack) {
         try {
-            if(itemHandler.getStackInSlot(LINK_SLOT).is(ModItemsAdditions.LINKING_TOOL.get())){
+            if (itemHandler.getStackInSlot(LINK_SLOT).is(ModItemsAdditions.LINKING_TOOL.get())) {
                 ItemStack linkingTool = itemHandler.getStackInSlot(LINK_SLOT).copy();
                 AtomicBoolean success = new AtomicBoolean(false);
                 String name = linkingTool.getDisplayName().getString();
                 this.data.set(11, 0);
                 this.data.set(12, 0);
                 this.data.set(13, 0);
-                if(linkingTool.hasCustomHoverName()) {
+                if (linkingTool.hasCustomHoverName()) {
                     String[] parts = name.substring(1, name.length() - 1).split(",");
                     int xl = 0;
                     int yl = 0;
@@ -660,7 +673,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                             facel = value;
                         }
                     }
-                    if(facel.equals("debug")){
+                    if (facel.equals("debug")) {
                         Player player = level.getPlayerByUUID(this.customBlockData.getUUID("ownerUUID"));
                         player.sendSystemMessage(Component.literal("Pos: " + this.data.get(11) + " " + this.data.get(12) + " " + this.data.get(13) + " " + facel));
                         player.sendSystemMessage(Component.literal("Name: " + name));
@@ -689,19 +702,20 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                         });
                     }
                 }
-                if(!success.get()) {
+                if (!success.get()) {
                     insertItemOnSelfInventory(itemStack);
                 }
-            }else{
+            } else {
                 insertItemOnSelfInventory(itemStack);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("§f[INM§f]§c: Failed to insert item in: " + this.getBlockPos());
         }
     }
+
     private Direction getLinkedSide(String side) {
-        switch (side){
+        switch (side) {
             case "up":
                 return Direction.UP;
             case "down":
@@ -718,10 +732,12 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                 return Direction.UP;
         }
     }
+
     private boolean canLink(BlockEntity blockEntity) {
         return (int) Math.sqrt(this.getBlockPos().distSqr(blockEntity.getBlockPos())) < 100;
     }
-    private void insertItemOnSelfInventory(ItemStack itemStack){
+
+    private void insertItemOnSelfInventory(ItemStack itemStack) {
         for (int slot : OUTPUT_SLOT) {
             if (ModUtils.canPlaceItemInContainer(itemStack, slot, this.itemHandler)) {
                 this.itemHandler.insertItem(slot, itemStack, false);
@@ -729,7 +745,8 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             }
         }
     }
-    private int getMachineLevel(){
+
+    private int getMachineLevel() {
         return ModUtils.getComponentLevel(this.itemHandler.getStackInSlot(COMPONENT_SLOT));
     }
 
@@ -740,9 +757,11 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     private boolean hasProgressFinished() {
         return progress >= maxProgress;
     }
+
     private void increaseCraftingProgress() {
-        progress ++;
+        progress++;
     }
+
     private void setMaxProgress(int machineLevel) {
         int duration = 130;
         int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS);
@@ -787,7 +806,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
                     player.getMainHandItem().shrink(1);
                 }
                 this.setChanged();
-            }else{
+            } else {
                 ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
                 this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
                 ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), component);
@@ -806,7 +825,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
 
     public void setUpgradeLevel(ItemStack itemStack, Player player) {
         {
-            for(int i = 0; i < UPGRADE_SLOTS.length; i++ ){
+            for (int i = 0; i < UPGRADE_SLOTS.length; i++) {
                 if (this.itemHandler.getStackInSlot(UPGRADE_SLOTS[i]).isEmpty()) {
                     ItemStack stack = itemStack.copy();
                     stack.setCount(1);
@@ -828,6 +847,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     public void setCustomBlockData(CompoundTag nbt) {
         this.customBlockData = nbt;
     }
+
     public int getTierLevel() {
         return this.getMachineLevel();
     }

@@ -1,0 +1,20 @@
+{
+  "type": "infinity_nexus_mod:squeezing",
+  "energy": 1000,
+  "duration": 130,
+  "fluidType": "infinity_nexus_mod:vinegar_water_fluid",
+  "fluidAmount": 100,
+  "ingredients": [
+    {
+      "tag": "infinity_nexus_mod:up_3"
+    },
+    {
+      "item": "minecraft:apple",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:bio_mass",
+    "count": 1
+  }
+}

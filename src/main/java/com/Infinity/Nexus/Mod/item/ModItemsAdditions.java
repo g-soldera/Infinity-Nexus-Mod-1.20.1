@@ -147,6 +147,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> BUCKET_WINE = ITEMS.register("bucket_wine", () -> new BucketItem(ModFluids.WINE_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
     public static final RegistryObject<Item> BUCKET_EXPERIENCE = ITEMS.register("bucket_experience", () -> new BucketItem(ModFluids.EXPERIENCE_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
     public static final RegistryObject<Item> BUCKET_STARLIQUID = ITEMS.register("bucket_starliquid", () -> new BucketItem(ModFluids.STARLIQUID_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
+    public static final RegistryObject<Item> BUCKET_POTATO_JUICE = ITEMS.register("bucket_potato_juice", () -> new BucketItem(ModFluids.POTATO_JUICE_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
 
     public static final RegistryObject<Item> ALCOHOL_BOTTLE = ITEMS.register("alcohol_bottle", () -> new AlcoholBottle(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
     public static final RegistryObject<Item> SUGARCANE_JUICE_BOTTLE = ITEMS.register("sugarcane_juice_bottle", () -> new BottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
@@ -186,6 +187,10 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> SOLAR_PANE_ADVANCED = ITEMS.register("solar_pane_advanced", () -> new SolarUpgrade(new Item.Properties().rarity(Rarity.UNCOMMON), 73));
     public static final RegistryObject<Item> SOLAR_PANE_ULTIMATE = ITEMS.register("solar_pane_ultimate", () -> new SolarUpgrade(new Item.Properties().rarity(Rarity.RARE), 648));
     public static final RegistryObject<Item> SOLAR_PANE_QUANTUM = ITEMS.register("solar_pane_quantum", () -> new SolarUpgrade(new Item.Properties().rarity(Rarity.EPIC), 5832));
+    public static final RegistryObject<Item> STARCH = ITEMS.register("starch", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> STRAINER = ITEMS.register("strainer", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PLASTIC_GOO = ITEMS.register("plastic_goo", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GLYCERIN = ITEMS.register("glycerin", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> ASGREON_SPAWN_EGG = ITEMS.register("asgreon_spawn_egg", () -> new ForgeSpawnEggItem( ModEntities.ASGREON, 0x7e9680, 0xc5d1c5,new Item.Properties()));
     public static void register(IEventBus eventBus) {
