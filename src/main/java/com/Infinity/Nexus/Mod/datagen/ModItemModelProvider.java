@@ -32,6 +32,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.BRASS_INGOT);
         simpleItem(ModItemsAdditions.BRONZE_INGOT);
         simpleItem(ModItemsAdditions.STEEL_INGOT);
+        simpleItem(ModItemsAdditions.GRAPHITE_INGOT);
 
         simpleItem(ModItemsAdditions.INFINITY_NUGGET);
         simpleItem(ModItemsAdditions.COPPER_NUGGET);
@@ -63,6 +64,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.BRASS_DUST);
         simpleItem(ModItemsAdditions.BRONZE_DUST);
         simpleItem(ModItemsAdditions.STEEL_DUST);
+        simpleItem(ModItemsAdditions.GRAPHITE_DUST);
 
         simpleItem(ModItemsAdditions.RAW_INFINITY);
         simpleItem(ModItemsAdditions.RAW_LEAD);
@@ -91,6 +93,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.INFINITY_CHESTPLATE);
         simpleItem(ModItemsAdditions.INFINITY_LEGGINGS);
         simpleItem(ModItemsAdditions.INFINITY_BOOTS);
+        simpleItem(ModItemsAdditions.CARBON_HELMET);
+        simpleItem(ModItemsAdditions.CARBON_CHESTPLATE);
+        simpleItem(ModItemsAdditions.CARBON_LEGGINGS);
+        simpleItem(ModItemsAdditions.CARBON_BOOTS);
         simpletools(ModItemsAdditions.IMPERIAL_INFINITY_SWORD);
         simpletools(ModItemsAdditions.IMPERIAL_INFINITY_HAMMER);
         simpletools(ModItemsAdditions.IMPERIAL_INFINITY_PAXEL);
@@ -214,6 +220,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.ALUMINUM_SHEET);
         simpleItem(ModItemsProgression.INDUSTRIAL_SHEET);
         simpleItem(ModItemsProgression.INFINITY_SHEET);
+        simpleItem(ModItemsProgression.CARBON_PLATE);
 
         simpleItem(ModItemsProgression.BIO_MASS);
         simpleItem(ModItemsProgression.SOLAR_CORE);
@@ -225,6 +232,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.TERRAIN_MARKER);
         simpleItem(ModItemsAdditions.LINKING_TOOL);
         simpleItem(ModItemsAdditions.HAMMER_RANGE_UPGRADE);
+        simpleItem(ModItemsAdditions.STAR_FRAGMENT);
 
         simpleItem(ModCrystalItems.AMBER_CRYSTAL);
         simpleItem(ModCrystalItems.MARINE_CRYSTAL);

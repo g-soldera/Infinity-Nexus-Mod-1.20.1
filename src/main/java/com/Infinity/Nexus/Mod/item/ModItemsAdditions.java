@@ -4,6 +4,7 @@ import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.entity.ModEntities;
 import com.Infinity.Nexus.Mod.fluid.ModFluids;
 import com.Infinity.Nexus.Mod.item.custom.*;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -31,6 +32,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> BRASS_INGOT = ITEMS.register("brass_ingot",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_INGOT = ITEMS.register("bronze_ingot",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot",() -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GRAPHITE_INGOT = ITEMS.register("graphite_ingot",() -> new Item(new Item.Properties()));
 
 
     public static final RegistryObject<Item> INFINITY_NUGGET = ITEMS.register("infinity_nugget",() -> new Item(new Item.Properties()));
@@ -62,6 +64,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> BRASS_DUST = ITEMS.register("brass_dust",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_DUST = ITEMS.register("bronze_dust",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> STEEL_DUST = ITEMS.register("steel_dust",() -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GRAPHITE_DUST = ITEMS.register("graphite_dust",() -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> RAW_INFINITY = ITEMS.register("raw_infinity",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RAW_LEAD = ITEMS.register("raw_lead",() -> new Item(new Item.Properties()));
@@ -104,6 +107,12 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> INFINITY_CHESTPLATE = ITEMS.register("infinity_chestplate", () -> new InfinityArmorItem(ModArmorMaterials.INFINITY, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()));
     public static final RegistryObject<Item> INFINITY_LEGGINGS = ITEMS.register("infinity_leggings", () -> new InfinityArmorItem(ModArmorMaterials.INFINITY, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()));
     public static final RegistryObject<Item> INFINITY_BOOTS = ITEMS.register("infinity_boots", () -> new InfinityArmorItem(ModArmorMaterials.INFINITY, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()));
+
+    public static final RegistryObject<Item> CARBON_HELMET = ITEMS.register("carbon_helmet", () -> new CarbonArmorItem(ModArmorMaterials.CARBON, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> CARBON_CHESTPLATE = ITEMS.register("carbon_chestplate", () -> new CarbonArmorItem(ModArmorMaterials.CARBON, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> CARBON_LEGGINGS = ITEMS.register("carbon_leggings", () -> new CarbonArmorItem(ModArmorMaterials.CARBON, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> CARBON_BOOTS = ITEMS.register("carbon_boots", () -> new CarbonArmorItem(ModArmorMaterials.CARBON, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
+
 
     public static final RegistryObject<Item> IMPERIAL_INFINITY_SWORD = ITEMS.register("imperial_infinity_sword",
             () -> new ModSword(ModToolTiers.IMPERIAL, 50, 1,
@@ -187,6 +196,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> SOLAR_PANE_ADVANCED = ITEMS.register("solar_pane_advanced", () -> new SolarUpgrade(new Item.Properties().rarity(Rarity.UNCOMMON), 73));
     public static final RegistryObject<Item> SOLAR_PANE_ULTIMATE = ITEMS.register("solar_pane_ultimate", () -> new SolarUpgrade(new Item.Properties().rarity(Rarity.RARE), 648));
     public static final RegistryObject<Item> SOLAR_PANE_QUANTUM = ITEMS.register("solar_pane_quantum", () -> new SolarUpgrade(new Item.Properties().rarity(Rarity.EPIC), 5832));
+
     public static final RegistryObject<Item> STARCH = ITEMS.register("starch", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> STRAINER = ITEMS.register("strainer", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PLASTIC_GOO = ITEMS.register("plastic_goo", () -> new Item(new Item.Properties()));

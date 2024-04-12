@@ -62,6 +62,11 @@
   "tooltip.infinity_nexus_mod.infinity_paxel":  "§kWEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
   "item.infinity_nexus_mod.infinity_bow": "Infinity Bow",
 
+  "item.infinity_nexus_mod.carbon_helmet": "Carbon Helmet",
+  "item.infinity_nexus_mod.carbon_chestplate": "Carbon Chestplate",
+  "item.infinity_nexus_mod.carbon_leggings": "Carbon Leggings",
+  "item.infinity_nexus_mod.carbon_boots": "Carbon Boots",
+
   "item.infinity_nexus_mod.purple_infinity_3d_sword": "Purple Infinity Sword",
   "tooltip.infinity_nexus_mod.purple_infinity_3d_sword":  "§eInflict effects §7Weakness §eand §9Wither §eon hit",
 
@@ -224,6 +229,9 @@
 
   "fluid_type.infinity_nexus_mod.sugarcane_juice": "Sugarcane Juice",
   "item.infinity_nexus_mod.bucket_sugarcane_juice": "Bucket Sugarcane Juice",
+
+  "fluid_type.infinity_nexus_mod.potato_juice": "Potato Juice",
+  "item.infinity_nexus_mod.bucket_potato_juice": "Bucket Potato Juice",
 
   "fluid_type.infinity_nexus_mod.experience": "Experience",
   "item.infinity_nexus_mod.bucket_experience": "Bucket Experience",
@@ -396,10 +404,16 @@
 
   "item.infinity_nexus_mod.solar_core": "Solar Core",
   "item.infinity_nexus_mod.advanced_solar_core": "Advanced Solar Core",
+
   "item.infinity_nexus_mod.plastic": "Bio Plastic",
   "item.infinity_nexus_mod.plastic_goo": "Plastic Ball",
-
   "item.infinity_nexus_mod.starch": "Starch",
-  "item.infinity_nexus_mod.strainer": "Strainer"
+  "item.infinity_nexus_mod.strainer": "Strainer",
+  "item.infinity_nexus_mod.glycerin": "Glycerin",
+
+  "block.infinity_nexus_mod.display": "Item Display",
+  "item.infinity_nexus_mod.graphite_ingot": "Graphite",
+  "item.infinity_nexus_mod.graphite_dust": "Graphite Dust",
+  "item.infinity_nexus_mod.carbon_plate": "Carbon Plate"
 
 }

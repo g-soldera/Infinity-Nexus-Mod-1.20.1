@@ -12,7 +12,7 @@
     }
   ],
   "output": {
-    "item": "minecraft:lapis",
+    "item": "minecraft:lapis_lazuli",
     "count": 6
   }
 }

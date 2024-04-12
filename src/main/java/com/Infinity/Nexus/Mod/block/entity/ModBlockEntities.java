@@ -59,6 +59,9 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<SolarBlockEntity>> SOLAR_BE =
             BLOCK_ENTITY.register("solar_block_entity", () ->
                     BlockEntityType.Builder.of(SolarBlockEntity::new, ModBlocksAdditions.SOLAR.get()).build(null));
+    public static final RegistryObject<BlockEntityType<DisplayBlockEntity>> DISPLAY_BE =
+            BLOCK_ENTITY.register("display_block_entity", () ->
+                    BlockEntityType.Builder.of(DisplayBlockEntity::new, ModBlocksAdditions.DISPLAY.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITY.register(eventBus);

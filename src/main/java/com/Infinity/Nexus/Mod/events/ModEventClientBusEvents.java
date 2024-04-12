@@ -2,6 +2,7 @@ package com.Infinity.Nexus.Mod.events;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
+import com.Infinity.Nexus.Mod.block.entity.renderer.DisplayBlockEntityRenderer;
 import com.Infinity.Nexus.Mod.block.entity.renderer.FactoryBlockEntityRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -15,6 +16,9 @@ public class ModEventClientBusEvents {
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.FACTORY_BE.get(),
                 FactoryBlockEntityRenderer::new);
+
+        event.registerBlockEntityRenderer(ModBlockEntities.DISPLAY_BE.get(),
+                DisplayBlockEntityRenderer::new);
 
     }
 }

@@ -154,7 +154,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.YELLOW_LIGHT_CRYSTAL.get()).pattern("AAA").pattern("ABA").pattern("CCC").define('A', Blocks.GLASS).define('B', ModCrystalItems.AMBER_CRYSTAL.get()).define('C', Blocks.QUARTZ_SLAB).unlockedBy("has_yellow_light_crystal", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.YELLOW_LIGHT_CRYSTAL.get()).build())).save(pWriter, "yellow_light_crystal");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.PURPLE_LIGHT_CRYSTAL.get()).pattern("AAA").pattern("ABA").pattern("CCC").define('A', Blocks.GLASS).define('B', ModCrystalItems.DEMETRIUM_CRYSTAL.get()).define('C', Blocks.QUARTZ_SLAB).unlockedBy("has_purple_light_crystal", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.PURPLE_LIGHT_CRYSTAL.get()).build())).save(pWriter, "purple_light_crystal");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.ORANGE_LIGHT_CRYSTAL.get()).pattern("AAA").pattern("ABA").pattern("CCC").define('A', Blocks.GLASS).define('B', ModCrystalItems.CITRIUM_CRYSTAL.get()).define('C', Blocks.QUARTZ_SLAB).unlockedBy("has_orange_light_crystal", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.ORANGE_LIGHT_CRYSTAL.get()).build())).save(pWriter, "orange_light_crystal");
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.PINK_LIGHT_CRYSTAL.get()).pattern("AAA").pattern("ABA").pattern("CCC").define('A', Blocks.GLASS).define('B', ModCrystalItems.AGATE_CRYSTAL.get()).define('C', Blocks.QUARTZ_SLAB).unlockedBy("has_pink_light_crystal", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.WHITE_LIGHT_CRYSTAL.get()).build())).save(pWriter, "pink_light_crystal");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.PINK_LIGHT_CRYSTAL.get()).pattern("AAA").pattern("ABA").pattern("CCC").define('A', Blocks.GLASS).define('B', ModCrystalItems.AGATE_CRYSTAL.get()).define('C', Blocks.QUARTZ_SLAB).unlockedBy("has_pink_light_crystal", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.PINK_LIGHT_CRYSTAL.get()).build())).save(pWriter, "pink_light_crystal");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.WHITE_LIGHT_CRYSTAL.get()).pattern("AAA").pattern("ABA").pattern("CCC").define('A', Blocks.GLASS).define('B', Items.AMETHYST_SHARD).define('C', Blocks.QUARTZ_SLAB).unlockedBy("has_white_light_crystal", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.WHITE_LIGHT_CRYSTAL.get()).build())).save(pWriter, "white_light_crystal");
 
         //infinity
@@ -240,7 +240,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         nineBlockStorageRecipes(pWriter, RecipeCategory.MISC, ModItemsAdditions.SILVER_NUGGET.get(), RecipeCategory.MISC, ModItemsAdditions.SILVER_INGOT.get());
         nineBlockStorageRecipes(pWriter, RecipeCategory.MISC, ModItemsAdditions.BRASS_NUGGET.get(), RecipeCategory.MISC, ModItemsAdditions.BRASS_INGOT.get());
         nineBlockStorageRecipes(pWriter, RecipeCategory.MISC, ModItemsAdditions.STEEL_NUGGET.get(), RecipeCategory.MISC, ModItemsAdditions.STEEL_INGOT.get());
-        nineBlockStorageRecipes(pWriter, RecipeCategory.MISC, ModItemsAdditions.BRONZE_INGOT.get(), RecipeCategory.MISC, ModItemsAdditions.BRONZE_NUGGET.get());
+        nineBlockStorageRecipes(pWriter, RecipeCategory.MISC, ModItemsAdditions.BRONZE_NUGGET.get(), RecipeCategory.MISC, ModItemsAdditions.BRONZE_INGOT.get());
 
         oreSmelting(pWriter, LEAD_SMELTING, RecipeCategory.MISC, ModItemsAdditions.LEAD_INGOT.get(), 0.25f, 200, "lead_ingot");
         oreSmelting(pWriter, ALUMINUM_SMELTING, RecipeCategory.MISC, ModItemsAdditions.ALUMINUM_INGOT.get(), 0.25f, 200, "aluminum_ingot");
@@ -249,6 +249,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         oreSmelting(pWriter, ZINC_SMELTING, RecipeCategory.MISC, ModItemsAdditions.ZINC_INGOT.get(), 0.25f, 200, "zinc_ingot");
         oreSmelting(pWriter, URANIUM_SMELTING, RecipeCategory.MISC, ModItemsAdditions.URANIUM_INGOT.get(), 0.25f, 200, "uranium_ingot");
         oreSmelting(pWriter, SILVER_SMELTING, RecipeCategory.MISC, ModItemsAdditions.SILVER_INGOT.get(), 0.25f, 200, "silver_ingot");
+        oreSmelting(pWriter, List.of(Items.COAL), RecipeCategory.MISC, ModItemsAdditions.GRAPHITE_INGOT.get(), 0.25f, 200, "graphite_ingot");
 
 
         oreBlasting(pWriter, LEAD_SMELTING, RecipeCategory.MISC, ModItemsAdditions.LEAD_INGOT.get(), 0.25f, 100, "lead_ingot");

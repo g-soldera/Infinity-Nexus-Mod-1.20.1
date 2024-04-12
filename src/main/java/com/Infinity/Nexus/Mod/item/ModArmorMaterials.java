@@ -19,6 +19,11 @@ public enum ModArmorMaterials implements ArmorMaterial {
             new int[]{15,25,20,15},
             0, SoundEvents.ARMOR_EQUIP_DIAMOND, 0f, 0f, () ->{
         return Ingredient.of(ModItemsAdditions.INFINITY_INGOT.get());
+    }),
+    CARBON("carbon", 150000,
+            new int[]{0,0,0,0}, 80, SoundEvents.ARMOR_EQUIP_NETHERITE, 0f, 0f, () -> {
+        return Ingredient.of(ModItemsProgression.CARBON_PLATE.get());
+
     });
 
     //Boots, Leggings, Chestplate, Helmet

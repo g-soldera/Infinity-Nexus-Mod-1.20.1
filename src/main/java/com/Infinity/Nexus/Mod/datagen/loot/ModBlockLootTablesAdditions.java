@@ -66,6 +66,7 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
 
         this.dropSelf(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get());
         this.dropSelf(ModBlocksAdditions.EXPLORAR_PORTAL.get());
+        this.dropSelf(ModBlocksAdditions.VOXEL_BLOCK.get());
         this.dropSelf(ModBlocksAdditions.ASPHALT.get());
 
         this.dropSelf(ModBlocksAdditions.MOB_CRUSHER.get());
@@ -81,6 +82,7 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksAdditions.RECYCLER.get());
         this.dropSelf(ModBlocksAdditions.MATTER_CONDENSER.get());
         this.dropSelf(ModBlocksAdditions.SOLAR.get());
+        this.dropSelf(ModBlocksAdditions.DISPLAY.get());
 
 
         this.dropSelf(ModBlocksProgression.WOOD_MACHINE_CASING.get());

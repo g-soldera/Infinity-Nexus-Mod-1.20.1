@@ -67,6 +67,7 @@ public class ModBlocksAdditions {
 
     public static final RegistryObject<Block> EXPLORAR_PORTAL_FRAME = registerBlock("explorar_portal_frame", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> EXPLORAR_PORTAL = registerBlock("explorar_portal", () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_PORTAL).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.SPORE_BLOSSOM)));
+    public static final RegistryObject<Block> VOXEL_BLOCK = registerBlock("voxel_cube", () -> new Voxel(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK).strength(3.0f, 6.0f).sound(SoundType.SPORE_BLOSSOM)));
 
     public static final RegistryObject<Block> ASPHALT = registerBlock("asphalt", () -> new Asphalt(BlockBehaviour.Properties.copy(Blocks.LADDER).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> STRUCTURAL_BLOCK = registerBlock("structural_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).replaceable().noLootTable().noOcclusion().noCollission().noParticlesOnBreak()));
@@ -82,6 +83,7 @@ public class ModBlocksAdditions {
     public static final RegistryObject<Block> GENERATOR = registerBlock("generator", () -> new Generator(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Generator.LIT) >= 8 ? 2 : 0).noOcclusion()));
     public static final RegistryObject<Block> RECYCLER = registerBlock("recycler", () -> new Recycler(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(Recycler.LIT) >= 8 ? 2 : 0).noOcclusion()));
     public static final RegistryObject<Block> MATTER_CONDENSER = registerBlock("matter_condenser", () -> new MatterCondenser(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(MatterCondenser.LIT) >= 8 ? 2 : 0).noOcclusion()));
+    public static final RegistryObject<Block> DISPLAY = registerBlock("display", () -> new Display(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).noOcclusion()));
 
     public static final RegistryObject<Block> SOLAR = registerBlock("solar", () -> new Solar(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(1.0f, 6.0f).lightLevel((state) -> state.getValue(Solar.LIT) > 0 ? 2 : 0).noOcclusion()));
     public static final RegistryObject<Block> FERMENTATION_BARREL = registerBlock("fermentation_barrel", () -> new FermentationBarrel(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).strength(1.0f, 6.0f).noOcclusion()));

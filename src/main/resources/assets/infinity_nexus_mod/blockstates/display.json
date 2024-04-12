@@ -1,0 +1,17 @@
+
+{
+  "variants":{
+    "facing=north,lit=0":{"model": "infinity_nexus_mod:block/display_block"},
+    "facing=east,lit=0":{"model": "infinity_nexus_mod:block/display_block", "y": 90},
+    "facing=south,lit=0":{"model": "infinity_nexus_mod:block/display_block", "y": 180},
+    "facing=west,lit=0":{"model": "infinity_nexus_mod:block/display_block", "y": 270},
+    "facing=north,lit=1":{"model": "infinity_nexus_mod:block/display_tool"},
+    "facing=east,lit=1":{"model": "infinity_nexus_mod:block/display_tool", "y": 90},
+    "facing=south,lit=1":{"model": "infinity_nexus_mod:block/display_tool", "y": 180},
+    "facing=west,lit=1":{"model": "infinity_nexus_mod:block/display_tool", "y": 270},
+    "facing=north,lit=2":{"model": "infinity_nexus_mod:block/display_item"},
+    "facing=east,lit=2":{"model": "infinity_nexus_mod:block/display_item", "y": 90},
+    "facing=south,lit=2":{"model": "infinity_nexus_mod:block/display_item", "y": 180},
+    "facing=west,lit=2":{"model": "infinity_nexus_mod:block/display_item", "y": 270}
+  }
+}

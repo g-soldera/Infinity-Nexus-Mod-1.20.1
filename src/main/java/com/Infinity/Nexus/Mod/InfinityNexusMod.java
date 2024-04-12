@@ -150,6 +150,7 @@ public class InfinityNexusMod
             ItemBlockRenderTypes.setRenderLayer(ModFluids.STARLIQUID_FLOWING.get(), RenderType.translucent());
 
             ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.STRUCTURAL_BLOCK.get(), RenderType.cutoutMipped());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.VOXEL_BLOCK.get(), RenderType.cutoutMipped());
 
             ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.RED_LIGHT_CRYSTAL.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.BLUE_LIGHT_CRYSTAL.get(), RenderType.translucent());

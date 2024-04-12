@@ -35,6 +35,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.RECYCLER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.MATTER_CONDENSER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.FERMENTATION_BARREL.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.DISPLAY.get()));
                         //-------------------------//-------------------------//
                         //Solar
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SOLAR.get()));
@@ -52,6 +53,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRASS_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRONZE_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.STEEL_INGOT.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.GRAPHITE_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.ALUMINUM_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.URANIUM_INGOT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_INGOT.get()));
@@ -81,6 +83,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRASS_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BRONZE_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.STEEL_DUST.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.GRAPHITE_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.ALUMINUM_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.URANIUM_DUST.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_DUST.get()));
@@ -153,6 +156,11 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_CHESTPLATE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_BOOTS.get()));
+                        //carbon armor
+                        pOutput.accept(new ItemStack(ModItemsAdditions.CARBON_HELMET.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.CARBON_CHESTPLATE.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.CARBON_LEGGINGS.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.CARBON_BOOTS.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_SINGULARITY.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.PORTAL_ACTIVATOR.get()));
@@ -218,6 +226,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsProgression.BIO_MASS.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.STABLE_MATTER.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.PLASTIC.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.CARBON_PLATE.get()));
 
                         //-------------------------//-------------------------//
                     })

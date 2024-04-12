@@ -2,6 +2,8 @@ package com.Infinity.Nexus.Mod.events;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -16,7 +18,7 @@ public class PlayerDamageEvent {
     public static void onPlayerHurt(LivingHurtEvent event) {
         if (event.getEntity() instanceof Player player) {
             try {
-                if(hasFullSuitOfArmorOn(player)){
+                if(hasFullImperialArmor(player)){
                     if (event.getSource().getEntity() instanceof Player enemy) {
                         ItemStack weapon = enemy.getMainHandItem();
                         if (!isCorrectWeapon(weapon)) {
@@ -28,6 +30,17 @@ public class PlayerDamageEvent {
                         }
                     }else{
                         event.setCanceled(true);
+                    }
+                }else if(hasFullCarbonArmor(player)) {
+                    float damage = event.getAmount();
+                    float hurtDamage = damage / 4;
+
+                    for(int i = 0; i < 4; i++){
+                        int durability = player.getInventory().getArmor(i).getDamageValue();
+                        if(durability >= 1){
+                            player.getInventory().getArmor(i).hurt((int) hurtDamage, player.level().random, null);
+                            event.setAmount(damage/10);
+                        }
                     }
                 }
             } catch (Exception e) {
@@ -46,7 +59,7 @@ public class PlayerDamageEvent {
                 || weapon.getItem() == ModItemsAdditions.IMPERIAL_INFINITY_BOW.get()
                 || weapon.getItem() == ModItemsAdditions.IMPERIAL_INFINITY_HOE.get();
     }
-    private static boolean hasFullSuitOfArmorOn(Player player) {
+    private static boolean hasFullImperialArmor(Player player) {
         Item boots = player.getInventory().getArmor(0).getItem();
         Item leggings = player.getInventory().getArmor(1).getItem();
         Item breastplate = player.getInventory().getArmor(2).getItem();
@@ -56,6 +69,18 @@ public class PlayerDamageEvent {
                         && leggings == ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS.get()
                         && breastplate == ModItemsAdditions.IMPERIAL_INFINITY_CHESTPLATE.get()
                         && helmet == ModItemsAdditions.IMPERIAL_INFINITY_HELMET.get();
+        return armor;
+    }
+    private static boolean hasFullCarbonArmor(Player player) {
+        Item boots = player.getInventory().getArmor(0).getItem();
+        Item leggings = player.getInventory().getArmor(1).getItem();
+        Item breastplate = player.getInventory().getArmor(2).getItem();
+        Item helmet = player.getInventory().getArmor(3).getItem();
+        boolean armor =
+                boots == ModItemsAdditions.CARBON_BOOTS.get()
+                        && leggings == ModItemsAdditions.CARBON_LEGGINGS.get()
+                        && breastplate == ModItemsAdditions.CARBON_CHESTPLATE.get()
+                        && helmet == ModItemsAdditions.CARBON_HELMET.get();
         return armor;
     }
 }

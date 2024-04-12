@@ -60,6 +60,11 @@
   "tooltip.infinity_nexus_mod.infinity_paxel": "§kWEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
   "item.infinity_nexus_mod.infinity_bow": "Arco de Infinity",
 
+  "item.infinity_nexus_mod.carbon_helmet": "Elmo de Carbono",
+  "item.infinity_nexus_mod.carbon_chestplate": "Peitoral de Carbono",
+  "item.infinity_nexus_mod.carbon_leggings": "Perneiras de Carbono",
+  "item.infinity_nexus_mod.carbon_boots": "Botas de Carbono",
+
   "item.infinity_nexus_mod.purple_infinity_3d_sword": "Espada Roxa de Infinity",
   "tooltip.infinity_nexus_mod.purple_infinity_3d_sword": "§eCausa os efeitos §7Fraqueza §ee §9Definhamento §equando atinge",
 
@@ -223,6 +228,9 @@
   "fluid_type.infinity_nexus_mod.sugarcane_juice": "Guarapa",
   "item.infinity_nexus_mod.bucket_sugarcane_juice": "Balde de Garapa",
 
+  "fluid_type.infinity_nexus_mod.potato_juice": "Suco de Batata",
+  "item.infinity_nexus_mod.bucket_potato_juice": "Balde de Suco de Batata",
+
   "fluid_type.infinity_nexus_mod.experience": "Experiência",
   "item.infinity_nexus_mod.bucket_experience": "Balde de Experiência",
 
@@ -361,9 +369,15 @@
 
   "item.infinity_nexus_mod.solar_core": "Nucleo Solar",
   "item.infinity_nexus_mod.advanced_solar_core": "Nucleo Solar Avançado",
+
   "item.infinity_nexus_mod.plastic": "Plástico Biodegradavel",
   "item.infinity_nexus_mod.plastic_goo": "Gosma Plástica",
-
   "item.infinity_nexus_mod.starch": "Amido",
-  "item.infinity_nexus_mod.strainer": "Coador"
+  "item.infinity_nexus_mod.strainer": "Coador",
+  "item.infinity_nexus_mod.glycerin": "Glicerina",
+
+  "block.infinity_nexus_mod.display": "Exibidor de itens",
+  "item.infinity_nexus_mod.graphite_ingot": "Graphite",
+  "item.infinity_nexus_mod.graphite_dust": "Graphite em Pó",
+  "item.infinity_nexus_mod.carbon_plate": "Pláca de Carbono"
 }
