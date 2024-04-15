@@ -5,8 +5,13 @@ import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.FermentationBarrelRecipes;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelMenu;
 import com.Infinity.Nexus.Mod.utils.ModUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -319,7 +324,6 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
                 this.FLUID_STORAGE_INPUT.drain(recipeFluidInputAmount, IFluidHandler.FluidAction.EXECUTE);
 
                 itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(stack, recipeResultCount + itemHandler.getStackInSlot(OUTPUT_SLOT).getCount()));
-                itemHandler.getStackInSlot(INPUT_SLOT).shrink(recipeInputCount);
             }
         }else{
             int recipeFluidOutputAmount = recipe.get().getOutputFluidStack().getAmount();
@@ -329,6 +333,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
             this.FLUID_STORAGE_INPUT.fill(recipeFluidOutput, IFluidHandler.FluidAction.EXECUTE);
 
             itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(stack, recipeResultCount + itemHandler.getStackInSlot(OUTPUT_SLOT).getCount()));
+            itemHandler.getStackInSlot(INPUT_SLOT).shrink(recipeInputCount);
         }
 
         level.playSound(null, this.getBlockPos(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -371,6 +376,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
         return progress >= maxProgress;
     }
     private void increaseCraftingProgress() {
+        level.addAlwaysVisibleParticle(ParticleTypes.SMOKE, this.worldPosition.getX() + 0.5D, this.worldPosition.getY() + 1.5D, this.worldPosition.getZ() + 0.5D, 1.0D, 1.0D, 1.0D);
         progress ++;
     }
 

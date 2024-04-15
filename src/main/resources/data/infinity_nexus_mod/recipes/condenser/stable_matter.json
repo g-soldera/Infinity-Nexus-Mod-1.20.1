@@ -1,0 +1,18 @@
+{
+  "type": "infinity_nexus_mod:matter_condenser",
+  "energy": 107374182,
+  "ATENTION": "THIS IS NOT A COMMON RECIPE, DONT REALLY USE IT",
+  "ingredients": [
+    {
+      "tag": "infinity_nexus_mod:up_1"
+    },
+    {
+      "item": "infinity_nexus_mod:residual_matter",
+      "count": 1
+    }
+  ],
+  "output": {
+    "item": "infinity_nexus_mod:stable_matter",
+    "count": 1
+  }
+}

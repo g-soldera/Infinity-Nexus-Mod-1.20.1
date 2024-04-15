@@ -201,6 +201,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> STRAINER = ITEMS.register("strainer", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PLASTIC_GOO = ITEMS.register("plastic_goo", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GLYCERIN = ITEMS.register("glycerin", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SLICED_APPLE = ITEMS.register("sliced_apple", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> ASGREON_SPAWN_EGG = ITEMS.register("asgreon_spawn_egg", () -> new ForgeSpawnEggItem( ModEntities.ASGREON, 0x7e9680, 0xc5d1c5,new Item.Properties()));
     public static void register(IEventBus eventBus) {

@@ -132,6 +132,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.STRAINER);
         simpleItem(ModItemsAdditions.PLASTIC_GOO);
         simpleItem(ModItemsAdditions.GLYCERIN);
+        simpleItem(ModItemsAdditions.SLICED_APPLE);
 
         simpleItem(ModItemsAdditions.BUCKET_LUBRICANT);
         simpleItem(ModItemsAdditions.BUCKET_ETHANOL);

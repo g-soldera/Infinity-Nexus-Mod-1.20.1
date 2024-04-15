@@ -178,6 +178,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.STRAINER.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.PLASTIC_GOO.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.GLYCERIN.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.SLICED_APPLE.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.REDSTONE_COMPONENT.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.BASIC_COMPONENT.get()));

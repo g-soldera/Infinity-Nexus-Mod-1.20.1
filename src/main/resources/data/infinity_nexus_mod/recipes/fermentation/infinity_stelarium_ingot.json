@@ -8,7 +8,7 @@
   "fluidOutputAmount": 0,
   "ingredients": [
     {
-      "item": "minecraft:glass_bottle",
+      "item": "infinity_nexus_mod:infinity_ingot",
       "count": 1
     }
   ],

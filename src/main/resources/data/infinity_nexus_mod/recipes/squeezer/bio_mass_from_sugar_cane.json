@@ -2,7 +2,7 @@
   "type": "infinity_nexus_mod:squeezing",
   "energy": 1200,
   "duration": 130,
-  "fluidType": "infinity_nexus_mod:ethanol_water_fluid",
+  "fluidType": "infinity_nexus_mod:sugarcane_juice_water_fluid",
   "fluidAmount": 15,
   "ingredients": [
     {

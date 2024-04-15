@@ -3,9 +3,11 @@ package com.Infinity.Nexus.Mod.compat;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.item.ModCrystalItems;
+import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.recipe.*;
 import com.Infinity.Nexus.Mod.screen.assembler.AssemblerScreen;
+import com.Infinity.Nexus.Mod.screen.condenser.CondenserScreen;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherScreen;
 import com.Infinity.Nexus.Mod.screen.factory.FactoryScreen;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelScreen;
@@ -40,6 +42,7 @@ public class JEIModPlugin implements IModPlugin {
         registration.addRecipeCategories(new FactoryCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new SqueezerCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new SmelteryCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new MatterCondenserCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new FermentationBarrelCategory(registration.getJeiHelpers().getGuiHelper()));
 
     }
@@ -55,6 +58,7 @@ public class JEIModPlugin implements IModPlugin {
         List<FactoryRecipes> factoryRecipes = recipeManager.getAllRecipesFor(FactoryRecipes.Type.INSTANCE);
         List<SqueezerRecipes> squeezerRecipes = recipeManager.getAllRecipesFor(SqueezerRecipes.Type.INSTANCE);
         List<SmelteryRecipes> smelteryRecipes = recipeManager.getAllRecipesFor(SmelteryRecipes.Type.INSTANCE);
+        List<MatterCondenserRecipes> matterCondenserRecipes = recipeManager.getAllRecipesFor(MatterCondenserRecipes.Type.INSTANCE);
         List<FermentationBarrelRecipes> fermentationBarrelRecipes = recipeManager.getAllRecipesFor(FermentationBarrelRecipes.Type.INSTANCE);
 
         try {
@@ -70,6 +74,8 @@ public class JEIModPlugin implements IModPlugin {
         System.out.println("Registry: " + squeezerRecipes.size() +" "+ Component.translatable("block.infinity_nexus_mod.squeezer"));
         registration.addRecipes(SmelteryCategory.SMELTERY_TYPE, smelteryRecipes);
         System.out.println("Registry: " + smelteryRecipes.size() +" "+ Component.translatable("block.infinity_nexus_mod.smeltery"));
+        registration.addRecipes(MatterCondenserCategory.MATTER_CONDENSER_TYPE, matterCondenserRecipes);
+        System.out.println("Registry: " + matterCondenserRecipes.size() +" "+ Component.translatable("block.infinity_nexus_mod.matter_condenser"));
         registration.addRecipes(FermentationBarrelCategory.FERMENTATION_BARREL_TYPE, fermentationBarrelRecipes);
         System.out.println("Registry: " + fermentationBarrelRecipes.size() +" "+ Component.translatable("block.infinity_nexus_mod.fermentation_barrel"));
         }catch (Exception ignored){
@@ -83,6 +89,7 @@ public class JEIModPlugin implements IModPlugin {
         registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.GENERATOR.get()), Component.translatable("infinity_nexus_mod.jei_information"));
         registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.MOB_CRUSHER.get()), Component.translatable("infinity_nexus_mod.jei_information"));
         registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.MINER.get()), Component.translatable("infinity_nexus_mod.jei_information"));
+        registration.addItemStackInfo(new ItemStack(ModBlocksAdditions.MATTER_CONDENSER.get()), Component.translatable("infinity_nexus_mod.jei_information"));
 
         registration.addItemStackInfo(new ItemStack(ModCrystalItems.AMBER_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §51"));
         registration.addItemStackInfo(new ItemStack(ModCrystalItems.MARINE_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §52"));
@@ -92,8 +99,7 @@ public class JEIModPlugin implements IModPlugin {
         registration.addItemStackInfo(new ItemStack(ModCrystalItems.AGATE_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §56"));
         registration.addItemStackInfo(new ItemStack(ModCrystalItems.DARIUM_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §57"));
 
-        registration.addItemStackInfo(new ItemStack(ModItemsProgression.STABLE_MATTER.get()), Component.translatable("item.infinity_nexus.stable_matter").append(" §5107MFE"));
-
+        registration.addItemStackInfo(new ItemStack(ModItemsProgression.RESIDUAL_MATTER.get()), Component.literal("Este item é obtido ao destruir items no Reciclador."));
     }
 
     @Override
@@ -109,6 +115,7 @@ public class JEIModPlugin implements IModPlugin {
         registration.addRecipeCatalyst(ModBlocksAdditions.FACTORY.get().asItem().getDefaultInstance(), FactoryCategory.FACTORY_TYPE);
         registration.addRecipeCatalyst(ModBlocksAdditions.SQUEEZER.get().asItem().getDefaultInstance(), SqueezerCategory.SQUEEZER_TYPE);
         registration.addRecipeCatalyst(ModBlocksAdditions.SMELTERY.get().asItem().getDefaultInstance(), SmelteryCategory.SMELTERY_TYPE);
+        registration.addRecipeCatalyst(ModBlocksAdditions.MATTER_CONDENSER.get().asItem().getDefaultInstance(), MatterCondenserCategory.MATTER_CONDENSER_TYPE);
         registration.addRecipeCatalyst(ModBlocksAdditions.FERMENTATION_BARREL.get().asItem().getDefaultInstance(), FermentationBarrelCategory.FERMENTATION_BARREL_TYPE);
     }
     @Override
@@ -120,6 +127,7 @@ public class JEIModPlugin implements IModPlugin {
        registration.addRecipeClickArea(FactoryScreen.class,162, -38,8,9, FactoryCategory.FACTORY_TYPE);
        registration.addRecipeClickArea(SqueezerScreen.class,162, -10,8,9, SqueezerCategory.SQUEEZER_TYPE);
        registration.addRecipeClickArea(SmelteryScreen.class,162, -10,8,9, SmelteryCategory.SMELTERY_TYPE);
+       registration.addRecipeClickArea(CondenserScreen.class,162, -10,8,9, MatterCondenserCategory.MATTER_CONDENSER_TYPE);
        registration.addRecipeClickArea(FermentationBarrelScreen.class,162, -10,8,9, FermentationBarrelCategory.FERMENTATION_BARREL_TYPE);
     }
 

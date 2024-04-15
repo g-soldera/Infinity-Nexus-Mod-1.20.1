@@ -224,8 +224,8 @@
   "fluid_type.infinity_nexus_mod.ethanol": "Fluid Ethanol",
   "item.infinity_nexus_mod.bucket_ethanol": "Bucket Ethanol",
 
-  "fluid_type.infinity_nexus_mod.vinegar": "Vinegar",
-  "item.infinity_nexus_mod.bucket_vinegar": "Bucket Vinegar",
+  "fluid_type.infinity_nexus_mod.vinegar": "Apple Vinegar",
+  "item.infinity_nexus_mod.bucket_vinegar": "Bucket Apple Vinegar",
 
   "fluid_type.infinity_nexus_mod.sugarcane_juice": "Sugarcane Juice",
   "item.infinity_nexus_mod.bucket_sugarcane_juice": "Bucket Sugarcane Juice",
@@ -244,7 +244,7 @@
 
   "item.infinity_nexus_mod.alcohol_bottle": "Alcohol",
   "item.infinity_nexus_mod.alcohol_bottle.effect.empty": "Alcohol",
-  "item.infinity_nexus_mod.vinegar_bottle": "Vinegar",
+  "item.infinity_nexus_mod.vinegar_bottle": "Apple Vinegar",
   "item.infinity_nexus_mod.sugarcane_juice_bottle": "Sugarcane Juice",
   "item.infinity_nexus_mod.wine_bottle": "Wine",
 
@@ -410,6 +410,7 @@
   "item.infinity_nexus_mod.starch": "Starch",
   "item.infinity_nexus_mod.strainer": "Strainer",
   "item.infinity_nexus_mod.glycerin": "Glycerin",
+  "item.infinity_nexus_mod.sliced_apple": "Sliced Apple",
 
   "block.infinity_nexus_mod.display": "Item Display",
   "item.infinity_nexus_mod.graphite_ingot": "Graphite",

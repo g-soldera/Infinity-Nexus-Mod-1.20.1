@@ -3,6 +3,9 @@ package com.Infinity.Nexus.Mod.block.entity;
 import com.Infinity.Nexus.Mod.block.custom.MatterCondenser;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
+import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
+import com.Infinity.Nexus.Mod.recipe.MatterCondenserRecipes;
+import com.Infinity.Nexus.Mod.recipe.PressRecipes;
 import com.Infinity.Nexus.Mod.screen.condenser.CondenserMenu;
 import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.utils.ModUtils;
@@ -39,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
@@ -246,18 +250,21 @@ public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvi
         }
         increaseCatalystLevel();
 
-        int machineLevel = getMachineLevel()-1 <= 0 ? 0 : getMachineLevel()-1; ;
+        int machineLevel = getMachineLevel()-1 <= 0 ? 0 : getMachineLevel()-1;
         pLevel.setBlock(pPos, pState.setValue(MatterCondenser.LIT, machineLevel), 3);
 
         if (isRedstonePowered(pPos)) {
             return;
         }
-
         if (!hasEnoughEnergy()) {
             return;
         }
 
         if(!hasFreeSlot()){
+            return;
+        }
+
+        if(!(itemHandler.getStackInSlot(COMPONENT_SLOT).getItem() instanceof ComponentItem)){
             return;
         }
 
@@ -270,7 +277,6 @@ public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvi
             resetProgress();
         }
     }
-
     private boolean hasFreeSlot() {
         return canInsertItemIntoOutputSlot(ModItemsProgression.STABLE_MATTER.get()) && canInsertAmountIntoOutputSlot(1);
     }

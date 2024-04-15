@@ -1,7 +1,7 @@
 {
   "type": "infinity_nexus_mod:fermentation",
   "duration": 240,
-  "fluidInputType": "infinity_nexus_mod:ethanol_water_fluid",
+  "fluidInputType": "infinity_nexus_mod:sugarcane_juice_water_fluid",
   "fluidInputAmount": 250,
   "fermenting": true,
   "fluidOutputType": "minecraft:water",

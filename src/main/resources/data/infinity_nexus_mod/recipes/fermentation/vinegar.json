@@ -1,20 +1,20 @@
 {
   "type": "infinity_nexus_mod:fermentation",
-  "duration": 240,
-  "fluidInputType": "infinity_nexus_mod:vinegar_water_fluid",
-  "fluidInputAmount": 250,
+  "duration": 72000,
+  "fluidInputType": "minecraft:water",
+  "fluidInputAmount": 1000,
   "fermenting": true,
   "fluidOutputType": "minecraft:water",
-  "fluidOutputAmount": 250,
+  "fluidOutputAmount": 5,
   "ingredients": [
     {
-      "item": "infinity_nexus_mod:strainer",
-      "count": 1
+      "item": "infinity_nexus_mod:sliced_apple",
+      "count": 16
     }
   ],
   "output":
   {
     "item": "infinity_nexus_mod:vinegar_bottle",
-    "count": 1
+    "count": 4
   }
 }

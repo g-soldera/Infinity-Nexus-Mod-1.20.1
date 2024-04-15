@@ -222,8 +222,8 @@
   "fluid_type.infinity_nexus_mod.ethanol": "Alcool",
   "item.infinity_nexus_mod.bucket_ethanol": "Balde de Alcool",
 
-  "fluid_type.infinity_nexus_mod.vinegar": "Vinho",
-  "item.infinity_nexus_mod.bucket_vinegar": "Balde de Vinho",
+  "fluid_type.infinity_nexus_mod.vinegar": "Vinagre de Maçã",
+  "item.infinity_nexus_mod.bucket_vinegar": "Balde de Vinagre de Maçã",
 
   "fluid_type.infinity_nexus_mod.sugarcane_juice": "Guarapa",
   "item.infinity_nexus_mod.bucket_sugarcane_juice": "Balde de Garapa",
@@ -237,10 +237,14 @@
   "fluid_type.infinity_nexus_mod.starliquid": "Estrela Liquida",
   "item.infinity_nexus_mod.bucket_starliquid": "Balde de Estrela Liquida",
 
+
+  "fluid_type.infinity_nexus_mod.wine": "Vinho",
+  "item.infinity_nexus_mod.bucket_wine": "Balde de Vinho",
+
   "item.infinity_nexus_mod.alcohol_bottle": "Alcool",
   "item.infinity_nexus_mod.alcohol_bottle.effect.empty": "Alcool",
   "item.infinity_nexus_mod.wine_bottle": "Vinho",
-  "item.infinity_nexus_mod.vinegar_bottle": "Vinagre",
+  "item.infinity_nexus_mod.vinegar_bottle": "Vinagre de Maçã",
   "item.infinity_nexus_mod.sugarcane_juice_bottle": "Caldo de Cana",
 
   "item.infinity_nexus_mod.bio_mass": "Biomassa",
@@ -375,6 +379,7 @@
   "item.infinity_nexus_mod.starch": "Amido",
   "item.infinity_nexus_mod.strainer": "Coador",
   "item.infinity_nexus_mod.glycerin": "Glicerina",
+  "item.infinity_nexus_mod.sliced_apple": "Maca cortada",
 
   "block.infinity_nexus_mod.display": "Exibidor de itens",
   "item.infinity_nexus_mod.graphite_ingot": "Graphite",

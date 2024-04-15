@@ -230,7 +230,7 @@ public class SolarBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
         int level = getSolarLevel();
-        pLevel.setBlock(pPos, pState.setValue(Solar.LIT, 0), 3);
+        pLevel.setBlock(pPos, pState.setValue(Solar.LIT, level), 3);
 
         if(!hasUpgrade()){
             return;
@@ -249,7 +249,6 @@ public class SolarBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
         generateEnergy();
-        pLevel.setBlock(pPos, pState.setValue(Solar.LIT, level), 3);
         setChanged(pLevel, pPos, pState);
     }
 

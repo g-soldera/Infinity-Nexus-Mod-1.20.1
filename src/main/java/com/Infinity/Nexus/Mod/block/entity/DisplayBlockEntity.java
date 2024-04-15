@@ -134,23 +134,36 @@ public class DisplayBlockEntity extends BlockEntity {
 
     public void setRenderStack(ItemStack itemStack, Player player) {
 
-        if (this.itemHandler.getStackInSlot(0).isEmpty() && !player.getMainHandItem().isEmpty()) {
-            ItemStack stack = itemStack.copy();
-            stack.setCount(1);
-            this.itemHandler.setStackInSlot(0, stack);
-            if (!player.isCreative()) {
-                player.getMainHandItem().shrink(1);
+        if (this.itemHandler.getStackInSlot(0).isEmpty()) {
+            if(!player.getMainHandItem().isEmpty()) {
+                //Slot Vázio
+                //Mão Cheia
+                ItemStack stack = itemStack.copy();
+                this.itemHandler.setStackInSlot(0, stack);
+                level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_STAND_FALL, SoundSource.BLOCKS, 1.0f, 1.0f);
+                if (!player.isCreative()) {
+                    //Não Criativo
+                    player.getMainHandItem().shrink(stack.getCount());
+                }
+                this.setChanged();
             }
-            assert level != null;
-            level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_TURTLE, SoundSource.BLOCKS, 1.0f, 1.0f);
-
-            this.setChanged();
         }else{
-            if(!Screen.hasShiftDown()) {
-                if (player.getMainHandItem().isEmpty() && !this.itemHandler.getStackInSlot(0).isEmpty()) {
-                    this.level.addFreshEntity(new ItemEntity(this.level, player.getX(), player.getY(), player.getZ(), this.itemHandler.getStackInSlot(0).copy()));
+            if(!player.getMainHandItem().isEmpty()) {
+                //Slot Cheio
+                //Mão Cheia
+                ItemStack stack = itemStack.copy();
+                level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY(), player.getZ(), itemHandler.getStackInSlot(0).copy()));
+                this.itemHandler.setStackInSlot(0, stack);
+                level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_STAND_FALL, SoundSource.BLOCKS, 1.0f, 1.0f);
+                if (!player.isCreative()) {
+                    //Não Criativo
+                    player.getMainHandItem().shrink(stack.getCount());
+                }
+                this.setChanged();
+            }else{
+                if(Screen.hasShiftDown()){
+                    level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY(), player.getZ(), itemHandler.getStackInSlot(0).copy()));
                     this.itemHandler.setStackInSlot(0, ItemStack.EMPTY);
-                    level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_STAND_FALL, SoundSource.BLOCKS, 1.0f, 1.0f);
                 }
             }
         }

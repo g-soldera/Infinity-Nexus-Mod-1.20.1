@@ -30,7 +30,9 @@ public class ComponentItem extends Item {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(Component.literal(durability));
-        pTooltipComponents.add(Component.literal("§2Uses:"+ (pStack.getOrCreateTag().contains("isInfinite") ? " §5∞ " : " ") + "§e"+ (pStack.getOrCreateTag().contains("Uses") ? pStack.getOrCreateTag().getInt("Uses") : 10)).append("\n").append(Component.translatable("chat.infinity_nexus_mod.component_install")));
+        if(pStack.getItem() == ModItemsAdditions.ANCESTRAL_COMPONENT.get()) {
+            pTooltipComponents.add(Component.literal("§2Uses:" + (pStack.getOrCreateTag().contains("isInfinite") ? " §5∞ " : " ") + "§e" + (pStack.getOrCreateTag().contains("Uses") ? pStack.getOrCreateTag().getInt("Uses") : 10)).append("\n").append(Component.translatable("chat.infinity_nexus_mod.component_install")));
+        }
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
     @Override

@@ -120,7 +120,7 @@ public class Display extends BaseEntityBlock {
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
-            setStack(pPlayer.getMainHandItem(), (DisplayBlockEntity) pLevel.getBlockEntity(pPos), pPlayer);
+            setStack(pPlayer.getMainHandItem().copy(), (DisplayBlockEntity) pLevel.getBlockEntity(pPos), pPlayer);
         }
 
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
