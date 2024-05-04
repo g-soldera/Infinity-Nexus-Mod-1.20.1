@@ -26,16 +26,18 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.CRUSHER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.PRESS.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ASSEMBLY.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.FACTORY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SQUEEZER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SMELTERY.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.RECYCLER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.GENERATOR.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.MATTER_CONDENSER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.MOB_CRUSHER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.MINER.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.RECYCLER.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.MATTER_CONDENSER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.FERMENTATION_BARREL.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.FACTORY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DISPLAY.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.ENTITY_DISPLAY.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.ENTITY_CENTRALIZER.get()));
                         //-------------------------//-------------------------//
                         //Solar
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SOLAR.get()));

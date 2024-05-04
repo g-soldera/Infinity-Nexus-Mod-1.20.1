@@ -3,7 +3,8 @@
 	"textures": {
 		"1": "minecraft:block/grindstone_side",
 		"2": "minecraft:block/hopper_inside",
-		"4": "minecraft:block/smooth_stone"
+		"4": "minecraft:block/smooth_stone",
+		"particle": "minecraft:block/polished_andesite"
 	},
 	"elements": [
 		{

@@ -1,32 +1,20 @@
 package com.Infinity.Nexus.Mod.block.entity.renderer;
 
-import com.Infinity.Nexus.Mod.block.custom.Display;
-import com.Infinity.Nexus.Mod.block.custom.Factory;
+import com.Infinity.Nexus.Mod.block.custom.ItemDisplay;
 import com.Infinity.Nexus.Mod.block.entity.DisplayBlockEntity;
-import com.Infinity.Nexus.Mod.block.entity.FactoryBlockEntity;
-import com.Infinity.Nexus.Mod.utils.ModTags;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ArmorStandArmorModel;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ArmorStandRenderer;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.phys.AABB;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.Objects;
 
 public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBlockEntity> {
 
@@ -50,7 +38,7 @@ public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBl
                 pPoseStack.pushPose();
                 pPoseStack.translate(0.5, 0.375, 0.5);
                 pPoseStack.scale(0.5001f, 0.5001f, 0.5001f);
-                pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(Display.FACING).toYRot()));
+                pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(ItemDisplay.FACING).toYRot()));
                 pPoseStack.mulPose(Axis.YN.rotationDegrees(180));
 
                 itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(pBlockEntity.getLevel(),
@@ -62,7 +50,7 @@ public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBl
                 pPoseStack.pushPose();
                 pPoseStack.translate(0.5, 0.6, 0.5);
                 pPoseStack.scale(0.8f, 0.8f, 0.8f);
-                pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(Display.FACING).toYRot()));
+                pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(ItemDisplay.FACING).toYRot()));
                 pPoseStack.mulPose(Axis.ZN.rotationDegrees(225));
 
                 itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(pBlockEntity.getLevel(),
@@ -73,7 +61,7 @@ public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBl
                 pPoseStack.pushPose();
                 pPoseStack.translate(0.5, 0.6, 0.5);
                 pPoseStack.scale(0.8f, 0.8f, 0.8f);
-                pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(Display.FACING).toYRot()));
+                pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(ItemDisplay.FACING).toYRot()));
                 pPoseStack.mulPose(Axis.ZN.rotationDegrees(45));
 
                 itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(pBlockEntity.getLevel(),
@@ -83,7 +71,7 @@ public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBl
                 pPoseStack.pushPose();
                 pPoseStack.translate(0.5, 0.4, 0.5);
                 pPoseStack.scale(0.5f, 0.5f, 0.5f);
-                pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(Display.FACING).toYRot()));
+                pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(ItemDisplay.FACING).toYRot()));
                 pPoseStack.mulPose(Axis.XN.rotationDegrees(45));
                 pPoseStack.mulPose(Axis.YN.rotationDegrees(180));
 

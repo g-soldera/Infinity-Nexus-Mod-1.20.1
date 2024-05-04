@@ -415,6 +415,16 @@
   "block.infinity_nexus_mod.display": "Item Display",
   "item.infinity_nexus_mod.graphite_ingot": "Graphite",
   "item.infinity_nexus_mod.graphite_dust": "Graphite Dust",
-  "item.infinity_nexus_mod.carbon_plate": "Carbon Plate"
+  "item.infinity_nexus_mod.carbon_plate": "Carbon Plate",
+  "block.infinity_nexus_mod.entity_centralizer": "Entity Centralizer",
+  "block.infinity_nexus_mod.entity_display": "Entity Display",
+
+  "block.infinity_nexus_mod.voxel_cube": "Voxel Cube",
+  "item.infinity_nexus_mod.voxel_t": "§6Creativity Orb",
+  "item.infinity_nexus_mod.voxel_d": "§7Decorative Orb",
+  "item.infinity_nexus_mod.voxel_n": "§3Technology Orb",
+  "item.infinity_nexus_mod.voxel_s": "§eResourceful Orb",
+  "item.infinity_nexus_mod.voxel_w": "§5Mágic Orb",
+  "item.infinity_nexus_mod.voxel_e": "§2Exploration Orb"
 
 }

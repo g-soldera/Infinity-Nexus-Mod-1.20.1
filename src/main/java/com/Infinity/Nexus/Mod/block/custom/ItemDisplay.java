@@ -2,15 +2,12 @@ package com.Infinity.Nexus.Mod.block.custom;
 
 import com.Infinity.Nexus.Mod.block.entity.DisplayBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -33,10 +30,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-public class Display extends BaseEntityBlock {
+public class ItemDisplay extends BaseEntityBlock {
     public static IntegerProperty LIT = IntegerProperty.create("lit", 0, 4);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public Display(Properties pProperties) {
+    public ItemDisplay(Properties pProperties) {
         super(pProperties);
     }
 
@@ -101,6 +98,17 @@ public class Display extends BaseEntityBlock {
     public BlockState rotate(BlockState pState, Rotation pRotation) {
         return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
     }
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (pState.getBlock() != pNewState.getBlock()) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof DisplayBlockEntity) {
+                ((DisplayBlockEntity) blockEntity).drops();
+            }
+        }
+
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+    }
 
     @Override
     public BlockState mirror(BlockState pState, Mirror pMirror) {
@@ -121,10 +129,11 @@ public class Display extends BaseEntityBlock {
     public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             setStack(pPlayer.getMainHandItem().copy(), (DisplayBlockEntity) pLevel.getBlockEntity(pPos), pPlayer);
+            return InteractionResult.SUCCESS;
         }
-
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
+
 
     private void setStack(ItemStack pStack, DisplayBlockEntity pBlockEntity, Player player) {
         pBlockEntity.setRenderStack(pStack, player);

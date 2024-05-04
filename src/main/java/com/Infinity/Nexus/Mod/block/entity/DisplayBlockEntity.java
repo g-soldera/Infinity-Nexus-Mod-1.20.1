@@ -1,8 +1,6 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
-import com.Infinity.Nexus.Mod.block.custom.Display;
-import com.Infinity.Nexus.Mod.block.custom.Factory;
-import net.minecraft.client.gui.screens.Screen;
+import com.Infinity.Nexus.Mod.block.custom.ItemDisplay;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -91,9 +89,10 @@ public class DisplayBlockEntity extends BlockEntity {
 
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-        inventory.setItem(0, itemHandler.getStackInSlot(0).copy());
-        System.out.println(inventory);
-        Containers.dropContents(this.level, this.getBlockPos(), inventory);
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inventory.setItem(i, itemHandler.getStackInSlot(i));
+        }
+        Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
     @Override
@@ -109,11 +108,6 @@ public class DisplayBlockEntity extends BlockEntity {
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
-        if (pLevel.isClientSide) {
-            return;
-        }
-        setBlockModel(this.itemHandler.getStackInSlot(0));
-        setChanged(pLevel, pPos, pState);
     }
 
     @Nullable
@@ -161,25 +155,26 @@ public class DisplayBlockEntity extends BlockEntity {
                 }
                 this.setChanged();
             }else{
-                if(Screen.hasShiftDown()){
+                if(player.isShiftKeyDown()){
                     level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY(), player.getZ(), itemHandler.getStackInSlot(0).copy()));
                     this.itemHandler.setStackInSlot(0, ItemStack.EMPTY);
                 }
             }
         }
+        setBlockModel(this.itemHandler.getStackInSlot(0));
     }
 
     private void setBlockModel(ItemStack itemStack) {
-        this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(Display.LIT, 4), 3);
+        this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 4), 3);
 
         if(itemStack.getItem() instanceof BlockItem){
-            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(Display.LIT, 0), 3);
+            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 0), 3);
 
         }else if(itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem) {
-            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(Display.LIT, 1), 3);
+            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 1), 3);
 
         }else{
-            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(Display.LIT, 2), 3);
+            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 2), 3);
         }
     }
 }

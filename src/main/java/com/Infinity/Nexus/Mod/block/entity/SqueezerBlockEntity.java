@@ -1,6 +1,8 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
 import com.Infinity.Nexus.Mod.block.custom.Squeezer;
+import com.Infinity.Nexus.Mod.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.SqueezerRecipes;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerMenu;
@@ -480,45 +482,9 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public void setMachineLevel(ItemStack itemStack, Player player) {
-        {
-            if (this.itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
-                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-                if (!player.isCreative()) {
-                    player.getMainHandItem().shrink(1);
-                }
-                this.setChanged();
-            }else{
-                ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
-                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), component);
-                if (!player.isCreative()) {
-                    player.getMainHandItem().shrink(1);
-                    this.level.addFreshEntity(itemEntity);
-                }
-                this.setChanged();
-            }
-            assert level != null;
-            level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_NETHERITE, SoundSource.BLOCKS, 1.0f, 1.0f);
-        }
-
+        SetMachineLevel.setMachineLevel(itemStack, player, this, COMPONENT_SLOT, this.itemHandler);
     }
-
     public void setUpgradeLevel(ItemStack itemStack, Player player) {
-        {
-            for(int i = 0; i < UPGRADE_SLOTS.length; i++ ){
-                if (this.itemHandler.getStackInSlot(UPGRADE_SLOTS[i]).isEmpty()) {
-                    ItemStack stack = itemStack.copy();
-                    stack.setCount(1);
-                    this.itemHandler.setStackInSlot(UPGRADE_SLOTS[i], stack);
-                    if (!player.isCreative()) {
-                        player.getMainHandItem().shrink(1);
-                    }
-                    assert level != null;
-                    level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_TURTLE, SoundSource.BLOCKS, 1.0f, 1.0f);
-                    this.setChanged();
-                }
-            }
-        }
+        SetUpgradeLevel.setUpgradeLevel(itemStack, player, this, UPGRADE_SLOTS, this.itemHandler);
     }
-
 }

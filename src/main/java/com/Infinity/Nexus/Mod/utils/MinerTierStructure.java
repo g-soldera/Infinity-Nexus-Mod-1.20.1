@@ -1,7 +1,6 @@
 package com.Infinity.Nexus.Mod.utils;
 
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
-import com.Infinity.Nexus.Mod.block.ModBlocksProgression;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;

@@ -1,5 +1,6 @@
 package com.Infinity.Nexus.Mod.block.custom;
 
+import com.Infinity.Nexus.Mod.block.custom.common.CommonUpgrades;
 import com.Infinity.Nexus.Mod.block.entity.MinerBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
@@ -92,30 +93,7 @@ public class Miner extends BaseEntityBlock {
 
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
-        if (!pLevel.isClientSide()) {
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
-            boolean component = pPlayer.getMainHandItem().getItem() instanceof ComponentItem;
-            boolean upgrade = pPlayer.getMainHandItem().getItem() instanceof UpgradeItem;
-
-            if(entity instanceof MinerBlockEntity) {
-                if(!(component || upgrade)) {
-                    NetworkHooks.openScreen(((ServerPlayer) pPlayer), (MinerBlockEntity) entity, pPos);
-                }else if (component) {
-                        ((MinerBlockEntity) entity).setMachineLevel(pPlayer.getMainHandItem(), pPlayer);
-                        pPlayer.closeContainer();
-                        return InteractionResult.FAIL;
-
-                }else{
-                        ((MinerBlockEntity) entity).setUpgradeLevel(pPlayer.getMainHandItem(), pPlayer);
-                        pPlayer.closeContainer();
-                        return InteractionResult.FAIL;
-                }
-                ((MinerBlockEntity) entity).resetVerify();
-            } else {
-                throw new IllegalStateException("Our Container provider is missing!");
-            }
-        }
-
+        CommonUpgrades.setUpgrades(pLevel, pPos, pPlayer);
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 

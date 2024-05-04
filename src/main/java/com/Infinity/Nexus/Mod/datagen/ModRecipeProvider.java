@@ -130,19 +130,73 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.SOLAR_PANE_ULTIMATE.get()).pattern("AAA").pattern("ABA").pattern("AAA").define('A', ModItemsAdditions.SOLAR_PANE_ADVANCED.get()).define('B', ModItemsProgression.SOLAR_CORE.get()).unlockedBy("has_solar_pane_ultimate", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.SOLAR_PANE_ULTIMATE.get()).build())).save(pWriter, "solar_pane_ultimate");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.SOLAR_PANE_QUANTUM.get()).pattern("AAA").pattern("ABA").pattern("AAA").define('A', ModItemsAdditions.SOLAR_PANE.get()).define('B', ModItemsProgression.ADVANCED_SOLAR_CORE.get()).unlockedBy("has_solar_pane_quantum", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.SOLAR_PANE_QUANTUM.get()).build())).save(pWriter, "solar_pane_quantum");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsProgression.SOLAR_CORE.get()).pattern("AAA").pattern("BCB").pattern("EDE").define('A', ModCrystalItems.DEMETRIUM_CRYSTAL.get()).define('B', ModItemsAdditions.ADVANCED_CIRCUIT.get()).define('C', ModItemsAdditions.LOGIC_COMPONENT.get()).define('D', ModItemsProgression.STABLE_MATTER.get()).define('E', ModItemsAdditions.INFINITY_NUGGET.get()).unlockedBy("has_solar_core", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsProgression.SOLAR_CORE.get()).build())).save(pWriter, "solar_core");
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsProgression.ADVANCED_SOLAR_CORE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsProgression.ADVANCED_SOLAR_CORE.get()).pattern("AAA").pattern("BCB").pattern("EDE").define('A', ModCrystalItems.DARIUM_CRYSTAL.get()).define('B', ModItemsProgression.SOLAR_CORE.get()).define('C', ModItemsAdditions.REFINED_COMPONENT.get()).define('D', ModItemsAdditions.INFINIUM_STELLARUM_INGOT.get()).define('E', ModItemsProgression.STABLE_MATTER.get()).unlockedBy("has_advanced_solar_core", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsProgression.ADVANCED_SOLAR_CORE.get()).build())).save(pWriter, "advanced_solar_core");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsAdditions.STRAINER.get()).pattern("AAA").pattern("BBB").pattern("AAA").define('A', Items.STICK).define('B', Items.STRING).unlockedBy("has_strainer", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.STRAINER.get()).build())).save(pWriter, "strainer");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.RECYCLER.get())
                 .pattern("AAA")
                 .pattern("BCB")
-                .pattern("EDE")
-                .define('A', ModCrystalItems.DARIUM_CRYSTAL.get())
-                .define('B', ModItemsProgression.SOLAR_CORE.get())
-                .define('C', ModItemsAdditions.REFINED_COMPONENT.get())
-                .define('D', ModItemsAdditions.INFINIUM_STELLARUM_INGOT.get())
-                .define('E', ModItemsProgression.STABLE_MATTER.get())
-                .unlockedBy("has_advanced_solar_core", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsProgression.ADVANCED_SOLAR_CORE.get()).build()))
-                .save(pWriter, "advanced_solar_core");
+                .pattern("DED")
+                .define('A', Blocks.POINTED_DRIPSTONE)
+                .define('B', Blocks.GRINDSTONE)
+                .define('C', ModBlocksProgression.STEEL_MACHINE_CASING.get())
+                .define('D', Items.IRON_INGOT)
+                .define('E', ModItemsAdditions.ADVANCED_CIRCUIT.get())
+                .unlockedBy("has_recycler", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.RECYCLER.get()).build()))
+                .save(pWriter, "recycler");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItemsProgression.INDUSTRIAL_SHEET.get()).pattern("A").pattern("A").pattern("A").define('A', ModItemsProgression.PLASTIC.get()).unlockedBy("has_industrial_sheet", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsProgression.INDUSTRIAL_SHEET.get()).build())).save(pWriter, "industrial_sheet");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.MATTER_CONDENSER.get())
+                .pattern("ABA")
+                .pattern("ACA")
+                .pattern("DED")
+                .define('A', Blocks.SMOOTH_STONE)
+                .define('B', Blocks.TINTED_GLASS)
+                .define('C', Items.GLASS_BOTTLE)
+                .define('D', ModItemsAdditions.STEEL_INGOT.get())
+                .define('E', ModBlocksProgression.STEEL_MACHINE_CASING.get())
+                .unlockedBy("has_matter_condenser", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.MATTER_CONDENSER.get()).build()))
+                .save(pWriter, "matter_condenser");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.FACTORY.get())
+                .pattern("ABA")
+                .pattern("CDC")
+                .pattern("EEE")
+                .define('A', Blocks.QUARTZ_STAIRS)
+                .define('B', Items.GLOW_ITEM_FRAME)
+                .define('C', Blocks.CRAFTING_TABLE)
+                .define('D', Blocks.RESPAWN_ANCHOR)
+                .define('E', Blocks.POLISHED_BASALT)
+                .unlockedBy("has_factory", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.FACTORY.get()).build()))
+                .save(pWriter, "factory");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.DISPLAY.get())
+                .pattern("A")
+                .pattern("B")
+                .define('A', ModItemsProgression.CARBON_PLATE.get())
+                .define('B', Blocks.POLISHED_ANDESITE_SLAB)
+                .unlockedBy("has_display", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.DISPLAY.get()).build()))
+                .save(pWriter, "display");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.ENTITY_CENTRALIZER.get())
+                .pattern(" A ")
+                .pattern("BCD")
+                .define('A', Blocks.HOPPER)
+                .define('B', Items.IRON_SWORD)
+                .define('C', Items.ENDER_PEARL)
+                .define('D', Items.IRON_AXE)
+                .unlockedBy("has_entity_centralizer", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.ENTITY_CENTRALIZER.get()).build()))
+                .save(pWriter, "entity_centralizer");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.ENTITY_DISPLAY.get())
+                .pattern(" A ")
+                .pattern("BCB")
+                .define('A', ModItemsProgression.CARBON_PLATE.get())
+                .define('B', Items.SPRUCE_LOG)
+                .define('C', Items.ENDER_PEARL)
+                .unlockedBy("has_entity_centralizer", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.ENTITY_CENTRALIZER.get()).build()))
+                .save(pWriter, "entity_display");
+
         //Light
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.RED_LIGHT_CRYSTAL.get()).pattern("AAA").pattern("ABA").pattern("CCC").define('A', Blocks.GLASS).define('B', ModCrystalItems.DARIUM_CRYSTAL.get()).define('C', Blocks.QUARTZ_SLAB).unlockedBy("has_red_light_crystal", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.RED_LIGHT_CRYSTAL.get()).build())).save(pWriter, "red_light_crystal");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocksAdditions.BLUE_LIGHT_CRYSTAL.get()).pattern("AAA").pattern("ABA").pattern("CCC").define('A', Blocks.GLASS).define('B', ModCrystalItems.MARINE_CRYSTAL.get()).define('C', Blocks.QUARTZ_SLAB).unlockedBy("has_blue_light_crystal", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocksAdditions.BLUE_LIGHT_CRYSTAL.get()).build())).save(pWriter, "blue_light_crystal");
@@ -196,9 +250,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         //silver
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.SILVER_NUGGET.get(), 9).requires(ModItemsAdditions.SILVER_INGOT.get()).unlockedBy("has_silver_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.SILVER_INGOT.get()).build())).save(pWriter);
         //brass
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.BRASS_NUGGET.get(), 9)
-                        .requires(ModItemsAdditions.BRASS_INGOT.get()).unlockedBy("has_brass_ingot", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItemsAdditions.BRASS_INGOT.get()).build())).save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.BRASS_NUGGET.get(), 9).requires(ModItemsAdditions.BRASS_INGOT.get()).unlockedBy("has_brass_ingot", inventoryTrigger(ItemPredicate.Builder.item().of(ModItemsAdditions.BRASS_INGOT.get()).build())).save(pWriter);
+        //copper
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.COPPER_NUGGET.get(), 9)
+                        .requires(Items.COPPER_INGOT).unlockedBy("has_copper_ingot", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.COPPER_INGOT).build())).save(pWriter);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItemsAdditions.GLYCERIN.get(), 1)
                         .requires(ModItemsAdditions.ALCOHOL_BOTTLE.get())

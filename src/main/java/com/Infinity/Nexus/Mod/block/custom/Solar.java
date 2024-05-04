@@ -1,5 +1,6 @@
 package com.Infinity.Nexus.Mod.block.custom;
 
+import com.Infinity.Nexus.Mod.block.custom.common.CommonUpgrades;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
 import com.Infinity.Nexus.Mod.block.entity.SmelteryBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.SolarBlockEntity;
@@ -87,22 +88,7 @@ public class Solar extends BaseEntityBlock {
 
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
-        if (!pLevel.isClientSide()) {
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
-            boolean upgrade = pPlayer.getMainHandItem().getItem() instanceof SolarUpgrade;
-
-            if(entity instanceof SolarBlockEntity) {
-                if(!upgrade) {
-                    NetworkHooks.openScreen(((ServerPlayer) pPlayer), (SolarBlockEntity) entity, pPos);
-                }else {
-                    ((SolarBlockEntity) entity).setMachineLevel(pPlayer.getMainHandItem(), pPlayer);
-                    pPlayer.closeContainer();
-                    return InteractionResult.FAIL;
-                }
-            } else {
-                throw new IllegalStateException("Our Container provider is missing!");
-            }
-        }
+        CommonUpgrades.setUpgrades(pLevel, pPos, pPlayer);
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 

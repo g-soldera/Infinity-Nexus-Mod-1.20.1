@@ -20,16 +20,16 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public class MatterCondenserRecipes implements Recipe<SimpleContainer> {
-    private final ResourceLocation id;
     private final NonNullList<Ingredient> input;
     private final ItemStack output;
+    private final ResourceLocation id;
     private final int energy;
 
 
-    public MatterCondenserRecipes(NonNullList<Ingredient> input,ItemStack output,int energy, ResourceLocation id) {
-        this.id = id;
+    public MatterCondenserRecipes(NonNullList<Ingredient> input,ItemStack output, ResourceLocation id, int energy) {
         this.input = input;
         this.output = output;
+        this.id = id;
         this.energy = energy;
     }
 
@@ -103,7 +103,7 @@ public class MatterCondenserRecipes implements Recipe<SimpleContainer> {
 
             int energy = pSerializedRecipe.get("energy").getAsInt();
 
-            return new MatterCondenserRecipes(inputs, output,energy, pRecipeId);
+            return new MatterCondenserRecipes(inputs, output, pRecipeId, energy);
         }
 
         @Override
@@ -115,9 +115,10 @@ public class MatterCondenserRecipes implements Recipe<SimpleContainer> {
                 //2
                 inputs.set(i, Ingredient.fromNetwork(pBuffer));
             }
-            ItemStack output = pBuffer.readItem();
+            //3
             int energy = pBuffer.readInt();
-            return new MatterCondenserRecipes(inputs,output,energy, pRecipeId);
+            ItemStack output = pBuffer.readItem();
+            return new MatterCondenserRecipes(inputs, output, pRecipeId, energy);
         }
 
         @Override

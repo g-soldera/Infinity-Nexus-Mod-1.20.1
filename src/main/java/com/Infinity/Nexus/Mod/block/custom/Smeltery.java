@@ -1,5 +1,6 @@
 package com.Infinity.Nexus.Mod.block.custom;
 
+import com.Infinity.Nexus.Mod.block.custom.common.CommonUpgrades;
 import com.Infinity.Nexus.Mod.block.entity.AssemblerBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.SmelteryBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
@@ -81,28 +82,7 @@ public class Smeltery extends BaseEntityBlock {
 
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
-        if (!pLevel.isClientSide()) {
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
-            boolean component = pPlayer.getMainHandItem().getItem() instanceof ComponentItem;
-            boolean upgrade = pPlayer.getMainHandItem().getItem() instanceof UpgradeItem;
-
-            if(entity instanceof SmelteryBlockEntity) {
-                if(!(component || upgrade)) {
-                    NetworkHooks.openScreen(((ServerPlayer) pPlayer), (SmelteryBlockEntity) entity, pPos);
-                }else if (component) {
-                    ((SmelteryBlockEntity) entity).setMachineLevel(pPlayer.getMainHandItem(), pPlayer);
-                    pPlayer.closeContainer();
-                    return InteractionResult.FAIL;
-
-                }else{
-                    ((SmelteryBlockEntity) entity).setUpgradeLevel(pPlayer.getMainHandItem(), pPlayer);
-                    pPlayer.closeContainer();
-                    return InteractionResult.FAIL;
-                }
-            } else {
-                throw new IllegalStateException("Our Container provider is missing!");
-            }
-        }
+        CommonUpgrades.setUpgrades(pLevel, pPos, pPlayer);
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 

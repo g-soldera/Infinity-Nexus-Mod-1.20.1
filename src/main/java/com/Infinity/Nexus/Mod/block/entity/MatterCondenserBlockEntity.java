@@ -1,6 +1,8 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
 import com.Infinity.Nexus.Mod.block.custom.MatterCondenser;
+import com.Infinity.Nexus.Mod.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
@@ -375,26 +377,6 @@ public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvi
         super.onDataPacket(net, pkt);
     }
     public void setMachineLevel(ItemStack itemStack, Player player) {
-        {
-            if (this.itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
-                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-                if (!player.isCreative()) {
-                    player.getMainHandItem().shrink(1);
-                }
-                this.setChanged();
-            }else{
-                ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
-                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), component);
-                if (!player.isCreative()) {
-                    player.getMainHandItem().shrink(1);
-                    this.level.addFreshEntity(itemEntity);
-                }
-                this.setChanged();
-            }
-            assert level != null;
-            level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_NETHERITE, SoundSource.BLOCKS, 1.0f, 1.0f);
-        }
-
+        SetMachineLevel.setMachineLevel(itemStack, player, this, COMPONENT_SLOT, this.itemHandler);
     }
 }

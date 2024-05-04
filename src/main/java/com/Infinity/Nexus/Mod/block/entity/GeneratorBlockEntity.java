@@ -1,6 +1,8 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
 import com.Infinity.Nexus.Mod.block.custom.Generator;
+import com.Infinity.Nexus.Mod.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Mod.screen.generator.GeneratorMenu;
 import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.utils.ModUtils;
@@ -231,11 +233,11 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
+        findEnergyCap();
         if(getMachineLevel() <= 0){
             return;
         }
 
-        findEnergyCap();
 
         if(!canInsertEnergy(this)){
             return;
@@ -273,12 +275,17 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
                 BlockPos neighborPos = pos.relative(direction);
                 assert level != null;
                 BlockEntity neighborBlockEntity = level.getBlockEntity(neighborPos);
-                if (neighborBlockEntity != null) {
+                if (neighborBlockEntity != null && !(neighborBlockEntity instanceof SolarBlockEntity || neighborBlockEntity instanceof GeneratorBlockEntity)) {
                     neighborBlockEntity.getCapability(ForgeCapabilities.ENERGY).ifPresent(energy ->{
                         int amount = Math.min(ENERGY_STORAGE.getEnergyStored(), ENERGY_TRANSFER);
-                        if(energy.canReceive() && (energy.getMaxEnergyStored() - energy.getEnergyStored()) >= amount){
-                            energy.receiveEnergy(amount, false);
-                            ENERGY_STORAGE.extractEnergy(amount, false);
+                        if(energy.canReceive() && energy.getEnergyStored() != energy.getMaxEnergyStored()) {
+                            if((energy.getMaxEnergyStored() - energy.getEnergyStored()) >= amount){
+                                energy.receiveEnergy(amount, false);
+                                ENERGY_STORAGE.extractEnergy(amount, false);
+                            }else{
+                                energy.receiveEnergy(energy.getMaxEnergyStored() - energy.getEnergyStored(), false);
+                                ENERGY_STORAGE.extractEnergy(energy.getMaxEnergyStored() - energy.getEnergyStored(), false);
+                            }
                         }
                     });
                 }
@@ -372,47 +379,10 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
         super.onDataPacket(net, pkt);
     }
     public void setMachineLevel(ItemStack itemStack, Player player) {
-        {
-            if (this.itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
-                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-                if (!player.isCreative()) {
-                    player.getMainHandItem().shrink(1);
-                }
-                this.setChanged();
-            }else{
-                ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
-                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), component);
-                if (!player.isCreative()) {
-                    player.getMainHandItem().shrink(1);
-                    this.level.addFreshEntity(itemEntity);
-                }
-                this.setChanged();
-            }
-            assert level != null;
-            level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_NETHERITE, SoundSource.BLOCKS, 1.0f, 1.0f);
-        }
-
+        SetMachineLevel.setMachineLevel(itemStack, player, this, COMPONENT_SLOT, this.itemHandler);
     }
 
     public void setUpgradeLevel(ItemStack itemStack, Player player) {
-        {
-            for(int i = 0; i < UPGRADE_SLOTS.length; i++ ){
-                if (this.itemHandler.getStackInSlot(UPGRADE_SLOTS[i]).isEmpty()) {
-                    ItemStack stack = itemStack.copy();
-                    stack.setCount(1);
-                    this.itemHandler.setStackInSlot(UPGRADE_SLOTS[i], stack);
-                    if (!player.isCreative()) {
-                        player.getMainHandItem().shrink(1);
-                    }
-                    assert level != null;
-                    level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_TURTLE, SoundSource.BLOCKS, 1.0f, 1.0f);
-                    this.setChanged();
-                }
-            }
-        }
-    }
-    public int getSpace(){
-        return 0;
+        SetUpgradeLevel.setUpgradeLevel(itemStack, player, this, UPGRADE_SLOTS, this.itemHandler);
     }
 }

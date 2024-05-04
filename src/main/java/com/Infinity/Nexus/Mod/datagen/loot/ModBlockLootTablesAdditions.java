@@ -136,6 +136,9 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksAdditions.GREEN_LIGHT_CRYSTAL.get());
         this.dropSelf(ModBlocksAdditions.BLUE_LIGHT_CRYSTAL.get());
 
+        this.dropSelf(ModBlocksAdditions.ENTITY_CENTRALIZER.get());
+        this.dropSelf(ModBlocksAdditions.ENTITY_DISPLAY.get());
+
 
     }
 

@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "block/block",
+	"parent": "industrial_agglomeration_factory.json",
 	"ambientocclusion": false,
 	"textures": {
 		"4": "infinity_nexus_mod:block/magic_machine_casing",

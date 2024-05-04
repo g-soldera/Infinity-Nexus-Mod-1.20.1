@@ -2,6 +2,8 @@ package com.Infinity.Nexus.Mod.block.entity;
 
 import com.Infinity.Nexus.Mod.block.custom.Generator;
 import com.Infinity.Nexus.Mod.block.custom.Miner;
+import com.Infinity.Nexus.Mod.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Mod.fakePlayer.IFFakePlayer;
 import com.Infinity.Nexus.Mod.item.ModCrystalItems;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
@@ -797,49 +799,6 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     private void makeStructure() {
         MinerTierStructure.hasStructure(getMachineLevel(), this.getBlockPos(), this.level);
     }
-
-    public void setMachineLevel(ItemStack itemStack, Player player) {
-        {
-            if (this.itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
-                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-                if (!player.isCreative()) {
-                    player.getMainHandItem().shrink(1);
-                }
-                this.setChanged();
-            } else {
-                ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
-                this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
-                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), component);
-                if (!player.isCreative()) {
-                    player.getMainHandItem().shrink(1);
-                    this.level.addFreshEntity(itemEntity);
-                }
-                this.setChanged();
-            }
-            assert level != null;
-            level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_NETHERITE, SoundSource.BLOCKS, 1.0f, 1.0f);
-            MinerTierStructure.hasStructure(getMachineLevel(), this.getBlockPos(), this.level);
-        }
-
-    }
-
-    public void setUpgradeLevel(ItemStack itemStack, Player player) {
-        {
-            for (int i = 0; i < UPGRADE_SLOTS.length; i++) {
-                if (this.itemHandler.getStackInSlot(UPGRADE_SLOTS[i]).isEmpty()) {
-                    ItemStack stack = itemStack.copy();
-                    stack.setCount(1);
-                    this.itemHandler.setStackInSlot(UPGRADE_SLOTS[i], stack);
-                    if (!player.isCreative()) {
-                        player.getMainHandItem().shrink(1);
-                    }
-                    assert level != null;
-                    level.playSound(null, this.getBlockPos(), SoundEvents.ARMOR_EQUIP_TURTLE, SoundSource.BLOCKS, 1.0f, 1.0f);
-                    this.setChanged();
-                }
-            }
-        }
-    }
     public void resetVerify() {
         this.data.set(2, this.data.get(3));
     }
@@ -847,8 +806,10 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
     public void setCustomBlockData(CompoundTag nbt) {
         this.customBlockData = nbt;
     }
-
-    public int getTierLevel() {
-        return this.getMachineLevel();
+    public void setMachineLevel(ItemStack itemStack, Player player) {
+        SetMachineLevel.setMachineLevel(itemStack, player, this, COMPONENT_SLOT, this.itemHandler);
+    }
+    public void setUpgradeLevel(ItemStack itemStack, Player player) {
+        SetUpgradeLevel.setUpgradeLevel(itemStack, player, this, UPGRADE_SLOTS, this.itemHandler);
     }
 }

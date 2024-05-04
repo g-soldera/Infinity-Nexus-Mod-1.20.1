@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.tab;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.ModBlocksProgression;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import net.minecraft.core.registries.Registries;
@@ -109,6 +110,13 @@ public class ModTabProgression {
                         pOutput.accept(new ItemStack(ModItemsProgression.INDUSTRIAL_SHEET.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.INFINITY_SHEET.get()));
 
+                        pOutput.accept(new ItemStack(ModItemsProgression.VOXEL_TOP.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.VOXEL_DOW.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.VOXEL_NORTH.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.VOXEL_SOUTH.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.VOXEL_WEST.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.VOXEL_EAST.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.VOXEL_BLOCK.get()));
 
 
                         //-------------------------//-------------------------//

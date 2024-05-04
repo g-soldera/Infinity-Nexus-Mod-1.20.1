@@ -53,7 +53,7 @@ public class SolarBlockEntity extends BlockEntity implements MenuProvider {
         }
     };
     private static final int COMPONENT_SLOT = 0;
-    private static final int GENERATED = 8;
+    private static final int ENERGY_TRANSFER = 5832;
     private static final int TRANSFER = 64000;
     private static final int CAPACITY = 512000;
     private static int GEM = 0;
@@ -232,11 +232,13 @@ public class SolarBlockEntity extends BlockEntity implements MenuProvider {
         int level = getSolarLevel();
         pLevel.setBlock(pPos, pState.setValue(Solar.LIT, level), 3);
 
-        if(!hasUpgrade()){
+
+        if (isRedstonePowered(pPos)) {
             return;
         }
 
-        if (isRedstonePowered(pPos)) {
+        findEnergyCap();
+        if(!hasUpgrade()){
             return;
         }
 
@@ -265,7 +267,35 @@ public class SolarBlockEntity extends BlockEntity implements MenuProvider {
         int[] energy = {0, 8, 72, 648, 5832};
         return getTime() ? energy[level] : energy[level] / 8;
     }
+    private void findEnergyCap() {
+        try{
+            Level level = getLevel();
+            BlockPos pos = getBlockPos();
 
+            for (Direction direction : Direction.values()) {
+                BlockPos neighborPos = pos.relative(direction);
+                assert level != null;
+                BlockEntity neighborBlockEntity = level.getBlockEntity(neighborPos);
+                if (neighborBlockEntity != null && !(neighborBlockEntity instanceof SolarBlockEntity || neighborBlockEntity instanceof GeneratorBlockEntity)) {
+                    neighborBlockEntity.getCapability(ForgeCapabilities.ENERGY).ifPresent(energy ->{
+                        int amount = Math.min(ENERGY_STORAGE.getEnergyStored(), ENERGY_TRANSFER);
+                        if(energy.canReceive() && energy.getEnergyStored() != energy.getMaxEnergyStored()) {
+                            if((energy.getMaxEnergyStored() - energy.getEnergyStored()) >= amount){
+                                energy.receiveEnergy(amount, false);
+                                ENERGY_STORAGE.extractEnergy(amount, false);
+                            }else{
+                                energy.receiveEnergy(energy.getMaxEnergyStored() - energy.getEnergyStored(), false);
+                                ENERGY_STORAGE.extractEnergy(energy.getMaxEnergyStored() - energy.getEnergyStored(), false);
+                            }
+                        }
+                    });
+                }
+            }
+        } catch (Exception e){
+            System.out.println("&f[INM&f]&4: Failed to find energy cap.");
+            e.printStackTrace();
+        }
+    }
     private boolean hasEnoughEnergySpace() {
         return ENERGY_STORAGE.getEnergyStored() < ENERGY_STORAGE.getMaxEnergyStored();
     }
@@ -294,14 +324,18 @@ public class SolarBlockEntity extends BlockEntity implements MenuProvider {
         super.onDataPacket(net, pkt);
     }
 
-    public void setMachineLevel(ItemStack itemStack, Player player) {
+    public void setSolarLevel(ItemStack itemStack, Player player) {
         if (this.itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
-            this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
+            ItemStack stack = itemStack.copy();
+            stack.setCount(1);
+            this.itemHandler.setStackInSlot(COMPONENT_SLOT, stack);
             player.getMainHandItem().shrink(1);
             this.setChanged();
         }else{
             ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
-            this.itemHandler.setStackInSlot(COMPONENT_SLOT, itemStack.copy());
+            ItemStack stack = itemStack.copy();
+            stack.setCount(1);
+            this.itemHandler.setStackInSlot(COMPONENT_SLOT, stack);
             ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), component);
             if (!player.isCreative()) {
                 player.getMainHandItem().shrink(1);

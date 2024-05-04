@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"5": "minecraft:block/hopper_inside",
-		"6": "minecraft:block/smooth_stone"
+		"6": "minecraft:block/smooth_stone",
+		"particle": "minecraft:block/polished_andesite"
 	},
 	"elements": [
 		{
