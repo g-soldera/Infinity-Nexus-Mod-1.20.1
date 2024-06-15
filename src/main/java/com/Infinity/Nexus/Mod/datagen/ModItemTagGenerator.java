@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.datagen;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.utils.ModTags;
@@ -28,7 +29,6 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-
 
         this.tag(ModTags.Items.FORGE_INGOTS)
                 .add(ModItemsAdditions.SILVER_INGOT.get())

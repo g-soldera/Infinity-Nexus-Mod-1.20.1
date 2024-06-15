@@ -327,6 +327,8 @@
   "item.infinity_nexus.miner_description": "§5Mineradora Multibloco.\n§bDeve ser colocada na altura correta em relação ao solo, dependendo do nível do componente instalado.\n§9Adicione energia e aguarde um pouco para que seja criado um exemplo de montagem.\n§fRedstone: 5° §a-> Wood or Copper.\n§fBasic: 5° §a-> Iron or Gold.\n§eReinforced: 7° §a-> Tin or Lead.\n§eLogic: 7° §a-> Nickel or Brass.\n§cAdvanced: 9° §a-> Bronze, Glass or Steel.\n§cRefined: 9° §a-> Aluminum, Silver or Plástic.\n§5Integral: 11° §a-> Industrial.\n§5Infinity: 11° §a-> Infinity.",
   "item.infinity_nexus.mod_crusher_description": "Executa rapidamente e silenciosamente inimigos que estiverem acima. A área depende do componente instalado. Caso haja muitos inimigos dentro do raio de ação do Mob Crusher e seus compartimentos estiverem cheios, todos serão executados sem chance de drops.\n§fRedstone:  §a1x1.\n§fBasic: §a3x3.\n§eReinforced: §a5x5\n§eLogic: §a7x7.\n§cAdvanced: §a9x9.\n§cRefined: §a11x11.\n§5Integral: §a13x13.\n§5Infinity: §a15x15",
 
+  "item.infinity_nexus.ancestral_component_description": "§9Use Shift+Click com um §bComponente de Infinity §9na não esquerda para tornar este §5Infinito",
+
   "infinity_nexus_mod.jei_information": "§9Esta máquina precisa de um componente para funcionar.",
   "item.infinity_nexus.crystal_description": "§9Este item é obtido atraves da mineradora tier",
   "item.infinity_nexus.stable_matter": "§9Pode ser obtido no Condensador de Matéria usando aproximadamente ",
@@ -350,7 +352,7 @@
 
   "item.infinity_nexus_mod.asgreon_spawn_egg": "Ovo invocador de Asgreon",
 
-  "chat.infinity_nexus_mod.component_install": "Clique com o botão direito em uma máquina para instalar este componente de nível.",
+  "chat.infinity_nexus_mod.component_install": "§7Clique com o botão direito em uma máquina para instalar este componente de nível.",
 
   "block.infinity_nexus_mod.recycler": "Reciclador",
   "block.infinity_nexus_mod.matter_condenser": "Condensador de Matéria",

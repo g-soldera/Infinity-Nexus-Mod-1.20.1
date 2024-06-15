@@ -1,5 +1,5 @@
 {
-  "replace": false,
+  "replace": true,
   "values": [
     "infinity_nexus_mod:nickel_ore"
   ]

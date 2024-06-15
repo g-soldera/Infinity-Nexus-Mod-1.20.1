@@ -1,7 +1,7 @@
 {
   "replace": true,
   "values": [
-    "infinity_nexus_mod:infinity_axes",
-    "infinity_nexus_mod:imperial_infinity_axes"
+    "infinity_nexus_mod:infinity_axe",
+    "infinity_nexus_mod:imperial_infinity_axe"
   ]
 }

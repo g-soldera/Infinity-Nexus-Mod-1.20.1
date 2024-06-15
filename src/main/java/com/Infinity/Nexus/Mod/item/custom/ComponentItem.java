@@ -2,6 +2,7 @@ package com.Infinity.Nexus.Mod.item.custom;
 
 import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Mod.utils.ModUtils;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,10 +30,15 @@ public class ComponentItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.literal(durability));
         if(pStack.getItem() == ModItemsAdditions.ANCESTRAL_COMPONENT.get()) {
-            pTooltipComponents.add(Component.literal("§2Uses:" + (pStack.getOrCreateTag().contains("isInfinite") ? " §5∞ " : " ") + "§e" + (pStack.getOrCreateTag().contains("Uses") ? pStack.getOrCreateTag().getInt("Uses") : 10)).append("\n").append(Component.translatable("chat.infinity_nexus_mod.component_install")));
+            pTooltipComponents.add(Component.literal("§2Uses:" + (pStack.getOrCreateTag()
+                    .contains("isInfinite") ? " §5∞ " : " ") + "§e" + (pStack.getOrCreateTag().contains("Uses") ? pStack.getOrCreateTag()
+                    .getInt("Uses") : 10)));
+        }else{
+            pTooltipComponents.add(Component.literal(durability));
         }
+        pTooltipComponents.add(Component.literal("§eLevel: §9"+ ModUtils.getComponentLevel(pStack)));
+        pTooltipComponents.add(Component.translatable("chat.infinity_nexus_mod.component_install"));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
     @Override
@@ -44,7 +50,7 @@ public class ComponentItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if(!pLevel.isClientSide()){
-            if(Screen.hasShiftDown()){
+            if(pPlayer.isShiftKeyDown()){
                 ItemStack mainHand = pPlayer.getMainHandItem();
                 ItemStack offHand = pPlayer.getOffhandItem();
 

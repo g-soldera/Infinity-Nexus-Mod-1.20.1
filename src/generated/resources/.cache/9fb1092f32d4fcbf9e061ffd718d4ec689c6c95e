@@ -1,4 +1,4 @@
-// 1.20.1	2024-04-29T10:02:15.1468969	Recipes
+// 1.20.1	2024-06-03T21:10:53.4147314	Recipes
 fee615835d53581e01b29c6f43b4f4181d353e67 data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot.json
 8ba69b00c384b85b687b57eb7986ade8d6d1d5e5 data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot_from_blasting_aluminum_dust.json
 25d67609fb62f0ece675817fe330e52c13650e6f data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot_from_blasting_aluminum_ore.json
@@ -316,7 +316,7 @@ e754e5d4cdea40688c8ee200558a606e2f76a23b data/minecraft/recipes/catalyst.json
 5485b8efa54f8951cb974fd95be031770bf0aca5 data/minecraft/recipes/crusher.json
 149516b32538626df9c308a103129c3547655289 data/minecraft/recipes/display.json
 687a75765fb1fe6e5771c1a1fd53956a76d3c1c6 data/minecraft/recipes/entity_centralizer.json
-2ae29bd4ccd1b94dc8337370efb62009f3b4839e data/minecraft/recipes/entity_display.json
+0065e2bba2f6f704ced1ed5f2d8bf0ed02568491 data/minecraft/recipes/entity_display.json
 41730d5c2b094462b141b5372cc37eaa583a1f1b data/minecraft/recipes/explorar_portal_frame.json
 43f72eda0fdf3a160a428e67ee014356baed22e0 data/minecraft/recipes/factory.json
 f6b5fe0e27e8bd98712ea16061cdda05302f80b5 data/minecraft/recipes/fermentation_barrel.json

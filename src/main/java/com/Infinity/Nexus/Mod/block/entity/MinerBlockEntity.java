@@ -5,49 +5,45 @@ import com.Infinity.Nexus.Mod.block.custom.Miner;
 import com.Infinity.Nexus.Mod.block.entity.common.SetMachineLevel;
 import com.Infinity.Nexus.Mod.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Mod.fakePlayer.IFFakePlayer;
-import com.Infinity.Nexus.Mod.item.ModCrystalItems;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
-import com.Infinity.Nexus.Mod.item.custom.PickaxeItems;
 import com.Infinity.Nexus.Mod.screen.miner.MinerMenu;
 import com.Infinity.Nexus.Mod.utils.MinerTierStructure;
 import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
-import net.minecraft.network.chat.*;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -57,9 +53,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -387,7 +381,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
         }
         int machineLevel = getMachineLevel() - 1 <= 0 ? 0 : getMachineLevel() - 1;
         if (structure == 0) {
-            pLevel.setBlock(pPos, pState.setValue(Generator.LIT, machineLevel), 3);
+            pLevel.setBlock(pPos, pState.setValue(Miner.LIT, machineLevel), 3);
         }
 
         if (isRedstonePowered(pPos)) {
@@ -495,6 +489,7 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
 
     private boolean isOre(ItemStack stack) {
         List<TagKey<Item>> tags = stack.getTags().toList();
+
         return tags.toString().contains("forge:ores");
     }
 
@@ -551,20 +546,26 @@ public class MinerBlockEntity extends BlockEntity implements MenuProvider {
             }
         }
         Random random = new Random();
-        int randomTier = random.nextInt(100);
-        int random1 = random.nextInt(100);
+        int randomTier = random.nextInt(100 * (machineLevel + 1));
+        int random1 = random.nextInt(100 * Math.max(machineLevel, 1));
 
-        if (random1 < 10) {
-            int[] chance = {100, 61, 38, 23, 14, 9, 5, 3, 1};
-            for (int i = 1; i < machineLevel + 2; i++) {
-                if (randomTier < chance[chance.length - i]) {
-                    insertItemOnInventory(new ItemStack(ModUtils.getCrystalType(chance.length - i).getItem()));
-                    break;
-                }
+        //if (random1 < 10) {
+        //    int[] chance = {100, 61, 38, 23, 14, 9, 5, 3, 1};
+        //    for (int i = 1; i < machineLevel + 2; i++) {
+        //        if (randomTier < chance[chance.length - i]) {
+        //            insertItemOnInventory(new ItemStack(ModUtils.getCrystalType(chance.length - i).getItem()));
+        //            break;
+        //        }
+        //    }
+        //}
+        for(int i = 1; i < machineLevel; i++){
+            if(random1 < i){
+                insertItemOnInventory(new ItemStack(ModUtils.getCrystalType(Math.min(i, 7)).getItem()));
+                break;
             }
         }
 
-        insertItemOnInventory(randomTier <= 1 ? new ItemStack(ModUtils.getCrystalType(1).getItem()) : output);
+        insertItemOnInventory(randomTier <= 1 ? new ItemStack(ModUtils.getCrystalType(Math.min(machineLevel + 1, 7)).getItem()) : output);
         level.playSound(null, this.getBlockPos(), SoundEvents.BEE_HURT, SoundSource.BLOCKS, 0.1f, 1.0f);
 
 

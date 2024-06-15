@@ -202,7 +202,7 @@
   "item.infinity_nexus_mod.redstone_component": "Redstone Component",
   "item.infinity_nexus_mod.basic_component": "Basic Component",
   "item.infinity_nexus_mod.reinforced_component": "Reinforced Component",
-  "item.infinity_nexus_mod.logic_component": "Lógic Component",
+  "item.infinity_nexus_mod.logic_component": "Logical Component",
   "item.infinity_nexus_mod.advanced_component": "Advanced Component",
   "item.infinity_nexus_mod.refined_component": "Refined Component",
   "item.infinity_nexus_mod.integral_component": "Integral Component",
@@ -357,6 +357,8 @@
   "item.infinity_nexus.miner_description": "§5Multiblock Miner.\n§bMust be placed at the correct height relative to the ground, depending on the level of the installed component.\n§9Add energy and wait a bit for an assembly example to be created.\n§fRedstone: 5° §a-> Wood or Copper.\n§fBasic: 5° §a-> Iron or Gold.\n§eReinforced: 7° §a-> Tin or Lead.\n§eLogic: 7° §a-> Nickel or Brass.\n§cAdvanced: 9° §a-> Bronze, Glass or Steel.\n§cRefined: 9° §a-> Aluminum, Silver or Plastic.\n§5Integral: 11° §a-> Industrial.\n§5Infinity: 11° §a-> Infinity.",
   "item.infinity_nexus.mod_crusher_description": "Executes quickly and silently enemies that are above. The area depends on the installed component. In case there are many enemies within the action radius of the Mob Crusher and its slots are full, all will be executed without a chance for drops.\n§fRedstone:  §a1x1.\n§fBasic: §a3x3.\n§eReinforced: §a5x5\n§eLogic: §a7x7.\n§cAdvanced: §a9x9.\n§cRefined: §a11x11.\n§5Integral: §a13x13.\n§5Infinity: §a15x15",
 
+  "item.infinity_nexus.ancestral_component_description": "§9Use Shift+Click with an §bInfinity Component §9in offhand to make this §5Infinity",
+
   "infinity_nexus_mod.jei_information": "§9This machine needs a component to function.",
   "item.infinity_nexus.crystal_description": "§9This item can be obtained from the Miner tier",
   "item.infinity_nexus.stable_matter": "§9It can be obtained in the Matter Condenser using approximately ",
@@ -380,7 +382,7 @@
 
   "item.infinity_nexus_mod.asgreon_spawn_egg": "Asgreon Spawn Egg",
 
-  "chat.infinity_nexus_mod.component_install": "Right-click on a machine to install this level component.",
+  "chat.infinity_nexus_mod.component_install": "§7Right-click on a machine to install this level component.",
 
 
   "block.infinity_nexus_mod.recycler": "Recycler",

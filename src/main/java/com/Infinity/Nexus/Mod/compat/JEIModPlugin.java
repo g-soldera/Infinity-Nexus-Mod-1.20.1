@@ -99,6 +99,8 @@ public class JEIModPlugin implements IModPlugin {
         registration.addItemStackInfo(new ItemStack(ModCrystalItems.AGATE_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §56"));
         registration.addItemStackInfo(new ItemStack(ModCrystalItems.DARIUM_CRYSTAL.get()), Component.translatable("item.infinity_nexus.crystal_description").append(" §57"));
 
+        registration.addItemStackInfo(new ItemStack(ModItemsAdditions.ANCESTRAL_COMPONENT.get()), Component.translatable("item.infinity_nexus.ancestral_component_description"));
+
         registration.addItemStackInfo(new ItemStack(ModItemsProgression.RESIDUAL_MATTER.get()), Component.literal("Este item é obtido ao destruir items no Reciclador."));
     }
 

@@ -34,19 +34,19 @@ public class AssemblerMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SingleItemSlot(iItemHandler, 0, 58 , 6 ));
-            this.addSlot(new SingleItemSlot(iItemHandler, 1, 81 , 6 ));
-            this.addSlot(new SingleItemSlot(iItemHandler, 2, 104, 6 ));
+            this.addSlot(new InputSlot(iItemHandler, 0, 58 , 6 ));
+            this.addSlot(new InputSlot(iItemHandler, 1, 81 , 6 ));
+            this.addSlot(new InputSlot(iItemHandler, 2, 104, 6 ));
 
-            this.addSlot(new SingleItemSlot(iItemHandler, 3, 58 , 29));
+            this.addSlot(new InputSlot(iItemHandler, 3, 58 , 29));
 
             this.addSlot(new ResultSlot(iItemHandler, 8, 81 , 29));
 
-            this.addSlot(new SingleItemSlot(iItemHandler, 4, 104, 29));
+            this.addSlot(new InputSlot(iItemHandler, 4, 104, 29));
 
-            this.addSlot(new SingleItemSlot(iItemHandler, 5, 58 , 52));
-            this.addSlot(new SingleItemSlot(iItemHandler, 6, 81 , 52));
-            this.addSlot(new SingleItemSlot(iItemHandler, 7, 104, 52));
+            this.addSlot(new InputSlot(iItemHandler, 5, 58 , 52));
+            this.addSlot(new InputSlot(iItemHandler, 6, 81 , 52));
+            this.addSlot(new InputSlot(iItemHandler, 7, 104, 52));
 
 
             this.addSlot(new UpgradeSlot(iItemHandler, 9, 12, 6));

@@ -277,7 +277,9 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         if (isRedstonePowered(pPos)) {
             return;
         }
-
+        if(itemHandler.getStackInSlot(0).isEmpty()){
+            return;
+        }
 
         if (!hasRecipe()) {
             resetProgress();
