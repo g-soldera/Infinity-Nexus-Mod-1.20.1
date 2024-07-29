@@ -1,13 +1,14 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
+import com.Infinity.Nexus.Core.block.entity.WrappedHandler;
+import com.Infinity.Nexus.Core.block.entity.common.SetUpgradeLevel;
+import com.Infinity.Nexus.Core.items.ModItems;
+import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
+import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.Infinity.Nexus.Mod.block.custom.Factory;
-import com.Infinity.Nexus.Mod.block.entity.common.SetMachineLevel;
-import com.Infinity.Nexus.Mod.block.entity.common.SetUpgradeLevel;
-import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
 import com.Infinity.Nexus.Mod.recipe.FactoryRecipes;
 import com.Infinity.Nexus.Mod.screen.factory.FactoryMenu;
-import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
-import com.Infinity.Nexus.Mod.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -21,7 +22,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -100,12 +100,12 @@ public class FactoryBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && canInsert(i, s))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && canInsert(i, s))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && canInsert(i, s))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && canInsert(i, s))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && canInsert(i, s))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && canInsert(i, s))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && ModUtils.canInsert(itemHandler, i, s))));
 
     protected final ContainerData data;
     private int progress = 0;
@@ -200,11 +200,6 @@ public class FactoryBlockEntity extends BlockEntity implements MenuProvider {
         progress = pTag.getInt("factory.progress");
         maxProgress = pTag.getInt("factory.maxProgress");
         ENERGY_STORAGE.setEnergy(pTag.getInt("factory.energy"));
-    }
-    public boolean canInsert(int slots, ItemStack stack) {
-        return this.itemHandler.getStackInSlot(slots).isEmpty()
-                && !(stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get())
-                && !(stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get());
     }
 
     public void drops() {
@@ -303,17 +298,26 @@ public class FactoryBlockEntity extends BlockEntity implements MenuProvider {
         int[] amountInput = recipe.get().getAmountInput();
 
 
-        for (int i = 0; i <= INPUT_SLOT; i++) {
-            this.itemHandler.extractItem(i, amountInput[i+1], false);
+        for (int i = 0; i < amountInput.length; i++) {
+            int amount = amountInput[i];
+            for (int slot = 0; slot <= INPUT_SLOT; slot++) {
+                ItemStack item = this.itemHandler.getStackInSlot(slot);
+                if (!item.isEmpty() && recipe.get().getIngredients().get(i).test(item) && amount > 0) {
+                    int extracted = this.itemHandler.extractItem(slot, amount, false).getCount();
+                    amount -= extracted;
+                }
+            }
         }
-
-
         ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
 
-        ModUtils.UseComponent(component, level, this.getBlockPos());
+        ModUtils.useComponent(component, level, this.getBlockPos());
 
         this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(),
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
+
+        if(ModUtils.getMuffler(itemHandler, UPGRADE_SLOTS) < 1){
+            level.playSound(null, this.getBlockPos(), SoundEvents.RESPAWN_ANCHOR_AMBIENT, SoundSource.BLOCKS, 0.3f, 1.0f);
+        }
     }
 
     private boolean hasRecipe() {
@@ -363,14 +367,6 @@ public class FactoryBlockEntity extends BlockEntity implements MenuProvider {
 
         duration = duration / Math.max((machineLevel + speed), 1);
         maxProgress = Math.max(duration, 5);
-    }
-
-    public static int getInputSlot() {
-        return INPUT_SLOT;
-    }
-
-    public static int getOutputSlot() {
-        return OUTPUT_SLOT;
     }
 
     @Nullable

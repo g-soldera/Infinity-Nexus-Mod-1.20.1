@@ -1,16 +1,13 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
+import com.Infinity.Nexus.Core.block.entity.WrappedHandler;
+import com.Infinity.Nexus.Core.items.custom.ComponentItem;
+import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.block.custom.MatterCondenser;
-import com.Infinity.Nexus.Mod.block.entity.common.SetMachineLevel;
-import com.Infinity.Nexus.Mod.block.entity.common.SetUpgradeLevel;
-import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
-import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
-import com.Infinity.Nexus.Mod.recipe.MatterCondenserRecipes;
-import com.Infinity.Nexus.Mod.recipe.PressRecipes;
 import com.Infinity.Nexus.Mod.screen.condenser.CondenserMenu;
-import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
-import com.Infinity.Nexus.Mod.utils.ModUtils;
+import com.Infinity.Nexus.Core.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -44,7 +41,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-import java.util.Optional;
 
 public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
@@ -280,7 +276,7 @@ public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvi
         }
     }
     private boolean hasFreeSlot() {
-        return canInsertItemIntoOutputSlot(ModItemsProgression.STABLE_MATTER.get()) && canInsertAmountIntoOutputSlot(1);
+        return canInsertItemIntoOutputSlot(ModItemsProgression.UNSTABLE_MATTER.get()) && canInsertAmountIntoOutputSlot(1);
     }
 
     private void increaseCatalystLevel() {
@@ -304,11 +300,11 @@ public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvi
 
         ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
 
-        ModUtils.UseComponent(component, level, this.getBlockPos());
+        ModUtils.useComponent(component, level, this.getBlockPos());
 
-        this.itemHandler.insertItem(OUTPUT_SLOT, new ItemStack(ModItemsProgression.STABLE_MATTER.get()), false);
+        this.itemHandler.insertItem(OUTPUT_SLOT, new ItemStack(ModItemsProgression.UNSTABLE_MATTER.get()), false);
 
-        level.playSound(null, this.getBlockPos(), SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 0.1f, 1.0f);
+        level.playSound(null, this.getBlockPos(), SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 0.3f, 1.0f);
     }
 
     private int getMachineLevel(){

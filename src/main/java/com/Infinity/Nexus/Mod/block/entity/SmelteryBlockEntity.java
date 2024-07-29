@@ -1,13 +1,13 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
+import com.Infinity.Nexus.Core.block.entity.WrappedHandler;
+import com.Infinity.Nexus.Core.block.entity.common.SetUpgradeLevel;
+import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.block.custom.Smeltery;
-import com.Infinity.Nexus.Mod.block.entity.common.SetMachineLevel;
-import com.Infinity.Nexus.Mod.block.entity.common.SetUpgradeLevel;
-import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
 import com.Infinity.Nexus.Mod.recipe.SmelteryRecipes;
 import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryMenu;
-import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
-import com.Infinity.Nexus.Mod.utils.ModUtils;
+import com.Infinity.Nexus.Core.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -21,7 +21,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -40,7 +39,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 
@@ -90,12 +88,12 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && !(ModUtils.isComponent(s) || ModUtils.isUpgrade(s)))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && ModUtils.canInsert(itemHandler, i, s))));
 
     protected final ContainerData data;
     private int progress = 0;
@@ -289,10 +287,12 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
 
         ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
 
-        ModUtils.UseComponent(component, level, this.getBlockPos());
+        ModUtils.useComponent(component, level, this.getBlockPos());
 
         this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(), this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
-        level.playSound(null, this.getBlockPos(), SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.1f, 1.0f);
+        if(ModUtils.getMuffler(itemHandler, UPGRADE_SLOTS) < 1){
+            level.playSound(null, this.getBlockPos(), SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.3f, 1.0f);
+        }
     }
 
     private boolean hasRecipe() {

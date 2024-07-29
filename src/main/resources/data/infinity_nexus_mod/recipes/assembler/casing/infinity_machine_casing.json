@@ -4,7 +4,7 @@
   "energy": 1000,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_8"
+      "tag": "infinity_nexus_core:up_8"
     },
     {
       "item": "infinity_nexus_mod:infinity_rod"

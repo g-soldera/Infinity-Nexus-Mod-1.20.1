@@ -6,7 +6,7 @@
   "fluidAmount": 10,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_2"
+      "tag": "infinity_nexus_core:up_2"
     },
     {
       "item": "minecraft:beetroot_seeds",

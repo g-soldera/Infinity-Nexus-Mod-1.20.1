@@ -2,9 +2,10 @@
   "type": "infinity_nexus_mod:crushing",
   "energy": 4800,
   "duration": 130,
+  "can_duplicate": false,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_4"
+      "tag": "infinity_nexus_core:up_4"
     },
     {
       "item": "infinity_nexus_mod:raw_nickel",

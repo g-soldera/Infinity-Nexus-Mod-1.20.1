@@ -2,10 +2,6 @@ package com.Infinity.Nexus.Mod.recipe;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.AssemblerBlockEntity;
-import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
-import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
-import com.Infinity.Nexus.Mod.utils.ModTags;
-import com.Infinity.Nexus.Mod.utils.ModUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
@@ -17,10 +13,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
 
 public class AssemblerRecipes implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> inputItems;

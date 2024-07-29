@@ -2,13 +2,8 @@ package com.Infinity.Nexus.Mod.block.custom;
 
 import com.Infinity.Nexus.Mod.block.custom.common.CommonUpgrades;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
-import com.Infinity.Nexus.Mod.block.entity.SmelteryBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.SolarBlockEntity;
-import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
-import com.Infinity.Nexus.Mod.item.custom.SolarUpgrade;
-import com.Infinity.Nexus.Mod.item.custom.UpgradeItem;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -27,12 +22,11 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Solar extends BaseEntityBlock {
-    public static IntegerProperty LIT = IntegerProperty.create("lit", 0, 4);
+    public static IntegerProperty LIT = IntegerProperty.create("lit", 0, 5);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 15, 16);
     public static final VoxelShape SHAPE_ON = Block.box(0, 0, 0, 16, 16, 16);

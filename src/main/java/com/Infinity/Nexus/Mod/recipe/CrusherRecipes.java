@@ -4,7 +4,7 @@ import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.CrusherBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
-import com.Infinity.Nexus.Mod.utils.ModUtils;
+import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
@@ -29,15 +29,17 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final int duration;
     private final int energy;
+    private final boolean canDuplicate;
 
 
-    public CrusherRecipes(NonNullList<Ingredient> inputItems, int inputCount, ItemStack output, ResourceLocation id, int duration, int energy) {
+    public CrusherRecipes(NonNullList<Ingredient> inputItems, int inputCount, ItemStack output, ResourceLocation id, int duration, int energy, boolean canDuplicate) {
         this.inputItems = inputItems;
         this.inputCount = inputCount;
         this.output = output;
         this.id = id;
         this.duration = duration;
         this.energy = energy;
+        this.canDuplicate = canDuplicate;
     }
 
 
@@ -99,6 +101,10 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
         return duration;
     }
 
+    public boolean canDuplicate() {
+        return canDuplicate;
+    }
+
     public static class Type implements RecipeType<CrusherRecipes> {
         public static final Type INSTANCE = new Type();
         public static final String ID = "crushing";
@@ -123,8 +129,9 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
 
             int duration = pSerializedRecipe.get("duration").getAsInt();
             int energy = pSerializedRecipe.get("energy").getAsInt();
+            boolean canDuplicate = pSerializedRecipe.get("can_duplicate").getAsBoolean();
 
-            return new CrusherRecipes(inputs, inputCount, output, pRecipeId, duration, energy);
+            return new CrusherRecipes(inputs, inputCount, output, pRecipeId, duration, energy, canDuplicate);
         }
 
         @Override
@@ -141,7 +148,8 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
             int duration = pBuffer.readInt();
             int energy = pBuffer.readInt();
             ItemStack output = pBuffer.readItem();
-            return new CrusherRecipes(inputs, inputCount, output, pRecipeId, duration, energy);
+            boolean canDuplicate = pBuffer.readBoolean();
+            return new CrusherRecipes(inputs, inputCount, output, pRecipeId, duration, energy, canDuplicate);
         }
 
         @Override
@@ -157,6 +165,7 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
             pBuffer.writeInt(pRecipe.inputCount);
             pBuffer.writeInt(pRecipe.duration);
             pBuffer.writeInt(pRecipe.energy);
+            pBuffer.writeBoolean(pRecipe.canDuplicate);
             pBuffer.writeItemStack(pRecipe.getResultItem(null), false);
         }
     }

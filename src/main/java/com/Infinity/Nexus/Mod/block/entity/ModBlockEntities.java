@@ -43,10 +43,6 @@ public class ModBlockEntities {
             BLOCK_ENTITY.register("generator_block_entity", () ->
                     BlockEntityType.Builder.of(GeneratorBlockEntity::new, ModBlocksAdditions.GENERATOR.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<MinerBlockEntity>> MINER_BE =
-            BLOCK_ENTITY.register("miner_block_entity", () ->
-                    BlockEntityType.Builder.of(MinerBlockEntity::new, ModBlocksAdditions.MINER.get()).build(null));
-
     public static final RegistryObject<BlockEntityType<FermentationBarrelBlockEntity>> FERMENTATION_BE =
             BLOCK_ENTITY.register("fermentation_barrel_block_entity", () ->
                     BlockEntityType.Builder.of(FermentationBarrelBlockEntity::new, ModBlocksAdditions.FERMENTATION_BARREL.get()).build(null));

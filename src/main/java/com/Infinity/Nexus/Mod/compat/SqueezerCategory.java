@@ -4,8 +4,6 @@ import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
 import com.Infinity.Nexus.Mod.recipe.SqueezerRecipes;
-import com.Infinity.Nexus.Mod.screen.renderer.EnergyInfoArea;
-import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -20,10 +18,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.energy.EnergyStorage;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class SqueezerCategory implements IRecipeCategory<SqueezerRecipes> {
 

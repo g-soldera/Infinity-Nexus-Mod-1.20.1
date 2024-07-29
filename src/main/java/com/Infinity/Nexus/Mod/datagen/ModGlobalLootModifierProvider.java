@@ -1,5 +1,6 @@
 package com.Infinity.Nexus.Mod.datagen;
 
+import com.Infinity.Nexus.Core.items.ModItems;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.loot.AddSusSandItemModifier;
@@ -18,6 +19,6 @@ public class ModGlobalLootModifierProvider extends GlobalLootModifierProvider {
     protected void start() {
         add("ancestral_component_trail_ruin_common_archaeology", new AddSusSandItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("archaeology/desert_pyramid")).build() },
-                ModItemsAdditions.ANCESTRAL_COMPONENT.get()));
+                ModItems.ANCESTRAL_COMPONENT.get()));
     }
 }

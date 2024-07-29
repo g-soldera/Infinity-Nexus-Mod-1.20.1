@@ -17,6 +17,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 
+        blockWithItem(ModBlocksAdditions.INFINIUM_STELLARUM_BLOCK);
+
         blockWithItem(ModBlocksAdditions.INFINITY_ORE);
         blockWithItem(ModBlocksAdditions.RAW_INFINITY_BLOCK);
         blockWithItem(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE);
@@ -49,9 +51,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE);
         blockWithItem(ModBlocksAdditions.RAW_URANIUM_BLOCK);
 
-
         blockWithItem(ModBlocksAdditions.ASPHALT);
-        blockWithItem(ModBlocksAdditions.STRUCTURAL_BLOCK);
 
 
 

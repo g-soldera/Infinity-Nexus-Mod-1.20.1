@@ -25,7 +25,7 @@ import java.util.Random;
 import java.util.function.Function;
 
 public class PaxelItem extends ModPaxelItem {
-    private boolean drop;
+    private final boolean drop;
     private final Component translation;
     private final MobEffectInstance[] effects =new MobEffectInstance[]{new MobEffectInstance(MobEffects.LUCK, 1, 1, false, false)};
 

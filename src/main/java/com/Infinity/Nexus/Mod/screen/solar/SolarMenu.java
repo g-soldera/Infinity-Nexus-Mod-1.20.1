@@ -1,11 +1,9 @@
-package com.Infinity.Nexus.Mod.screen.generator;
+package com.Infinity.Nexus.Mod.screen.solar;
 
-import com.Infinity.Nexus.Core.slots.ComponentSlot;
-import com.Infinity.Nexus.Core.slots.FuelSlot;
-import com.Infinity.Nexus.Core.slots.UpgradeSlot;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
-import com.Infinity.Nexus.Mod.block.entity.GeneratorBlockEntity;
+import com.Infinity.Nexus.Mod.block.entity.SolarBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
+import com.Infinity.Nexus.Mod.slots.SolarComponentSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -15,19 +13,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 
-public class GeneratorMenu extends AbstractContainerMenu {
-    public final GeneratorBlockEntity blockEntity;
+public class SolarMenu extends AbstractContainerMenu {
+    public final SolarBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
-    public GeneratorMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+    public SolarMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(1));
     }
 
-    public GeneratorMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.GENERATOR_MENU.get(), pContainerId);
+    public SolarMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.SOLAR_MENU.get(), pContainerId);
         checkContainerSize(inv, TE_INVENTORY_SLOT_COUNT);
-        blockEntity = ((GeneratorBlockEntity) entity);
+        blockEntity = ((SolarBlockEntity) entity);
         this.level = inv.player.level();
         this.data = data;
 
@@ -35,15 +33,7 @@ public class GeneratorMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new FuelSlot(iItemHandler, 0, 80, 47));
-
-
-            this.addSlot(new UpgradeSlot(iItemHandler, 1, -11, 11));
-            this.addSlot(new UpgradeSlot(iItemHandler, 2,  -11,23));
-            this.addSlot(new UpgradeSlot(iItemHandler, 3,  -11,35));
-            this.addSlot(new UpgradeSlot(iItemHandler, 4,  -11,47));
-
-            this.addSlot(new ComponentSlot(iItemHandler, 5, 8, 29));
+            this.addSlot(new SolarComponentSlot(iItemHandler, 0, 80, 45));
         });
 
         addDataSlots(data);
@@ -52,15 +42,8 @@ public class GeneratorMenu extends AbstractContainerMenu {
     public boolean isCrafting() {
         return data.get(0) > 0;
     }
-    public GeneratorBlockEntity getBlockEntity(){
+    public SolarBlockEntity getBlockEntity() {
         return blockEntity;
-    }
-    public int getScaledProgress() {
-        int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 13; // This is the height in pixels of your arrow
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -79,7 +62,7 @@ public class GeneratorMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 6;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
@@ -116,7 +99,7 @@ public class GeneratorMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocksAdditions.GENERATOR.get());
+                pPlayer, ModBlocksAdditions.SOLAR.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

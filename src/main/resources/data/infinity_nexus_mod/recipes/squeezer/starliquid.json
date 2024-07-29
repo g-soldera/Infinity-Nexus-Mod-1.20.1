@@ -6,7 +6,7 @@
   "fluidAmount": 1,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_7"
+      "tag": "infinity_nexus_core:up_7"
     },
     {
       "item": "minecraft:nether_star",

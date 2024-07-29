@@ -1,8 +1,6 @@
 package com.Infinity.Nexus.Mod.item;
 
-import ca.weblite.objc.Proxy;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
-import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,6 +16,7 @@ public class ModItemsProgression {
     public static final RegistryObject<Item> GOLD_SCREW_CAST = ITEMS.register("gold_screw_cast", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> GOLD_SHEET_CAST = ITEMS.register("gold_sheet_cast", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> GOLD_ROD_CAST = ITEMS.register("gold_rod_cast", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> GOLD_INGOT_CAST = ITEMS.register("gold_ingot_cast", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
 
     //Models
     public static final RegistryObject<Item> RAW_WIRE_CLAY_MODEL = ITEMS.register("raw_wire_clay_model", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
@@ -98,8 +97,11 @@ public class ModItemsProgression {
     public static final RegistryObject<Item> BIO_MASS = ITEMS.register("bio_mass", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SOLAR_CORE = ITEMS.register("solar_core", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ADVANCED_SOLAR_CORE = ITEMS.register("advanced_solar_core", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> QUANTUM_SOLAR_CORE = ITEMS.register("quantum_solar_core", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RESIDUAL_MATTER = ITEMS.register("residual_matter", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> UNSTABLE_MATTER = ITEMS.register("unstable_matter", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> STABLE_MATTER = ITEMS.register("stable_matter", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> IRIDIUM = ITEMS.register("iridium", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PLASTIC = ITEMS.register("plastic", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CARBON_PLATE = ITEMS.register("carbon_plate", () -> new Item(new Item.Properties()));
 

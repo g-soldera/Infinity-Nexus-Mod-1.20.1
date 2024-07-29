@@ -2,9 +2,10 @@
   "type": "infinity_nexus_mod:crushing",
   "energy": 4800,
   "duration": 130,
+  "can_duplicate": true,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_4"
+      "tag": "infinity_nexus_core:up_4"
     },
     {
       "item": "occultism:silver_ore_deepslate",
@@ -12,7 +13,7 @@
     }
   ],
   "output": {
-    "item": "infinity_nexus_mod:nickel_dust",
-    "count": 2
+    "item": "infinity_nexus_mod:silver_dust",
+    "count": 1
   }
 }

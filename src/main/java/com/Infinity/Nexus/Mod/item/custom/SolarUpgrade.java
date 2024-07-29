@@ -22,7 +22,7 @@ public class SolarUpgrade extends Item {
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
         if (Screen.hasShiftDown()) {
-            components.add(Component.translatable("tooltip.infinity_nexus.solar_upgrade").append(Component.literal(" " + energy)));
+            components.add(Component.translatable("tooltip.infinity_nexus.solar_upgrade").append(Component.literal(" " + energy +" FE/t")));
         } else {
             components.add(Component.translatable("tooltip.infinity_nexus.pressShift"));
         }

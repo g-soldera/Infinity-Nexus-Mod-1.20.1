@@ -1,7 +1,6 @@
 {
-  "replace": true,
   "values": [
-    "infinity_nexus_mod:wood_machine_casing",
-    "infinity_nexus_mod:copper_machine_casing"
+    "infinity_nexus_core:wood_structure",
+    "infinity_nexus_core:copper_structure"
   ]
 }

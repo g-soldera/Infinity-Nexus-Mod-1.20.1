@@ -3,7 +3,7 @@ package com.Infinity.Nexus.Mod.recipe;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.SmelteryBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
-import com.Infinity.Nexus.Mod.utils.ModUtils;
+import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;

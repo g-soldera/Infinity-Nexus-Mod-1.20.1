@@ -22,8 +22,6 @@ public class ModTabProgression {
                     .displayItems((pParameters, pOutput) -> {
                         //-------------------------//-------------------------//
 
-                        pOutput.accept(new ItemStack(ModBlocksProgression.WOOD_MACHINE_CASING.get()));
-                        pOutput.accept(new ItemStack(ModBlocksProgression.COPPER_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.SILVER_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.TIN_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.LEAD_MACHINE_CASING.get()));
@@ -31,8 +29,6 @@ public class ModTabProgression {
                         pOutput.accept(new ItemStack(ModBlocksProgression.BRASS_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.BRONZE_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.ALUMINUM_MACHINE_CASING.get()));
-                        pOutput.accept(new ItemStack(ModBlocksProgression.GOLD_MACHINE_CASING.get()));
-                        pOutput.accept(new ItemStack(ModBlocksProgression.IRON_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.PLASTIC_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.GLASS_MACHINE_CASING.get()));
                         pOutput.accept(new ItemStack(ModBlocksProgression.STEEL_MACHINE_CASING.get()));
@@ -43,6 +39,7 @@ public class ModTabProgression {
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_SCREW_CAST.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_SHEET_CAST.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.GOLD_ROD_CAST.get()));
+                        pOutput.accept(new ItemStack(ModItemsProgression.GOLD_INGOT_CAST.get()));
 
                         pOutput.accept(new ItemStack(ModItemsProgression.RAW_WIRE_CLAY_MODEL.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.RAW_SCREW_CLAY_MODEL.get()));

@@ -1,14 +1,16 @@
 package com.Infinity.Nexus.Mod.screen.squeezer;
 
+import com.Infinity.Nexus.Core.renderer.EnergyInfoArea;
+import com.Infinity.Nexus.Core.renderer.FluidTankRenderer;
+import com.Infinity.Nexus.Core.renderer.InfoArea;
+import com.Infinity.Nexus.Core.renderer.RenderScreenTooltips;
+import com.Infinity.Nexus.Core.utils.MouseUtil;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
-import com.Infinity.Nexus.Mod.screen.renderer.EnergyInfoArea;
-import com.Infinity.Nexus.Mod.screen.renderer.FluidTankRenderer;
-import com.Infinity.Nexus.Mod.screen.renderer.InfoArea;
-import com.Infinity.Nexus.Mod.utils.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -18,6 +20,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.fluids.FluidStack;
 
 
+import java.util.List;
 import java.util.Optional;
 
 public class SqueezerScreen extends AbstractContainerScreen<SqueezerMenu> implements GuiEventListener {
@@ -86,6 +89,30 @@ public class SqueezerScreen extends AbstractContainerScreen<SqueezerMenu> implem
             pGuiGraphics.renderTooltip(this.font, energyInfoArea.getTooltips(), Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
+    private void renderTooltips(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, int x, int y) {
+        if (Screen.hasShiftDown()) {
+            if (isMouseAboveArea(pMouseX, pMouseY, x, y, -12, 10, 17, 53)) {
+                RenderScreenTooltips.renderUpgradeSlotTooltipAndItems(this.font, pGuiGraphics, pMouseX, pMouseY, x, y);
+            }else if (isMouseAboveArea(pMouseX, pMouseY, x, y, 7, 28, 17, 17)) {
+                RenderScreenTooltips.renderComponentSlotTooltipAndItems(this.font, pGuiGraphics, pMouseX, pMouseY, x, y);
+            }else if(isMouseAboveArea(pMouseX, pMouseY, x, y, 145, 6, 6, 62)) {
+                List<Component> components = List.of(Component.literal("Output Fluid"));
+                RenderScreenTooltips.renderTooltipArea(this.font, pGuiGraphics ,components, pMouseX, pMouseY, x, y);
+            }else if(isMouseAboveArea(pMouseX, pMouseY, x, y, 124, 6, 17, 17)) {
+                List<Component> components = List.of(Component.literal("Container Fluid Input Slot"));
+                RenderScreenTooltips.renderTooltipArea(this.font, pGuiGraphics ,components, pMouseX, pMouseY, x, y);
+            }else if(isMouseAboveArea(pMouseX, pMouseY, x, y, 124, 52, 17, 17)) {
+                List<Component> components = List.of(Component.literal("Container Fluid Output Slot"));
+                RenderScreenTooltips.renderTooltipArea(this.font, pGuiGraphics ,components, pMouseX, pMouseY, x, y);
+            }else if(isMouseAboveArea(pMouseX, pMouseY, x, y, 79, 6, 17, 17)) {
+                List<Component> components = List.of(Component.literal("Input Slot"));
+                RenderScreenTooltips.renderTooltipArea(this.font, pGuiGraphics ,components, pMouseX, pMouseY, x, y);
+            }else if(isMouseAboveArea(pMouseX, pMouseY, x, y, 79, 51, 17, 17)) {
+                List<Component> components = List.of(Component.literal("Output Slot"));
+                RenderScreenTooltips.renderTooltipArea(this.font, pGuiGraphics ,components, pMouseX, pMouseY, x, y);
+            }
+        }
+    }
     @Override
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
@@ -96,6 +123,7 @@ public class SqueezerScreen extends AbstractContainerScreen<SqueezerMenu> implem
 
         renderEnergyAreaTooltips(pGuiGraphics,pMouseX,pMouseY, x, y);
         renderFluidAreaTooltips(pGuiGraphics,pMouseX,pMouseY, x, y, menu.blockEntity.getFluid(), 146,6, fluidRenderer);
+        renderTooltips(pGuiGraphics,pMouseX,pMouseY, x, y);
 
         InfoArea.draw(pGuiGraphics);
         super.renderLabels(pGuiGraphics, pMouseX, pMouseY);

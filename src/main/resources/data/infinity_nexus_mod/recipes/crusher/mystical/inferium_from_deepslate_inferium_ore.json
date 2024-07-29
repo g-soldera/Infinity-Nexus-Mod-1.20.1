@@ -2,9 +2,10 @@
   "type": "infinity_nexus_mod:crushing",
   "energy": 3600,
   "duration": 130,
+  "can_duplicate": false,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_3"
+      "tag": "infinity_nexus_core:up_3"
     },
     {
       "item": "mysticalagriculture:deepslate_inferium_ore",

@@ -20,6 +20,7 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        this.dropSelf(ModBlocksAdditions.INFINIUM_STELLARUM_BLOCK.get());
         this.dropSelf(ModBlocksAdditions.INFINITY_BLOCK.get());
         this.dropSelf(ModBlocksAdditions.RAW_INFINITY_BLOCK.get());
         this.dropSelf(ModBlocksAdditions.INFINITY_ORE.get());
@@ -76,7 +77,6 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksAdditions.FACTORY.get());
         this.dropSelf(ModBlocksAdditions.SQUEEZER.get());
         this.dropSelf(ModBlocksAdditions.SMELTERY.get());
-        this.dropSelf(ModBlocksAdditions.MINER.get());
         this.dropSelf(ModBlocksAdditions.GENERATOR.get());
         this.dropSelf(ModBlocksAdditions.FERMENTATION_BARREL.get());
         this.dropSelf(ModBlocksAdditions.RECYCLER.get());
@@ -84,9 +84,6 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksAdditions.SOLAR.get());
         this.dropSelf(ModBlocksAdditions.DISPLAY.get());
 
-
-        this.dropSelf(ModBlocksProgression.WOOD_MACHINE_CASING.get());
-        this.dropSelf(ModBlocksProgression.COPPER_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.SILVER_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.TIN_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.NICKEL_MACHINE_CASING.get());
@@ -94,8 +91,6 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksProgression.BRASS_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.LEAD_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.ALUMINUM_MACHINE_CASING.get());
-        this.dropSelf(ModBlocksProgression.GOLD_MACHINE_CASING.get());
-        this.dropSelf(ModBlocksProgression.IRON_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.PLASTIC_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.GLASS_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.STEEL_MACHINE_CASING.get());
@@ -126,15 +121,6 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
 
         this.add(ModBlocksAdditions.URANIUM_ORE.get(), block -> createOreDrop( ModBlocksAdditions.URANIUM_ORE.get(), ModItemsAdditions.RAW_URANIUM.get()));
         this.add(ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get(), block -> createOreDrop( ModBlocksAdditions.DEEPSLATE_URANIUM_ORE.get(), ModItemsAdditions.RAW_URANIUM.get()));
-
-        this.dropSelf(ModBlocksAdditions.PURPLE_LIGHT_CRYSTAL.get());
-        this.dropSelf(ModBlocksAdditions.YELLOW_LIGHT_CRYSTAL.get());
-        this.dropSelf(ModBlocksAdditions.WHITE_LIGHT_CRYSTAL.get());
-        this.dropSelf(ModBlocksAdditions.RED_LIGHT_CRYSTAL.get());
-        this.dropSelf(ModBlocksAdditions.ORANGE_LIGHT_CRYSTAL.get());
-        this.dropSelf(ModBlocksAdditions.PINK_LIGHT_CRYSTAL.get());
-        this.dropSelf(ModBlocksAdditions.GREEN_LIGHT_CRYSTAL.get());
-        this.dropSelf(ModBlocksAdditions.BLUE_LIGHT_CRYSTAL.get());
 
         this.dropSelf(ModBlocksAdditions.ENTITY_CENTRALIZER.get());
         this.dropSelf(ModBlocksAdditions.ENTITY_DISPLAY.get());

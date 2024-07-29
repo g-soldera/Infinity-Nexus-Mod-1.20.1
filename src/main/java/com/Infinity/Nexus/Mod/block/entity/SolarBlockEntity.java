@@ -1,10 +1,11 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
+import com.Infinity.Nexus.Core.block.entity.WrappedHandler;
+import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.block.custom.Solar;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
-import com.Infinity.Nexus.Mod.screen.solar.solar.SolarMenu;
-import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
-import com.Infinity.Nexus.Mod.utils.ModUtils;
+import com.Infinity.Nexus.Mod.item.custom.SolarUpgrade;
+import com.Infinity.Nexus.Mod.screen.solar.SolarMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -25,9 +26,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.DaylightDetectorBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.DaylightDetectorBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -77,12 +76,12 @@ public class SolarBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> !(ModUtils.isSolarComponent(s)))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> !(ModUtils.isSolarComponent(s)))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> !(ModUtils.isSolarComponent(s)))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> !(ModUtils.isSolarComponent(s)))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> !(ModUtils.isSolarComponent(s)))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> !(ModUtils.isSolarComponent(s)))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> !(s.getItem() instanceof SolarUpgrade))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> !(s.getItem() instanceof SolarUpgrade))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> !(s.getItem() instanceof SolarUpgrade))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> !(s.getItem() instanceof SolarUpgrade))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> !(s.getItem() instanceof SolarUpgrade))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> !(s.getItem() instanceof SolarUpgrade))));
 
     protected final ContainerData data;
     public SolarBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -175,6 +174,7 @@ public class SolarBlockEntity extends BlockEntity implements MenuProvider {
             case 2 -> Component.translatable("item.infinity_nexus_mod.solar_pane_advanced");
             case 3 -> Component.translatable("item.infinity_nexus_mod.solar_pane_ultimate");
             case 4 -> Component.translatable("item.infinity_nexus_mod.solar_pane_quantum");
+            case 5 -> Component.translatable("item.infinity_nexus_mod.solar_pane_photonic");
             default -> throw new IllegalStateException("Unexpected value: " + getSolarLevel());
         };
     }
@@ -192,6 +192,9 @@ public class SolarBlockEntity extends BlockEntity implements MenuProvider {
         }else
         if (stack.getItem() == ModItemsAdditions.SOLAR_PANE_QUANTUM.get()) {
             level = 4;
+        }else
+        if (stack.getItem() == ModItemsAdditions.SOLAR_PANE_PHOTONIC.get()) {
+            level = 5;
         }
         return level;
     }
@@ -264,7 +267,7 @@ public class SolarBlockEntity extends BlockEntity implements MenuProvider {
 
     public  int getGenerationRate() {
         int level = getSolarLevel();
-        int[] energy = {0, 8, 72, 648, 5832};
+        int[] energy = {0, 8, 72, 648, 5832, 52488};
         return getTime() ? energy[level] : energy[level] / 8;
     }
     private void findEnergyCap() {

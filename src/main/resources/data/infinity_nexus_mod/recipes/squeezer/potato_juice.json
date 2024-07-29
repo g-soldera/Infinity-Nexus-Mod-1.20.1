@@ -6,7 +6,7 @@
   "fluidAmount": 100,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_3"
+      "tag": "infinity_nexus_core:up_3"
     },
     {
       "item": "minecraft:potato",

@@ -1,10 +1,10 @@
 package com.Infinity.Nexus.Mod.screen.fermentation;
 
+import com.Infinity.Nexus.Core.renderer.FluidTankRenderer;
+import com.Infinity.Nexus.Core.renderer.InfoArea;
+import com.Infinity.Nexus.Core.utils.MouseUtil;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.FermentationBarrelBlockEntity;
-import com.Infinity.Nexus.Mod.screen.renderer.FluidTankRenderer;
-import com.Infinity.Nexus.Mod.screen.renderer.InfoArea;
-import com.Infinity.Nexus.Mod.utils.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -13,7 +13,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.ClipContext;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Optional;

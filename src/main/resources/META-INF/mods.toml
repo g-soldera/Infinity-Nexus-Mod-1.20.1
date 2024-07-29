@@ -51,16 +51,32 @@ description='''${mod_description}'''
     # An ordering relationship for the dependency - BEFORE or AFTER required if the dependency is not mandatory
     # BEFORE - This mod is loaded BEFORE the dependency
     # AFTER - This mod is loaded AFTER the dependency
-    ordering="NONE"
+    ordering="AFTER"
     # Side this dependency is applied on - BOTH, CLIENT, or SERVER
     side="BOTH"
 # Here's another dependency
-[[dependencies.${mod_id}]]
-    modId="minecraft"
+                #MOD_ID
+[[dependencies.infinity_nexus_core]]
+    #mod_group_id . MOD_ID
+    modId="com.nexus.infinity_nexus_core"
+    #é obrigatório?
     mandatory=true
-    # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="${minecraft_version_range}"
-    ordering="NONE"
+    #mod_version
+    versionRange="0.0.1-1.20.1"
+    #Se ele vai iniciar antes ou depois de do mod, User AFTER no mod acima que é seu "addon" que usa este core
+    ordering="BEFORE"
+    #Quem precisa ussar esta biblioteca? BOTH, CLIENT, or SERVER
+    side="BOTH"
+[[dependencies.infinity_nexus_miner]]
+    #mod_group_id . MOD_ID
+    modId="com.nexus.infinity_nexus_miner"
+    #é obrigatório?
+    mandatory=true
+    #mod_version
+    versionRange="1.0.1-1.20.1"
+    #Se ele vai iniciar antes ou depois de do mod, User AFTER no mod acima que é seu "addon" que usa este core
+    ordering="BEFORE"
+    #Quem precisa ussar esta biblioteca? BOTH, CLIENT, or SERVER
     side="BOTH"
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares

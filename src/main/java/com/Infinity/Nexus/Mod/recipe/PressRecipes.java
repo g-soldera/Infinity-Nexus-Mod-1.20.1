@@ -3,7 +3,7 @@ package com.Infinity.Nexus.Mod.recipe;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
-import com.Infinity.Nexus.Mod.utils.ModUtils;
+import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -50,7 +50,7 @@ public class PressRecipes implements Recipe<SimpleContainer> {
         int componentSlot = PressBlockEntity.getComponentSlot();
         ItemStack stack = pContainer.getItem(componentSlot);
         return (inputItems.get(0).test(stack)) &&
-                (inputItems.get(1).test(pContainer.getItem(0)))&&
+                (inputItems.get(1).test(pContainer.getItem(0)) && pContainer.getItem(0).getCount() >= getInputCount()) &&
                 inputItems.get(2).test(pContainer.getItem(1));
     }
 

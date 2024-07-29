@@ -1,18 +1,21 @@
 package com.Infinity.Nexus.Mod.screen.condenser;
 
+import com.Infinity.Nexus.Core.renderer.EnergyInfoArea;
+import com.Infinity.Nexus.Core.renderer.InfoArea;
+import com.Infinity.Nexus.Core.renderer.RenderScreenTooltips;
+import com.Infinity.Nexus.Core.utils.MouseUtil;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
-import com.Infinity.Nexus.Mod.screen.renderer.EnergyInfoArea;
-import com.Infinity.Nexus.Mod.screen.renderer.InfoArea;
 import com.Infinity.Nexus.Mod.screen.renderer.CondenserProgressInfoArea;
-import com.Infinity.Nexus.Mod.utils.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
+import java.util.List;
 import java.util.Optional;
 
 public class CondenserScreen extends AbstractContainerScreen<CondenserMenu> {
@@ -55,6 +58,7 @@ public class CondenserScreen extends AbstractContainerScreen<CondenserMenu> {
         pGuiGraphics.drawString(this.font,"Up: "+menu.getBlockEntity().getCatalystLevel() +"/"+menu.getBlockEntity().getAmplifier(),88,74,0XFFFFFF);
 
         renderEnergyAreaTooltips(pGuiGraphics,pMouseX,pMouseY, x, y);
+        renderTooltips(pGuiGraphics,pMouseX,pMouseY, x, y);
 
         InfoArea.draw(pGuiGraphics);
         super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
@@ -68,7 +72,19 @@ public class CondenserScreen extends AbstractContainerScreen<CondenserMenu> {
             pGuiGraphics.renderTooltip(this.font, progressInfoArea.getTooltips(), Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
-
+    private void renderTooltips(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, int x, int y) {
+        if (Screen.hasShiftDown()) {
+            if (isMouseAboveArea(pMouseX, pMouseY, x, y, 7, 28, 17, 17)) {
+                RenderScreenTooltips.renderComponentSlotTooltipAndItems(this.font, pGuiGraphics, pMouseX, pMouseY, x, y);
+            }else if(isMouseAboveArea(pMouseX, pMouseY, x, y, 79, 6, 17, 17)) {
+                List<Component> components = List.of(Component.literal("Input Slot"));
+                RenderScreenTooltips.renderTooltipArea(this.font, pGuiGraphics ,components, pMouseX, pMouseY, x, y);
+            }else if(isMouseAboveArea(pMouseX, pMouseY, x, y, 79, 51, 17, 17)) {
+                List<Component> components = List.of(Component.literal("Output Slot"));
+                RenderScreenTooltips.renderTooltipArea(this.font, pGuiGraphics ,components, pMouseX, pMouseY, x, y);
+            }
+        }
+    }
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
@@ -77,7 +93,6 @@ public class CondenserScreen extends AbstractContainerScreen<CondenserMenu> {
         RenderSystem.setShaderTexture(0, TEXTURE);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-
         guiGraphics.blit(TEXTURE, x + 2, y-14, 2, 167, 174, 64);
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 

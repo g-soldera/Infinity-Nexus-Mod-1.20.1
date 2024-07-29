@@ -2,9 +2,10 @@
   "type": "infinity_nexus_mod:crushing",
   "energy": 1200,
   "duration": 130,
+  "can_duplicate": true,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_1"
+      "tag": "infinity_nexus_core:up_1"
     },
     {
       "item": "minecraft:nether_quartz_ore",
@@ -13,6 +14,6 @@
   ],
   "output": {
     "item": "minecraft:quartz",
-    "count": 5
+    "count": 2
   }
 }

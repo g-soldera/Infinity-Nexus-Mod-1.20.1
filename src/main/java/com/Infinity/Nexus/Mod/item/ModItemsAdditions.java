@@ -6,6 +6,7 @@ import com.Infinity.Nexus.Mod.fluid.ModFluids;
 import com.Infinity.Nexus.Mod.item.custom.*;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
@@ -14,6 +15,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.Objects;
 
 public class ModItemsAdditions {
     public static final DeferredRegister<Item> ITEMS =
@@ -33,6 +36,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> BRONZE_INGOT = ITEMS.register("bronze_ingot",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GRAPHITE_INGOT = ITEMS.register("graphite_ingot",() -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IRIDIUM_INGOT = ITEMS.register("iridium_ingot",() -> new Item(new Item.Properties()));
 
 
     public static final RegistryObject<Item> INFINITY_NUGGET = ITEMS.register("infinity_nugget",() -> new Item(new Item.Properties()));
@@ -88,7 +92,7 @@ public class ModItemsAdditions {
                             new MobEffectInstance(MobEffects.WITHER, 200, 2)
             }));
     public static final RegistryObject<Item> INFINITY_3D_SWORD = ITEMS.register("infinity_3d_sword",
-            () -> new ModSword(ModToolTiers.INFINITY, 40, 0,//+4
+            () -> new ModSword(ModToolTiers.INFINITY, 50, 0,//+4
                     new Item.Properties().stacksTo(1).fireResistant(),
                     Component.translatable("tooltip.infinity_nexus_mod.infinity_3d_sword"),
                     new MobEffectInstance[]{
@@ -124,7 +128,7 @@ public class ModItemsAdditions {
                             new MobEffectInstance(MobEffects.POISON, 200, 3)
                     }));
     public static final RegistryObject<Item> IMPERIAL_INFINITY_3D_SWORD = ITEMS.register("imperial_infinity_3d_sword",
-            () -> new ModSword(ModToolTiers.IMPERIAL, 50, 1,
+            () -> new ModSword(ModToolTiers.IMPERIAL, 60, 1,
                     new Item.Properties().stacksTo(1).fireResistant(),
                     Component.translatable("tooltip.infinity_nexus_mod.imperial_infinity_3d_sword"),
                     new MobEffectInstance[]{
@@ -145,9 +149,6 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> IMPERIAL_INFINITY_LEGGINGS = ITEMS.register("imperial_infinity_leggings", () -> new ImperialInfinityArmorItem(ModArmorMaterials.IMPERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
     public static final RegistryObject<Item> IMPERIAL_INFINITY_BOOTS = ITEMS.register("imperial_infinity_boots", () -> new ImperialInfinityArmorItem(ModArmorMaterials.IMPERIAL, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
 
-    public static final RegistryObject<Item> SPEED_UPGRADE = ITEMS.register("speed_upgrade", () -> new UpgradeItem(new Item.Properties().stacksTo(4).fireResistant().rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> STRENGTH_UPGRADE = ITEMS.register("strength_upgrade", () -> new UpgradeItem(new Item.Properties().stacksTo(4).fireResistant().rarity(Rarity.UNCOMMON)));
-
     public static final RegistryObject<Item> BUCKET_LUBRICANT = ITEMS.register("bucket_lubricant", () -> new BucketItem(ModFluids.LUBRICANT_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
     public static final RegistryObject<Item> BUCKET_ETHANOL = ITEMS.register("bucket_ethanol", () -> new BucketItem(ModFluids.ETHANOL_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
     public static final RegistryObject<Item> BUCKET_OIL = ITEMS.register("bucket_oil", () -> new BucketItem(ModFluids.OIL_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1) ));
@@ -163,25 +164,6 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> VINEGAR_BOTTLE = ITEMS.register("vinegar_bottle", () -> new BottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
     public static final RegistryObject<Item> WINE_BOTTLE = ITEMS.register("wine_bottle", () -> new BottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
 
-
-    public static final RegistryObject<Item> MEMBER_BAG = ITEMS.register("bag_member", () -> new Item(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> SUPPORTER_BAG = ITEMS.register("bag_apoiador", () -> new Item(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> VIP_BAG = ITEMS.register("bag_vip", () -> new Item(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> VIPPLUS_BAG = ITEMS.register("bag_vipplus", () -> new Item(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> VIPNEXUS_BAG = ITEMS.register("bag_vipnexus", () -> new Item(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.EPIC)));
-    public static final RegistryObject<Item> VIPINFINITY_BAG = ITEMS.register("bag_vipinfinity", () -> new Item(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.EPIC)));
-
-
-    public static final RegistryObject<Item> REDSTONE_COMPONENT = ITEMS.register("redstone_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(1000).rarity(Rarity.COMMON), "§2Base Durability:§e 1000"));
-    public static final RegistryObject<Item> BASIC_COMPONENT = ITEMS.register("basic_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(2000).rarity(Rarity.COMMON), "§2Base Durability:§e 2000"));
-    public static final RegistryObject<Item> REINFORCED_COMPONENT = ITEMS.register("reinforced_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(4000).rarity(Rarity.UNCOMMON), "§2Base Durability:§e 4000"));
-    public static final RegistryObject<Item> LOGIC_COMPONENT = ITEMS.register("logic_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(8000).rarity(Rarity.UNCOMMON), "§2Base Durability:§e 8000"));
-    public static final RegistryObject<Item> ADVANCED_COMPONENT = ITEMS.register("advanced_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(16000).rarity(Rarity.RARE), "§2Base Durability:§e 16000"));
-    public static final RegistryObject<Item> REFINED_COMPONENT = ITEMS.register("refined_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(32000).rarity(Rarity.RARE), "§2Base Durability:§e 32000"));
-    public static final RegistryObject<Item> INTEGRAL_COMPONENT = ITEMS.register("integral_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(64000).rarity(Rarity.EPIC), "§2Base Durability:§e 64000"));
-    public static final RegistryObject<Item> INFINITY_COMPONENT = ITEMS.register("infinity_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(-1).rarity(Rarity.EPIC), "§2Base Durability:§e Infinity"));
-    public static final RegistryObject<Item> ANCESTRAL_COMPONENT = ITEMS.register("ancestral_component", () -> new ComponentItem(new Item.Properties().stacksTo(1).durability(10).rarity(Rarity.EPIC), ""));
-
     public static final RegistryObject<Item> HAMMER_RANGE_UPGRADE = ITEMS.register("hammer_range_upgrade", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final RegistryObject<Item> STAR_FRAGMENT = ITEMS.register("star_fragment", () -> new Item(new Item.Properties()));
@@ -190,18 +172,18 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> ADVANCED_CIRCUIT = ITEMS.register("advanced_circuit", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final RegistryObject<Item> TERRAIN_MARKER = ITEMS.register("terrain_marker", () -> new Item(new Item.Properties().stacksTo(1).durability(-1)));
-    public static final RegistryObject<Item> LINKING_TOOL = ITEMS.register("linking_tool", () -> new LinkingTool(new Item.Properties().stacksTo(1).durability(-1)));
-
     public static final RegistryObject<Item> SOLAR_PANE = ITEMS.register("solar_pane", () -> new SolarUpgrade(new Item.Properties().rarity(Rarity.COMMON),8));
     public static final RegistryObject<Item> SOLAR_PANE_ADVANCED = ITEMS.register("solar_pane_advanced", () -> new SolarUpgrade(new Item.Properties().rarity(Rarity.UNCOMMON), 73));
     public static final RegistryObject<Item> SOLAR_PANE_ULTIMATE = ITEMS.register("solar_pane_ultimate", () -> new SolarUpgrade(new Item.Properties().rarity(Rarity.RARE), 648));
     public static final RegistryObject<Item> SOLAR_PANE_QUANTUM = ITEMS.register("solar_pane_quantum", () -> new SolarUpgrade(new Item.Properties().rarity(Rarity.EPIC), 5832));
+    public static final RegistryObject<Item> SOLAR_PANE_PHOTONIC = ITEMS.register("solar_pane_photonic", () -> new SolarUpgrade(new Item.Properties().rarity(Rarity.EPIC), 52488));
 
     public static final RegistryObject<Item> STARCH = ITEMS.register("starch", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> STRAINER = ITEMS.register("strainer", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PLASTIC_GOO = ITEMS.register("plastic_goo", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GLYCERIN = ITEMS.register("glycerin", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SLICED_APPLE = ITEMS.register("sliced_apple", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> KNIFE = ITEMS.register("knife", () -> new Knife(new Item.Properties().stacksTo(1).durability(500)));
 
     public static final RegistryObject<Item> ASGREON_SPAWN_EGG = ITEMS.register("asgreon_spawn_egg", () -> new ForgeSpawnEggItem( ModEntities.ASGREON, 0x7e9680, 0xc5d1c5,new Item.Properties()));
     public static void register(IEventBus eventBus) {

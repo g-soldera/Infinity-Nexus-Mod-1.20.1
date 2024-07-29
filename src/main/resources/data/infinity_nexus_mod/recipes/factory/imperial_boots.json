@@ -4,7 +4,7 @@
   "energy": 1e12,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_9"
+      "tag": "infinity_nexus_core:up_9"
     },
     {
       "item": "infinity_nexus_mod:infinium_stellarum_ingot"

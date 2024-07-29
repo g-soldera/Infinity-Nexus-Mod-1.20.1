@@ -2,7 +2,6 @@ package com.Infinity.Nexus.Mod.recipe;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.FactoryBlockEntity;
-import com.Infinity.Nexus.Mod.utils.ModUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
@@ -16,9 +15,7 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 public class FactoryRecipes implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> inputItems;
@@ -43,19 +40,38 @@ public class FactoryRecipes implements Recipe<SimpleContainer> {
         if (pLevel.isClientSide()) {
             return false;
         }
+        int matches = 0;
+        int componentSlot = FactoryBlockEntity.getComponentSlot();
+        ItemStack stack = pContainer.getItem(componentSlot);
+        List<Integer> slotsVerificados = new ArrayList<>();
 
+        for (int i = 1; i < 17; i++) {
+            for (int j = 0; j < 16; j++) {
+                if (inputItems.get(i).test(pContainer.getItem(j)) && !slotsVerificados.contains(j) && pContainer.getItem(j).getCount() == amountInput[i]) {
+                    matches++;
+                    slotsVerificados.add(j);
+                    break;
+                }
+            }
+        }
+        if (matches < 16) {
+            return false;
+        }
+        /*
         int componentSlot = FactoryBlockEntity.getComponentSlot();
         ItemStack stack = pContainer.getItem(componentSlot);
 
         // Criar um conjunto para rastrear os slots já verificados e os ingredientes associados a eles
 
         for (int i = 1; i < 17; i++) {
-            if(!inputItems.get(i).test(pContainer.getItem(i - 1)) || pContainer.getItem(i - 1).getCount() < amountInput[i]) {
+            if (!inputItems.get(i).test(pContainer.getItem(i - 1)) || pContainer.getItem(i - 1).getCount() < amountInput[i]) {
                 return false;
             }
         }
 
+         */
         return inputItems.get(0).test(stack);
+
     }
 
     @Override

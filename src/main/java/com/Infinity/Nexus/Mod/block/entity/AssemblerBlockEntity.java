@@ -1,14 +1,17 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
+import com.Infinity.Nexus.Core.block.entity.WrappedHandler;
+import com.Infinity.Nexus.Core.block.entity.common.SetUpgradeLevel;
+import com.Infinity.Nexus.Core.items.ModItems;
+import com.Infinity.Nexus.Core.items.custom.UpgradeItem;
+import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
+import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.Infinity.Nexus.Mod.block.custom.Assembler;
-import com.Infinity.Nexus.Mod.block.entity.common.SetMachineLevel;
-import com.Infinity.Nexus.Mod.block.entity.common.SetUpgradeLevel;
+import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.config.ConfigUtils;
 import com.Infinity.Nexus.Mod.fluid.ModFluids;
-import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.recipe.AssemblerRecipes;
 import com.Infinity.Nexus.Mod.screen.assembler.AssemblerMenu;
-import com.Infinity.Nexus.Mod.utils.ModUtils;
-import com.Infinity.Nexus.Mod.utils.ModEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -22,7 +25,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -68,69 +70,63 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
             };
         }
     };
-
+    //Slots
     private static final int INPUT_SLOT = 7;
     private static final int OUTPUT_SLOT = 8;
     private static final int[] UPGRADE_SLOTS = {9, 10, 11, 12};
     private static final int COMPONENT_SLOT = 13;
     private static final int FLUID_ITEM_INPUT_SLOT = 14;
     private static final int FLUID_ITEM_OUTPUT_SLOT = 15;
-    private static final int EnergyStorageCapacity = 60000;
-    private static final int FluidStorageCapacity = 10000;
-
-    private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
-    private final FluidTank FLUID_STORAGE = createFluidStorage();
+    //Configs
+    private static final int ENERGY_STORAGE_CAPACITY = ConfigUtils.assembler_energy_storage_capacity;
+    private static final int ENERGY_TRANSFER_RATE = ConfigUtils.assembler_energy_transfer_rate;
+    private static final int FLUID_STORAGE_CAPACITY = ConfigUtils.assembler_fluid_storage_capacity;
+    private static final int ENERGY_REQ = ConfigUtils.assembler_energy_request;
+    //Inventory
+    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private LazyOptional<IEnergyStorage> lazyEnergyStorage = LazyOptional.empty();
+    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
+    protected final ContainerData data;
+    //Misc
+    private int progress = 0;
+    public int maxProgress = 0;
 
     public static int getComponentSlot() {
         return COMPONENT_SLOT;
     }
 
 
-    private ModEnergyStorage createEnergyStorage() {
-        return new ModEnergyStorage(EnergyStorageCapacity, 640) {
-            @Override
-            public void onEnergyChanged() {
-                setChanged();
+    private final ModEnergyStorage ENERGY_STORAGE =  new ModEnergyStorage(ENERGY_STORAGE_CAPACITY, ENERGY_TRANSFER_RATE) {
+        @Override
+        public void onEnergyChanged() {
+            setChanged();
+            getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+        }
+    };
+
+    private final FluidTank FLUID_STORAGE = new FluidTank(FLUID_STORAGE_CAPACITY) {
+        @Override
+        protected void onContentsChanged() {
+            setChanged();
+            if (!getLevel().isClientSide) {
                 getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
-        };
-    }
+        }
 
-    private FluidTank createFluidStorage() {
-        return new FluidTank(FluidStorageCapacity) {
-            @Override
-            protected void onContentsChanged() {
-                setChanged();
-                if (!getLevel().isClientSide) {
-                    getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-                }
-            }
-
-            @Override
-            public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid() == ModFluids.LUBRICANT_SOURCE.get();
-            }
-        };
-    }
-
-    private static final int ENERGY_REQ = 32;
-
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    private LazyOptional<IEnergyStorage> lazyEnergyStorage = LazyOptional.empty();
-    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
+        @Override
+        public boolean isFluidValid(FluidStack stack) {
+            return stack.getFluid() == ModFluids.LUBRICANT_SOURCE.get();
+        }
+    };
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && canInsert(i, s))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && canInsert(i, s))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && canInsert(i, s))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && canInsert(i, s))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && canInsert(i, s))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && canInsert(i, s))));
-
-    protected final ContainerData data;
-    private int progress = 0;
-    public int maxProgress = 0;
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && ModUtils.canInsert(itemHandler, i, s))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && ModUtils.canInsert(itemHandler, i, s))));
 
     public AssemblerBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.ASSEMBLY_BE.get(), pPos, pBlockState);
@@ -226,11 +222,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         ENERGY_STORAGE.setEnergy(pTag.getInt("assembler.energy"));
         FLUID_STORAGE.readFromNBT(pTag);
     }
-    public boolean canInsert(int slots, ItemStack stack) {
-        return this.itemHandler.getStackInSlot(slots).isEmpty()
-                && !(stack.getItem() == ModItemsAdditions.SPEED_UPGRADE.get())
-                && !(stack.getItem() == ModItemsAdditions.STRENGTH_UPGRADE.get());
-    }
 
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
@@ -325,9 +316,8 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         if (this.FLUID_STORAGE.getFluidAmount() > 0) {
             speed++;
         }
-
-        duration = duration / Math.max((machineLevel + speed), 1);
-        maxProgress = Math.max(duration, 5);
+        duration = duration - (machineLevel * Math.max(speed, 1));
+        maxProgress = Math.max(duration, ConfigUtils.assembler_minimum_tick);
     }
     private void extractEnergy(AssemblerBlockEntity assemblerBlockEntity) {
         int energy = getCurrentRecipe().get().getEnergy();
@@ -390,12 +380,13 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
         ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
 
-        ModUtils.UseComponent(component, level, this.getBlockPos());
+        ModUtils.useComponent(component, level, this.getBlockPos());
 
         this.FLUID_STORAGE.drain(1, IFluidHandler.FluidAction.EXECUTE);
         this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(), this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
-
-        level.playSound(null, this.getBlockPos(), SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 0.1f, 1.0f);
+        if(ModUtils.getMuffler(itemHandler, UPGRADE_SLOTS) < 1){
+            level.playSound(null, this.getBlockPos(), SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 0.3f, 1.0f);
+        }
     }
 
     private boolean hasRecipe() {

@@ -1,14 +1,12 @@
 package com.Infinity.Nexus.Mod.block.custom;
 
+import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.custom.common.CommonUpgrades;
 import com.Infinity.Nexus.Mod.block.entity.MobCrusherBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
-import com.Infinity.Nexus.Mod.item.custom.ComponentItem;
-import com.Infinity.Nexus.Mod.item.custom.UpgradeItem;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +27,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -86,6 +84,7 @@ public class MobCrusher extends BaseEntityBlock {
 
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
+        pLevel.setBlock(pPos, ModBlocksAdditions.MOB_CRUSHER.get().defaultBlockState(), 1);
         CommonUpgrades.setUpgrades(pLevel, pPos, pPlayer);
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }

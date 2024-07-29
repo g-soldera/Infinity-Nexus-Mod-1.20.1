@@ -74,9 +74,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get())
                 .add(ModBlocksAdditions.RAW_INFINITY_BLOCK.get())
                 .add(ModBlocksAdditions.INFINITY_BLOCK.get())
+                .add(ModBlocksAdditions.INFINIUM_STELLARUM_BLOCK.get())
 
                 .add(ModBlocksAdditions.ASPHALT.get())
-                .add(ModBlocksAdditions.STRUCTURAL_BLOCK.get())
                 .add(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get())
 
                 .add(ModBlocksAdditions.MOB_CRUSHER.get())
@@ -85,7 +85,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.ASSEMBLY.get())
                 .add(ModBlocksAdditions.SQUEEZER.get())
                 .add(ModBlocksAdditions.SMELTERY.get())
-                .add(ModBlocksAdditions.MINER.get())
                 .add(ModBlocksAdditions.GENERATOR.get())
                 .add(ModBlocksAdditions.MATTER_CONDENSER.get())
                 .add(ModBlocksAdditions.RECYCLER.get())
@@ -93,7 +92,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.SOLAR.get())
                 .add(ModBlocksAdditions.FERMENTATION_BARREL.get())
 
-                .add(ModBlocksProgression.COPPER_MACHINE_CASING.get())
                 .add(ModBlocksProgression.SILVER_MACHINE_CASING.get())
                 .add(ModBlocksProgression.TIN_MACHINE_CASING.get())
                 .add(ModBlocksProgression.LEAD_MACHINE_CASING.get())
@@ -101,21 +99,16 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksProgression.BRASS_MACHINE_CASING.get())
                 .add(ModBlocksProgression.BRONZE_MACHINE_CASING.get())
                 .add(ModBlocksProgression.ALUMINUM_MACHINE_CASING.get())
-                .add(ModBlocksProgression.GOLD_MACHINE_CASING.get())
-                .add(ModBlocksProgression.IRON_MACHINE_CASING.get())
                 .add(ModBlocksProgression.PLASTIC_MACHINE_CASING.get())
                 .add(ModBlocksProgression.GLASS_MACHINE_CASING.get())
                 .add(ModBlocksProgression.STEEL_MACHINE_CASING.get())
                 .add(ModBlocksProgression.INDUSTRIAL_MACHINE_CASING.get())
                 .add(ModBlocksProgression.INFINITY_MACHINE_CASING.get());
 
-        this.tag(BlockTags.MINEABLE_WITH_AXE)
-                .add(ModBlocksProgression.WOOD_MACHINE_CASING.get());
 
         this.tag(BlockTags.NEEDS_STONE_TOOL)
 
                 .add(ModBlocksAdditions.ASPHALT.get())
-                .add(ModBlocksAdditions.STRUCTURAL_BLOCK.get())
                 .add(ModBlocksAdditions.EXPLORAR_PORTAL_FRAME.get())
 
                 .add(ModBlocksAdditions.MOB_CRUSHER.get())
@@ -127,8 +120,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.GENERATOR.get())
                 .add(ModBlocksAdditions.FERMENTATION_BARREL.get())
 
-                .add(ModBlocksProgression.WOOD_MACHINE_CASING.get())
-                .add(ModBlocksProgression.COPPER_MACHINE_CASING.get())
                 .add(ModBlocksProgression.SILVER_MACHINE_CASING.get())
                 .add(ModBlocksProgression.TIN_MACHINE_CASING.get())
                 .add(ModBlocksProgression.LEAD_MACHINE_CASING.get())
@@ -136,8 +127,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksProgression.BRASS_MACHINE_CASING.get())
                 .add(ModBlocksProgression.BRONZE_MACHINE_CASING.get())
                 .add(ModBlocksProgression.ALUMINUM_MACHINE_CASING.get())
-                .add(ModBlocksProgression.GOLD_MACHINE_CASING.get())
-                .add(ModBlocksProgression.IRON_MACHINE_CASING.get())
                 .add(ModBlocksProgression.PLASTIC_MACHINE_CASING.get())
                 .add(ModBlocksProgression.GLASS_MACHINE_CASING.get())
                 .add(ModBlocksProgression.STEEL_MACHINE_CASING.get())
@@ -192,7 +181,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.INFINITY_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get())
                 .add(ModBlocksAdditions.RAW_INFINITY_BLOCK.get())
-                .add(ModBlocksAdditions.INFINITY_BLOCK.get());
+                .add(ModBlocksAdditions.INFINITY_BLOCK.get())
+                .add(ModBlocksAdditions.INFINIUM_STELLARUM_BLOCK.get());
 
 
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
@@ -201,7 +191,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.INFINITY_ORE.get())
                 .add(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get())
                 .add(ModBlocksAdditions.RAW_INFINITY_BLOCK.get())
-                .add(ModBlocksAdditions.INFINITY_BLOCK.get());
+                .add(ModBlocksAdditions.INFINITY_BLOCK.get())
+                .add(ModBlocksAdditions.INFINIUM_STELLARUM_BLOCK.get());
 
         this.tag(ModTags.Blocks.FORGE_ORES_IN_GROUND_STONE)
                 .add(ModBlocksAdditions.SILVER_ORE.get())
@@ -277,6 +268,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.ALUMINUM_BLOCK.get())
                 .add(ModBlocksAdditions.URANIUM_BLOCK.get())
                 .add(ModBlocksAdditions.INFINITY_BLOCK.get())
+                .add(ModBlocksAdditions.INFINIUM_STELLARUM_BLOCK.get())
                 .add(ModBlocksAdditions.BRASS_BLOCK.get())
                 .add(ModBlocksAdditions.BRONZE_BLOCK.get())
                 .add(ModBlocksAdditions.STEEL_BLOCK.get());

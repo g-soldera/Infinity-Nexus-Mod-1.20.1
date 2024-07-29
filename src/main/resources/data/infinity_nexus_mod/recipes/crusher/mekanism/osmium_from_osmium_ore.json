@@ -2,9 +2,10 @@
   "type": "infinity_nexus_mod:crushing",
   "energy": 2400,
   "duration": 130,
+  "can_duplicate": true,
   "ingredients": [
     {
-      "tag": "infinity_nexus_mod:up_2"
+      "tag": "infinity_nexus_core:up_2"
     },
     {
       "item": "mekanism:osmium_ore",
@@ -13,6 +14,6 @@
   ],
   "output": {
     "item": "mekanism:dust_osmium",
-    "count": 2
+    "count": 1
   }
 }

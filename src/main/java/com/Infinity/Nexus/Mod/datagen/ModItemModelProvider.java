@@ -1,8 +1,6 @@
 package com.Infinity.Nexus.Mod.datagen;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
-import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
-import com.Infinity.Nexus.Mod.item.ModCrystalItems;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import net.minecraft.data.PackOutput;
@@ -33,6 +31,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.BRONZE_INGOT);
         simpleItem(ModItemsAdditions.STEEL_INGOT);
         simpleItem(ModItemsAdditions.GRAPHITE_INGOT);
+        simpleItem(ModItemsAdditions.IRIDIUM_INGOT);
 
         simpleItem(ModItemsAdditions.INFINITY_NUGGET);
         simpleItem(ModItemsAdditions.COPPER_NUGGET);
@@ -108,23 +107,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_CHESTPLATE);
         simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS);
         simpleItem(ModItemsAdditions.IMPERIAL_INFINITY_BOOTS);
-        simpleItem(ModItemsAdditions.SPEED_UPGRADE);
-        simpleItem(ModItemsAdditions.STRENGTH_UPGRADE);
-        simpleItem(ModItemsAdditions.MEMBER_BAG);
-        simpleItem(ModItemsAdditions.SUPPORTER_BAG);
-        simpleItem(ModItemsAdditions.VIP_BAG);
-        simpleItem(ModItemsAdditions.VIPPLUS_BAG);
-        simpleItem(ModItemsAdditions.VIPNEXUS_BAG);
-        simpleItem(ModItemsAdditions.VIPINFINITY_BAG);
-        simpleItem(ModItemsAdditions.REDSTONE_COMPONENT);
-        simpleItem(ModItemsAdditions.BASIC_COMPONENT);
-        simpleItem(ModItemsAdditions.REINFORCED_COMPONENT);
-        simpleItem(ModItemsAdditions.LOGIC_COMPONENT);
-        simpleItem(ModItemsAdditions.ADVANCED_COMPONENT);
-        simpleItem(ModItemsAdditions.REFINED_COMPONENT);
-        simpleItem(ModItemsAdditions.INTEGRAL_COMPONENT);
-        simpleItem(ModItemsAdditions.INFINITY_COMPONENT);
-        simpleItem(ModItemsAdditions.ANCESTRAL_COMPONENT);
 
         simpleItem(ModItemsAdditions.BASIC_CIRCUIT);
         simpleItem(ModItemsAdditions.ADVANCED_CIRCUIT);
@@ -133,6 +115,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsAdditions.PLASTIC_GOO);
         simpleItem(ModItemsAdditions.GLYCERIN);
         simpleItem(ModItemsAdditions.SLICED_APPLE);
+        simpletools(ModItemsAdditions.KNIFE);
 
         simpleItem(ModItemsAdditions.BUCKET_LUBRICANT);
         simpleItem(ModItemsAdditions.BUCKET_ETHANOL);
@@ -153,6 +136,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.GOLD_SCREW_CAST);
         simpleItem(ModItemsProgression.GOLD_SHEET_CAST);
         simpleItem(ModItemsProgression.GOLD_WIRE_CAST);
+        simpleItem(ModItemsProgression.GOLD_INGOT_CAST);
         simpleItem(ModItemsProgression.RAW_ROD_CLAY_MODEL);
         simpleItem(ModItemsProgression.RAW_SCREW_CLAY_MODEL);
         simpleItem(ModItemsProgression.RAW_SHEET_CLAY_MODEL);
@@ -226,22 +210,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.BIO_MASS);
         simpleItem(ModItemsProgression.SOLAR_CORE);
         simpleItem(ModItemsProgression.ADVANCED_SOLAR_CORE);
+        simpleItem(ModItemsProgression.QUANTUM_SOLAR_CORE);
         simpleItem(ModItemsProgression.RESIDUAL_MATTER);
+        simpleItem(ModItemsProgression.UNSTABLE_MATTER);
         simpleItem(ModItemsProgression.STABLE_MATTER);
+        simpleItem(ModItemsProgression.IRIDIUM);
         simpleItem(ModItemsProgression.PLASTIC);
 
         simpleItem(ModItemsAdditions.TERRAIN_MARKER);
-        simpleItem(ModItemsAdditions.LINKING_TOOL);
         simpleItem(ModItemsAdditions.HAMMER_RANGE_UPGRADE);
         simpleItem(ModItemsAdditions.STAR_FRAGMENT);
-
-        simpleItem(ModCrystalItems.AMBER_CRYSTAL);
-        simpleItem(ModCrystalItems.MARINE_CRYSTAL);
-        simpleItem(ModCrystalItems.CITRIUM_CRYSTAL);
-        simpleItem(ModCrystalItems.RUBIUM_CRYSTAL);
-        simpleItem(ModCrystalItems.DEMETRIUM_CRYSTAL);
-        simpleItem(ModCrystalItems.AGATE_CRYSTAL);
-        simpleItem(ModCrystalItems.DARIUM_CRYSTAL);
 
         simpleItem(ModItemsProgression.VOXEL_TOP);
         simpleItem(ModItemsProgression.VOXEL_DOW);
