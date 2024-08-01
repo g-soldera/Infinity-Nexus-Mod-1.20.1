@@ -1,10 +1,10 @@
 package com.Infinity.Nexus.Mod.screen.assembler;
 
+import com.Infinity.Nexus.Core.slots.*;
+import com.Infinity.Nexus.Core.slots.ResultSlot;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.AssemblerBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
-import com.Infinity.Nexus.Mod.slots.*;
-import com.Infinity.Nexus.Mod.slots.ResultSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -49,12 +49,12 @@ public class AssemblerMenu extends AbstractContainerMenu {
             this.addSlot(new InputSlot(iItemHandler, 7, 104, 52));
 
 
-            this.addSlot(new UpgradeSlot(iItemHandler, 9, 12, 6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 10, 35,6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 11, 12,29));
-            this.addSlot(new UpgradeSlot(iItemHandler, 12, 35,29));
+            this.addSlot(new UpgradeSlot(iItemHandler, 9, -11, 11));
+            this.addSlot(new UpgradeSlot(iItemHandler, 10, -11,23));
+            this.addSlot(new UpgradeSlot(iItemHandler, 11, -11,35));
+            this.addSlot(new UpgradeSlot(iItemHandler, 12, -11,47));
 
-            this.addSlot(new ComponentSlot(iItemHandler, 13, 24, 52));
+            this.addSlot(new ComponentSlot(iItemHandler, 13, 8, 29));
 
             this.addSlot(new FluidItemSlot(iItemHandler, 14, 125, 6));
 

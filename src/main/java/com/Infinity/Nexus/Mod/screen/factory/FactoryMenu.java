@@ -1,10 +1,12 @@
 package com.Infinity.Nexus.Mod.screen.factory;
 
+import com.Infinity.Nexus.Core.slots.ComponentSlot;
+import com.Infinity.Nexus.Core.slots.InputSlot;
+import com.Infinity.Nexus.Core.slots.UpgradeSlot;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.FactoryBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
-import com.Infinity.Nexus.Mod.slots.ResultSlot;
-import com.Infinity.Nexus.Mod.slots.*;
+import com.Infinity.Nexus.Core.slots.ResultSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -58,13 +60,13 @@ public class FactoryMenu extends AbstractContainerMenu {
             this.addSlot(new InputSlot(iItemHandler, 14, 100,66));
             this.addSlot(new InputSlot(iItemHandler, 15, 120,68));
 
-            this.addSlot(new UpgradeSlot(iItemHandler, 17, 12,-12));
-            this.addSlot(new UpgradeSlot(iItemHandler, 18, 12,8));
-            this.addSlot(new UpgradeSlot(iItemHandler, 19, 12,28));
-            this.addSlot(new UpgradeSlot(iItemHandler, 20, 12,48));
+            this.addSlot(new UpgradeSlot(iItemHandler, 17, -11, 11));
+            this.addSlot(new UpgradeSlot(iItemHandler, 18, -11,23));
+            this.addSlot(new UpgradeSlot(iItemHandler, 19, -11,35));
+            this.addSlot(new UpgradeSlot(iItemHandler, 20, -11,47));
 
 
-            this.addSlot(new ComponentSlot(iItemHandler, 21, 13, 68));
+            this.addSlot(new ComponentSlot(iItemHandler, 21, 8, 28));
 
 
         });

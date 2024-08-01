@@ -1,11 +1,10 @@
 package com.Infinity.Nexus.Mod.screen.mobcrusher;
 
+import com.Infinity.Nexus.Core.slots.*;
+import com.Infinity.Nexus.Core.slots.ResultSlot;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.MobCrusherBlockEntity;
-import com.Infinity.Nexus.Mod.block.entity.MobCrusherBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
-import com.Infinity.Nexus.Mod.slots.*;
-import com.Infinity.Nexus.Mod.slots.ResultSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -35,24 +34,26 @@ public class MobCrusherMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new ResultSlot(iItemHandler, 0, 62, 11));
-            this.addSlot(new ResultSlot(iItemHandler, 1, 80, 11));
-            this.addSlot(new ResultSlot(iItemHandler, 2, 98, 11));
-            this.addSlot(new ResultSlot(iItemHandler, 3, 62, 29));
-            this.addSlot(new ResultSlot(iItemHandler, 4, 80, 29));
-            this.addSlot(new ResultSlot(iItemHandler, 5, 98, 29));
-            this.addSlot(new ResultSlot(iItemHandler, 6, 62, 47));
-            this.addSlot(new ResultSlot(iItemHandler, 7, 80, 47));
-            this.addSlot(new ResultSlot(iItemHandler, 8, 98, 47));
+            this.addSlot(new ResultSlot(iItemHandler, 0, 80, 11));
+            this.addSlot(new ResultSlot(iItemHandler, 1, 98, 11));
+            this.addSlot(new ResultSlot(iItemHandler, 2, 116, 11));
+            this.addSlot(new ResultSlot(iItemHandler, 3, 80, 29));
+            this.addSlot(new ResultSlot(iItemHandler, 4, 98, 29));
+            this.addSlot(new ResultSlot(iItemHandler, 5, 116, 29));
+            this.addSlot(new ResultSlot(iItemHandler, 6, 80, 47));
+            this.addSlot(new ResultSlot(iItemHandler, 7, 98, 47));
+            this.addSlot(new ResultSlot(iItemHandler, 8, 116, 47));
 
-            this.addSlot(new UpgradeSlot(iItemHandler, 9, 12, 6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 10, 35, 6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 11, 12, 29));
-            this.addSlot(new UpgradeSlot(iItemHandler, 12, 35, 29));
+            this.addSlot(new UpgradeSlot(iItemHandler, 9, -11, 11));
+            this.addSlot(new UpgradeSlot(iItemHandler, 10, -11,23));
+            this.addSlot(new UpgradeSlot(iItemHandler, 11, -11,35));
+            this.addSlot(new UpgradeSlot(iItemHandler, 12, -11,47));
 
-            this.addSlot(new ComponentSlot(iItemHandler, 13, 24, 52));
+            this.addSlot(new ComponentSlot(iItemHandler, 13, 8, 29));
 
-            this.addSlot(new LinkSlot(iItemHandler, 14, 116, 29));
+            this.addSlot(new SwordSlot(iItemHandler, 14, 44, 11));
+            this.addSlot(new LinkSlot(iItemHandler, 15, 44, 29));
+            this.addSlot(new FuelSlot(iItemHandler, 16, 44, 47));
         });
 
         addDataSlots(data);
@@ -88,7 +89,7 @@ public class MobCrusherMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 15;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 17;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);

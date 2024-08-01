@@ -5,6 +5,8 @@ import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
 import com.Infinity.Nexus.Core.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.block.custom.Recycler;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.PressHandler;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.RecyclerHandler;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.screen.recycler.RecyclerMenu;
 import com.Infinity.Nexus.Core.utils.ModUtils;
@@ -50,7 +52,14 @@ public class RecyclerBlockEntity extends BlockEntity implements MenuProvider {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return super.isItemValid(slot, stack);
+            return switch (slot) {
+                case 0 -> !ModUtils.isUpgrade(stack) && !ModUtils.isComponent(stack);
+                case 1 -> false;
+                case 2, 3, 4, 5 -> ModUtils.isUpgrade(stack);
+                case 6 -> ModUtils.isComponent(stack);
+
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
 
@@ -83,12 +92,12 @@ public class RecyclerBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> RecyclerHandler.extract(i, Direction.UP), RecyclerHandler::insert)),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> RecyclerHandler.extract(i, Direction.DOWN), RecyclerHandler::insert)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> RecyclerHandler.extract(i, Direction.NORTH), RecyclerHandler::insert)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> RecyclerHandler.extract(i, Direction.SOUTH), RecyclerHandler::insert)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> RecyclerHandler.extract(i, Direction.EAST), RecyclerHandler::insert)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> RecyclerHandler.extract(i, Direction.WEST), RecyclerHandler::insert)));
 
     protected final ContainerData data;
     private int progress = 0;

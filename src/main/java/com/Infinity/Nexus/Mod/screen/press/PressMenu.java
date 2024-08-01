@@ -1,10 +1,10 @@
 package com.Infinity.Nexus.Mod.screen.press;
 
+import com.Infinity.Nexus.Core.slots.*;
+import com.Infinity.Nexus.Core.slots.ResultSlot;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
-import com.Infinity.Nexus.Mod.slots.*;
-import com.Infinity.Nexus.Mod.slots.ResultSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -39,12 +39,12 @@ public class PressMenu extends AbstractContainerMenu {
             this.addSlot(new CastSlot(iItemHandler, 1, 80, 47));
             this.addSlot(new ResultSlot(iItemHandler, 2, 116, 29));
 
-            this.addSlot(new UpgradeSlot(iItemHandler, 3, 12, 6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 4, 35, 6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 5, 12, 29));
-            this.addSlot(new UpgradeSlot(iItemHandler, 6, 35, 29));
+            this.addSlot(new UpgradeSlot(iItemHandler, 3, -11, 11));
+            this.addSlot(new UpgradeSlot(iItemHandler, 4,  -11,23));
+            this.addSlot(new UpgradeSlot(iItemHandler, 5,  -11,35));
+            this.addSlot(new UpgradeSlot(iItemHandler, 6,  -11,47));
 
-            this.addSlot(new ComponentSlot(iItemHandler, 7, 24, 52));
+            this.addSlot(new ComponentSlot(iItemHandler, 7, 8, 29));
         });
 
         addDataSlots(data);

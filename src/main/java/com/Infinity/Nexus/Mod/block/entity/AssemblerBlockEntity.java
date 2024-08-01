@@ -2,12 +2,11 @@ package com.Infinity.Nexus.Mod.block.entity;
 
 import com.Infinity.Nexus.Core.block.entity.WrappedHandler;
 import com.Infinity.Nexus.Core.block.entity.common.SetUpgradeLevel;
-import com.Infinity.Nexus.Core.items.ModItems;
-import com.Infinity.Nexus.Core.items.custom.UpgradeItem;
 import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.Infinity.Nexus.Mod.block.custom.Assembler;
 import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.AssemblerHandler;
 import com.Infinity.Nexus.Mod.config.ConfigUtils;
 import com.Infinity.Nexus.Mod.fluid.ModFluids;
 import com.Infinity.Nexus.Mod.recipe.AssemblerRecipes;
@@ -60,7 +59,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0,1,2,3,4,5,6,7 -> !ModUtils.isUpgrade(stack) || !ModUtils.isComponent(stack);
+                case 0,1,2,3,4,5,6,7 -> !ModUtils.isUpgrade(stack) && !ModUtils.isComponent(stack);
                 case 8 -> false;
                 case 9,10,11,12 -> ModUtils.isUpgrade(stack);
                 case 13 -> ModUtils.isComponent(stack);
@@ -121,12 +120,13 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 8, (i, s) -> i != 8 && ModUtils.canInsert(itemHandler, i, s))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.UP), AssemblerHandler::insert)),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.DOWN), AssemblerHandler::insert)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.NORTH), AssemblerHandler::insert)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.SOUTH), AssemblerHandler::insert)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.EAST), AssemblerHandler::insert)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.WEST), AssemblerHandler::insert)));
+
 
     public AssemblerBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.ASSEMBLY_BE.get(), pPos, pBlockState);
@@ -233,7 +233,6 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-
         return Component.translatable("block.infinity_nexus_mod.assembler").append(" LV "+ getMachineLevel());
     }
 

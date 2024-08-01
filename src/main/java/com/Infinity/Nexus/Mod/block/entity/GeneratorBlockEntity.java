@@ -5,6 +5,8 @@ import com.Infinity.Nexus.Core.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.block.custom.Generator;
 import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.FactoryHandler;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.GeneratorHandler;
 import com.Infinity.Nexus.Mod.screen.generator.GeneratorMenu;
 import com.Infinity.Nexus.Core.utils.ModUtils;
 import net.minecraft.core.BlockPos;
@@ -49,7 +51,13 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return super.isItemValid(slot, stack);
+            return switch (slot) {
+                case 0 -> ForgeHooks.getBurnTime(stack, null) >= 1;
+                case 1,2,3,4 -> ModUtils.isUpgrade(stack);
+                case 5 -> ModUtils.isComponent(stack);
+
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
 
@@ -81,12 +89,12 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> false, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> GeneratorHandler.extract(i, Direction.UP), GeneratorHandler::insert)),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> GeneratorHandler.extract(i, Direction.DOWN), GeneratorHandler::insert)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> GeneratorHandler.extract(i, Direction.NORTH), GeneratorHandler::insert)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> GeneratorHandler.extract(i, Direction.SOUTH), GeneratorHandler::insert)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> GeneratorHandler.extract(i, Direction.EAST), GeneratorHandler::insert)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> GeneratorHandler.extract(i, Direction.WEST), GeneratorHandler::insert)));
 
     protected final ContainerData data;
     private int progress = 0;

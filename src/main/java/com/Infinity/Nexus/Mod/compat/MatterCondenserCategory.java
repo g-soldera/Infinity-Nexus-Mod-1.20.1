@@ -65,7 +65,7 @@ public class MatterCondenserCategory implements IRecipeCategory<MatterCondenserR
         ItemStack input =  recipe.getIngredients().get(1).getItems()[0];
         ItemStack catalyst =  recipe.getIngredients().get(0).getItems()[0];
     //TODO
-        builder.addSlot(RecipeIngredientRole.CATALYST, 24, 52).addItemStack(catalyst);
+        builder.addSlot(RecipeIngredientRole.CATALYST, 8, 29).addItemStack(catalyst);
         builder.addSlot(RecipeIngredientRole.INPUT, 80, 52).addItemStack(input);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 7).addItemStack(recipe.getResultItem(null));
     }

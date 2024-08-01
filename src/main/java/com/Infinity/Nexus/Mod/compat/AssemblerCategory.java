@@ -3,7 +3,6 @@ package com.Infinity.Nexus.Mod.compat;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.recipe.AssemblerRecipes;
-import com.Infinity.Nexus.Mod.slots.ComponentSlot;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -79,7 +78,7 @@ public class AssemblerCategory implements IRecipeCategory<AssemblerRecipes> {
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 81 , 29).addItemStack(output);
 
-        builder.addSlot(RecipeIngredientRole.CATALYST, 24, 52).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.CATALYST, 8, 29).addIngredients(recipe.getIngredients().get(0));
 
     }
 }

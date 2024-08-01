@@ -5,6 +5,9 @@ import com.Infinity.Nexus.Core.items.custom.ComponentItem;
 import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.block.custom.MatterCondenser;
 import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.GeneratorHandler;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.MatterCondenserHandler;
+import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.screen.condenser.CondenserMenu;
 import com.Infinity.Nexus.Core.utils.ModUtils;
@@ -31,6 +34,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -51,7 +55,13 @@ public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvi
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return super.isItemValid(slot, stack);
+            return switch (slot) {
+                case 0 -> stack.is(ModItemsProgression.RESIDUAL_MATTER.get());
+                case 1 -> false;
+                case 2 -> ModUtils.isComponent(stack);
+
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
 
@@ -71,6 +81,7 @@ public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvi
                 setChanged();
                 getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 4);
             }
+
         };
     }
 
@@ -83,12 +94,12 @@ public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvi
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && s.is(ModItemsProgression.RESIDUAL_MATTER.get()))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && s.is(ModItemsProgression.RESIDUAL_MATTER.get()))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && s.is(ModItemsProgression.RESIDUAL_MATTER.get()))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && s.is(ModItemsProgression.RESIDUAL_MATTER.get()))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && s.is(ModItemsProgression.RESIDUAL_MATTER.get()))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && s.is(ModItemsProgression.RESIDUAL_MATTER.get()))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> MatterCondenserHandler.extract(i, Direction.UP), MatterCondenserHandler::insert)),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> MatterCondenserHandler.extract(i, Direction.DOWN), MatterCondenserHandler::insert)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> MatterCondenserHandler.extract(i, Direction.NORTH), MatterCondenserHandler::insert)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> MatterCondenserHandler.extract(i, Direction.SOUTH), MatterCondenserHandler::insert)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> MatterCondenserHandler.extract(i, Direction.EAST), MatterCondenserHandler::insert)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> MatterCondenserHandler.extract(i, Direction.WEST), MatterCondenserHandler::insert)));
 
     protected final ContainerData data;
     private int progress = 0;

@@ -8,6 +8,8 @@ import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Miner.config.Config;
 import com.Infinity.Nexus.Mod.block.custom.MobCrusher;
 import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.MatterCondenserHandler;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.MobCrusherHandler;
 import com.Infinity.Nexus.Mod.fluid.ModFluids;
 import com.Infinity.Nexus.Mod.screen.mobcrusher.MobCrusherMenu;
 import com.Infinity.Nexus.Core.utils.ModUtils;
@@ -100,7 +102,7 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0,1,2,3,4,5,6,7,8 -> !ModUtils.isUpgrade(stack) || !ModUtils.isComponent(stack);
+                case 0,1,2,3,4,5,6,7,8 -> !ModUtils.isUpgrade(stack) && !ModUtils.isComponent(stack);
                 case 9,10,11,12 -> ModUtils.isUpgrade(stack);
                 case 13 -> ModUtils.isComponent(stack);
                 case 14 -> stack.getItem() instanceof SwordItem;
@@ -111,12 +113,12 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         }
     };
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap = Map.of(
-            Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i <= 8, (i, s) -> ModUtils.canInsert(itemHandler, i, s))),
-            Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i <= 8, (i, s) -> ModUtils.canInsert(itemHandler, i, s))),
-            Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i <= 8, (i, s) -> ModUtils.canInsert(itemHandler, i, s))),
-            Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i <= 8, (i, s) -> ModUtils.canInsert(itemHandler, i, s))),
-            Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i <= 8, (i, s) -> ModUtils.canInsert(itemHandler, i, s))),
-            Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i <= 8, (i, s) -> ModUtils.canInsert(itemHandler, i, s))));
+            Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> MobCrusherHandler.extract(i, Direction.UP), MobCrusherHandler::insert)),
+            Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> MobCrusherHandler.extract(i, Direction.DOWN), MobCrusherHandler::insert)),
+            Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> MobCrusherHandler.extract(i, Direction.NORTH), MobCrusherHandler::insert)),
+            Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> MobCrusherHandler.extract(i, Direction.SOUTH), MobCrusherHandler::insert)),
+            Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> MobCrusherHandler.extract(i, Direction.EAST), MobCrusherHandler::insert)),
+            Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> MobCrusherHandler.extract(i, Direction.WEST), MobCrusherHandler::insert)));
 
     private final ModEnergyStorage ENERGY_STORAGE = new ModEnergyStorage(ENERGY_CAPACITY, ENERGY_TRANSFER) {
         @Override

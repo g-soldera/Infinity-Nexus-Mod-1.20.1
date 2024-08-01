@@ -1,5 +1,6 @@
 package com.Infinity.Nexus.Mod.compat;
 
+import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.ModBlocksProgression;
@@ -53,7 +54,7 @@ public class CrusherCategory implements IRecipeCategory<CrusherRecipes> {
     public void draw(CrusherRecipes recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
 
         Minecraft minecraft = Minecraft.getInstance();
-        guiGraphics.drawString(minecraft.font, recipe.getEnergy() + " FE /  "+ (recipe.getDuration()/20) + "s", 6, 76, 0xFFFFFF, false);
+        guiGraphics.drawString(minecraft.font, recipe.getEnergy() + " FE /  "+ (recipe.getDuration()/20) + "s §6Duplicate: " + recipe.canDuplicate() , 6, 76, 0xFFFFFF, false);
     }
 
     @Override
@@ -70,7 +71,6 @@ public class CrusherCategory implements IRecipeCategory<CrusherRecipes> {
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 47).addItemStack(recipe.getResultItem(null));
 
-        builder.addSlot(RecipeIngredientRole.CATALYST, 24, 52).addIngredients(recipe.getIngredients().get(0));
-
+        builder.addSlot(RecipeIngredientRole.CATALYST, 8, 29).addIngredients(recipe.getIngredients().get(0));
     }
 }

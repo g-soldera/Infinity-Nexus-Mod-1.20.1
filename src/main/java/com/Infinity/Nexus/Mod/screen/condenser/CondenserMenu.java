@@ -1,11 +1,11 @@
 package com.Infinity.Nexus.Mod.screen.condenser;
 
+import com.Infinity.Nexus.Core.slots.ComponentSlot;
+import com.Infinity.Nexus.Core.slots.InputSlot;
+import com.Infinity.Nexus.Core.slots.ResultSlot;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.MatterCondenserBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
-import com.Infinity.Nexus.Mod.slots.ComponentSlot;
-import com.Infinity.Nexus.Mod.slots.InputSlot;
-import com.Infinity.Nexus.Mod.slots.ResultSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +38,7 @@ public class CondenserMenu extends AbstractContainerMenu {
             this.addSlot(new InputSlot(iItemHandler, 0, 80, 6));
             this.addSlot(new ResultSlot(iItemHandler, 1, 80, 52));
 
-            this.addSlot(new ComponentSlot(iItemHandler, 2, 24, 52));
+            this.addSlot(new ComponentSlot(iItemHandler, 2, 8, 29));
         });
 
         addDataSlots(data);

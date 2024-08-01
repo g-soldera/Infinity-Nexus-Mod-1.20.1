@@ -5,6 +5,8 @@ import com.Infinity.Nexus.Core.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.block.custom.Press;
 import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.MobCrusherHandler;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.PressHandler;
 import com.Infinity.Nexus.Mod.recipe.PressRecipes;
 import com.Infinity.Nexus.Mod.screen.press.PressMenu;
 import com.Infinity.Nexus.Core.utils.ModUtils;
@@ -52,7 +54,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0,1 -> !ModUtils.isUpgrade(stack) || !ModUtils.isComponent(stack);
+                case 0,1 -> !ModUtils.isUpgrade(stack) && !ModUtils.isComponent(stack);
                 case 2 -> false;
                 case 3,4,5,6 -> ModUtils.isUpgrade(stack);
                 case 7 -> ModUtils.isComponent(stack);
@@ -86,12 +88,12 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> PressHandler.extract(i, Direction.UP), PressHandler::insert)),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> PressHandler.extract(i, Direction.DOWN), PressHandler::insert)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> PressHandler.extract(i, Direction.NORTH), PressHandler::insert)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> PressHandler.extract(i, Direction.SOUTH), PressHandler::insert)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> PressHandler.extract(i, Direction.EAST), PressHandler::insert)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> PressHandler.extract(i, Direction.WEST), PressHandler::insert)));
 
     protected final ContainerData data;
     private int progress = 0;

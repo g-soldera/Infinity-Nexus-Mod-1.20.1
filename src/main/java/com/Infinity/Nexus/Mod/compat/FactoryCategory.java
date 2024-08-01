@@ -87,6 +87,6 @@ public class FactoryCategory implements IRecipeCategory<FactoryRecipes> {
         builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 56).addItemStack(output);
 
         // Adicionar o slot de catalisador
-        builder.addSlot(RecipeIngredientRole.CATALYST, 13, 96).addIngredients(inputs.get(0));
+        builder.addSlot(RecipeIngredientRole.CATALYST, 8, 56).addIngredients(inputs.get(0));
     }
 }

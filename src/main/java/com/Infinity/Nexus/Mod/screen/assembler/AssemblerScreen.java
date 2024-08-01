@@ -106,6 +106,9 @@ public class AssemblerScreen extends AbstractContainerScreen<AssemblerMenu> {
 
 
             ){
+                List<Component> components = List.of(Component.literal("Input Slot"));
+                RenderScreenTooltips.renderTooltipArea(this.font, pGuiGraphics ,components, pMouseX, pMouseY, x, y);
+            }else if(isMouseAboveArea(pMouseX, pMouseY, x, y, 80, 28, 17, 17)) {
                 List<Component> components = List.of(Component.literal("Output Slot"));
                 RenderScreenTooltips.renderTooltipArea(this.font, pGuiGraphics ,components, pMouseX, pMouseY, x, y);
             }

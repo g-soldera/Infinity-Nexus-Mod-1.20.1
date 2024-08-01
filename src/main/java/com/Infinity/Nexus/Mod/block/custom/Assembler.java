@@ -34,7 +34,6 @@ public class Assembler extends BaseEntityBlock {
         super(pProperties);
     }
 
-
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE;
@@ -70,7 +69,6 @@ public class Assembler extends BaseEntityBlock {
                 ((AssemblerBlockEntity) blockEntity).drops();
             }
         }
-
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 

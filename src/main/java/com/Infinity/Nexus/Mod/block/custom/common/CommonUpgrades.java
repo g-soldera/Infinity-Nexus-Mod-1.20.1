@@ -52,7 +52,11 @@ public class CommonUpgrades {
                 if (Objects.requireNonNull(entity) instanceof SolarBlockEntity be) { be.setSolarLevel(stack, pPlayer);
                 }
             }else{
-                NetworkHooks.openScreen(((ServerPlayer) pPlayer), (MenuProvider) entity, pPos);
+                try{
+                    NetworkHooks.openScreen(((ServerPlayer) pPlayer), (MenuProvider) entity, pPos);
+                }catch (Exception e){
+                    throw new IllegalStateException("Our Container provider is missing!");
+                }
             }
         }
     }

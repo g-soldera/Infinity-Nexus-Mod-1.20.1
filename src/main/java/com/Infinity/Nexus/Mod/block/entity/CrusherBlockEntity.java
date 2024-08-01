@@ -6,6 +6,7 @@ import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.Infinity.Nexus.Mod.block.custom.Crusher;
 import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.CrusherHandler;
 import com.Infinity.Nexus.Mod.recipe.CrusherRecipes;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherMenu;
 import net.minecraft.core.BlockPos;
@@ -51,7 +52,14 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return super.isItemValid(slot, stack);
+            return switch (slot) {
+                case 0 -> !ModUtils.isUpgrade(stack) && !ModUtils.isComponent(stack);
+                case 1 -> false;
+                case 2, 3, 4, 5 -> ModUtils.isUpgrade(stack);
+                case 6 -> ModUtils.isComponent(stack);
+
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
 
@@ -82,12 +90,12 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> CrusherHandler.extract(i, Direction.UP), CrusherHandler::insert)),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> CrusherHandler.extract(i, Direction.DOWN), CrusherHandler::insert)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> CrusherHandler.extract(i, Direction.NORTH), CrusherHandler::insert)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> CrusherHandler.extract(i, Direction.SOUTH), CrusherHandler::insert)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> CrusherHandler.extract(i, Direction.EAST), CrusherHandler::insert)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> CrusherHandler.extract(i, Direction.WEST), CrusherHandler::insert)));
 
     protected final ContainerData data;
     private int progress = 0;

@@ -7,6 +7,8 @@ import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.Infinity.Nexus.Mod.block.custom.Factory;
 import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.CrusherHandler;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.FactoryHandler;
 import com.Infinity.Nexus.Mod.recipe.FactoryRecipes;
 import com.Infinity.Nexus.Mod.screen.factory.FactoryMenu;
 import net.minecraft.core.BlockPos;
@@ -57,7 +59,7 @@ public class FactoryBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 -> !ModUtils.isUpgrade(stack) || !ModUtils.isComponent(stack);
+                case 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 -> !ModUtils.isUpgrade(stack) && !ModUtils.isComponent(stack);
                 case 16 -> false;
                 case 17,18,19,20 -> ModUtils.isUpgrade(stack);
                 case 21 -> ModUtils.isComponent(stack);
@@ -100,12 +102,12 @@ public class FactoryBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 15, (i, s) -> i != 15 && ModUtils.canInsert(itemHandler, i, s))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.UP), FactoryHandler::insert)),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.DOWN), FactoryHandler::insert)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.NORTH), FactoryHandler::insert)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.SOUTH), FactoryHandler::insert)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.EAST), FactoryHandler::insert)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.WEST), FactoryHandler::insert)));
 
     protected final ContainerData data;
     private int progress = 0;

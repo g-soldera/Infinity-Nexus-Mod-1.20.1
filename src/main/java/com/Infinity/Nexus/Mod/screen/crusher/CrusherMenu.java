@@ -1,12 +1,12 @@
 package com.Infinity.Nexus.Mod.screen.crusher;
 
+import com.Infinity.Nexus.Core.slots.ComponentSlot;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.CrusherBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
-import com.Infinity.Nexus.Mod.slots.ComponentSlot;
-import com.Infinity.Nexus.Mod.slots.InputSlot;
-import com.Infinity.Nexus.Mod.slots.ResultSlot;
-import com.Infinity.Nexus.Mod.slots.UpgradeSlot;
+import com.Infinity.Nexus.Core.slots.InputSlot;
+import com.Infinity.Nexus.Core.slots.ResultSlot;
+import com.Infinity.Nexus.Core.slots.UpgradeSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -40,12 +40,12 @@ public class CrusherMenu extends AbstractContainerMenu {
             this.addSlot(new ResultSlot(iItemHandler, 1, 80, 47));
 
 
-            this.addSlot(new UpgradeSlot(iItemHandler, 2, 12, 6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 3, 35, 6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 4, 12, 29));
-            this.addSlot(new UpgradeSlot(iItemHandler, 5, 35, 29));
+            this.addSlot(new UpgradeSlot(iItemHandler, 2, -11, 11));
+            this.addSlot(new UpgradeSlot(iItemHandler, 3,  -11,23));
+            this.addSlot(new UpgradeSlot(iItemHandler, 4,  -11,35));
+            this.addSlot(new UpgradeSlot(iItemHandler, 5,  -11,47));
 
-            this.addSlot(new ComponentSlot(iItemHandler, 6, 24, 52));
+            this.addSlot(new ComponentSlot(iItemHandler, 6, 8, 29));
         });
 
         addDataSlots(data);

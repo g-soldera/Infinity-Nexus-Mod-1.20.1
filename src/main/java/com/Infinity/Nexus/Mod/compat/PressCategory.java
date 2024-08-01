@@ -64,7 +64,7 @@ public class PressCategory implements IRecipeCategory<PressRecipes> {
         ItemStack input =  recipe.getIngredients().get(1).getItems()[0];
         input.setCount(recipe.getInputCount());
 
-        builder.addSlot(RecipeIngredientRole.CATALYST, 24, 52).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.CATALYST, 8, 29).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.INPUT, 80, 11).addIngredients(recipe.getIngredients().get(1));
         builder.addSlot(RecipeIngredientRole.INPUT, 80, 47).addIngredients(recipe.getIngredients().get(2));
 

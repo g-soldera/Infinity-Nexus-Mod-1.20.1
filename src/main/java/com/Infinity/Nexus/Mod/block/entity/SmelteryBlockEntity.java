@@ -5,6 +5,8 @@ import com.Infinity.Nexus.Core.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.block.custom.Smeltery;
 import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.RecyclerHandler;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.SmelteryHandler;
 import com.Infinity.Nexus.Mod.recipe.SmelteryRecipes;
 import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryMenu;
 import com.Infinity.Nexus.Core.utils.ModUtils;
@@ -88,12 +90,12 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i < 3 && ModUtils.canInsert(itemHandler, i, s))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> SmelteryHandler.extract(i, Direction.UP), SmelteryHandler::insert)),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> SmelteryHandler.extract(i, Direction.DOWN), SmelteryHandler::insert)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> SmelteryHandler.extract(i, Direction.NORTH), SmelteryHandler::insert)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> SmelteryHandler.extract(i, Direction.SOUTH), SmelteryHandler::insert)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> SmelteryHandler.extract(i, Direction.EAST), SmelteryHandler::insert)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> SmelteryHandler.extract(i, Direction.WEST), SmelteryHandler::insert)));
 
     protected final ContainerData data;
     private int progress = 0;

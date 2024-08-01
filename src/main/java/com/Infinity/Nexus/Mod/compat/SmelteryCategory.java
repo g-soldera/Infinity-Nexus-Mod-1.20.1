@@ -65,12 +65,12 @@ public class SmelteryCategory implements IRecipeCategory<SmelteryRecipes> {
             int[] inputCount = recipe.getInputCount();
         switch (recipe.getIngredients().size()){
             case 1 :
-                builder.addSlot(RecipeIngredientRole.CATALYST, 24, 52).addIngredients(recipe.getIngredients().get(0));
+                builder.addSlot(RecipeIngredientRole.CATALYST, 8, 29).addIngredients(recipe.getIngredients().get(0));
                 break;
             case 2 :
                 ItemStack input1 = recipe.getIngredients().get(1).getItems()[0];
                 input1.setCount(inputCount[1]);
-                builder.addSlot(RecipeIngredientRole.CATALYST, 24, 52).addIngredients(recipe.getIngredients().get(0));
+                builder.addSlot(RecipeIngredientRole.CATALYST, 8, 29).addIngredients(recipe.getIngredients().get(0));
                 builder.addSlot(RecipeIngredientRole.INPUT, 57, 13).addItemStack(input1);
                 break;
             case 3 :
@@ -78,7 +78,7 @@ public class SmelteryCategory implements IRecipeCategory<SmelteryRecipes> {
                 input1.setCount(inputCount[1]);
                 ItemStack input2 = recipe.getIngredients().get(2).getItems()[0];
                 input2.setCount(inputCount[2]);
-                builder.addSlot(RecipeIngredientRole.CATALYST, 24, 52).addIngredients(recipe.getIngredients().get(0));
+                builder.addSlot(RecipeIngredientRole.CATALYST, 8, 29).addIngredients(recipe.getIngredients().get(0));
                 builder.addSlot(RecipeIngredientRole.INPUT, 57, 13).addItemStack(input1);
                 builder.addSlot(RecipeIngredientRole.INPUT, 80, 6).addItemStack(input2);
                 break;
@@ -89,7 +89,7 @@ public class SmelteryCategory implements IRecipeCategory<SmelteryRecipes> {
                 input2.setCount(inputCount[2]);
                 ItemStack input3 = recipe.getIngredients().get(3).getItems()[0];
                 input3.setCount(inputCount[3]);
-                builder.addSlot(RecipeIngredientRole.CATALYST, 24, 52).addIngredients(recipe.getIngredients().get(0));
+                builder.addSlot(RecipeIngredientRole.CATALYST, 8, 29).addIngredients(recipe.getIngredients().get(0));
                 builder.addSlot(RecipeIngredientRole.INPUT, 57, 13).addItemStack(input1);
                 builder.addSlot(RecipeIngredientRole.INPUT, 80, 6).addItemStack(input2);
                 builder.addSlot(RecipeIngredientRole.INPUT, 103, 13).addItemStack(input3);

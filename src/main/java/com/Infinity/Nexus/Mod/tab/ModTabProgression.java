@@ -17,7 +17,7 @@ public class ModTabProgression {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, InfinityNexusMod.MOD_ID);
     public static final RegistryObject<CreativeModeTab> INFINITY_TAB_ADDITIONS = CREATIVE_MODE_TABS.register("infinity_nexus_mod_progression",
                                                             //Tab Icon
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocksProgression.INDUSTRIAL_MACHINE_CASING.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocksProgression.INFINITY_MACHINE_CASING.get()))
                     .title(Component.translatable("itemGroup.infinity_nexus_mod_addition"))
                     .displayItems((pParameters, pOutput) -> {
                         //-------------------------//-------------------------//

@@ -5,6 +5,8 @@ import com.Infinity.Nexus.Core.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.block.custom.Squeezer;
 import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.SmelteryHandler;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.SqueezerHandler;
 import com.Infinity.Nexus.Mod.recipe.SqueezerRecipes;
 import com.Infinity.Nexus.Mod.screen.squeezer.SqueezerMenu;
 import com.Infinity.Nexus.Core.utils.ModUtils;
@@ -60,7 +62,7 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0,1 -> !ModUtils.isUpgrade(stack) || !ModUtils.isComponent(stack);
+                case 0,1 -> !ModUtils.isUpgrade(stack) && !ModUtils.isComponent(stack);
                 case 2 -> stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
                 case 3 -> false;
                 case 4,5,6,7 -> ModUtils.isUpgrade(stack);
@@ -116,12 +118,13 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == OUTPUT_SLOT, (i, s) -> i == INPUT_SLOT && ModUtils.canInsert(itemHandler, i, s))));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> SqueezerHandler.extract(i, Direction.UP), SqueezerHandler::insert)),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> SqueezerHandler.extract(i, Direction.DOWN), SqueezerHandler::insert)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> SqueezerHandler.extract(i, Direction.NORTH), SqueezerHandler::insert)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> SqueezerHandler.extract(i, Direction.SOUTH), SqueezerHandler::insert)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> SqueezerHandler.extract(i, Direction.EAST), SqueezerHandler::insert)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> SqueezerHandler.extract(i, Direction.WEST), SqueezerHandler::insert)));
+
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress;

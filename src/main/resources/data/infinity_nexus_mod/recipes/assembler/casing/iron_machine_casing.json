@@ -10,7 +10,7 @@
       "item": "infinity_nexus_mod:iron_rod"
     },
     {
-      "item": "infinity_nexus_mod:amber_crystal"
+      "item": "infinity_nexus_miner:amber_crystal"
     },
     {
       "item": "infinity_nexus_mod:iron_screw"
@@ -32,7 +32,7 @@
     }
   ],
   "output": {
-    "item": "infinity_nexus_mod:iron_machine_casing",
+    "item": "infinity_nexus_miner:iron_machine_casing",
     "count": 1
   }
 }

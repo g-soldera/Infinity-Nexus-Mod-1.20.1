@@ -1,10 +1,10 @@
 package com.Infinity.Nexus.Mod.screen.squeezer;
 
+import com.Infinity.Nexus.Core.slots.*;
+import com.Infinity.Nexus.Core.slots.ResultSlot;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
-import com.Infinity.Nexus.Mod.slots.ResultSlot;
-import com.Infinity.Nexus.Mod.slots.*;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -43,13 +43,13 @@ public class SqueezerMenu extends AbstractContainerMenu {
 
             this.addSlot(new ResultSlot(iItemHandler, 3, 125, 52));
 
-            this.addSlot(new UpgradeSlot(iItemHandler, 4, 12, 6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 5, 35, 6));
-            this.addSlot(new UpgradeSlot(iItemHandler, 6, 12, 29));
-            this.addSlot(new UpgradeSlot(iItemHandler, 7, 35, 29));
+            this.addSlot(new UpgradeSlot(iItemHandler, 4, -11, 11));
+            this.addSlot(new UpgradeSlot(iItemHandler, 5,  -11,23));
+            this.addSlot(new UpgradeSlot(iItemHandler, 6,  -11,35));
+            this.addSlot(new UpgradeSlot(iItemHandler, 7,  -11,47));
 
-            this.addSlot(new ComponentSlot(iItemHandler, 8, 24, 52));
-            } catch (Exception e) {
+            this.addSlot(new ComponentSlot(iItemHandler, 8, 8, 29));
+            } catch (Exception ignored) {
 
             }
         });

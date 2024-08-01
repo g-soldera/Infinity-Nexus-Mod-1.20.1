@@ -2,10 +2,12 @@ package com.Infinity.Nexus.Mod.screen.factory;
 
 import com.Infinity.Nexus.Core.renderer.EnergyInfoArea;
 import com.Infinity.Nexus.Core.renderer.InfoArea;
+import com.Infinity.Nexus.Core.renderer.RenderScreenTooltips;
 import com.Infinity.Nexus.Core.utils.MouseUtil;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -68,6 +70,11 @@ public class FactoryScreen extends AbstractContainerScreen<FactoryMenu> {
         RenderSystem.setShaderTexture(0, TEXTURE);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
+        if(Screen.hasShiftDown() || isMouseAboveArea(pMouseX, pMouseY, x, y, - 15, + 37, 17, 54)) {
+            RenderScreenTooltips.renderComponentSlotTooltip(guiGraphics, TEXTURE, x - 15, y + 37, 193, 84, 18, 131);
+        }else{
+            RenderScreenTooltips.renderComponentSlotTooltip(guiGraphics, TEXTURE, x - 3, y + 37, 193, 84, 18, 131);
+        }
 
         guiGraphics.blit(TEXTURE, x + 2, y - 14, 2, imageHeight, imageWidth -4, 66);
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);

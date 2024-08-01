@@ -79,6 +79,11 @@ public class GeneratorScreen extends AbstractContainerScreen<GeneratorMenu> {
         RenderSystem.setShaderTexture(0, TEXTURE);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
+        if(Screen.hasShiftDown() || isMouseAboveArea(pMouseX, pMouseY, x, y, - 15, + 10, 17, 54)) {
+            RenderScreenTooltips.renderComponentSlotTooltip(guiGraphics, TEXTURE, x - 15, y + 10, 193, 84, 18, 131);
+        }else{
+            RenderScreenTooltips.renderComponentSlotTooltip(guiGraphics, TEXTURE, x - 3, y + 10, 193, 84, 18, 131);
+        }
 
         guiGraphics.blit(TEXTURE, x + 2, y-14, 2, 167, 174, 64);
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
