@@ -15,10 +15,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DiggerItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -139,7 +136,6 @@ public class DisplayBlockEntity extends BlockEntity {
                     //Não Criativo
                     player.getMainHandItem().shrink(stack.getCount());
                 }
-                this.setChanged();
             }
         }else{
             if(!player.getMainHandItem().isEmpty()) {
@@ -153,7 +149,6 @@ public class DisplayBlockEntity extends BlockEntity {
                     //Não Criativo
                     player.getMainHandItem().shrink(stack.getCount());
                 }
-                this.setChanged();
             }else{
                 if(player.isShiftKeyDown()){
                     level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY(), player.getZ(), itemHandler.getStackInSlot(0).copy()));
@@ -162,19 +157,23 @@ public class DisplayBlockEntity extends BlockEntity {
             }
         }
         setBlockModel(this.itemHandler.getStackInSlot(0));
+        this.setChanged();
     }
 
     private void setBlockModel(ItemStack itemStack) {
-        this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 4), 3);
+        this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 0), 3);
 
         if(itemStack.getItem() instanceof BlockItem){
             this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 0), 3);
 
-        }else if(itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem) {
-            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 1), 3);
+        }else if(itemStack.getItem() instanceof SwordItem) {
+            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 6), 3);
+
+        }else if(itemStack.getItem() instanceof DiggerItem) {
+            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 7), 3);
 
         }else{
-            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 2), 3);
+            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 4), 3);
         }
     }
 }

@@ -22,6 +22,8 @@ public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBl
     float[] x = {1.032f, 0.782f, 0.5f,   0.218f, -0.032f, 1.032f,-0.04f,1.032f,-0.04f,1.032f,-0.04f,1.032f,0.782f,0.5f,0.218f,-0.032f};
     float[] y = {1.175f, 1.145f, 1.115f, 1.145f, 1.175f,  1.145f, 1.145f, 1.115f, 1.115f, 1.145f, 1.145f, 1.175f, 1.145f, 1.115f, 1.145f, 1.175f};
     float[] z = {1.032f, 1.032f, 1.032f, 1.032f, 1.032f, 0.782f,0.782f,0.5f,0.5f,0.218f,0.218f,-0.032f,-0.032f,-0.032f,-0.032f,-0.032f};
+
+    float rotation = 0;
     public DisplayBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
 
     }
@@ -29,61 +31,60 @@ public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBl
     @Override
     public void render(DisplayBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource,
                        int pPackedLight, int pPackedOverlay) {
+
+        //Lit
+        //0 = Block
+        //1 = Block Move
+        //2 = Block Alt
+        //3 = Block Alt Move
+
+        //4 = Item
+        //5 = Item Alt
+
+        //6 = Sword
+        //7 = Tool
+
         ItemStack itemStack = pBlockEntity.getRenderStack(0);
 
         if(itemStack != ItemStack.EMPTY) {
-                ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+            ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+            int LIT = pBlockEntity.getBlockState().getValue(ItemDisplay.LIT);
+            rotation = rotation < 360F ? rotation + 0.005F : 0.0F;
 
-            if (itemStack.getItem() instanceof BlockItem) {
+            if (LIT <= 3) {
                 pPoseStack.pushPose();
-                pPoseStack.translate(0.5, 0.375, 0.5);
-                pPoseStack.scale(0.5001f, 0.5001f, 0.5001f);
+                pPoseStack.translate(0.5, LIT < 2 ? 0.5 : 2.1, 0.5);
+                pPoseStack.scale(0.5f, 0.5f, 0.5f);
                 pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(ItemDisplay.FACING).toYRot()));
-                pPoseStack.mulPose(Axis.YN.rotationDegrees(180));
+                pPoseStack.mulPose(Axis.YN.rotationDegrees(LIT == 0 || LIT == 2 ? 180 : rotation));
 
                 itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(pBlockEntity.getLevel(),
                         pBlockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, pBlockEntity.getLevel(), 0);
                 pPoseStack.popPose();
 
-            } else if (itemStack.getItem() instanceof SwordItem) {
-
+            } else if (LIT == 4 || LIT == 5) {
                 pPoseStack.pushPose();
-                pPoseStack.translate(0.5, 0.6, 0.5);
-                pPoseStack.scale(0.8f, 0.8f, 0.8f);
-                pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(ItemDisplay.FACING).toYRot()));
-                pPoseStack.mulPose(Axis.ZN.rotationDegrees(225));
-
-                itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(pBlockEntity.getLevel(),
-                        pBlockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, pBlockEntity.getLevel(), 1);
-                pPoseStack.popPose();
-
-            } else if (itemStack.getItem() instanceof DiggerItem) {
-                pPoseStack.pushPose();
-                pPoseStack.translate(0.5, 0.6, 0.5);
-                pPoseStack.scale(0.8f, 0.8f, 0.8f);
-                pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(ItemDisplay.FACING).toYRot()));
-                pPoseStack.mulPose(Axis.ZN.rotationDegrees(45));
-
-                itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(pBlockEntity.getLevel(),
-                        pBlockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, pBlockEntity.getLevel(), 1);
-                pPoseStack.popPose();
-            }else{
-                pPoseStack.pushPose();
-                pPoseStack.translate(0.5, 0.4, 0.5);
+                pPoseStack.translate(0.5, LIT == 4 ? 0.5 : 2.1, 0.5);
                 pPoseStack.scale(0.5f, 0.5f, 0.5f);
                 pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(ItemDisplay.FACING).toYRot()));
                 pPoseStack.mulPose(Axis.XN.rotationDegrees(45));
-                pPoseStack.mulPose(Axis.YN.rotationDegrees(180));
+
+                itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(pBlockEntity.getLevel(),
+                        pBlockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, pBlockEntity.getLevel(), 1);
+                pPoseStack.popPose();
+
+            } else if (LIT == 6 || LIT == 7) {
+                pPoseStack.pushPose();
+                pPoseStack.translate(0.5,0.5, 0.5);
+                pPoseStack.scale(0.5f, 0.5f, 0.5f);
+                pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(ItemDisplay.FACING).toYRot()));
+                pPoseStack.mulPose(Axis.ZN.rotationDegrees(LIT == 6 ? 225 : 45));
 
                 itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(pBlockEntity.getLevel(),
                         pBlockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, pBlockEntity.getLevel(), 1);
                 pPoseStack.popPose();
             }
-        }else{
-            //System.out.println("Empty");
-            //System.out.println(itemStack);
         }
-
     }
     private int getLightLevel(Level pLevel, BlockPos pPos) {
         int blight = pLevel.getBrightness(LightLayer.BLOCK, pPos);

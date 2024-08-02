@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -31,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 public class ItemDisplay extends BaseEntityBlock {
-    public static IntegerProperty LIT = IntegerProperty.create("lit", 0, 4);
+    public static IntegerProperty LIT = IntegerProperty.create("lit", 0, 7);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public ItemDisplay(Properties pProperties) {
         super(pProperties);
@@ -40,55 +41,10 @@ public class ItemDisplay extends BaseEntityBlock {
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        Direction facing = pState.getValue(FACING);
-        return switch (pState.getValue(LIT)) {
-            case 1 : if(facing == Direction.NORTH || facing == Direction.SOUTH){
-                yield Stream.of(
-                        Block.box(2, 0, 6, 14, 3, 10),
-                        Block.box(7, 0, 7.7, 9, 15, 8.3)
-                        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-            }else{
-                yield Stream.of(
-                        Block.box(6, 0, 2, 10, 3, 14),
-                        Block.box(7.7, 0, 7, 8.3, 15, 9)
-                ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-            }
-
-            case 2 : if(facing == Direction.NORTH){
-                yield Stream.of(
-                        Block.box(2, 0, 4, 14, 2, 8),
-                        Block.box(3, 3, 7, 13, 4, 8),
-                        Block.box(3, 4, 8, 13, 5, 9),
-                        Block.box(3, 5, 9, 13, 6, 10),
-                        Block.box(3, 6, 10, 13, 7, 11)
-                ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-            }else if (facing == Direction.SOUTH){
-                yield Stream.of(
-                        Block.box(2, 0, 8, 14, 2, 12),
-                        Block.box(3, 3, 8, 13, 4, 9),
-                        Block.box(3, 4, 7, 13, 5, 8),
-                        Block.box(3, 5, 6, 13, 6, 7),
-                        Block.box(3, 6, 5, 13, 7, 6)
-                ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-            }else if (facing == Direction.EAST){
-                yield Stream.of(
-                        Block.box(8, 0, 2, 12, 2, 14),
-                        Block.box(8, 3, 3, 9, 4, 13),
-                        Block.box(7, 4, 3, 8, 5, 13),
-                        Block.box(6, 5, 3, 7, 6, 13),
-                        Block.box(5, 6, 3, 6, 7, 13)
-                ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-            }else{
-                yield Stream.of(
-                        Block.box(4, 0, 2, 8, 2, 14),
-                        Block.box(7, 3, 3, 8, 4, 13),
-                        Block.box(8, 4, 3, 9, 5, 13),
-                        Block.box(9, 5, 3, 10, 6, 13),
-                        Block.box(10, 6, 3, 11, 7, 13)
-                ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-            }
-
-            default : yield Block.box(4, 0, 4, 12, 2, 12);
+        int litValue = pState.getValue(LIT);
+        return switch (litValue) {
+            case 2, 3, 5 -> Block.box(0, 14, 0, 16, 16, 16);
+            default -> Block.box(0, 0, 0, 16, 2, 16);
         };
     }
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
@@ -128,7 +84,13 @@ public class ItemDisplay extends BaseEntityBlock {
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
-            setStack(pPlayer.getMainHandItem().copy(), (DisplayBlockEntity) pLevel.getBlockEntity(pPos), pPlayer);
+            if(pPlayer.getOffhandItem().getItem() == Items.STICK){
+                BlockState blockState = pState.getValue(LIT) < 7 ? pState.setValue(LIT, pState.getValue(LIT) + 1) : pState.setValue(LIT, 0);
+                pLevel.setBlock(pPos, blockState, 3);
+                System.out.println("Lit alterado de " + pState.getValue(LIT) + " para " + blockState.getValue(LIT));
+            }else{
+                setStack(pPlayer.getMainHandItem().copy(), (DisplayBlockEntity) pLevel.getBlockEntity(pPos), pPlayer);
+            }
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
