@@ -150,6 +150,7 @@ public class InfinityNexusMod
 
             ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.VOXEL_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.ENTITY_DISPLAY.get(), RenderType.cutoutMipped());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK.get(), RenderType.translucent());
 
             EntityRenderers.register(ModEntities.ASGREON.get(), AsgreonRenderer::new);
 

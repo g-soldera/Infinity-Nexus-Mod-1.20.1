@@ -1,0 +1,2 @@
+[V] Duplicação de minérios no Crusher
+[X] Mostrar a area de ação do MobCrusher

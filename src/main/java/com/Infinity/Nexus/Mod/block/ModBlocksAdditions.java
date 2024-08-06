@@ -85,6 +85,7 @@ public class ModBlocksAdditions {
     public static final RegistryObject<Block> MATTER_CONDENSER = registerBlock("matter_condenser", () -> new MatterCondenser(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> state.getValue(MatterCondenser.LIT) >= 8 ? 2 : 0).noOcclusion().mapColor(MapColor.METAL)));
     public static final RegistryObject<Block> DISPLAY = registerBlock("display", () -> new ItemDisplay(BlockBehaviour.Properties.copy(Blocks.ANDESITE).requiresCorrectToolForDrops().strength(3.0f, 6.0f).noOcclusion().mapColor(MapColor.STONE)));
     public static final RegistryObject<Block> ENTITY_DISPLAY = registerBlock("entity_display", () -> new EntityDisplay(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> 1).noOcclusion().noCollission().mapColor(MapColor.WOOD)));
+    public static final RegistryObject<Block> CATWALK = registerBlock("catwalk", () -> new Catwalk(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).lightLevel((state) -> 1).noOcclusion().mapColor(MapColor.RAW_IRON)));
 
     public static final RegistryObject<Block> SOLAR = registerBlock("solar", () -> new Solar(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(1.0f, 6.0f).lightLevel((state) -> state.getValue(Solar.LIT) > 0 ? 2 : 0).noOcclusion().mapColor(MapColor.METAL)));
     public static final RegistryObject<Block> FERMENTATION_BARREL = registerBlock("fermentation_barrel", () -> new FermentationBarrel(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).strength(1.0f, 6.0f).noOcclusion().mapColor(MapColor.WOOD)));
@@ -104,11 +105,9 @@ public class ModBlocksAdditions {
         registerBlockItem(name, toReturn);
         return toReturn;
     }
-
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
         return ModItemsAdditions.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
-
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }

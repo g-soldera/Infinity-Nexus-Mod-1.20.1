@@ -309,13 +309,16 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         progress ++;
     }
     private void setMaxProgress(int machineLevel) {
-        int duration = getCurrentRecipe().get().getDuration();
-        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS);
+        int duration = getCurrentRecipe().get().getDuration(); //130
+        int lubricant = this.FLUID_STORAGE.getFluidAmount() > 0 ? 1 : 0;
+        int halfDuration = duration / 2;
+        int speedReduction = halfDuration / 16;
+        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS); //16
 
-        if (this.FLUID_STORAGE.getFluidAmount() > 0) {
-            speed++;
-        }
-        duration = duration - (machineLevel * Math.max(speed, 1));
+        int reducedDuration = speed * speedReduction;
+        int reducedLevel = machineLevel * (halfDuration / (8 + lubricant));
+        duration = duration - reducedDuration - reducedLevel;
+
         maxProgress = Math.max(duration, ConfigUtils.assembler_minimum_tick);
     }
     private void extractEnergy(AssemblerBlockEntity assemblerBlockEntity) {

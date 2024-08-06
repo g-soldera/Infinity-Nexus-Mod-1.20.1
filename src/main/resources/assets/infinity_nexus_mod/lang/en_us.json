@@ -387,6 +387,9 @@
   "item.infinity_nexus_mod.voxel_n": "§3Technology Orb",
   "item.infinity_nexus_mod.voxel_s": "§eResourceful Orb",
   "item.infinity_nexus_mod.voxel_w": "§5Mágic Orb",
-  "item.infinity_nexus_mod.voxel_e": "§2Exploration Orb"
+  "item.infinity_nexus_mod.voxel_e": "§2Exploration Orb",
+
+  "item.infinity_nexus_mod.catwalk": "Catwalk",
+  "tooltip.infinity_nexus.catwalk": "use a stick on the secondary hand to change the type of the Catwalk.\nClick to change the format.\nCTRL + Click to rotate\nAlt + Click to go back to the previous format"
 
 }

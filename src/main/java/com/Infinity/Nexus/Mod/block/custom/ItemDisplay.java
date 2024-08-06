@@ -4,6 +4,7 @@ import com.Infinity.Nexus.Mod.block.entity.DisplayBlockEntity;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -44,7 +45,7 @@ public class ItemDisplay extends BaseEntityBlock {
         int litValue = pState.getValue(LIT);
         return switch (litValue) {
             case 2, 3, 5 -> Block.box(0, 14, 0, 16, 16, 16);
-            default -> Block.box(0, 0, 0, 16, 2, 16);
+            default -> Block.box(1, 0, 1, 15, 2, 15);
         };
     }
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
@@ -87,7 +88,7 @@ public class ItemDisplay extends BaseEntityBlock {
             if(pPlayer.getOffhandItem().getItem() == Items.STICK){
                 BlockState blockState = pState.getValue(LIT) < 7 ? pState.setValue(LIT, pState.getValue(LIT) + 1) : pState.setValue(LIT, 0);
                 pLevel.setBlock(pPos, blockState, 3);
-                System.out.println("Lit alterado de " + pState.getValue(LIT) + " para " + blockState.getValue(LIT));
+                pPlayer.sendSystemMessage(Component.literal("Display Alterado"));
             }else{
                 setStack(pPlayer.getMainHandItem().copy(), (DisplayBlockEntity) pLevel.getBlockEntity(pPos), pPlayer);
             }

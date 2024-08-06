@@ -383,5 +383,8 @@
   "item.infinity_nexus_mod.uranium_ingot": "Uranium Ingot",
   "item.infinity_nexus_mod.uranium_nugget": "Uranium Nugget",
   "block.infinity_nexus_mod.uranium_block": "Uranium Block",
-  "block.infinity_nexus_mod.raw_uranium_block": "Raw Uranium Block"
+  "block.infinity_nexus_mod.raw_uranium_block": "Raw Uranium Block",
+
+  "item.infinity_nexus_mod.catwalk": "Catwalk",
+  "tooltip.infinity_nexus.catwalk": "Use um stick na mão secundaria para mudar o tipo da passarela.\nClique para mudar o formato.\nCTRL + Clique rotacionar\nAlt + Clique para voltar ao formato anterior"
 }

@@ -161,7 +161,7 @@ public class DisplayBlockEntity extends BlockEntity {
     }
 
     private void setBlockModel(ItemStack itemStack) {
-        this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 0), 3);
+        this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 1), 3);
 
         if(itemStack.getItem() instanceof BlockItem){
             this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 0), 3);

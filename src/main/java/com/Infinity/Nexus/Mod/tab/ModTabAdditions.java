@@ -36,6 +36,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DISPLAY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ENTITY_DISPLAY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ENTITY_CENTRALIZER.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK.get()));
                         //-------------------------//-------------------------//
                         //Solar
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SOLAR.get()));

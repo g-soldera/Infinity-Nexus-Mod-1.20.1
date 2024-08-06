@@ -7,6 +7,7 @@ import com.Infinity.Nexus.Mod.block.custom.Press;
 import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
 import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.MobCrusherHandler;
 import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.PressHandler;
+import com.Infinity.Nexus.Mod.config.ConfigUtils;
 import com.Infinity.Nexus.Mod.recipe.PressRecipes;
 import com.Infinity.Nexus.Mod.screen.press.PressMenu;
 import com.Infinity.Nexus.Core.utils.ModUtils;
@@ -329,11 +330,16 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         progress ++;
     }
     private void setMaxProgress(int machineLevel) {
-        int duration = getCurrentRecipe().get().getDuration();
-        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS);
+        int duration = getCurrentRecipe().get().getDuration(); //130
+        int halfDuration = duration / 2;
+        int speedReduction = halfDuration / 16;
+        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS); //16
 
-        duration = duration / Math.max((machineLevel + speed), 1);
-        maxProgress = Math.max(duration, 5);
+        int reducedDuration = speed * speedReduction;
+        int reducedLevel = machineLevel * (halfDuration / 8);
+        duration = duration - reducedDuration - reducedLevel;
+
+        maxProgress = Math.max(duration, ConfigUtils.assembler_minimum_tick);
     }
     public static int getInputSlot() {
         return INPUT_SLOT;

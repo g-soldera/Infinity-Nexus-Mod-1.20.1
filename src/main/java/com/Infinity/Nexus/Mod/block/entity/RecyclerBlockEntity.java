@@ -7,6 +7,7 @@ import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.block.custom.Recycler;
 import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.PressHandler;
 import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.RecyclerHandler;
+import com.Infinity.Nexus.Mod.config.ConfigUtils;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.screen.recycler.RecyclerMenu;
 import com.Infinity.Nexus.Core.utils.ModUtils;
@@ -279,10 +280,15 @@ public class RecyclerBlockEntity extends BlockEntity implements MenuProvider {
     }
     private void setMaxProgress(int machineLevel) {
         int duration = 130;
-        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS);
+        int halfDuration = duration / 2;
+        int speedReduction = halfDuration / 16;
+        int speed = ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS); //16
 
-        duration = duration / Math.max((machineLevel + speed), 1);
-        maxProgress = Math.max(duration, 5);
+        int reducedDuration = speed * speedReduction;
+        int reducedLevel = machineLevel * (halfDuration / 8);
+        duration = duration - reducedDuration - reducedLevel;
+
+        maxProgress = Math.max(duration, ConfigUtils.assembler_minimum_tick);
     }
     private boolean hasEnoughEnergy() {
         return ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQ;
