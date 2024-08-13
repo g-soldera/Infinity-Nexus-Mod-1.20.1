@@ -306,6 +306,7 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
 
             if (hasProgressFinished()) {
                 craftItem();
+                ModUtils.ejectItemsWhePusher(pPos.above(),UPGRADE_SLOTS, new int[]{OUTPUT_SLOT}, itemHandler, pLevel);
                 resetProgress();
             }
         }catch (Exception e){

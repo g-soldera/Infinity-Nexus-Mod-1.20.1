@@ -23,8 +23,10 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -62,10 +64,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
@@ -359,6 +358,7 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
             verifyMobs(pLevel, pPos, machineLevel);
             extractEnergy(this);
             setChanged(pLevel, pPos, pState);
+            ModUtils.ejectItemsWhePusher(pPos.above(),UPGRADE_SLOTS, OUTPUT_SLOT, itemHandler, pLevel);
             resetProgress();
         }
         this.data.set(3, 0);
@@ -436,7 +436,9 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         ModUtils.useComponent(component, level, this.getBlockPos());
 
         Player player = new IFFakePlayer((ServerLevel) this.level);
-        DamageSource source = player.damageSources().playerAttack(player);
+        player.setItemInHand(InteractionHand.MAIN_HAND, this.itemHandler.getStackInSlot(SWORD_SLOT));
+        ServerPlayer randomPlayer = ((ServerLevel) this.level).getRandomPlayer();
+        DamageSource source = player.damageSources().playerAttack((randomPlayer != null) && machineLevel >= 7 ? randomPlayer : player);
         LootTable table = Objects.requireNonNull(this.level.getServer()).getLootData().getLootTable(mob.getLootTable());
         LootParams.Builder context = new LootParams.Builder((ServerLevel) this.level)
                 .withParameter(LootContextParams.THIS_ENTITY, mob)
@@ -444,8 +446,7 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
                 .withParameter(LootContextParams.ORIGIN, new Vec3(pPos.getX(), pPos.getY(), pPos.getZ()))
                 .withParameter(LootContextParams.KILLER_ENTITY, player)
                 .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, player)
-                .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, player)
-                .withParameter(LootContextParams.TOOL, itemHandler.getStackInSlot(SWORD_SLOT));
+                .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, player);
         table.getRandomItems(context.create(LootContextParamSets.ENTITY)).forEach(stack ->{
             insertItemOnInventory(stack);
                 for(int loot = 0; loot < machineLevel; loot++) {
@@ -467,6 +468,7 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
             e.printStackTrace();
         }
         ForgeHooks.onLivingDrops(mob, source, extra, 3, true);
+        player.attack(mob);
         extra.forEach(itemEntity -> {
             insertItemOnInventory(itemEntity.getItem());
             itemEntity.remove(Entity.RemovalReason.KILLED);

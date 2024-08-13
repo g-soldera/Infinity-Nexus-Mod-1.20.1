@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "infinity_nexus_mod:solar_pane_quantum"
+    },
+    "B": {
+      "item": "infinity_nexus_mod:quantum_solar_core"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "item": "infinity_nexus_mod:solar_pane_photonic"
+  },
+  "show_notification": true
+}

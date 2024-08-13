@@ -361,8 +361,10 @@
   "item.infinity_nexus_mod.voxel_w": "§5Orbe de Mágica",
   "item.infinity_nexus_mod.voxel_e": "§2Orbe de Exploração",
   "block.infinity_nexus_mod.smeltery": "Smeltery",
+
   "infinity_nexus_mod.tooltip.liquid.amount.with.capacity": "%s / %s mb",
   "infinity_nexus_mod.tooltip.liquid.amount": "%s mb",
+
   "block.infinity_nexus_mod.deepslate_lead_ore": "Deepslate Lead Ore",
   "block.infinity_nexus_mod.zinc_ore": "Zinc Ore",
   "block.infinity_nexus_mod.deepslate_zinc_ore": "Deepslate Zinc Ore",
@@ -385,6 +387,20 @@
   "block.infinity_nexus_mod.uranium_block": "Uranium Block",
   "block.infinity_nexus_mod.raw_uranium_block": "Raw Uranium Block",
 
-  "item.infinity_nexus_mod.catwalk": "Catwalk",
-  "tooltip.infinity_nexus.catwalk": "Use um stick na mão secundaria para mudar o tipo da passarela.\nClique para mudar o formato.\nCTRL + Clique rotacionar\nAlt + Clique para voltar ao formato anterior"
+  "block.infinity_nexus_mod.catwalk": "Grade Lateral",
+  "block.infinity_nexus_mod.catwalk_2": "Grade Lateral Dupla",
+  "block.infinity_nexus_mod.catwalk_3": "Grade de Canto Dupla",
+  "block.infinity_nexus_mod.catwalk_4": "Grade Lateral com Chão",
+  "block.infinity_nexus_mod.catwalk_5": "Grade Lateral Dupla com Chão",
+  "block.infinity_nexus_mod.catwalk_6": "Grade de Canto Dupla com Chão",
+  "block.infinity_nexus_mod.catwalk_7": "Grade de Canto Dupla com Chão com Ponta",
+  "block.infinity_nexus_mod.catwalk_8": "Chão Reto",
+  "block.infinity_nexus_mod.catwalk_9": "Chão de Canto",
+  "block.infinity_nexus_mod.catwalk_10": "Chão de Canto com Ponta",
+  "block.infinity_nexus_mod.catwalk_11": "Escada com Grade Lateral Esquerda Simples",
+  "block.infinity_nexus_mod.catwalk_12": "Escada com Grade Lateral Direita Simples",
+  "block.infinity_nexus_mod.catwalk_13": "Escada com Grade Lateral Esquerda Composta",
+  "block.infinity_nexus_mod.catwalk_14": "Escada com Grade Lateral Direita Composta",
+  "block.infinity_nexus_mod.catwalk_15": "Escada Simples",
+  "block.infinity_nexus_mod.catwalk_16": "Escada Composta"
 }

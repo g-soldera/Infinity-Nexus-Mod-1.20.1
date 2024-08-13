@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"render_type": "translucent",
 	"textures": {
-		"0": "minecraft:block/iron_block",
-		"particle": "minecraft:block/iron_block",
-		"1": "infinity_nexus_mod:block/machine_casing"
+		"0": "desktop:block/iron_block",
+		"1": "infinity_nexus_mod:block/machine_casing",
+		"particle": "desktop:block/iron_block"
 	},
 	"elements": [
 		{
@@ -511,8 +511,8 @@
 			"scale": [0.25, 0.25, 0.25]
 		},
 		"gui": {
-			"rotation": [25, -44, 0],
-			"scale": [0.6, 0.6, 0.6]
+			"rotation": [30, 225, 0],
+			"scale": [0.625, 0.625, 0.625]
 		},
 		"head": {
 			"scale": [0.91, 0.91, 0.91]

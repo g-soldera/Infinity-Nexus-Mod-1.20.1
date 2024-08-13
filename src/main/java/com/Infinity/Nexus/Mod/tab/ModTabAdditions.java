@@ -36,7 +36,6 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DISPLAY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ENTITY_DISPLAY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.ENTITY_CENTRALIZER.get()));
-                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK.get()));
                         //-------------------------//-------------------------//
                         //Solar
                         pOutput.accept(new ItemStack(ModBlocksAdditions.SOLAR.get()));
@@ -45,6 +44,24 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.SOLAR_PANE_ULTIMATE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.SOLAR_PANE_QUANTUM.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.SOLAR_PANE_PHOTONIC.get()));
+                        //-------------------------//-------------------------//
+                        //Catwalk
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_2.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_3.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_4.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_5.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_6.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_7.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_8.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_9.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_10.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_11.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_12.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_13.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_14.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_15.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.CATWALK_16.get()));
                         //-------------------------//-------------------------//
                         //ingots
                         pOutput.accept(new ItemStack(ModItemsAdditions.SILVER_INGOT.get()));

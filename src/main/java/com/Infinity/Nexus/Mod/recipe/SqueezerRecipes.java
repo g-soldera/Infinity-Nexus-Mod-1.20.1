@@ -2,7 +2,6 @@ package com.Infinity.Nexus.Mod.recipe;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.SqueezerBlockEntity;
-import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
@@ -14,12 +13,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.extensions.IForgeFluid;
-import net.minecraftforge.common.extensions.IForgeItem;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -126,7 +120,7 @@ public class SqueezerRecipes implements Recipe<SimpleContainer> {
             int inputCount = ingredients.get(1).getAsJsonObject().get("count").getAsInt();
 
             FluidStack fluidStack = new FluidStack(Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(new ResourceLocation(pSerializedRecipe.get("fluidType").getAsString()))),
-            pSerializedRecipe.get("fluidAmount").getAsInt());
+                    pSerializedRecipe.get("fluidAmount").getAsInt());
 
             NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
             for (int i = 0; i < ingredients.size(); i++) {

@@ -5,9 +5,7 @@ import com.Infinity.Nexus.Core.items.custom.ComponentItem;
 import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Mod.block.custom.MatterCondenser;
 import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
-import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.GeneratorHandler;
 import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.MatterCondenserHandler;
-import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.screen.condenser.CondenserMenu;
 import com.Infinity.Nexus.Core.utils.ModUtils;
@@ -34,7 +32,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -313,9 +310,10 @@ public class MatterCondenserBlockEntity extends BlockEntity implements MenuProvi
 
         ModUtils.useComponent(component, level, this.getBlockPos());
 
-        this.itemHandler.insertItem(OUTPUT_SLOT, new ItemStack(ModItemsProgression.UNSTABLE_MATTER.get()), false);
+        this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(ModItemsProgression.UNSTABLE_MATTER.get(),
+                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + 1));
 
-        level.playSound(null, this.getBlockPos(), SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 0.3f, 1.0f);
+        level.playSound(null, this.getBlockPos(), SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 0.1f, 1.0f);
     }
 
     private int getMachineLevel(){

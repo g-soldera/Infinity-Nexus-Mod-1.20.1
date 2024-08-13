@@ -10,7 +10,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -19,13 +18,14 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -38,45 +38,45 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class Catwalk extends Block {
-    public static IntegerProperty LIT = IntegerProperty.create("lit", 0, 16);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public Catwalk(Properties pProperties) {
-        super(pProperties);
+    private final int TYPE;
+    public Catwalk(Properties properties, int type) {
+        super(properties);
+        this.TYPE = type;
     }
 
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        int litValue = pState.getValue(LIT);
         Direction direction = pState.getValue(FACING);
-        return switch (litValue) {
-            case 0 -> switch (direction) {
+        return switch (TYPE) {
+            case 1 -> switch (direction) {
                 case WEST -> Block.box(0, 0, 0, 16, 16, 1);
                 case EAST -> Block.box(0, 0, 15, 16, 16, 16);
                 case SOUTH -> Block.box(0, 0, 0, 1, 16, 16);
                 default -> Block.box(15, 0, 0, 16, 16, 16);
             };
-            case 1 -> switch (direction) {
+            case 2 -> switch (direction) {
                 case WEST, EAST -> Stream.of(Block.box(0, 0, 0, 16, 16, 1), Block.box(0, 0, 15, 16, 16, 16)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
                 default -> Stream.of(Block.box(0, 0, 0, 1, 16, 16), Block.box(15, 0, 0, 16, 16, 16)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
             };
-            case 2 -> switch (direction) {
+            case 3 -> switch (direction) {
                 case WEST -> Stream.of(Block.box(0, 0, 0, 16, 16, 1), Block.box(15, 0, 0, 16, 16, 16)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
                 case EAST -> Stream.of(Block.box(0, 0, 15, 16, 16, 16), Block.box(0, 0, 0, 1, 16, 16)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
                 case SOUTH -> Stream.of(Block.box(0, 0, 0, 16, 16, 1), Block.box(0, 0, 0, 1, 16, 16)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
                 default -> Stream.of(Block.box(0, 0, 15, 16, 16, 16), Block.box(15, 0, 0, 16, 16, 16)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
             };
-            case 3 -> switch (direction) {
+            case 4 -> switch (direction) {
                 case WEST -> Stream.of(Block.box(0, 0, 0, 16, 1, 16), Block.box(0, 0, 0, 16, 16, 1)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
                 case EAST -> Stream.of(Block.box(0, 0, 0, 16, 1, 16), Block.box(0, 0, 15, 16, 16, 16)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
                 case SOUTH -> Stream.of(Block.box(0, 0, 0, 16, 1, 16), Block.box(0, 0, 0, 1, 16, 16)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
                 default -> Stream.of(Block.box(0, 0, 0, 16, 1, 16), Block.box(15, 0, 0, 16, 16, 16)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
             };
-            case 4 -> switch (direction) {
+            case 5 -> switch (direction) {
                 case WEST, EAST -> Stream.of(Block.box(0, 0, 0, 16, 1, 16), Block.box(0, 0, 15, 16, 16, 16), Block.box(0, 0, 0, 16, 16, 1)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
                 default -> Stream.of(Block.box(0, 0, 0, 16, 1, 16), Block.box(15, 0, 0, 16, 16, 16), Block.box(0, 0, 0, 1, 16, 16)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
             };
-            case 5, 10 -> switch (direction) {
+            case 6,7 -> switch (direction) {
                 case WEST -> Stream.of(Block.box(0, 0, 0, 16, 1, 16), Block.box(15, 0, 0, 16, 16, 16), Block.box(0, 0, 0, 16, 16, 1)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
                 case EAST -> Stream.of(Block.box(0, 0, 0, 16, 1, 16), Block.box(0, 0, 0, 1, 16, 16), Block.box(0, 0, 15, 16, 16, 16)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
                 case SOUTH -> Stream.of(Block.box(0, 0, 0, 16, 1, 16), Block.box(0, 0, 0, 16, 16, 1), Block.box(0, 0, 0, 1, 16, 16)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
@@ -119,7 +119,7 @@ public class Catwalk extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING, LIT);
+        pBuilder.add(FACING);
     }
     @Override
     public RenderShape getRenderShape(BlockState pState) {
@@ -129,42 +129,11 @@ public class Catwalk extends Block {
     @Override
     public void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity) {
         if (!pLevel.isClientSide() && pEntity instanceof ServerPlayer player) {
-            int lit[] = {11,12,13,14,15,16};
-            if(Arrays.stream(lit).anyMatch(i -> pState.getValue(LIT) == i)){
+            int type[] = {11,12,13,14,15};
+            if(Arrays.stream(type).anyMatch(i -> this.TYPE == i)){
                 player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 3, false, false));
             }
         }
         super.entityInside(pState, pLevel, pPos, pEntity);
-    }
-
-    @Override
-    public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
-        if (!pLevel.isClientSide()) {
-            if(pPlayer.getOffhandItem().getItem() == Items.STICK) {
-                System.out.println(pState.getValue(LIT));
-                if (Screen.hasControlDown()) {
-                    pPlayer.sendSystemMessage(Component.literal("Rotação Alterada"));
-                    pLevel.setBlock(pPos, pState.cycle(FACING), 3);
-                }else if(Screen.hasAltDown()){
-                    BlockState blockState = pState.getValue(LIT) > 0 ? pState.setValue(LIT, pState.getValue(LIT) - 1) : pState.setValue(LIT, 16);
-                    pLevel.setBlock(pPos, blockState, 3);
-                }else {
-                    pLevel.setBlock(pPos, pState.cycle(LIT), 3);
-                    pPlayer.sendSystemMessage(Component.literal("Display Alterado"));
-                }
-            }
-            return InteractionResult.SUCCESS;
-        }
-        return InteractionResult.sidedSuccess(pLevel.isClientSide());
-    }
-
-    @Override
-    public void appendHoverText(ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> components, TooltipFlag pFlag) {
-        if (Screen.hasShiftDown()) {
-            components.add(Component.translatable("tooltip.infinity_nexus.catwalk"));
-        } else {
-            components.add(Component.translatable("tooltip.infinity_nexus.pressShift"));
-        }
-        super.appendHoverText(pStack, pLevel, components, pFlag);
     }
 }

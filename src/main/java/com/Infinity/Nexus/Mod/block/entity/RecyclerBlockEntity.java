@@ -255,6 +255,7 @@ public class RecyclerBlockEntity extends BlockEntity implements MenuProvider {
 
         if (hasProgressFinished()) {
             craftItem();
+            ModUtils.ejectItemsWhePusher(pPos.above(),UPGRADE_SLOTS, new int[]{OUTPUT_SLOT}, itemHandler, pLevel);
             resetProgress();
         }
     }
@@ -268,7 +269,8 @@ public class RecyclerBlockEntity extends BlockEntity implements MenuProvider {
         itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
         int chance = new Random().nextInt(100);
         if(chance < 5){
-            itemHandler.insertItem(OUTPUT_SLOT, ModItemsProgression.RESIDUAL_MATTER.get().getDefaultInstance(), false);
+            this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(ModItemsProgression.RESIDUAL_MATTER.get(),
+                    this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + 1));
         }
         if(ModUtils.getMuffler(itemHandler, UPGRADE_SLOTS) < 1){
             level.playSound(null, this.getBlockPos(), SoundEvents.GRAVEL_FALL, SoundSource.BLOCKS, 0.3f, 1.0f);

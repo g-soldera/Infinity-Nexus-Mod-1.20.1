@@ -2,12 +2,8 @@ package com.Infinity.Nexus.Mod.recipe;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
-import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
-import com.Infinity.Nexus.Core.utils.ModUtils;
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
@@ -17,12 +13,8 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
-import java.util.Objects;
 
 public class PressRecipes implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> inputItems;
@@ -50,7 +42,7 @@ public class PressRecipes implements Recipe<SimpleContainer> {
         int componentSlot = PressBlockEntity.getComponentSlot();
         ItemStack stack = pContainer.getItem(componentSlot);
         return (inputItems.get(0).test(stack)) &&
-                (inputItems.get(1).test(pContainer.getItem(0)) && pContainer.getItem(0).getCount() >= getInputCount()) &&
+                (inputItems.get(1).test(pContainer.getItem(0)) && pContainer.getItem(0).getCount() >= inputCount)&&
                 inputItems.get(2).test(pContainer.getItem(1));
     }
 
@@ -131,7 +123,7 @@ public class PressRecipes implements Recipe<SimpleContainer> {
 
         @Override
         public @Nullable PressRecipes fromNetwork(@NotNull ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
-                //1
+            //1
             NonNullList<Ingredient> inputs = NonNullList.withSize(pBuffer.readInt(), Ingredient.EMPTY);
 
             for(int i = 0; i < inputs.size(); i++) {

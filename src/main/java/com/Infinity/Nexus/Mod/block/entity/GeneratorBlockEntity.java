@@ -100,7 +100,7 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
     private int progress = 0;
     private int maxProgress = 0;
     private int fuel = 0;
-    private int ENERGY_TRANSFER;
+    private int ENERGY_TRANSFER = 30;
 
 
     public GeneratorBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -236,7 +236,7 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
-        findEnergyCap();
+        findEnergyCap(machineLevel);
         if(getMachineLevel() <= 0){
             return;
         }
@@ -263,12 +263,12 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
-    private void setMaxTransfer() {
-        int energy = (getMachineLevel() + (ModUtils.getSpeed(this.itemHandler, UPGRADE_SLOTS) + ModUtils.getSpeed(itemHandler, UPGRADE_SLOTS))) * 30;
+    private void setMaxTransfer(int machineLevel) {
+        int energy = (machineLevel + (ModUtils.getStrength(this.itemHandler, UPGRADE_SLOTS))) * 30;
         ENERGY_TRANSFER = energy <= 0 ? 30 : energy;
     }
 
-    private void findEnergyCap() {
+    private void findEnergyCap(int machineLevel) {
         try{
             Level level = getLevel();
             BlockPos pos = getBlockPos();
@@ -279,7 +279,7 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
                 BlockEntity neighborBlockEntity = level.getBlockEntity(neighborPos);
                 if (neighborBlockEntity != null && !(neighborBlockEntity instanceof SolarBlockEntity || neighborBlockEntity instanceof GeneratorBlockEntity)) {
                     neighborBlockEntity.getCapability(ForgeCapabilities.ENERGY).ifPresent(energy ->{
-                        setMaxTransfer();
+                        setMaxTransfer(machineLevel);
                         int amount = Math.min(ENERGY_STORAGE.getEnergyStored(), ENERGY_TRANSFER);
                         if(energy.canReceive() && energy.getEnergyStored() != energy.getMaxEnergyStored()) {
                             if((energy.getMaxEnergyStored() - energy.getEnergyStored()) >= amount){

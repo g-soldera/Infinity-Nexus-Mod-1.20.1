@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class SolarUpgrade extends Item {
-    private int energy;
+    private final int energy;
     public SolarUpgrade(Properties pProperties, int energy) {
         super(pProperties);
         this.energy = energy;

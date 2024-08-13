@@ -389,7 +389,21 @@
   "item.infinity_nexus_mod.voxel_w": "§5Mágic Orb",
   "item.infinity_nexus_mod.voxel_e": "§2Exploration Orb",
 
-  "item.infinity_nexus_mod.catwalk": "Catwalk",
-  "tooltip.infinity_nexus.catwalk": "use a stick on the secondary hand to change the type of the Catwalk.\nClick to change the format.\nCTRL + Click to rotate\nAlt + Click to go back to the previous format"
+  "block.infinity_nexus_mod.catwalk": "Side Grid",
+  "block.infinity_nexus_mod.catwalk_2": "Dual Side Grid",
+  "block.infinity_nexus_mod.catwalk_3": "Dual Corner Grid",
+  "block.infinity_nexus_mod.catwalk_4": "Side Grid white Floor",
+  "block.infinity_nexus_mod.catwalk_5": "Dual Side Grid white Floor",
+  "block.infinity_nexus_mod.catwalk_6": "Dual Corner Grid white Floor",
+  "block.infinity_nexus_mod.catwalk_7": "Dual Corner Grid white Floor and Pillar",
+  "block.infinity_nexus_mod.catwalk_8": "Flat Floor",
+  "block.infinity_nexus_mod.catwalk_9": "Flat Corner Floor",
+  "block.infinity_nexus_mod.catwalk_10": "Flat Corner Floor with Pillar",
+  "block.infinity_nexus_mod.catwalk_11": "Stair with Simple Left Side Railing",
+  "block.infinity_nexus_mod.catwalk_12": "Stair with Simple Right Side Railing",
+  "block.infinity_nexus_mod.catwalk_13": "Stair with Composite Left Side Railing",
+  "block.infinity_nexus_mod.catwalk_14": "Stair with Composite Right Side Railing",
+  "block.infinity_nexus_mod.catwalk_15": "Simple Stair",
+  "block.infinity_nexus_mod.catwalk_16": "Composite Stair"
 
 }

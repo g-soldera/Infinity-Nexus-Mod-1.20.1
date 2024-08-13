@@ -25,7 +25,7 @@ public class FactoryRecipes implements Recipe<SimpleContainer> {
     private final int duration;
     private final int energy;
 
-    public FactoryRecipes(NonNullList<Ingredient> inputItems,int[] amountInput, ItemStack output, ResourceLocation id, int duration, int energy) {
+    public FactoryRecipes(NonNullList<Ingredient> inputItems, int[] amountInput, ItemStack output, ResourceLocation id, int duration, int energy) {
         this.inputItems = inputItems;
         this.amountInput = amountInput;
         this.output = output;
@@ -78,6 +78,7 @@ public class FactoryRecipes implements Recipe<SimpleContainer> {
     public NonNullList<Ingredient> getIngredients() {
         return inputItems;
     }
+
     @Override
     public ItemStack assemble(SimpleContainer pContainer, RegistryAccess pRegistryAccess) {
         return output.copy();
@@ -153,7 +154,7 @@ public class FactoryRecipes implements Recipe<SimpleContainer> {
             int duration = pSerializedRecipe.get("duration").getAsInt();
             int energy = pSerializedRecipe.get("energy").getAsInt();
 
-            return new FactoryRecipes(inputs, amountInput, output,pRecipeId,duration, energy);
+            return new FactoryRecipes(inputs, amountInput, output, pRecipeId, duration, energy);
         }
 
         @Override

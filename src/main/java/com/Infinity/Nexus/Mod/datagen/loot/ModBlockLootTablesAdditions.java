@@ -84,6 +84,23 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksAdditions.SOLAR.get());
         this.dropSelf(ModBlocksAdditions.DISPLAY.get());
 
+        this.dropSelf(ModBlocksAdditions.CATWALK.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_2.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_3.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_4.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_5.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_6.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_7.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_8.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_9.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_10.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_11.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_12.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_13.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_14.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_15.get());
+        this.dropSelf(ModBlocksAdditions.CATWALK_16.get());
+
         this.dropSelf(ModBlocksProgression.SILVER_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.TIN_MACHINE_CASING.get());
         this.dropSelf(ModBlocksProgression.NICKEL_MACHINE_CASING.get());

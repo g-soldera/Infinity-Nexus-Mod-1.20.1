@@ -32,24 +32,13 @@ public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBl
     public void render(DisplayBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource,
                        int pPackedLight, int pPackedOverlay) {
 
-        //Lit
-        //0 = Block
-        //1 = Block Move
-        //2 = Block Alt
-        //3 = Block Alt Move
-
-        //4 = Item
-        //5 = Item Alt
-
-        //6 = Sword
-        //7 = Tool
 
         ItemStack itemStack = pBlockEntity.getRenderStack(0);
 
         if(itemStack != ItemStack.EMPTY) {
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
             int LIT = pBlockEntity.getBlockState().getValue(ItemDisplay.LIT);
-            rotation = rotation < 360F ? rotation + 0.005F : 0.0F;
+            rotation = rotation < 360F ? rotation + 0.05F : 0.0F;
 
             if (LIT <= 3) {
                 pPoseStack.pushPose();
@@ -68,6 +57,7 @@ public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBl
                 pPoseStack.scale(0.5f, 0.5f, 0.5f);
                 pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(ItemDisplay.FACING).toYRot()));
                 pPoseStack.mulPose(Axis.XN.rotationDegrees(45));
+                pPoseStack.mulPose(Axis.YN.rotationDegrees(180));
 
                 itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(pBlockEntity.getLevel(),
                         pBlockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, pBlockEntity.getLevel(), 1);

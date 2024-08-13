@@ -245,6 +245,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
 
         if (hasProgressFinished()) {
             craftItem();
+            ModUtils.ejectItemsWhePusher(pPos.above(),UPGRADE_SLOTS, new int[]{OUTPUT_SLOT}, itemHandler, pLevel);
             resetProgress();
         }
     }

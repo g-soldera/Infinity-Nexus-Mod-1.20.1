@@ -2,9 +2,6 @@ package com.Infinity.Nexus.Mod.recipe;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.CrusherBlockEntity;
-import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
-import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
-import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
@@ -16,11 +13,8 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
 
 public class CrusherRecipes implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> inputItems;
@@ -147,8 +141,8 @@ public class CrusherRecipes implements Recipe<SimpleContainer> {
             int inputCount = pBuffer.readInt();
             int duration = pBuffer.readInt();
             int energy = pBuffer.readInt();
-            ItemStack output = pBuffer.readItem();
             boolean canDuplicate = pBuffer.readBoolean();
+            ItemStack output = pBuffer.readItem();
             return new CrusherRecipes(inputs, inputCount, output, pRecipeId, duration, energy, canDuplicate);
         }
 

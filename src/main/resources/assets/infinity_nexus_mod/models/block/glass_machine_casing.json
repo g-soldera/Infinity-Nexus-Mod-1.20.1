@@ -3,8 +3,8 @@
 	"render_type": "translucent",
 	"textures": {
 		"0": "infinity_nexus_mod:block/glass_machine_casing",
-		"particle": "infinity_nexus_mod:block/glass_machine_casing",
-		"1": "infinity_nexus_mod:block/machine_casing"
+		"1": "infinity_nexus_mod:block/machine_casing",
+		"particle": "infinity_nexus_mod:block/glass_machine_casing"
 	},
 	"elements": [
 		{
@@ -511,8 +511,8 @@
 			"scale": [0.25, 0.25, 0.25]
 		},
 		"gui": {
-			"rotation": [25, -44, 0],
-			"scale": [0.6, 0.6, 0.6]
+			"rotation": [30, 225, 0],
+			"scale": [0.625, 0.625, 0.625]
 		},
 		"head": {
 			"scale": [0.91, 0.91, 0.91]

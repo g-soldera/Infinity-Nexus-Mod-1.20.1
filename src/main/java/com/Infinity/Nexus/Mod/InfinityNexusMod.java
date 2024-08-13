@@ -36,8 +36,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -85,7 +83,6 @@ public class InfinityNexusMod
         modEventBus.addListener(this::setup);
 
         MinecraftForge.EVENT_BUS.register(this);
-        modEventBus.addListener(this::addCreative);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC,"InfinityNexus/config.toml");
     }
@@ -95,17 +92,6 @@ public class InfinityNexusMod
         event.enqueueWork(() -> {
             ModMessages.register();
         });
-    }
-
-    // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event)
-    {
-    }
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
@@ -151,6 +137,22 @@ public class InfinityNexusMod
             ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.VOXEL_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.ENTITY_DISPLAY.get(), RenderType.cutoutMipped());
             ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_2.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_3.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_4.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_5.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_6.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_7.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_8.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_9.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_10.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_11.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_12.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_13.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_14.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocksAdditions.CATWALK_15.get(), RenderType.translucent());
+
+
 
             EntityRenderers.register(ModEntities.ASGREON.get(), AsgreonRenderer::new);
 

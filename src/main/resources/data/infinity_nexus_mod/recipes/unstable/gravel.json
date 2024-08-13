@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "infinity_nexus_mod:unstable_matter"
+    }
+  },
+  "pattern": [
+    "## ",
+    "   ",
+    "   "
+  ],
+  "result": {
+    "item": "minecraft:gravel",
+    "count": 16
+  },
+  "show_notification": true
+}

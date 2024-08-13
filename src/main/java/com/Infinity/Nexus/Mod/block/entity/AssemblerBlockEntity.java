@@ -288,6 +288,7 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
         if (hasProgressFinished()) {
             craftItem();
             extractFluid();
+            ModUtils.ejectItemsWhePusher(pPos.above(),UPGRADE_SLOTS, new int[]{OUTPUT_SLOT}, itemHandler, pLevel);
             resetProgress();
         }
     }
