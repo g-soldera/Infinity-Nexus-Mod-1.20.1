@@ -12,7 +12,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 
@@ -23,9 +24,7 @@ public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBl
     float[] y = {1.175f, 1.145f, 1.115f, 1.145f, 1.175f,  1.145f, 1.145f, 1.115f, 1.115f, 1.145f, 1.145f, 1.175f, 1.145f, 1.115f, 1.145f, 1.175f};
     float[] z = {1.032f, 1.032f, 1.032f, 1.032f, 1.032f, 0.782f,0.782f,0.5f,0.5f,0.218f,0.218f,-0.032f,-0.032f,-0.032f,-0.032f,-0.032f};
 
-    float rotation = 0;
     public DisplayBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
-
     }
 
     @Override
@@ -38,14 +37,13 @@ public class DisplayBlockEntityRenderer implements BlockEntityRenderer<DisplayBl
         if(itemStack != ItemStack.EMPTY) {
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
             int LIT = pBlockEntity.getBlockState().getValue(ItemDisplay.LIT);
-            rotation = rotation < 360F ? rotation + 0.05F : 0.0F;
 
             if (LIT <= 3) {
                 pPoseStack.pushPose();
                 pPoseStack.translate(0.5, LIT < 2 ? 0.5 : 2.1, 0.5);
                 pPoseStack.scale(0.5f, 0.5f, 0.5f);
                 pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(ItemDisplay.FACING).toYRot()));
-                pPoseStack.mulPose(Axis.YN.rotationDegrees(LIT == 0 || LIT == 2 ? 180 : rotation));
+                pPoseStack.mulPose(Axis.YN.rotationDegrees(LIT == 0 || LIT == 2 ? 180 : pBlockEntity.getRotation()));
 
                 itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(pBlockEntity.getLevel(),
                         pBlockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, pBlockEntity.getLevel(), 0);

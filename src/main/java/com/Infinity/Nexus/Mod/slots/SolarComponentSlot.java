@@ -1,6 +1,5 @@
 package com.Infinity.Nexus.Mod.slots;
 
-import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.Infinity.Nexus.Mod.item.custom.SolarUpgrade;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;

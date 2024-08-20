@@ -17,11 +17,12 @@ import com.Infinity.Nexus.Mod.recipe.ModRecipes;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
 import com.Infinity.Nexus.Mod.screen.assembler.AssemblerScreen;
 import com.Infinity.Nexus.Mod.screen.condenser.CondenserScreen;
-import com.Infinity.Nexus.Mod.screen.factory.FactoryScreen;
-import com.Infinity.Nexus.Mod.screen.mobcrusher.MobCrusherScreen;
 import com.Infinity.Nexus.Mod.screen.crusher.CrusherScreen;
+import com.Infinity.Nexus.Mod.screen.factory.FactoryScreen;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelScreen;
 import com.Infinity.Nexus.Mod.screen.generator.GeneratorScreen;
+import com.Infinity.Nexus.Mod.screen.mobcrusher.MobCrusherScreen;
+import com.Infinity.Nexus.Mod.screen.placer.PlacerScreen;
 import com.Infinity.Nexus.Mod.screen.press.PressScreen;
 import com.Infinity.Nexus.Mod.screen.recycler.RecyclerScreen;
 import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryScreen;
@@ -54,6 +55,7 @@ public class InfinityNexusMod
     public static final String MOD_ID = "infinity_nexus_mod";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static final String message = "§f[§4I§5n§9fi§3ni§bty§f]: §e";
 
     public InfinityNexusMod()
     {
@@ -114,6 +116,7 @@ public class InfinityNexusMod
             MenuScreens.register(ModMenuTypes.RECYCLER_MENU.get(), RecyclerScreen::new);
             MenuScreens.register(ModMenuTypes.MATTER_CONDENSER_MENU.get(), CondenserScreen::new);
             MenuScreens.register(ModMenuTypes.SOLAR_MENU.get(), SolarScreen::new);
+            MenuScreens.register(ModMenuTypes.PLACER_MENU.get(), PlacerScreen::new);
 
 
 

@@ -2,7 +2,6 @@ package com.Infinity.Nexus.Mod.datagen;
 
 import com.Infinity.Nexus.Core.items.ModItems;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
-import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.loot.AddSusSandItemModifier;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;

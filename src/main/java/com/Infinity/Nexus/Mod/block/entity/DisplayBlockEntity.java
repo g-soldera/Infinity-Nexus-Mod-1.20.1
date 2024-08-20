@@ -1,10 +1,13 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
+import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.custom.ItemDisplay;
+import com.Infinity.Nexus.Mod.config.ConfigUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -15,7 +18,10 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,6 +35,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class DisplayBlockEntity extends BlockEntity {
     protected final ContainerData data;
+    float rotation = 0;
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -123,6 +130,9 @@ public class DisplayBlockEntity extends BlockEntity {
         super.onDataPacket(net, pkt);
     }
 
+    public float getRotation() {
+        return rotation = rotation < 360F ? (float) (rotation + (ConfigUtils.display_rotation_speed_multiplier)) : 0.0F;
+    }
     public void setRenderStack(ItemStack itemStack, Player player) {
 
         if (this.itemHandler.getStackInSlot(0).isEmpty()) {
@@ -136,11 +146,17 @@ public class DisplayBlockEntity extends BlockEntity {
                     //Não Criativo
                     player.getMainHandItem().shrink(stack.getCount());
                 }
+                player.sendSystemMessage(Component.literal(InfinityNexusMod.message + " Display atualizado!"));
+                setBlockModel(this.itemHandler.getStackInSlot(0));
             }
         }else{
             if(!player.getMainHandItem().isEmpty()) {
                 //Slot Cheio
                 //Mão Cheia
+                if(player.getMainHandItem().is(itemHandler.getStackInSlot(0).getItem())){
+                    player.sendSystemMessage(Component.literal(InfinityNexusMod.message + "O é igual ao do display!"));
+                    return;
+                }
                 ItemStack stack = itemStack.copy();
                 level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY(), player.getZ(), itemHandler.getStackInSlot(0).copy()));
                 this.itemHandler.setStackInSlot(0, stack);
@@ -149,18 +165,22 @@ public class DisplayBlockEntity extends BlockEntity {
                     //Não Criativo
                     player.getMainHandItem().shrink(stack.getCount());
                 }
+                player.sendSystemMessage(Component.literal(InfinityNexusMod.message + "Display atualizado!"));
+                setBlockModel(this.itemHandler.getStackInSlot(0));
             }else{
                 if(player.isShiftKeyDown()){
                     level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY(), player.getZ(), itemHandler.getStackInSlot(0).copy()));
                     this.itemHandler.setStackInSlot(0, ItemStack.EMPTY);
+                    player.sendSystemMessage(Component.literal(InfinityNexusMod.message + "Item removido do display!"));
+                    setBlockModel(this.itemHandler.getStackInSlot(0));
                 }
             }
         }
-        setBlockModel(this.itemHandler.getStackInSlot(0));
         this.setChanged();
     }
 
     private void setBlockModel(ItemStack itemStack) {
+
         this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 1), 3);
 
         if(itemStack.getItem() instanceof BlockItem){
@@ -176,4 +196,5 @@ public class DisplayBlockEntity extends BlockEntity {
             this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ItemDisplay.LIT, 4), 3);
         }
     }
+
 }

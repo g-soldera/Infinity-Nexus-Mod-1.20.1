@@ -1,0 +1,139 @@
+
+{
+  "variants":{
+    "facing=north,lit=0,rot=0":{"model": "infinity_nexus_mod:block/placer"},
+    "facing=east,lit=0,rot=0":{"model": "infinity_nexus_mod:block/placer", "y": 90},
+    "facing=south,lit=0,rot=0":{"model": "infinity_nexus_mod:block/placer", "y": 180},
+    "facing=west,lit=0,rot=0":{"model": "infinity_nexus_mod:block/placer", "y": 270},
+
+    "facing=up,lit=0,rot=0":{"model": "infinity_nexus_mod:block/placer", "x": -90},
+    "facing=up,lit=0,rot=1":{"model": "infinity_nexus_mod:block/placer", "y": 90,"x": -90},
+    "facing=up,lit=0,rot=2":{"model": "infinity_nexus_mod:block/placer", "y": 180,"x": -90},
+    "facing=up,lit=0,rot=3":{"model": "infinity_nexus_mod:block/placer", "y": 270,"x": -90},
+
+    "facing=down,lit=0,rot=0":{"model": "infinity_nexus_mod:block/placer", "x": 90},
+    "facing=down,lit=0,rot=1":{"model": "infinity_nexus_mod:block/placer", "y": 90,"x": 90},
+    "facing=down,lit=0,rot=2":{"model": "infinity_nexus_mod:block/placer", "y": 180,"x": 90},
+    "facing=down,lit=0,rot=3":{"model": "infinity_nexus_mod:block/placer", "y": 270,"x": 90},
+
+    "facing=north,lit=1,rot=0":{"model": "infinity_nexus_mod:block/placer_1"},
+    "facing=east,lit=1,rot=0":{"model": "infinity_nexus_mod:block/placer_1", "y": 90},
+    "facing=south,lit=1,rot=0":{"model": "infinity_nexus_mod:block/placer_1", "y": 180},
+    "facing=west,lit=1,rot=0":{"model": "infinity_nexus_mod:block/placer_1", "y": 270},
+
+    "facing=up,lit=1,rot=0":{"model": "infinity_nexus_mod:block/placer_1", "x": -90},
+    "facing=up,lit=1,rot=1":{"model": "infinity_nexus_mod:block/placer_1", "y": 90,"x": -90},
+    "facing=up,lit=1,rot=2":{"model": "infinity_nexus_mod:block/placer_1", "y": 180,"x": -90},
+    "facing=up,lit=1,rot=3":{"model": "infinity_nexus_mod:block/placer_1", "y": 270,"x": -90},
+
+    "facing=down,lit=1,rot=0":{"model": "infinity_nexus_mod:block/placer_1", "x": 90},
+    "facing=down,lit=1,rot=1":{"model": "infinity_nexus_mod:block/placer_1", "y": 90,"x": 90},
+    "facing=down,lit=1,rot=2":{"model": "infinity_nexus_mod:block/placer_1", "y": 180,"x": 90},
+    "facing=down,lit=1,rot=3":{"model": "infinity_nexus_mod:block/placer_1", "y": 270,"x": 90},
+
+    "facing=north,lit=2,rot=0":{"model": "infinity_nexus_mod:block/placer_2"},
+    "facing=east,lit=2,rot=0":{"model": "infinity_nexus_mod:block/placer_2", "y": 90},
+    "facing=south,lit=2,rot=0":{"model": "infinity_nexus_mod:block/placer_2", "y": 180},
+    "facing=west,lit=2,rot=0":{"model": "infinity_nexus_mod:block/placer_2", "y": 270},
+
+    "facing=up,lit=2,rot=0":{"model": "infinity_nexus_mod:block/placer_2", "x": -90},
+    "facing=up,lit=2,rot=1":{"model": "infinity_nexus_mod:block/placer_2", "y": 90,"x": -90},
+    "facing=up,lit=2,rot=2":{"model": "infinity_nexus_mod:block/placer_2", "y": 180,"x": -90},
+    "facing=up,lit=2,rot=3":{"model": "infinity_nexus_mod:block/placer_2", "y": 270,"x": -90},
+
+    "facing=down,lit=2,rot=0":{"model": "infinity_nexus_mod:block/placer_2", "x": 90},
+    "facing=down,lit=2,rot=1":{"model": "infinity_nexus_mod:block/placer_2", "y": 90,"x": 90},
+    "facing=down,lit=2,rot=2":{"model": "infinity_nexus_mod:block/placer_2", "y": 180,"x": 90},
+    "facing=down,lit=2,rot=3":{"model": "infinity_nexus_mod:block/placer_2", "y": 270,"x": 90},
+
+    "facing=north,lit=3,rot=0":{"model": "infinity_nexus_mod:block/placer_3"},
+    "facing=east,lit=3,rot=0":{"model": "infinity_nexus_mod:block/placer_3", "y": 90},
+    "facing=south,lit=3,rot=0":{"model": "infinity_nexus_mod:block/placer_3", "y": 180},
+    "facing=west,lit=3,rot=0":{"model": "infinity_nexus_mod:block/placer_3", "y": 270},
+
+    "facing=up,lit=3,rot=0":{"model": "infinity_nexus_mod:block/placer_3", "x": -90},
+    "facing=up,lit=3,rot=1":{"model": "infinity_nexus_mod:block/placer_3", "y": 90,"x": -90},
+    "facing=up,lit=3,rot=2":{"model": "infinity_nexus_mod:block/placer_3", "y": 180,"x": -90},
+    "facing=up,lit=3,rot=3":{"model": "infinity_nexus_mod:block/placer_3", "y": 270,"x": -90},
+
+    "facing=down,lit=3,rot=0":{"model": "infinity_nexus_mod:block/placer_3", "x": 90},
+    "facing=down,lit=3,rot=1":{"model": "infinity_nexus_mod:block/placer_3", "y": 90,"x": 90},
+    "facing=down,lit=3,rot=2":{"model": "infinity_nexus_mod:block/placer_3", "y": 180,"x": 90},
+    "facing=down,lit=3,rot=3":{"model": "infinity_nexus_mod:block/placer_3", "y": 270,"x": 90},
+
+    "facing=north,lit=4,rot=0":{"model": "infinity_nexus_mod:block/placer_4"},
+    "facing=east,lit=4,rot=0":{"model": "infinity_nexus_mod:block/placer_4", "y": 90},
+    "facing=south,lit=4,rot=0":{"model": "infinity_nexus_mod:block/placer_4", "y": 180},
+    "facing=west,lit=4,rot=0":{"model": "infinity_nexus_mod:block/placer_4", "y": 270},
+
+    "facing=up,lit=4,rot=0":{"model": "infinity_nexus_mod:block/placer_4", "x": -90},
+    "facing=up,lit=4,rot=1":{"model": "infinity_nexus_mod:block/placer_4", "y": 90,"x": -90},
+    "facing=up,lit=4,rot=2":{"model": "infinity_nexus_mod:block/placer_4", "y": 180,"x": -90},
+    "facing=up,lit=4,rot=3":{"model": "infinity_nexus_mod:block/placer_4", "y": 270,"x": -90},
+
+    "facing=down,lit=4,rot=0":{"model": "infinity_nexus_mod:block/placer_4", "x": 90},
+    "facing=down,lit=4,rot=1":{"model": "infinity_nexus_mod:block/placer_4", "y": 90,"x": 90},
+    "facing=down,lit=4,rot=2":{"model": "infinity_nexus_mod:block/placer_4", "y": 180,"x": 90},
+    "facing=down,lit=4,rot=3":{"model": "infinity_nexus_mod:block/placer_4", "y": 270,"x": 90},
+
+    "facing=north,lit=5,rot=0":{"model": "infinity_nexus_mod:block/placer_5"},
+    "facing=east,lit=5,rot=0":{"model": "infinity_nexus_mod:block/placer_5", "y": 90},
+    "facing=south,lit=5,rot=0":{"model": "infinity_nexus_mod:block/placer_5", "y": 180},
+    "facing=west,lit=5,rot=0":{"model": "infinity_nexus_mod:block/placer_5", "y": 270},
+
+    "facing=up,lit=5,rot=0":{"model": "infinity_nexus_mod:block/placer_5", "x": -90},
+    "facing=up,lit=5,rot=1":{"model": "infinity_nexus_mod:block/placer_5", "y": 90,"x": -90},
+    "facing=up,lit=5,rot=2":{"model": "infinity_nexus_mod:block/placer_5", "y": 180,"x": -90},
+    "facing=up,lit=5,rot=3":{"model": "infinity_nexus_mod:block/placer_5", "y": 270,"x": -90},
+
+    "facing=down,lit=5,rot=0":{"model": "infinity_nexus_mod:block/placer_5", "x": 90},
+    "facing=down,lit=5,rot=1":{"model": "infinity_nexus_mod:block/placer_5", "y": 90,"x": 90},
+    "facing=down,lit=5,rot=2":{"model": "infinity_nexus_mod:block/placer_5", "y": 180,"x": 90},
+    "facing=down,lit=5,rot=3":{"model": "infinity_nexus_mod:block/placer_5", "y": 270,"x": 90},
+
+    "facing=north,lit=6,rot=0":{"model": "infinity_nexus_mod:block/placer_6"},
+    "facing=east,lit=6,rot=0":{"model": "infinity_nexus_mod:block/placer_6", "y": 90},
+    "facing=south,lit=6,rot=0":{"model": "infinity_nexus_mod:block/placer_6", "y": 180},
+    "facing=west,lit=6,rot=0":{"model": "infinity_nexus_mod:block/placer_6", "y": 270},
+
+    "facing=up,lit=6,rot=0":{"model": "infinity_nexus_mod:block/placer_6", "x": -90},
+    "facing=up,lit=6,rot=1":{"model": "infinity_nexus_mod:block/placer_6", "y": 90,"x": -90},
+    "facing=up,lit=6,rot=2":{"model": "infinity_nexus_mod:block/placer_6", "y": 180,"x": -90},
+    "facing=up,lit=6,rot=3":{"model": "infinity_nexus_mod:block/placer_6", "y": 270,"x": -90},
+
+    "facing=down,lit=6,rot=0":{"model": "infinity_nexus_mod:block/placer_6", "x": 90},
+    "facing=down,lit=6,rot=1":{"model": "infinity_nexus_mod:block/placer_6", "y": 90,"x": 90},
+    "facing=down,lit=6,rot=2":{"model": "infinity_nexus_mod:block/placer_6", "y": 180,"x": 90},
+    "facing=down,lit=6,rot=3":{"model": "infinity_nexus_mod:block/placer_6", "y": 270,"x": 90},
+
+    "facing=north,lit=7,rot=0":{"model": "infinity_nexus_mod:block/placer_7"},
+    "facing=east,lit=7,rot=0":{"model": "infinity_nexus_mod:block/placer_7", "y": 90},
+    "facing=south,lit=7,rot=0":{"model": "infinity_nexus_mod:block/placer_7", "y": 180},
+    "facing=west,lit=7,rot=0":{"model": "infinity_nexus_mod:block/placer_7", "y": 270},
+
+    "facing=up,lit=7,rot=0":{"model": "infinity_nexus_mod:block/placer_7", "x": -90},
+    "facing=up,lit=7,rot=1":{"model": "infinity_nexus_mod:block/placer_7", "y": 90,"x": -90},
+    "facing=up,lit=7,rot=2":{"model": "infinity_nexus_mod:block/placer_7", "y": 180,"x": -90},
+    "facing=up,lit=7,rot=3":{"model": "infinity_nexus_mod:block/placer_7", "y": 270,"x": -90},
+
+    "facing=down,lit=7,rot=0":{"model": "infinity_nexus_mod:block/placer_7", "x": 90},
+    "facing=down,lit=7,rot=1":{"model": "infinity_nexus_mod:block/placer_7", "y": 90,"x": 90},
+    "facing=down,lit=7,rot=2":{"model": "infinity_nexus_mod:block/placer_7", "y": 180,"x": 90},
+    "facing=down,lit=7,rot=3":{"model": "infinity_nexus_mod:block/placer_7", "y": 270,"x": 90},
+
+    "facing=north,lit=8,rot=0":{"model": "infinity_nexus_mod:block/placer_8"},
+    "facing=east,lit=8,rot=0":{"model": "infinity_nexus_mod:block/placer_8", "y": 90},
+    "facing=south,lit=8,rot=0":{"model": "infinity_nexus_mod:block/placer_8", "y": 180},
+    "facing=west,lit=8,rot=0":{"model": "infinity_nexus_mod:block/placer_8", "y": 270},
+
+    "facing=up,lit=8,rot=0":{"model": "infinity_nexus_mod:block/placer_8", "x": -90},
+    "facing=up,lit=8,rot=1":{"model": "infinity_nexus_mod:block/placer_8", "y": 90,"x": -90},
+    "facing=up,lit=8,rot=2":{"model": "infinity_nexus_mod:block/placer_8", "y": 180,"x": -90},
+    "facing=up,lit=8,rot=3":{"model": "infinity_nexus_mod:block/placer_8", "y": 270,"x": -90},
+
+    "facing=down,lit=8,rot=0":{"model": "infinity_nexus_mod:block/placer_8", "x": 90},
+    "facing=down,lit=8,rot=1":{"model": "infinity_nexus_mod:block/placer_8", "y": 90,"x": 90},
+    "facing=down,lit=8,rot=2":{"model": "infinity_nexus_mod:block/placer_8", "y": 180,"x": 90},
+    "facing=down,lit=8,rot=3":{"model": "infinity_nexus_mod:block/placer_8", "y": 270,"x": 90}
+  }
+}

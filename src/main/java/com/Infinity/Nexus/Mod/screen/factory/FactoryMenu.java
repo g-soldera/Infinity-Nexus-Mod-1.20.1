@@ -2,11 +2,11 @@ package com.Infinity.Nexus.Mod.screen.factory;
 
 import com.Infinity.Nexus.Core.slots.ComponentSlot;
 import com.Infinity.Nexus.Core.slots.InputSlot;
+import com.Infinity.Nexus.Core.slots.ResultSlot;
 import com.Infinity.Nexus.Core.slots.UpgradeSlot;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.FactoryBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
-import com.Infinity.Nexus.Core.slots.ResultSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

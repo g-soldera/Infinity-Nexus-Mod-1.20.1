@@ -1,7 +1,7 @@
 package com.Infinity.Nexus.Mod.screen.mobcrusher;
 
-import com.Infinity.Nexus.Core.slots.*;
 import com.Infinity.Nexus.Core.slots.ResultSlot;
+import com.Infinity.Nexus.Core.slots.*;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.MobCrusherBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;

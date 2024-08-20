@@ -1,10 +1,14 @@
 package com.Infinity.Nexus.Mod.config;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = InfinityNexusMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Config
@@ -72,7 +76,21 @@ public class Config
     private static final ForgeConfigSpec.IntValue SQUEEZER_ENERGY_TRANSFER_RATE  = BUILDER.comment("Define a quantidade de energia o Espremedor pode receber por tick").defineInRange("squeezer_energy_transfer", 600000, 1, Integer.MAX_VALUE);
     private static final ForgeConfigSpec.IntValue SQUEEZER_FLUID_STORAGE_CAPACITY  = BUILDER.comment("Define a quantidade de liquido o Espremedor pode armazenar").defineInRange("squeezer_fluid_capacity", 10000, 1, Integer.MAX_VALUE);
     private static final ForgeConfigSpec.IntValue SQUEEZER_MINIMUM_TICK  = BUILDER.comment("Define a menor velocidade que o Espremedor pode trabalhar").defineInRange("squeezer_minimum_tick", 1, 1, Integer.MAX_VALUE);
-
+    //PLACER
+    private static final ForgeConfigSpec.ConfigValue<List<String>> LIST_OF_NON_PLACEABLE_BLOCKS = BUILDER
+            .comment("Lista de Itens que o Placer não pode colocar no chão.")
+            .define("list_of_non_placeable_blocks", List.of(
+                    "minecraft:redstone"
+            ));
+    //Infinity Armor
+    private static final ForgeConfigSpec.BooleanValue INFINITY_ARMOR_FLY = BUILDER.comment("Define se a Infinity Armor pode voar ou não").define("infinity_armor_fly", true);
+    private static final ForgeConfigSpec.BooleanValue INFINITY_ARMOR_NEED_FUEL = BUILDER.comment("Define se a Infinity Armor necessita de combustivel ou não").define("infinity_armor_need_fuel", true);
+    private static final ForgeConfigSpec.ConfigValue<String> INFINITY_ARMOR_FUEL = BUILDER.comment("Define o tipo de combustivel que a Infinity Armor vai precisar").define("infinity_armor_fuel", "infinity_nexus_mod:unstable_matter");
+    private static final ForgeConfigSpec.IntValue INFINITY_ARMOR_FUEL_TIME = BUILDER.comment("Define o tempo de duracao do combustivel").defineInRange("infinity_armor_fuel_time", 2000, 1, Integer.MAX_VALUE);
+    //DISPLAY
+    private static final ForgeConfigSpec.ConfigValue<Double> DISPLAY_ROTATION_SPEED_MULTIPLIER = BUILDER.comment("Define o multiplicador da velocidade de rotacao dos itens no display").define("display_rotation_speed_multiplier", 0.05D);
+    //Imperial Infinity Armor
+    private static final ForgeConfigSpec.BooleanValue IMPERIAL_INFINITY_ARMOR_FLY = BUILDER.comment("Define se a Infinity Armor pode voar ou não").define("imperial_infinity_armor_fly", true);
     //Builda o Arquivo
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 
@@ -141,5 +159,16 @@ public class Config
         ConfigUtils.squeezer_energy_transfer_rate = SQUEEZER_ENERGY_TRANSFER_RATE.get();
         ConfigUtils.squeezer_fluid_storage_capacity = SQUEEZER_FLUID_STORAGE_CAPACITY.get();
         ConfigUtils.squeezer_minimum_tick = SQUEEZER_MINIMUM_TICK.get();
+        //PLACER
+        ConfigUtils.list_of_non_placeable_blocks = LIST_OF_NON_PLACEABLE_BLOCKS.get();
+        //DISPLAY
+        ConfigUtils.display_rotation_speed_multiplier = DISPLAY_ROTATION_SPEED_MULTIPLIER.get();
+        //Infinity Armor
+        ConfigUtils.infinity_armor_can_fly = INFINITY_ARMOR_FLY.get();
+        ConfigUtils.infinity_armor_need_fuel = INFINITY_ARMOR_NEED_FUEL.get();
+        ConfigUtils.infinity_armor_fuel = ForgeRegistries.ITEMS.getValue(new ResourceLocation(INFINITY_ARMOR_FUEL.get()));
+        ConfigUtils.infinity_armor_fuel_time = INFINITY_ARMOR_FUEL_TIME.get();
+        //Imperial Infinity Armor
+        ConfigUtils.imperial_infinity_armor_can_fly = IMPERIAL_INFINITY_ARMOR_FLY.get();
     }
 }

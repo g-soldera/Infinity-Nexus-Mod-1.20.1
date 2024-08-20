@@ -1,16 +1,15 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
 import com.Infinity.Nexus.Core.block.entity.WrappedHandler;
+import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
 import com.Infinity.Nexus.Core.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
+import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.Infinity.Nexus.Mod.block.custom.Smeltery;
-import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
-import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.RecyclerHandler;
 import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.SmelteryHandler;
 import com.Infinity.Nexus.Mod.config.ConfigUtils;
 import com.Infinity.Nexus.Mod.recipe.SmelteryRecipes;
 import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryMenu;
-import com.Infinity.Nexus.Core.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

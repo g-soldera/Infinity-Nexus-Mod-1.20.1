@@ -1,5 +1,9 @@
 package com.Infinity.Nexus.Mod.config;
 
+import net.minecraft.world.item.Item;
+
+import java.util.List;
+
 public class ConfigUtils {
     //Cria as Variaveis de Configuração
     //ASSEMBLER
@@ -61,15 +65,18 @@ public class ConfigUtils {
     public static int squeezer_energy_transfer_rate;
     public static int squeezer_fluid_storage_capacity;
     public static int squeezer_minimum_tick;
+    //DISPLAY
+    public static double display_rotation_speed_multiplier;
+    //INFINITY ARMOR
+    public static boolean infinity_armor_can_fly;
+    public static boolean infinity_armor_need_fuel;
+    public static Item infinity_armor_fuel;
+    public static int infinity_armor_fuel_time;
+    //IMPERIAL INFINITY ARMOR
+    public static boolean imperial_infinity_armor_can_fly;
 
+    public static List<String> list_of_non_placeable_blocks;
 
-    //Exemplo de listas de string
-    //public static boolean isComponentItem(Item item) {
-    //    return
-    //            AssemblerConfig.list_of_components.stream()
-    //            .map(component -> ForgeRegistries.ITEMS.getValue(new ResourceLocation(component)))
-    //            .anyMatch(componentItem -> componentItem == item);
-    //}
     //public static ItemStack getStrengthUpgrade() {
     //    return new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(new ResourceLocation(AssemblerConfig.list_of_upgrades.get(1)))));
     //}

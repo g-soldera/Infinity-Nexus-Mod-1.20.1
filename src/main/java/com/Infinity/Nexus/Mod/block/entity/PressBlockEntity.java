@@ -1,16 +1,15 @@
 package com.Infinity.Nexus.Mod.block.entity;
 
 import com.Infinity.Nexus.Core.block.entity.WrappedHandler;
+import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
 import com.Infinity.Nexus.Core.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
+import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.Infinity.Nexus.Mod.block.custom.Press;
-import com.Infinity.Nexus.Core.block.entity.common.SetMachineLevel;
-import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.MobCrusherHandler;
 import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.PressHandler;
 import com.Infinity.Nexus.Mod.config.ConfigUtils;
 import com.Infinity.Nexus.Mod.recipe.PressRecipes;
 import com.Infinity.Nexus.Mod.screen.press.PressMenu;
-import com.Infinity.Nexus.Core.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -223,7 +222,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
-        int machineLevel = getMachineLevel()-1 <= 0 ? 0 : getMachineLevel()-1; ;
+        int machineLevel = getMachineLevel()-1 <= 0 ? 0 : getMachineLevel()-1;
         pLevel.setBlock(pPos, pState.setValue(Press.LIT, machineLevel), 3);
         if (isRedstonePowered(pPos)) {
             return;

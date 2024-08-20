@@ -8,6 +8,7 @@ import com.Infinity.Nexus.Mod.screen.factory.FactoryMenu;
 import com.Infinity.Nexus.Mod.screen.fermentation.FermentationBarrelMenu;
 import com.Infinity.Nexus.Mod.screen.generator.GeneratorMenu;
 import com.Infinity.Nexus.Mod.screen.mobcrusher.MobCrusherMenu;
+import com.Infinity.Nexus.Mod.screen.placer.PlacerMenu;
 import com.Infinity.Nexus.Mod.screen.press.PressMenu;
 import com.Infinity.Nexus.Mod.screen.recycler.RecyclerMenu;
 import com.Infinity.Nexus.Mod.screen.smeltery.SmelteryMenu;
@@ -55,6 +56,9 @@ public class ModMenuTypes {
             registerMenuType("recycler_menu", RecyclerMenu::new);
     public static final RegistryObject<MenuType<CondenserMenu>> MATTER_CONDENSER_MENU =
             registerMenuType("condenser_menu", CondenserMenu::new);
+
+    public static final RegistryObject<MenuType<PlacerMenu>> PLACER_MENU =
+            registerMenuType("placer_menu", PlacerMenu::new);
 
     //Solar
     public static final RegistryObject<MenuType<SolarMenu>> SOLAR_MENU = registerMenuType("solar_menu", SolarMenu::new);

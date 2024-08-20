@@ -1,6 +1,6 @@
 {
   "type": "infinity_nexus_mod:fermentation",
-  "duration": 24000,
+  "duration": 4800,
   "fluidInputType": "infinity_nexus_mod:starliquid_water_fluid",
   "fluidInputAmount": 9,
   "fermenting": true,

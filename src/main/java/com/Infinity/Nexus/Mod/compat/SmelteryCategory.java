@@ -3,7 +3,6 @@ package com.Infinity.Nexus.Mod.compat;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.recipe.SmelteryRecipes;
-import com.Infinity.Nexus.Mod.recipe.SqueezerRecipes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;

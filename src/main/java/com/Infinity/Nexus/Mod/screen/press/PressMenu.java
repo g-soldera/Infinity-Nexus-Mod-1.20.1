@@ -1,7 +1,7 @@
 package com.Infinity.Nexus.Mod.screen.press;
 
-import com.Infinity.Nexus.Core.slots.*;
 import com.Infinity.Nexus.Core.slots.ResultSlot;
+import com.Infinity.Nexus.Core.slots.*;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.PressBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
@@ -13,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
 
 public class PressMenu extends AbstractContainerMenu {
     public final PressBlockEntity blockEntity;

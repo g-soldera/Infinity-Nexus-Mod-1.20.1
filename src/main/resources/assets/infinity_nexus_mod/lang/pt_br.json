@@ -237,6 +237,8 @@
   "block.infinity_nexus_mod.factory": "Fábrica",
   "block.infinity_nexus_mod.squeezer": "Espremedor",
   "block.infinity_nexus_mod.generator": "Gerador",
+  "block.infinity_nexus_mod.placer": "Colocador de Blocos",
+  "item.infinity_nexus.placer_description": "Pode colocar blocos de forma automatica, porem não se o bloco tiver dados!",
   "block.infinity_nexus_mod.fermentation_barrel": "Barril de Fermentação",
 
   "block.infinity_nexus_mod.lead_ore": "Minério de Chumbo",

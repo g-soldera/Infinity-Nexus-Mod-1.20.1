@@ -5,7 +5,6 @@ import com.Infinity.Nexus.Core.renderer.EnergyInfoArea;
 import com.Infinity.Nexus.Core.renderer.FluidTankRenderer;
 import com.Infinity.Nexus.Core.renderer.InfoArea;
 import com.Infinity.Nexus.Core.renderer.RenderScreenTooltips;
-import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.Infinity.Nexus.Core.utils.MouseUtil;
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.MobCrusherBlockEntity;
@@ -23,7 +22,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.fluids.FluidStack;
-
 
 import java.util.List;
 import java.util.Optional;

@@ -1,5 +1,6 @@
 package com.Infinity.Nexus.Mod.item.custom;
 
+import com.Infinity.Nexus.Mod.config.ConfigUtils;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -23,7 +24,9 @@ public class ImperialInfinityArmorItem extends  ArmorItem{
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if(!pLevel.isClientSide() && pEntity instanceof Player player && pSlotId < 4) {
             if (hasFullSuitOfArmorOn(player)) {
-                player.getAbilities().mayfly = true;
+                if(ConfigUtils.imperial_infinity_armor_can_fly ) {
+                    player.getAbilities().mayfly = true;
+                }
                 player.getFoodData().setSaturation(20);
                 player.getFoodData().setFoodLevel(20);
                 if (delay >= maxDelay) {
@@ -37,12 +40,11 @@ public class ImperialInfinityArmorItem extends  ArmorItem{
                 }else{
                     delay++;
                 }
-                player.onUpdateAbilities();
             }else{
                 player.getAbilities().flying = false;
                 player.getAbilities().mayfly = false;
-                player.onUpdateAbilities();
             }
+            player.onUpdateAbilities();
         }
     }
 

@@ -58,6 +58,9 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<DisplayBlockEntity>> DISPLAY_BE =
             BLOCK_ENTITY.register("display_block_entity", () ->
                     BlockEntityType.Builder.of(DisplayBlockEntity::new, ModBlocksAdditions.DISPLAY.get()).build(null));
+    public static final RegistryObject<BlockEntityType<PlacerBlockEntity>> PLACER_BE =
+            BLOCK_ENTITY.register("placer_block_entity", () ->
+                    BlockEntityType.Builder.of(PlacerBlockEntity::new, ModBlocksAdditions.PLACER.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITY.register(eventBus);

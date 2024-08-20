@@ -4,7 +4,6 @@ import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
 
 public class MatterCondenserHandler {

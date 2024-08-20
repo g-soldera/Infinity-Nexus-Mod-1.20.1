@@ -15,7 +15,8 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FactoryRecipes implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> inputItems;

@@ -36,6 +36,7 @@ public class CommonUpgrades {
                 } else if (entity instanceof RecyclerBlockEntity be) { be.setMachineLevel(stack, pPlayer);
                 } else if (entity instanceof SmelteryBlockEntity be) { be.setMachineLevel(stack, pPlayer);
                 } else if (entity instanceof SqueezerBlockEntity be) { be.setMachineLevel(stack, pPlayer);
+                } else if (entity instanceof PlacerBlockEntity be) { be.setMachineLevel(stack, pPlayer);
                 }
             } else if (upgrade) {
                 if (Objects.requireNonNull(entity) instanceof AssemblerBlockEntity be) { be.setUpgradeLevel(stack, pPlayer);

@@ -4,6 +4,7 @@
 		"0": "infinity_nexus_mod:block/solar/solar_side",
 		"1": "infinity_nexus_mod:block/solar/solar_top",
 		"2": "infinity_nexus_mod:block/solar/solar_top_0",
+		"3": "infinity_nexus_mod:block/solar/solar_bottom",
 		"particle": "infinity_nexus_mod:block/solar/solar_side"
 	},
 	"elements": [
@@ -17,7 +18,7 @@
 				"south": {"uv": [0, 2, 16, 16], "texture": "#0"},
 				"west": {"uv": [0, 2, 16, 16], "texture": "#0"},
 				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#missing"}
+				"down": {"uv": [0, 0, 16, 16], "texture": "#3"}
 			}
 		},
 		{

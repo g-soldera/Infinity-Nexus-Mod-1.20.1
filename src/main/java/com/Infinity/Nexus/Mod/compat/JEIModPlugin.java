@@ -2,7 +2,6 @@ package com.Infinity.Nexus.Mod.compat;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
-import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.ModItemsProgression;
 import com.Infinity.Nexus.Mod.recipe.*;
 import com.Infinity.Nexus.Mod.screen.assembler.AssemblerScreen;

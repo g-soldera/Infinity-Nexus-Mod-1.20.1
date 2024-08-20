@@ -1,14 +1,9 @@
 package com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap;
 
-import com.Infinity.Nexus.Core.block.entity.WrappedHandler;
 import com.Infinity.Nexus.Core.utils.ModUtils;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Map;
 
 public class CrusherHandler {
 
