@@ -10,6 +10,7 @@ import com.Infinity.Nexus.Mod.config.ConfigUtils;
 import com.Infinity.Nexus.Mod.screen.placer.PlacerMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -40,8 +41,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class PlacerBlockEntity extends BlockEntity implements MenuProvider {
@@ -54,7 +53,7 @@ public class PlacerBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0 -> !ModUtils.isUpgrade(stack) && !ModUtils.isComponent(stack) && stack.getItem() instanceof BlockItem;
+                case 0 -> !ModUtils.isUpgrade(stack) && !ModUtils.isComponent(stack);
                 case 1 -> ModUtils.isComponent(stack);
                 default -> super.isItemValid(slot, stack);
             };
@@ -173,7 +172,7 @@ public class PlacerBlockEntity extends BlockEntity implements MenuProvider {
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
         pTag.putInt("placer.progress", progress);
-        pTag.putInt("placer.maxProgress", maxProgress);
+        pTag.putInt("placer.max_progress", maxProgress);
         pTag.putInt("placer.blocked", blocked);
 
         super.saveAdditional(pTag);
@@ -188,11 +187,15 @@ public class PlacerBlockEntity extends BlockEntity implements MenuProvider {
         blocked = pTag.getInt("placer.blocked");
     }
 
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
 
-        if (pLevel.isClientSide) {
+    public ItemStack getRenderStack(int slot){
+        return itemHandler.getStackInSlot(slot).isEmpty() ? ItemStack.EMPTY : itemHandler.getStackInSlot(slot).getItem().getDefaultInstance();
+    }
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
+        if (pLevel.isClientSide()) {
             return;
         }
+
         int machineLevel = getMachineLevel()-1 <= 0 ? 0 : getMachineLevel()-1;
         if(pState.getValue(Placer.LIT) != machineLevel){
             pLevel.setBlock(pPos, pState.setValue(Placer.LIT, machineLevel), 3);
@@ -201,7 +204,7 @@ public class PlacerBlockEntity extends BlockEntity implements MenuProvider {
         if (isRedstonePowered(pPos)) {
             return;
         }
-        increaseMaxProgress();
+        increaseProgress();
         if (!hasProgressFinished()) {
             return;
         }
@@ -220,7 +223,7 @@ public class PlacerBlockEntity extends BlockEntity implements MenuProvider {
         maxProgress = 20;
     }
 
-    private void increaseMaxProgress() {
+    private void increaseProgress() {
         if (progress < maxProgress) {
             progress++;
         }
