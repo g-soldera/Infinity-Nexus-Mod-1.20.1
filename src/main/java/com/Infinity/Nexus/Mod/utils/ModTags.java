@@ -26,6 +26,7 @@ public class ModTags {
         public static final TagKey<Block> MINER_STRUCTURE_5 = tag("machine_tier_5");
         public static final TagKey<Block> MINER_STRUCTURE_6 = tag("machine_tier_6");
         public static final TagKey<Block> MINER_STRUCTURE_7 = tag("machine_tier_7");
+        public static final TagKey<Block> MINER_STRUCTURE_8 = tag("machine_tier_8");
 
 
         private static TagKey<Block> tag(String name) {
@@ -59,6 +60,7 @@ public class ModTags {
         public static final TagKey<Item> MINER_STRUCTURE_5 = tag("machine_tier_5");
         public static final TagKey<Item> MINER_STRUCTURE_6 = tag("machine_tier_6");
         public static final TagKey<Item> MINER_STRUCTURE_7 = tag("machine_tier_7");
+        public static final TagKey<Item> MINER_STRUCTURE_8 = tag("machine_tier_8");
 
 
         private static TagKey<Item> tag(String name) {

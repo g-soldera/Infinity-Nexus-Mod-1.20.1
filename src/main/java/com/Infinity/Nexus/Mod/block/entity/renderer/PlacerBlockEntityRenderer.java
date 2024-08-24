@@ -35,10 +35,10 @@ public class PlacerBlockEntityRenderer implements BlockEntityRenderer<PlacerBloc
         float x = switch (direction) {
             case UP -> 0.5f;
             case DOWN -> 0.5f;
-            case NORTH -> 1f;
-            case SOUTH -> 0f;
-            case EAST -> 0.5f;
-            case WEST -> 0.5f;
+            case NORTH -> 0.5f;
+            case SOUTH -> 0.5f;
+            case EAST -> 1f;
+            case WEST -> 0f;
         };
         float y = switch (direction) {
             case UP -> 1.0F;
@@ -51,10 +51,10 @@ public class PlacerBlockEntityRenderer implements BlockEntityRenderer<PlacerBloc
         float z = switch (direction) {
             case UP -> 0.5f;
             case DOWN -> 0.5f;
-            case NORTH -> 0.5f;
-            case SOUTH -> 0.5f;
-            case EAST -> 1f;
-            case WEST -> 0f;
+            case NORTH -> 0f;
+            case SOUTH -> 1f;
+            case EAST -> 0.5f;
+            case WEST -> 0.5f;
         };
         if(itemStack != ItemStack.EMPTY) {
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();

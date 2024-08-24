@@ -9,7 +9,7 @@
   "item.infinity_nexus_mod.item_dislocator": "Deslocador de Itens",
   "chat.infinity_nexus_mod.item_dislocator_on": "§bDeslocador de Itens §2Ligado",
   "chat.infinity_nexus_mod.item_dislocator_off": "§bDeslocador de Itens §cDesligado",
-  "tooltip.infinity_nexus_mod.item_dislocator": "§4WIPE §eExclui itens largados perto de você em um raio de: §5",
+  "tooltip.infinity_nexus_mod.item_dislocator": "§eColeta itens dropados no seu alcance de §b10x10",
 
   "item.infinity_nexus_mod.imperial_infinity_3d_sword": "§fEspada Imperial de Infinity 3D",
   "item.infinity_nexus_mod.imperial_infinity_3d_shield": "§fEscudo Imperial de Infinity 3D",

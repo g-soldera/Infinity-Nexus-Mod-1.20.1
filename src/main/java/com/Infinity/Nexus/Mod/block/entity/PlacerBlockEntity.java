@@ -32,12 +32,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -234,16 +237,22 @@ public class PlacerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void craft(Level pLevel, BlockPos pPos, BlockState pState, int machineLevel) {
-        Direction direction = pState.getValue(Placer.FACING);
-        BlockPos  placePos = getPlacePos(pPos, direction);
-        ItemStack stack = itemHandler.getStackInSlot(INPUT_SLOT).copy();
-        IFFakePlayer player = new IFFakePlayer((ServerLevel) pLevel);
-        player.placeBlock(level, placePos, stack, direction.getOpposite());
-        itemHandler.extractItem(INPUT_SLOT, 1, false);
-
-
+        if(pLevel instanceof ServerLevel level) {
+            Direction direction = pState.getValue(Placer.FACING);
+            BlockPos placePos = getPlacePos(pPos, direction);
+            if(!hasEntity(placePos)) {
+                ItemStack stack = itemHandler.getStackInSlot(INPUT_SLOT).copy();
+                IFFakePlayer player = new IFFakePlayer(level);
+                player.placeBlock(this.level, placePos, stack, direction);
+                itemHandler.extractItem(INPUT_SLOT, 1, false);
+            }
+        }
     }
 
+    private boolean hasEntity(BlockPos pPos) {
+        return !level.getEntitiesOfClass(Player.class, new AABB(pPos)).isEmpty();
+
+    }
     private boolean canPlace(ItemStack stack) {
         return !ConfigUtils.list_of_non_placeable_blocks.stream()
                 .map(structure -> ForgeRegistries.ITEMS.getValue(new ResourceLocation(structure)))

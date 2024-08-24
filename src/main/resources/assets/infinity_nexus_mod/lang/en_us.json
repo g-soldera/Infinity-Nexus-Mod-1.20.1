@@ -10,7 +10,7 @@
   "item.infinity_nexus_mod.item_dislocator": "Item Dislocator",
   "chat.infinity_nexus_mod.item_dislocator_on": "§bItem Dislocator §2On",
   "chat.infinity_nexus_mod.item_dislocator_off": "§bItem Dislocator §cOff",
-  "tooltip.infinity_nexus_mod.item_dislocator": "§4WIPE §eDeletes items dropped near you within a radius of:§5 ",
+  "tooltip.infinity_nexus_mod.item_dislocator": "§eCollect Items droped near you in a §5radius: §b10x10",
 
 
   "item.infinity_nexus_mod.imperial_infinity_3d_sword": "§f3D Imperial Infinity Sword",

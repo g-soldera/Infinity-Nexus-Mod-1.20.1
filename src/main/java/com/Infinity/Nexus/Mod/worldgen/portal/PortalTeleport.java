@@ -13,7 +13,7 @@ public class PortalTeleport implements ITeleporter {
     public static boolean insideDimension = true;
 
     public PortalTeleport(BlockPos pos, boolean insideDim) {
-        thisPos = pos;
+        thisPos = pos.above(200);
         insideDimension = insideDim;
     }
 

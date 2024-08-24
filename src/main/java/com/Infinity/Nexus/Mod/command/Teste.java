@@ -37,9 +37,9 @@ public class Teste {
         BlockPos pos = BlockPos.containing(context.getSource().getPosition()).above(3);
         fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, heldItem.copy());
 
-        boolean b = fakePlayer.onPlaceItemIntoWorld(serverLevel, pos, heldItem, InteractionHand.MAIN_HAND, Direction.NORTH);
+        //boolean b = fakePlayer.onPlaceItemIntoWorld(serverLevel, pos, heldItem, InteractionHand.MAIN_HAND, Direction.NORTH);
 
-        player.sendSystemMessage(Component.literal("onPlaceItemIntoWorld: " + b));
+        //player.sendSystemMessage(Component.literal("onPlaceItemIntoWorld: " + b));
         return 1;
     }
 

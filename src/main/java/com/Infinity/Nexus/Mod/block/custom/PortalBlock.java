@@ -47,8 +47,10 @@ public class PortalBlock extends Block {
                 if(resourcekey == ModDimensions.EXPLORAR_LEVEL_KEY) {
                     serverPlayer.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 1000, 1, false, false));
                     player.changeDimension(portalDimension, new PortalTeleport(pPos, true));
+                    player.teleportTo(player.getX(), player.getY()+300, player.getZ());
                 } else {
                     player.changeDimension(portalDimension, new PortalTeleport(pPos, false));
+                    player.teleportTo(player.getX(), player.getY()+300, player.getZ());
                 }
             }
         }
