@@ -100,6 +100,7 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 0;
+    public ItemStack recipeOutput = ItemStack.EMPTY;
 
     public SmelteryBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.SMELTERY_BE.get(), pPos, pBlockState);
@@ -210,6 +211,7 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
         pTag.put("inventory", itemHandler.serializeNBT());
         pTag.putInt("smeltery.progress", progress);
         pTag.putInt("smeltery.energy", ENERGY_STORAGE.getEnergyStored());
+        pTag.put("recipeOutput", recipeOutput.serializeNBT());
 
         super.saveAdditional(pTag);
     }
@@ -220,8 +222,12 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
         progress = pTag.getInt("smeltery.progress");
         ENERGY_STORAGE.setEnergy(pTag.getInt("smeltery.energy"));
+        recipeOutput = ItemStack.of(pTag.getCompound("recipeOutput"));
     }
 
+    public ItemStack getResultItem(){
+        return this.recipeOutput;
+    }
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
 
         if (pLevel.isClientSide) {
@@ -302,6 +308,7 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
         Optional<SmelteryRecipes> recipe = getCurrentRecipe();
 
         if (recipe.isEmpty()) {
+            this.recipeOutput = ItemStack.EMPTY;
             return false;
         }
 
@@ -313,6 +320,7 @@ public class SmelteryBlockEntity extends BlockEntity implements MenuProvider {
         }
 
         ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
+        this.recipeOutput = result.copy();
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemIntoOutputSlot(result.getItem());
     }

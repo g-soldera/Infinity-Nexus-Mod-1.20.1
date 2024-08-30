@@ -31,6 +31,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.GENERATOR.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.MATTER_CONDENSER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.MOB_CRUSHER.get()));
+                        pOutput.accept(new ItemStack(ModBlocksAdditions.PLACER.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.FERMENTATION_BARREL.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.FACTORY.get()));
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DISPLAY.get()));
@@ -159,7 +160,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get()));
                         //infinity tools
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_SWORD.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_PAXEL.get()));
+                        //pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_PAXEL.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_HAMMER.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_PICKAXE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_AXE.get()));
@@ -174,7 +175,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.INFINITY_BOOTS.get()));
                         //imperial tools
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_SWORD.get()));
-                        pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_PAXEL.get()));
+                        //pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_PAXEL.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_HAMMER.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_PICKAXE.get()));
                         pOutput.accept(new ItemStack(ModItemsAdditions.IMPERIAL_INFINITY_AXE.get()));

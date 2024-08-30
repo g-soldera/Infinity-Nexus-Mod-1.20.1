@@ -7,6 +7,7 @@ import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.block.entity.FermentationBarrelBlockEntity;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -65,13 +66,15 @@ public class FermentationBarrelScreen extends AbstractContainerScreen<Fermentati
 
         renderProgressArrow(guiGraphics, x, y);
 
-
         fluidRenderer.render(guiGraphics, x+62, y+6, menu.blockEntity.getFluidInInputTank());
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
             guiGraphics.blit(TEXTURE, x + 93, y + 51, 186, 27, -10, -menu.getScaledProgress());
+            if(!Screen.hasShiftDown()){
+                guiGraphics.renderFakeItem(menu.blockEntity.getResultItem(), x+116, y+52);
+            }
         }
     }
 

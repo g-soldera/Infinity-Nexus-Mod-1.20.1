@@ -1,6 +1,7 @@
 package com.Infinity.Nexus.Mod.screen.fermentation;
 
 import com.Infinity.Nexus.Core.slots.FluidItemSlot;
+import com.Infinity.Nexus.Core.slots.InputSlot;
 import com.Infinity.Nexus.Core.slots.ResultSlot;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.FermentationBarrelBlockEntity;
@@ -38,7 +39,7 @@ public class FermentationBarrelMenu extends AbstractContainerMenu {
             this.addSlot(new ResultSlot(iItemHandler, 1, 44, 52));
 
 
-            this.addSlot(new FluidItemSlot(iItemHandler, 2, 116, 6));
+            this.addSlot(new InputSlot(iItemHandler, 2, 116, 6));
             this.addSlot(new ResultSlot(iItemHandler, 3, 116, 52));
         });
 

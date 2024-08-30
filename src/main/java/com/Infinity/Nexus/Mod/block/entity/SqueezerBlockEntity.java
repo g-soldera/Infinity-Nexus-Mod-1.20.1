@@ -126,7 +126,7 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress;
-    private int onofre;
+    public ItemStack recipeOutput = ItemStack.EMPTY;
 
     public SqueezerBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.SQUEEZER_BE.get(), pPos, pBlockState);
@@ -136,7 +136,6 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
                 return switch (pIndex) {
                     case 0 -> SqueezerBlockEntity.this.progress;
                     case 1 -> SqueezerBlockEntity.this.maxProgress;
-                    case 2 -> SqueezerBlockEntity.this.onofre;
                     default -> 0;
                 };
             }
@@ -146,7 +145,6 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
                 switch (pIndex) {
                     case 0 -> SqueezerBlockEntity.this.progress = pValue;
                     case 1 -> SqueezerBlockEntity.this.maxProgress = pValue;
-                    case 2 -> SqueezerBlockEntity.this.onofre = pValue;
                 }
             }
 
@@ -246,7 +244,7 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
         pTag.putInt("squeezer.progress", progress);
         pTag.putInt("squeezer.energy", ENERGY_STORAGE.getEnergyStored());
         pTag = FLUID_STORAGE.writeToNBT(pTag);
-        pTag.putInt("squeezer.onofre", data.get(2));
+        pTag.put("recipeOutput", recipeOutput.serializeNBT());
 
         super.saveAdditional(pTag);
     }
@@ -258,16 +256,12 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
         progress = pTag.getInt("squeezer.progress");
         ENERGY_STORAGE.setEnergy(pTag.getInt("squeezer.energy"));
         FLUID_STORAGE.readFromNBT(pTag);
-        onofre = pTag.getInt("squeezer.onofre");
+        recipeOutput = ItemStack.of(pTag.getCompound("recipeOutput"));
     }
 
-    public int getOnofre() {
-        return data.get(2);
+    public ItemStack getResultItem(){
+        return this.recipeOutput;
     }
-    public void setOnofre(int value) {
-        data.set(2, value);
-    }
-
     public FluidStack getFluid() {
         return FLUID_STORAGE.getFluid();
     }
@@ -415,10 +409,12 @@ public class SqueezerBlockEntity extends BlockEntity implements MenuProvider {
         Optional<SqueezerRecipes> recipe = getCurrentRecipe();
 
         if (recipe.isEmpty()) {
+            this.recipeOutput = ItemStack.EMPTY;
             return false;
         }
 
         ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
+        this.recipeOutput = result.copy();
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemIntoOutputSlot(result.getItem());
     }

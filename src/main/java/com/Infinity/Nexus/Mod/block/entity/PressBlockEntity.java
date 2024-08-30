@@ -98,6 +98,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress;
+    private ItemStack recipeOutput = ItemStack.EMPTY;
 
     public PressBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.PRESS_BE.get(), pPos, pBlockState);
@@ -205,6 +206,7 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         pTag.put("inventory", itemHandler.serializeNBT());
         pTag.putInt("press.progress", progress);
         pTag.putInt("press.energy", ENERGY_STORAGE.getEnergyStored());
+        pTag.put("recipeOutput", recipeOutput.serializeNBT());
 
         super.saveAdditional(pTag);
     }
@@ -215,6 +217,10 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
         progress = pTag.getInt("press.progress");
         ENERGY_STORAGE.setEnergy(pTag.getInt("press.energy"));
+        recipeOutput = ItemStack.of(pTag.getCompound("recipeOutput"));
+    }
+    public ItemStack getResultItem(){
+        return this.recipeOutput;
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
@@ -291,10 +297,12 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
         Optional<PressRecipes> recipe = getCurrentRecipe();
 
         if (recipe.isEmpty()) {
+            this.recipeOutput = ItemStack.EMPTY;
             return false;
         }
 
         ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
+        this.recipeOutput = result.copy();
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemIntoOutputSlot(result.getItem());
     }
@@ -369,4 +377,5 @@ public class PressBlockEntity extends BlockEntity implements MenuProvider {
     public void setUpgradeLevel(ItemStack itemStack, Player player) {
         SetUpgradeLevel.setUpgradeLevel(itemStack, player, this, UPGRADE_SLOTS, this.itemHandler);
     }
+
 }

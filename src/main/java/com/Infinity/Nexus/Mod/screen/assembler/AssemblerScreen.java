@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -112,6 +113,8 @@ public class AssemblerScreen extends AbstractContainerScreen<AssemblerMenu> {
                 List<Component> components = List.of(Component.literal("Output Slot"));
                 RenderScreenTooltips.renderTooltipArea(this.font, pGuiGraphics ,components, pMouseX, pMouseY, x, y);
             }
+        }else{
+            pGuiGraphics.renderFakeItem(menu.blockEntity.getResultItem(), 81 , 29);
         }
     }
 

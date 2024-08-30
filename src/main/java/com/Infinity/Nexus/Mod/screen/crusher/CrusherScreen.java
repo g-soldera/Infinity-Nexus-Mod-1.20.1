@@ -72,6 +72,8 @@ public class CrusherScreen extends AbstractContainerScreen<CrusherMenu> {
                 List<Component> components = List.of(Component.literal("Output Slot"));
                 RenderScreenTooltips.renderTooltipArea(this.font, pGuiGraphics ,components, pMouseX, pMouseY, x, y);
             }
+        }else{
+            pGuiGraphics.renderFakeItem(menu.blockEntity.getResultItem(), 80, 47);
         }
     }
 

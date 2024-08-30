@@ -101,6 +101,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 0;
+    public ItemStack recipeOutput = ItemStack.EMPTY;
 
 
     public FermentationBarrelBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -206,6 +207,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
         pTag.put("inventory", itemHandler.serializeNBT());
         pTag.putInt("fermentation_barrel.progress", progress);
         pTag.putInt("fermentation_barrel.max_progress", maxProgress);
+        pTag.put("recipeOutput", recipeOutput.serializeNBT());
         pTag = FLUID_STORAGE_INPUT.writeToNBT(pTag);
         super.saveAdditional(pTag);
     }
@@ -216,7 +218,11 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
         progress = pTag.getInt("fermentation_barrel.progress");
         maxProgress = pTag.getInt("fermentation_barrel.max_progress");
+        recipeOutput = ItemStack.of(pTag.getCompound("recipeOutput"));
         FLUID_STORAGE_INPUT.readFromNBT(pTag);
+    }
+    public ItemStack getResultItem(){
+        return this.recipeOutput;
     }
     public FluidStack getFluidInInputTank() {
         return FLUID_STORAGE_INPUT.getFluid();
@@ -349,9 +355,11 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements MenuPr
     private boolean hasRecipe() {
         Optional<FermentationBarrelRecipes> recipe = getCurrentRecipe();
         if (recipe.isEmpty()) {
+            this.recipeOutput = ItemStack.EMPTY;
             return false;
         }
         ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
+        this.recipeOutput = result.copy();
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemIntoOutputSlot(result.getItem()) && hasFluidInTank();
     }
 

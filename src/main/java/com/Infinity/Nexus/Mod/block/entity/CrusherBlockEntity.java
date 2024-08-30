@@ -101,6 +101,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 0;
+    public ItemStack recipeOutput = ItemStack.EMPTY;
 
 
     public CrusherBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -212,6 +213,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         pTag.put("inventory", itemHandler.serializeNBT());
         pTag.putInt("crusher.progress", progress);
         pTag.putInt("crusher.energy", ENERGY_STORAGE.getEnergyStored());
+        pTag.put("recipeOutput", recipeOutput.serializeNBT());
 
         super.saveAdditional(pTag);
     }
@@ -222,8 +224,11 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
         progress = pTag.getInt("crusher.progress");
         ENERGY_STORAGE.setEnergy(pTag.getInt("crusher.energy"));
+        recipeOutput = ItemStack.of(pTag.getCompound("recipeOutput"));
     }
-
+    public ItemStack getResultItem(){
+        return this.recipeOutput;
+    }
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
 
         if (pLevel.isClientSide) {
@@ -304,10 +309,12 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         Optional<CrusherRecipes> recipe = getCurrentRecipe();
 
         if (recipe.isEmpty()) {
+            this.recipeOutput = ItemStack.EMPTY;
             return false;
         }
 
         ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
+        this.recipeOutput = result.copy();
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemIntoOutputSlot(result.getItem());
     }

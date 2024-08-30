@@ -110,8 +110,8 @@ public class FactoryBlockEntity extends BlockEntity implements MenuProvider {
 
     protected final ContainerData data;
     private int progress = 0;
-
     public int maxProgress = 0;
+    public ItemStack recipeOutput = ItemStack.EMPTY;
 
     public FactoryBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.FACTORY_BE.get(), pPos, pBlockState);
@@ -190,6 +190,7 @@ public class FactoryBlockEntity extends BlockEntity implements MenuProvider {
         pTag.putInt("factory.progress", progress);
         pTag.putInt("factory.maxProgress", maxProgress);
         pTag.putInt("factory.energy", ENERGY_STORAGE.getEnergyStored());
+        pTag.put("recipeOutput", recipeOutput.serializeNBT());
 
         super.saveAdditional(pTag);
     }
@@ -201,6 +202,10 @@ public class FactoryBlockEntity extends BlockEntity implements MenuProvider {
         progress = pTag.getInt("factory.progress");
         maxProgress = pTag.getInt("factory.maxProgress");
         ENERGY_STORAGE.setEnergy(pTag.getInt("factory.energy"));
+        recipeOutput = ItemStack.of(pTag.getCompound("recipeOutput"));
+    }
+    public ItemStack getResultItem(){
+        return this.recipeOutput;
     }
 
     public void drops() {
@@ -326,10 +331,12 @@ public class FactoryBlockEntity extends BlockEntity implements MenuProvider {
         Optional<FactoryRecipes> recipe = getCurrentRecipe();
 
         if (recipe.isEmpty()) {
+            this.recipeOutput = ItemStack.EMPTY;
             return false;
         }
 
         ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
+        this.recipeOutput = result.copy();
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemIntoOutputSlot(result.getItem());
     }

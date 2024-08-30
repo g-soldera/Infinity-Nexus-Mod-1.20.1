@@ -60,6 +60,9 @@ public class FactoryScreen extends AbstractContainerScreen<FactoryMenu> {
         if(isMouseAboveArea(pMouseX, pMouseY, x, y, 159,  6, 6, 117)) {
             pGuiGraphics.renderTooltip(this.font, energyInfoArea.getTooltips(), Optional.empty(), pMouseX - x, pMouseY - y);
         }
+        if(!Screen.hasShiftDown()){
+            pGuiGraphics.renderFakeItem(menu.blockEntity.getResultItem(), 80, 28);
+        }
     }
 
 
