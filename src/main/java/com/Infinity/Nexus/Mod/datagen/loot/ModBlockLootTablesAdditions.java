@@ -81,6 +81,7 @@ public class ModBlockLootTablesAdditions extends BlockLootSubProvider {
         this.dropSelf(ModBlocksAdditions.FERMENTATION_BARREL.get());
         this.dropSelf(ModBlocksAdditions.RECYCLER.get());
         this.dropSelf(ModBlocksAdditions.MATTER_CONDENSER.get());
+        this.dropSelf(ModBlocksAdditions.PLACER.get());
         this.dropSelf(ModBlocksAdditions.SOLAR.get());
         this.dropSelf(ModBlocksAdditions.DISPLAY.get());
 

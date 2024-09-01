@@ -44,6 +44,7 @@
     "infinity_nexus_mod:generator",
     "infinity_nexus_mod:matter_condenser",
     "infinity_nexus_mod:recycler",
+    "infinity_nexus_mod:placer",
     "infinity_nexus_mod:display",
     "infinity_nexus_mod:solar",
     "infinity_nexus_mod:fermentation_barrel",

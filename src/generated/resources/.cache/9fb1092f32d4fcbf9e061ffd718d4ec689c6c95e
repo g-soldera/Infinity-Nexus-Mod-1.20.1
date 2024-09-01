@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-13T10:19:43.907877	Recipes
+// 1.20.1	2024-09-01T17:27:28.7854011	Recipes
 fee615835d53581e01b29c6f43b4f4181d353e67 data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot.json
 8ba69b00c384b85b687b57eb7986ade8d6d1d5e5 data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot_from_blasting_aluminum_dust.json
 25d67609fb62f0ece675817fe330e52c13650e6f data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot_from_blasting_aluminum_ore.json
@@ -228,7 +228,7 @@ bb14402f427cef9a09a18a4b44b940f63c29b96b data/minecraft/advancements/recipes/mis
 14cbdd55306753d479c98f64b8b3509541c5a42c data/minecraft/advancements/recipes/misc/lead_ingot.json
 4f540e7a3ebd9078ac7eb1d5d680e70232f06a0a data/minecraft/advancements/recipes/misc/lead_nugget.json
 bfc4ec36b2288cdf015d73820c59e4c400e355a8 data/minecraft/advancements/recipes/misc/matter_condenser.json
-2c0e3a0cc714423a93a25167e2d3a0845f090eb7 data/minecraft/advancements/recipes/misc/mob_crusher.json
+d533a55c1cd34e3266182a23a2288d0520cc33f8 data/minecraft/advancements/recipes/misc/mob_crusher.json
 fbbc4926b7a054e0ca096f70bdec9773368f16b0 data/minecraft/advancements/recipes/misc/nickel_block_from_ingot.json
 e05f701df142f8c2e1c32e347a28013ac19ba0e0 data/minecraft/advancements/recipes/misc/nickel_ingot.json
 735c28807ae586a13f61ca95553da8251fa09f38 data/minecraft/advancements/recipes/misc/nickel_nugget.json
@@ -335,7 +335,7 @@ f8611613ab61e10013934d888a50cfa2381b4b45 data/minecraft/recipes/lead_block_from_
 3e00797d5a28cd969b0ddff3805854f0ffd3c321 data/minecraft/recipes/lead_ingot.json
 e716b2728a87d53630eb15d1e94e513aaa4ed0d1 data/minecraft/recipes/lead_nugget.json
 98cd1c689bc6de6dabd7734134ebfc28bfdd8b7e data/minecraft/recipes/matter_condenser.json
-39dbf243bb0a96d9cb2f364dedaedf224fdfcd2e data/minecraft/recipes/mob_crusher.json
+b939cda5e32d47ea39c1796a6f6538da4ef5493f data/minecraft/recipes/mob_crusher.json
 6a005ab34cf9fa8aecdc39cb17f9111fe43e0375 data/minecraft/recipes/nickel_block_from_ingot.json
 9374283fa4a737f81094ade93e619eec91f6bc9d data/minecraft/recipes/nickel_ingot.json
 0e9ed5309c537ed16af0293553c137283a0fa6a3 data/minecraft/recipes/nickel_nugget.json

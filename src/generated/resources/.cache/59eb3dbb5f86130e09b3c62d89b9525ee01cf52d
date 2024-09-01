@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-13T10:36:48.8304513	Loot Tables
+// 1.20.1	2024-09-01T17:27:28.7817243	Loot Tables
 f9a67308c28e23e46c1ddc9d8c836770051f6112 data/infinity_nexus_mod/loot_tables/blocks/aluminum_block.json
 899979f19cf97b6e901c7519504a666158405e75 data/infinity_nexus_mod/loot_tables/blocks/aluminum_machine_casing.json
 0823bf53e52fab2334df6b35191379d42a583479 data/infinity_nexus_mod/loot_tables/blocks/aluminum_ore.json
@@ -55,6 +55,7 @@ cb958a40b2968bc8349da5e31c9cc0eb93840c20 data/infinity_nexus_mod/loot_tables/blo
 39f3443fb5793a8fc9ee2000575074ca83b46f78 data/infinity_nexus_mod/loot_tables/blocks/nickel_block.json
 4e23c1ddef03926df097eb0cac730a8c27884733 data/infinity_nexus_mod/loot_tables/blocks/nickel_machine_casing.json
 d15c4a1b50762512aa0206ae2ebb40c8da9134ef data/infinity_nexus_mod/loot_tables/blocks/nickel_ore.json
+c0f6d886b411f42967603d7cf02892462045f727 data/infinity_nexus_mod/loot_tables/blocks/placer.json
 a190a4569024a216bd08a42fce1862a47eb8b538 data/infinity_nexus_mod/loot_tables/blocks/plastic_machine_casing.json
 da292ed154c272e32bd55163c4a1bf00d1b9bbb3 data/infinity_nexus_mod/loot_tables/blocks/press.json
 cc71482af6377678e78aa7b4131b07d2e8b04a4c data/infinity_nexus_mod/loot_tables/blocks/raw_aluminum_block.json
