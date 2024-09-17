@@ -20,7 +20,7 @@ public class MobCrusherMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public MobCrusherMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(8));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(12));
     }
 
     public MobCrusherMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {

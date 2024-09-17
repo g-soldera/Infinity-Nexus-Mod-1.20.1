@@ -91,6 +91,9 @@ public class MobCrusherScreen extends AbstractContainerScreen<MobCrusherMenu> im
         int hasSlotFree = menu.getBlockEntity().getHasSlotFree();
         int hasRecipe = menu.getBlockEntity().getHasRecipe();
 
+        String hasLink = menu.getBlockEntity().getHasLink();
+        ItemStack linkedBlock = menu.getBlockEntity().getLikedBlock();
+
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
@@ -142,12 +145,21 @@ public class MobCrusherScreen extends AbstractContainerScreen<MobCrusherMenu> im
         }
         if (hasComponent >= 1){
             int range = hasComponent - 1;
-            guiGraphics.drawString(this.font, "Range: "+ (range + range + 1) + "x"+ (range + range + 1)+ "^3", x + 196, index, 0XB6FF00);
+            guiGraphics.drawString(this.font, "Range: "+ (range + range + 1) + "x3x"+ (range + range + 1), x + 196, index, 0XB6FF00);
             guiGraphics.renderFakeItem(new ItemStack(ModItemsAdditions.TERRAIN_MARKER.get()), x + 178, index - 4);
             index += 15;
         }else {
             guiGraphics.drawString(this.font, "Range: 0", x + 196, index, 0XB6FF00);
             guiGraphics.renderFakeItem(new ItemStack(ModItemsAdditions.TERRAIN_MARKER.get()), x + 178, index - 4);
+            index += 15;
+        }
+        if (linkedBlock != null && linkedBlock.getItem() != Items.AIR){
+            guiGraphics.drawString(this.font, hasLink, x + 196, index, 0X00FF00);
+            guiGraphics.renderFakeItem(linkedBlock, x + 178, index - 4);
+            index += 15;
+        }else{
+            guiGraphics.drawString(this.font, hasLink, x + 196, index, 0XB6FF00);
+            guiGraphics.renderFakeItem(new ItemStack(ModItems.LINKING_TOOL.get()), x + 178, index - 4);
             index += 15;
         }
         if (hasRedstoneSignal == 0 && hasComponent == 1 && hasEnoughEnergy == 1

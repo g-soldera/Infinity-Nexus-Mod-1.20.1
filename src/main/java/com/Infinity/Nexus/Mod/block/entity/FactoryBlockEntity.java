@@ -6,6 +6,7 @@ import com.Infinity.Nexus.Core.block.entity.common.SetUpgradeLevel;
 import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Core.utils.ModUtils;
 import com.Infinity.Nexus.Mod.block.custom.Factory;
+import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.AssemblerHandler;
 import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.FactoryHandler;
 import com.Infinity.Nexus.Mod.config.ConfigUtils;
 import com.Infinity.Nexus.Mod.recipe.FactoryRecipes;
@@ -101,12 +102,12 @@ public class FactoryBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.UP), FactoryHandler::insert)),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.DOWN), FactoryHandler::insert)),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.NORTH), FactoryHandler::insert)),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.SOUTH), FactoryHandler::insert)),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.EAST), FactoryHandler::insert)),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.WEST), FactoryHandler::insert)));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.UP), (i, s) -> FactoryHandler.insert(i,s) && (itemHandler.getStackInSlot(i).isEmpty()))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.DOWN), (i, s) -> FactoryHandler.insert(i,s) && (itemHandler.getStackInSlot(i).isEmpty()))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.NORTH), (i, s) -> FactoryHandler.insert(i,s) && (itemHandler.getStackInSlot(i).isEmpty()))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.SOUTH), (i, s) -> FactoryHandler.insert(i,s) && (itemHandler.getStackInSlot(i).isEmpty()))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.EAST), (i, s) -> FactoryHandler.insert(i,s) && (itemHandler.getStackInSlot(i).isEmpty()))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> FactoryHandler.extract(i, Direction.WEST), (i, s) -> FactoryHandler.insert(i,s) && (itemHandler.getStackInSlot(i).isEmpty()))));
 
     protected final ContainerData data;
     private int progress = 0;

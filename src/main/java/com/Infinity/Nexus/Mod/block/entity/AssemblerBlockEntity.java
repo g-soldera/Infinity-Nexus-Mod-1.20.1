@@ -121,12 +121,12 @@ public class AssemblerBlockEntity extends BlockEntity implements MenuProvider {
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(
-                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.UP), AssemblerHandler::insert)),
-                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.DOWN), AssemblerHandler::insert)),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.NORTH), AssemblerHandler::insert)),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.SOUTH), AssemblerHandler::insert)),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.EAST), AssemblerHandler::insert)),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.WEST), AssemblerHandler::insert)));
+                    Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.UP), (i, s) -> AssemblerHandler.insert(i,s) && (itemHandler.getStackInSlot(i).isEmpty()))),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.DOWN), (i, s) -> AssemblerHandler.insert(i,s) && (itemHandler.getStackInSlot(i).isEmpty()))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.NORTH), (i, s) -> AssemblerHandler.insert(i,s) && (itemHandler.getStackInSlot(i).isEmpty()))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.SOUTH), (i, s) -> AssemblerHandler.insert(i,s) && (itemHandler.getStackInSlot(i).isEmpty()))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.EAST), (i, s) -> AssemblerHandler.insert(i,s) && (itemHandler.getStackInSlot(i).isEmpty()))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> AssemblerHandler.extract(i, Direction.WEST), (i, s) -> AssemblerHandler.insert(i,s) && (itemHandler.getStackInSlot(i).isEmpty()))));
 
 
     public AssemblerBlockEntity(BlockPos pPos, BlockState pBlockState) {

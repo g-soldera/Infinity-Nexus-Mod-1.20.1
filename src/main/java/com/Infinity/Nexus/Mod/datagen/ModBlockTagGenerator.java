@@ -99,7 +99,24 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksProgression.GLASS_MACHINE_CASING.get())
                 .add(ModBlocksProgression.STEEL_MACHINE_CASING.get())
                 .add(ModBlocksProgression.INDUSTRIAL_MACHINE_CASING.get())
-                .add(ModBlocksProgression.INFINITY_MACHINE_CASING.get());
+                .add(ModBlocksProgression.INFINITY_MACHINE_CASING.get())
+
+                .add(ModBlocksAdditions.CATWALK.get())
+                .add(ModBlocksAdditions.CATWALK_2.get())
+                .add(ModBlocksAdditions.CATWALK_3.get())
+                .add(ModBlocksAdditions.CATWALK_4.get())
+                .add(ModBlocksAdditions.CATWALK_5.get())
+                .add(ModBlocksAdditions.CATWALK_6.get())
+                .add(ModBlocksAdditions.CATWALK_7.get())
+                .add(ModBlocksAdditions.CATWALK_8.get())
+                .add(ModBlocksAdditions.CATWALK_9.get())
+                .add(ModBlocksAdditions.CATWALK_10.get())
+                .add(ModBlocksAdditions.CATWALK_11.get())
+                .add(ModBlocksAdditions.CATWALK_12.get())
+                .add(ModBlocksAdditions.CATWALK_13.get())
+                .add(ModBlocksAdditions.CATWALK_14.get())
+                .add(ModBlocksAdditions.CATWALK_15.get())
+                .add(ModBlocksAdditions.CATWALK_16.get());
 
 
         this.tag(BlockTags.NEEDS_STONE_TOOL)
@@ -127,7 +144,24 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksProgression.GLASS_MACHINE_CASING.get())
                 .add(ModBlocksProgression.STEEL_MACHINE_CASING.get())
                 .add(ModBlocksProgression.INDUSTRIAL_MACHINE_CASING.get())
-                .add(ModBlocksProgression.INFINITY_MACHINE_CASING.get());
+                .add(ModBlocksProgression.INFINITY_MACHINE_CASING.get())
+
+                .add(ModBlocksAdditions.CATWALK.get())
+                .add(ModBlocksAdditions.CATWALK_2.get())
+                .add(ModBlocksAdditions.CATWALK_3.get())
+                .add(ModBlocksAdditions.CATWALK_4.get())
+                .add(ModBlocksAdditions.CATWALK_5.get())
+                .add(ModBlocksAdditions.CATWALK_6.get())
+                .add(ModBlocksAdditions.CATWALK_7.get())
+                .add(ModBlocksAdditions.CATWALK_8.get())
+                .add(ModBlocksAdditions.CATWALK_9.get())
+                .add(ModBlocksAdditions.CATWALK_10.get())
+                .add(ModBlocksAdditions.CATWALK_11.get())
+                .add(ModBlocksAdditions.CATWALK_12.get())
+                .add(ModBlocksAdditions.CATWALK_13.get())
+                .add(ModBlocksAdditions.CATWALK_14.get())
+                .add(ModBlocksAdditions.CATWALK_15.get())
+                .add(ModBlocksAdditions.CATWALK_16.get());
 
         this.tag(BlockTags.NEEDS_IRON_TOOL)
 

@@ -7,6 +7,8 @@ import com.Infinity.Nexus.Core.fakePlayer.IFFakePlayer;
 import com.Infinity.Nexus.Core.items.ModItems;
 import com.Infinity.Nexus.Core.utils.ModEnergyStorage;
 import com.Infinity.Nexus.Core.utils.ModUtils;
+import com.Infinity.Nexus.Miner.block.entity.MinerBlockEntity;
+import com.Infinity.Nexus.Miner.utils.ModUtilsMiner;
 import com.Infinity.Nexus.Mod.block.custom.MobCrusher;
 import com.Infinity.Nexus.Mod.block.entity.wrappedHandlerMap.MobCrusherHandler;
 import com.Infinity.Nexus.Mod.fluid.ModFluids;
@@ -64,6 +66,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
@@ -83,6 +86,10 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
     private int hasComponent = 0;
     private int hasEnoughEnergy = 0;
     private int hasRecipe = 0;
+    private int linkx = 0;
+    private int linky = 0;
+    private int linkz = 0;
+    private int linkFace = 0;
     private static final int ENERGY_CAPACITY = 60000;
     private static final int ENERGY_TRANSFER = 640;
     private static final int ENERGY_REQ = 32;
@@ -158,6 +165,11 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
                     case 6 -> MobCrusherBlockEntity.this.hasEnoughEnergy;
                     case 7 -> MobCrusherBlockEntity.this.hasRecipe;
 
+                    case 8 -> MobCrusherBlockEntity.this.linkx;
+                    case 9 -> MobCrusherBlockEntity.this.linky;
+                    case 10 -> MobCrusherBlockEntity.this.linkz;
+                    case 11 -> MobCrusherBlockEntity.this.linkFace;
+
                     default -> 0;
                 };
             }
@@ -174,12 +186,17 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
                     case 5 -> MobCrusherBlockEntity.this.hasComponent = pValue;
                     case 6 -> MobCrusherBlockEntity.this.hasEnoughEnergy = pValue;
                     case 7 -> MobCrusherBlockEntity.this.hasRecipe = pValue;
+
+                    case 8 -> MobCrusherBlockEntity.this.linkx = pValue;
+                    case 9 -> MobCrusherBlockEntity.this.linky = pValue;
+                    case 10 -> MobCrusherBlockEntity.this.linkz = pValue;
+                    case 11 -> MobCrusherBlockEntity.this.linkFace = pValue;
                 }
             }
 
             @Override
             public int getCount() {
-                return 8;
+                return 12;
             }
         };
     }
@@ -303,6 +320,11 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         pTag.putInt("mobCrusher.hasEnoughEnergy", getHasEnoughEnergy());
         pTag.putInt("mobCrusher.hasRecipe", getHasRecipe());
 
+        pTag.putInt("miner.linkx", data.get(8));
+        pTag.putInt("miner.linky", data.get(9));
+        pTag.putInt("miner.linkz", data.get(10));
+        pTag.putInt("miner.linkFace", data.get(11));
+
         super.saveAdditional(pTag);
     }
     @Override
@@ -319,6 +341,11 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         hasComponent = pTag.getInt("mobCrusher.hasComponent");
         hasEnoughEnergy = pTag.getInt("mobCrusher.hasEnoughEnergy");
         hasRecipe = pTag.getInt("mobCrusher.hasRecipe");
+
+        linkx = pTag.getInt("miner.linkx");
+        linky = pTag.getInt("miner.linky");
+        linkz = pTag.getInt("miner.linkz");
+        linkFace = pTag.getInt("miner.linkFace");
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
@@ -357,7 +384,9 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
             verifyMobs(pLevel, pPos, machineLevel);
             extractEnergy(this);
             setChanged(pLevel, pPos, pState);
-            ModUtils.ejectItemsWhePusher(pPos.above(),UPGRADE_SLOTS, OUTPUT_SLOT, itemHandler, pLevel);
+            if(!itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
+                ModUtils.ejectItemsWhePusher(pPos.above(),UPGRADE_SLOTS, OUTPUT_SLOT, itemHandler, pLevel);
+            }
             resetProgress();
         }
         this.data.set(3, 0);
@@ -366,7 +395,7 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
 
     private boolean hasMobInside(int machinelevel, BlockPos pPos, Level pLevel) {
         machinelevel = machinelevel + 1;
-        List<Mob> mobs = new ArrayList<>(pLevel.getEntitiesOfClass(Mob.class, new AABB(pPos.offset( machinelevel * -1, 0,  machinelevel * -1), pPos.offset(+machinelevel,3,+machinelevel))));
+        List<Mob> mobs = new ArrayList<>(pLevel.getEntitiesOfClass(Mob.class, new AABB(pPos.offset( machinelevel * -1, 1,  machinelevel * -1), pPos.offset(+machinelevel, 3,+machinelevel))));
         return !mobs.isEmpty();
     }
     private void extractEnergy(MobCrusherBlockEntity mobCrusherBlockEntity) {
@@ -432,7 +461,7 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
 
         ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
 
-        ModUtils.useComponent(component, level, this.getBlockPos());
+        //ModUtils.useComponent(component, level, this.getBlockPos());
 
         Player player = new IFFakePlayer((ServerLevel) this.level);
         player.setItemInHand(InteractionHand.MAIN_HAND, this.itemHandler.getStackInSlot(SWORD_SLOT));
@@ -531,29 +560,80 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         }
         return freeSlots.get() > 0;
     }
+
     private void insertItemOnInventory(ItemStack itemStack) {
         try {
-            if(itemHandler.getStackInSlot(LINK_SLOT).is(ModItems.LINKING_TOOL.get())){
+            if (itemHandler.getStackInSlot(LINK_SLOT).is(ModItems.LINKING_TOOL.get())) {
                 ItemStack linkingTool = itemHandler.getStackInSlot(LINK_SLOT).copy();
-                boolean success = false;
+                AtomicBoolean success = new AtomicBoolean(false);
                 String name = linkingTool.getDisplayName().getString();
+                this.data.set(8, 0);
+                this.data.set(9, 0);
+                this.data.set(10, 0);
+                if (linkingTool.hasCustomHoverName()) {
+                    String[] parts = name.substring(1, name.length() - 1).split(",");
+                    int xl = 0;
+                    int yl = 0;
+                    int zl = 0;
+                    String facel = "up";
 
-                if(linkingTool.hasCustomHoverName()) {
-                    //success = LinkInventory.insertItem(name, this.level, itemStack, itemHandler, OUTPUT_SLOT);
+                    for (String part : parts) {
+                        String[] keyValue = part.split("=");
+                        String key = keyValue[0].trim();
+                        String value = keyValue[1].trim();
+
+                        if (key.equals("x")) {
+                            xl = Integer.parseInt(value);
+                            this.data.set(8, xl);
+                        } else if (key.equals("y")) {
+                            yl = Integer.parseInt(value);
+                            this.data.set(9, yl);
+                        } else if (key.equals("z")) {
+                            zl = Integer.parseInt(value);
+                            this.data.set(10, zl);
+                        } else if (key.equals("face")) {
+                            facel = value;
+                        }
+                    }
+                    BlockEntity blockEntity = this.level.getBlockEntity(new BlockPos(xl, yl, zl));
+                    if (blockEntity != null && canLink(blockEntity)) {
+                        blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, ModUtilsMiner.getLinkedSide(facel)).ifPresent(iItemHandler -> {
+                            for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
+                                if (ModUtils.canPlaceItemInContainer(itemStack.copy(), slot, iItemHandler) && iItemHandler.isItemValid(slot, itemStack.copy())) {
+                                    iItemHandler.insertItem(slot, itemStack.copy(), false);
+                                    success.set(true);
+                                    break;
+                                }
+                            }
+
+                            for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
+                                for (int outputSlot : OUTPUT_SLOT) {
+                                    if (!itemHandler.getStackInSlot(outputSlot).isEmpty() && iItemHandler.isItemValid(slot, itemStack.copy()) && ModUtils.canPlaceItemInContainer(itemHandler.getStackInSlot(outputSlot).copy(), slot, iItemHandler)) {
+                                        iItemHandler.insertItem(slot, itemHandler.getStackInSlot(outputSlot).copy(), false);
+                                        itemHandler.extractItem(outputSlot, itemHandler.getStackInSlot(outputSlot).getCount(), false);
+                                        success.set(true);
+                                        break;
+                                    }
+                                }
+                            }
+                        });
+                    }
                 }
-                if(!success) {
+                if (!success.get()) {
                     insertItemOnSelfInventory(itemStack);
                 }
-            }else{
+            } else {
                 insertItemOnSelfInventory(itemStack);
             }
 
-        }catch (Exception e){
-            System.out.println("§f[INM§f]§4: Failed to insert item in: " + this.getBlockPos());
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("§f[INM§f]§c: Failed to insert item in: " + this.getBlockPos());
         }
     }
-    private void insertItemOnSelfInventory(ItemStack itemStack){
+    private boolean canLink(BlockEntity blockEntity) {
+        return (int) Math.sqrt(this.getBlockPos().distSqr(blockEntity.getBlockPos())) < 100;
+    }
+    private void insertItemOnSelfInventory(ItemStack itemStack) {
         for (int slot : OUTPUT_SLOT) {
             if (ModUtils.canPlaceItemInContainer(itemStack, slot, this.itemHandler)) {
                 this.itemHandler.insertItem(slot, itemStack, false);
@@ -561,10 +641,22 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
             }
         }
     }
+    public String getHasLink() {
+        if (this.data.get(8) != 0 || this.data.get(9) != 0 || this.data.get(10) != 0) {
+            return "X: " + this.data.get(8) + ", Y: " + this.data.get(9) + ", Z: " + this.data.get(10);
+        } else {
+            return "[Unlinked]";
+
+        }
+    }
+    public ItemStack getLikedBlock() {
+        return new ItemStack(level.getBlockState(new BlockPos(this.data.get(8), this.data.get(9), this.data.get(10))).getBlock().asItem());
+    }
     public void setMachineLevel(ItemStack itemStack, Player player) {
         SetMachineLevel.setMachineLevel(itemStack, player, this, COMPONENT_SLOT, this.itemHandler);
     }
     public void setUpgradeLevel(ItemStack itemStack, Player player) {
         SetUpgradeLevel.setUpgradeLevel(itemStack, player, this, UPGRADE_SLOTS, this.itemHandler);
     }
+
 }

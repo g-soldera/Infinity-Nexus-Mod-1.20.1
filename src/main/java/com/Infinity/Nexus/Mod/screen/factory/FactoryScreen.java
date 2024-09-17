@@ -74,9 +74,9 @@ public class FactoryScreen extends AbstractContainerScreen<FactoryMenu> {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         if(Screen.hasShiftDown() || isMouseAboveArea(pMouseX, pMouseY, x, y, - 15, + 37, 17, 54)) {
-            RenderScreenTooltips.renderComponentSlotTooltip(guiGraphics, TEXTURE, x - 15, y + 37, 193, 84, 18, 131);
+            RenderScreenTooltips.renderComponentSlotTooltip(guiGraphics, TEXTURE, x - 15, y + 37, 193, 84, 18, 54);
         }else{
-            RenderScreenTooltips.renderComponentSlotTooltip(guiGraphics, TEXTURE, x - 3, y + 37, 193, 84, 18, 131);
+            RenderScreenTooltips.renderComponentSlotTooltip(guiGraphics, TEXTURE, x - 3, y + 37, 193, 84, 18, 54);
         }
 
         guiGraphics.blit(TEXTURE, x + 2, y - 14, 2, imageHeight, imageWidth -4, 66);
@@ -89,9 +89,7 @@ public class FactoryScreen extends AbstractContainerScreen<FactoryMenu> {
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-
-            guiGraphics.blit(TEXTURE, x + 207, y + 123 , 238, 117,  -62, -menu.getScaledProgress());
-
+            guiGraphics.blit(TEXTURE, x + 151, y + 123 , 182, 117,  -6, -menu.getScaledProgress());
         }
     }
 

@@ -1,9 +1,7 @@
 package com.Infinity.Nexus.Mod.screen.factory;
 
-import com.Infinity.Nexus.Core.slots.ComponentSlot;
-import com.Infinity.Nexus.Core.slots.InputSlot;
+import com.Infinity.Nexus.Core.slots.*;
 import com.Infinity.Nexus.Core.slots.ResultSlot;
-import com.Infinity.Nexus.Core.slots.UpgradeSlot;
 import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.entity.FactoryBlockEntity;
 import com.Infinity.Nexus.Mod.screen.ModMenuTypes;
@@ -36,29 +34,29 @@ public class FactoryMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new InputSlot(iItemHandler, 0, 40 , -12));
-            this.addSlot(new InputSlot(iItemHandler, 1, 60 , -10));
-            this.addSlot(new InputSlot(iItemHandler, 2, 80 , -8));
-            this.addSlot(new InputSlot(iItemHandler, 3, 100 , -10));
-            this.addSlot(new InputSlot(iItemHandler, 4, 120 , -12));
+            this.addSlot(new SingleItemSlot(iItemHandler, 0, 40 , -12));
+            this.addSlot(new SingleItemSlot(iItemHandler, 1, 60 , -10));
+            this.addSlot(new SingleItemSlot(iItemHandler, 2, 80 , -8));
+            this.addSlot(new SingleItemSlot(iItemHandler, 3, 100 , -10));
+            this.addSlot(new SingleItemSlot(iItemHandler, 4, 120 , -12));
 
-            this.addSlot(new InputSlot(iItemHandler, 5, 42, 8));
-            this.addSlot(new InputSlot(iItemHandler, 6, 118 , 8));
+            this.addSlot(new SingleItemSlot(iItemHandler, 5, 42, 8));
+            this.addSlot(new SingleItemSlot(iItemHandler, 6, 118 , 8));
 
-            this.addSlot(new InputSlot(iItemHandler, 7, 44 , 28));
+            this.addSlot(new SingleItemSlot(iItemHandler, 7, 44 , 28));
 
             this.addSlot(new ResultSlot(iItemHandler, 16, 80, 28));
 
-            this.addSlot(new InputSlot(iItemHandler, 8, 116, 28));
+            this.addSlot(new SingleItemSlot(iItemHandler, 8, 116, 28));
 
-            this.addSlot(new InputSlot(iItemHandler, 9, 42, 48));
-            this.addSlot(new InputSlot(iItemHandler, 10, 118, 48));
+            this.addSlot(new SingleItemSlot(iItemHandler, 9, 42, 48));
+            this.addSlot(new SingleItemSlot(iItemHandler, 10, 118, 48));
 
-            this.addSlot(new InputSlot(iItemHandler, 11,  40,68));
-            this.addSlot(new InputSlot(iItemHandler, 12,  60,66));
-            this.addSlot(new InputSlot(iItemHandler, 13,  80,64));
-            this.addSlot(new InputSlot(iItemHandler, 14, 100,66));
-            this.addSlot(new InputSlot(iItemHandler, 15, 120,68));
+            this.addSlot(new SingleItemSlot(iItemHandler, 11,  40,68));
+            this.addSlot(new SingleItemSlot(iItemHandler, 12,  60,66));
+            this.addSlot(new SingleItemSlot(iItemHandler, 13,  80,64));
+            this.addSlot(new SingleItemSlot(iItemHandler, 14, 100,66));
+            this.addSlot(new SingleItemSlot(iItemHandler, 15, 120,68));
 
             this.addSlot(new UpgradeSlot(iItemHandler, 17, -11, 11));
             this.addSlot(new UpgradeSlot(iItemHandler, 18, -11,23));

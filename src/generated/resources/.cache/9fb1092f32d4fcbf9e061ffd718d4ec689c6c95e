@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-01T17:27:28.7854011	Recipes
+// 1.20.1	2024-09-17T14:14:39.7415051	Recipes
 fee615835d53581e01b29c6f43b4f4181d353e67 data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot.json
 8ba69b00c384b85b687b57eb7986ade8d6d1d5e5 data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot_from_blasting_aluminum_dust.json
 25d67609fb62f0ece675817fe330e52c13650e6f data/infinity_nexus_mod/advancements/recipes/misc/aluminum_ingot_from_blasting_aluminum_ore.json
@@ -232,6 +232,7 @@ d533a55c1cd34e3266182a23a2288d0520cc33f8 data/minecraft/advancements/recipes/mis
 fbbc4926b7a054e0ca096f70bdec9773368f16b0 data/minecraft/advancements/recipes/misc/nickel_block_from_ingot.json
 e05f701df142f8c2e1c32e347a28013ac19ba0e0 data/minecraft/advancements/recipes/misc/nickel_ingot.json
 735c28807ae586a13f61ca95553da8251fa09f38 data/minecraft/advancements/recipes/misc/nickel_nugget.json
+3ed506b06f49b24d32ac6c884f417c118704f72c data/minecraft/advancements/recipes/misc/placer.json
 fefb955097ae409a5dddd16f1a98ba970c236191 data/minecraft/advancements/recipes/misc/press.json
 a2d42d8d9f81bcf8fb03cb21f2d16a78ef079793 data/minecraft/advancements/recipes/misc/quantum_solar_core.json
 88ae5a332d32e37dbc0f932a2f07f50408a68ea4 data/minecraft/advancements/recipes/misc/raw_aluminum.json
@@ -339,6 +340,7 @@ b939cda5e32d47ea39c1796a6f6538da4ef5493f data/minecraft/recipes/mob_crusher.json
 6a005ab34cf9fa8aecdc39cb17f9111fe43e0375 data/minecraft/recipes/nickel_block_from_ingot.json
 9374283fa4a737f81094ade93e619eec91f6bc9d data/minecraft/recipes/nickel_ingot.json
 0e9ed5309c537ed16af0293553c137283a0fa6a3 data/minecraft/recipes/nickel_nugget.json
+7a962cd2282735ddfcef423f658a8f2759e1b319 data/minecraft/recipes/placer.json
 1a20275badca38e33d682d5451ababfa1b6000b3 data/minecraft/recipes/press.json
 b1d9104ee076920722f9b9ad8b5ed7bf376bb4ae data/minecraft/recipes/quantum_solar_core.json
 84a3bff58e91b5b1bdef2b6e6f249634fbe95029 data/minecraft/recipes/raw_aluminum.json
