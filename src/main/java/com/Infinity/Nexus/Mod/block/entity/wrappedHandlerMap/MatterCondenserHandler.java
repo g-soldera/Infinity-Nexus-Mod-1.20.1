@@ -9,7 +9,8 @@ import org.jetbrains.annotations.NotNull;
 public class MatterCondenserHandler {
     public static boolean extract(int slot, Direction direction) {
         return switch (slot) {
-            case 1,2,3,4,5 -> direction == Direction.UP; //Upgrade and Component
+            case 1 -> true; //Upgrade and Component
+            case 2 -> direction == Direction.UP; //Upgrade and Component
             default -> false;
         };
     }

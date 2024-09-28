@@ -41,7 +41,8 @@ public class FermentationBarrelScreen extends AbstractContainerScreen<Fermentati
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        pGuiGraphics.drawString(this.font,this.playerInventoryTitle,8,74,0XFFFFFF);
+        pGuiGraphics.drawString(this.font,this.playerInventoryTitle.getString(),8,74,0XFFFFFF);
+        pGuiGraphics.drawString(this.font,(menu.isCrafting() ? "Fermenting" : "Standing By"),98,74,0XFFFFFF);
         pGuiGraphics.drawString(this.font,this.title,8,-9,0XFFFFFF);
 
         renderFluidAreaTooltips(pGuiGraphics,pMouseX,pMouseY, x, y, menu.blockEntity.getFluidInInputTank(), 62,6, fluidRenderer);

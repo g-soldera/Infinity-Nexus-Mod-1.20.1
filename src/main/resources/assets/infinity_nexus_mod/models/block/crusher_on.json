@@ -4,6 +4,6 @@
     "bottom": "infinity_nexus_mod:block/base_machines/machine_bottom_0",
     "front": "infinity_nexus_mod:block/crusher/crusher_front_on_0",
     "side": "infinity_nexus_mod:block/base_machines/machine_side_0",
-    "top": "infinity_nexus_mod:block/crusher/crusher_top_0"
+    "top": "infinity_nexus_mod:block/crusher/crusher_top_on_0"
   }
 }

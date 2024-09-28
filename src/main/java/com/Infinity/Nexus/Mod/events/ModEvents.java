@@ -34,9 +34,9 @@ public class ModEvents {
     public static void onHammerUsage(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
         ItemStack mainHandItem = player.getMainHandItem();
-        int range = mainHandItem.getOrCreateTag().getInt("range");
 
         if (mainHandItem.getItem() instanceof HammerItem hammer && player instanceof ServerPlayer serverPlayer) {
+            int range = mainHandItem.getOrCreateTag().getInt("range");
             BlockPos initalBlockPos = event.getPos();
             if (HARVESTED_BLOCKS.contains(initalBlockPos)) {
                 return;

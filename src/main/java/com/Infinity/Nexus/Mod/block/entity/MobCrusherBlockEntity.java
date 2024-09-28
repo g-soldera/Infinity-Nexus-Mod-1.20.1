@@ -477,12 +477,12 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
                 .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, player);
         table.getRandomItems(context.create(LootContextParamSets.ENTITY)).forEach(stack ->{
             insertItemOnInventory(stack);
-                for(int loot = 0; loot < machineLevel; loot++) {
-                    int rand = RandomSource.create().nextInt(10);
-                    if (rand == 0) {
-                        insertItemOnInventory(stack);
-                    }
+            for(int loot = 0; loot < machineLevel; loot++) {
+                int rand = RandomSource.create().nextInt(10);
+                if (rand == 0) {
+                    insertItemOnInventory(stack);
                 }
+            }
         });
 
         List<ItemEntity> extra = new ArrayList<>();
@@ -519,6 +519,9 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
             if (!entities.isEmpty()) {
                 boolean hasFreeSlots = hasFreeSlots();
                 if(!hasFreeSlots && entities.size() > 30) {
+                    if(hasProgressFinished()){
+                        insertItemOnInventory(ItemStack.EMPTY);
+                    }
                     entities.forEach(Entity::discard);
                     notifyOwner();
                 }else if(hasFreeSlots){
@@ -596,27 +599,33 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
                         }
                     }
                     BlockEntity blockEntity = this.level.getBlockEntity(new BlockPos(xl, yl, zl));
-                    if (blockEntity != null && canLink(blockEntity)) {
-                        blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, ModUtilsMiner.getLinkedSide(facel)).ifPresent(iItemHandler -> {
-                            for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
-                                if (ModUtils.canPlaceItemInContainer(itemStack.copy(), slot, iItemHandler) && iItemHandler.isItemValid(slot, itemStack.copy())) {
-                                    iItemHandler.insertItem(slot, itemStack.copy(), false);
-                                    success.set(true);
-                                    break;
-                                }
-                            }
-
-                            for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
-                                for (int outputSlot : OUTPUT_SLOT) {
-                                    if (!itemHandler.getStackInSlot(outputSlot).isEmpty() && iItemHandler.isItemValid(slot, itemStack.copy()) && ModUtils.canPlaceItemInContainer(itemHandler.getStackInSlot(outputSlot).copy(), slot, iItemHandler)) {
-                                        iItemHandler.insertItem(slot, itemHandler.getStackInSlot(outputSlot).copy(), false);
-                                        itemHandler.extractItem(outputSlot, itemHandler.getStackInSlot(outputSlot).getCount(), false);
+                    if (blockEntity.getBlockPos().equals(this.getBlockPos())) {
+                        level.addFreshEntity(new ItemEntity(level, xl, yl + 1, zl, itemHandler.getStackInSlot(LINK_SLOT).copy()));
+                        itemHandler.extractItem(LINK_SLOT, 1, false);
+                    }
+                    if(!itemHandler.getStackInSlot(OUTPUT_SLOT[7]).isEmpty()) {
+                        if (blockEntity != null && canLink(blockEntity)) {
+                            blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, ModUtilsMiner.getLinkedSide(facel)).ifPresent(iItemHandler -> {
+                                for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
+                                    if (ModUtils.canPlaceItemInContainer(itemStack.copy(), slot, iItemHandler) && iItemHandler.isItemValid(slot, itemStack.copy())) {
+                                        iItemHandler.insertItem(slot, itemStack.copy(), false);
                                         success.set(true);
                                         break;
                                     }
                                 }
-                            }
-                        });
+
+                                for (int slot = 0; slot < iItemHandler.getSlots(); slot++) {
+                                    for (int outputSlot : OUTPUT_SLOT) {
+                                        if (!itemHandler.getStackInSlot(outputSlot).isEmpty() && iItemHandler.isItemValid(slot, itemStack.copy()) && ModUtils.canPlaceItemInContainer(itemHandler.getStackInSlot(outputSlot).copy(), slot, iItemHandler)) {
+                                            iItemHandler.insertItem(slot, itemHandler.getStackInSlot(outputSlot).copy(), false);
+                                            itemHandler.extractItem(outputSlot, itemHandler.getStackInSlot(outputSlot).getCount(), false);
+                                            success.set(true);
+                                            break;
+                                        }
+                                    }
+                                }
+                            });
+                        }
                     }
                 }
                 if (!success.get()) {

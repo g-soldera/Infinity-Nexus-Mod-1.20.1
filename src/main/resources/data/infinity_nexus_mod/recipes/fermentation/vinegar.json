@@ -1,6 +1,6 @@
 {
   "type": "infinity_nexus_mod:fermentation",
-  "duration": 72000,
+  "duration": 31000,
   "fluidInputType": "minecraft:water",
   "fluidInputAmount": 1000,
   "fermenting": true,

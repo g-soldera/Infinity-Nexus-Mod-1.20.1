@@ -80,6 +80,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.ASSEMBLY.get())
                 .add(ModBlocksAdditions.SQUEEZER.get())
                 .add(ModBlocksAdditions.SMELTERY.get())
+                .add(ModBlocksAdditions.FACTORY.get())
                 .add(ModBlocksAdditions.GENERATOR.get())
                 .add(ModBlocksAdditions.MATTER_CONDENSER.get())
                 .add(ModBlocksAdditions.RECYCLER.get())
@@ -222,7 +223,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocksAdditions.DEEPSLATE_INFINITY_ORE.get())
                 .add(ModBlocksAdditions.RAW_INFINITY_BLOCK.get())
                 .add(ModBlocksAdditions.INFINITY_BLOCK.get())
-                .add(ModBlocksAdditions.INFINIUM_STELLARUM_BLOCK.get());
+                .add(ModBlocksAdditions.INFINIUM_STELLARUM_BLOCK.get())
+                .add(ModBlocksAdditions.FACTORY.get());
 
         this.tag(ModTags.Blocks.FORGE_ORES_IN_GROUND_STONE)
                 .add(ModBlocksAdditions.SILVER_ORE.get())

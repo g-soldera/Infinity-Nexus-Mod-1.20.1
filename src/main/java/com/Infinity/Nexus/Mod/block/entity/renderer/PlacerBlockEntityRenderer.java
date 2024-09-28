@@ -1,6 +1,5 @@
 package com.Infinity.Nexus.Mod.block.entity.renderer;
 
-import com.Infinity.Nexus.Mod.block.custom.ItemDisplay;
 import com.Infinity.Nexus.Mod.block.custom.Placer;
 import com.Infinity.Nexus.Mod.block.entity.PlacerBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -60,7 +59,7 @@ public class PlacerBlockEntityRenderer implements BlockEntityRenderer<PlacerBloc
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
                 pPoseStack.pushPose();
                 pPoseStack.translate(x, y, z);
-                pPoseStack.scale(0.7f, 0.7f, 0.7f);
+                pPoseStack.scale(0.5f, 0.5f, 0.5f);
                 pPoseStack.mulPose(Axis.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(Placer.FACING).toYRot()));
                 pPoseStack.mulPose(Axis.YN.rotationDegrees(180.0F));
 
