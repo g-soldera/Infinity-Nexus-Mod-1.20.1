@@ -2,6 +2,7 @@ package com.Infinity.Nexus.Mod.entity.client;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.entity.custom.Asgreon;
+import com.Infinity.Nexus.Mod.entity.custom.Flaron;
 import com.Infinity.Nexus.Mod.entity.layers.ModModelLayers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -12,18 +13,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
-public class AsgreonRenderer extends MobRenderer<Asgreon, AsgreonModel<Asgreon> > {
-    private static final ResourceLocation LOCATION = new ResourceLocation(InfinityNexusMod.MOD_ID, "textures/entity/asgreon/asgreon.png");
+public class FlaronRenderer extends MobRenderer<Flaron, AsgreonModel<Flaron> > {
+    private static final ResourceLocation LOCATION = new ResourceLocation(InfinityNexusMod.MOD_ID, "textures/entity/flaron/flaron.png");
     private static int light = 5;
     private static boolean lightIncrease = true;
 
-    public AsgreonRenderer(EntityRendererProvider.Context context) {
-        super(context, new AsgreonModel<>(context.bakeLayer(ModModelLayers.ASGREON_LAYER)), 0.5f);
+    public FlaronRenderer(EntityRendererProvider.Context context) {
+        super(context, new AsgreonModel<>(context.bakeLayer(ModModelLayers.FLARON_LAYER)), 0.5f);
     }
 
-
     @Override
-    public void render(Asgreon pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
+    public void render(Flaron pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
         if(pEntity.isBaby()){
             pMatrixStack.scale(0.5f, 0.5f, 0.5f);
         }
@@ -32,12 +32,12 @@ public class AsgreonRenderer extends MobRenderer<Asgreon, AsgreonModel<Asgreon> 
 
     @Nullable
     @Override
-    protected RenderType getRenderType(Asgreon pLivingEntity, boolean pBodyVisible, boolean pTranslucent, boolean pGlowing) {
+    protected RenderType getRenderType(Flaron pLivingEntity, boolean pBodyVisible, boolean pTranslucent, boolean pGlowing) {
         return super.getRenderType(pLivingEntity, pBodyVisible, true, true);
     }
 
     @Override
-    protected int getBlockLightLevel(Asgreon pEntity, BlockPos pPos) {
+    protected int getBlockLightLevel(Flaron pEntity, BlockPos pPos) {
         if(lightIncrease){
             if(light >= 1400){
                 light = 1400;
@@ -57,7 +57,7 @@ public class AsgreonRenderer extends MobRenderer<Asgreon, AsgreonModel<Asgreon> 
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Asgreon entity) {
+    public ResourceLocation getTextureLocation(Flaron entity) {
         return LOCATION;
     }
 }

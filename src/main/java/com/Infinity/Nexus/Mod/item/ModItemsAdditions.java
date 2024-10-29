@@ -182,6 +182,7 @@ public class ModItemsAdditions {
     public static final RegistryObject<Item> KNIFE = ITEMS.register("knife", () -> new Knife(new Item.Properties().stacksTo(1).durability(500)));
 
     public static final RegistryObject<Item> ASGREON_SPAWN_EGG = ITEMS.register("asgreon_spawn_egg", () -> new ForgeSpawnEggItem( ModEntities.ASGREON, 0x7e9680, 0xc5d1c5,new Item.Properties()));
+    public static final RegistryObject<Item> FLARON_SPAWN_EGG = ITEMS.register("flaron_spawn_egg", () -> new ForgeSpawnEggItem( ModEntities.FLARON, 0x7e9680, 0xc5d1c5,new Item.Properties()));
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

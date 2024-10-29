@@ -53,32 +53,13 @@ public class InfinityArmorItem extends ArmorItem implements GeoItem {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-            if (pEntity instanceof Player player && pSlotId < 4) {
-                if (hasFullSuitOfArmorOn(player)) {
-                    if (ConfigUtils.infinity_armor_can_fly && hasFuel(player)) {
-                        if(!pLevel.isClientSide()) {
-                            player.getAbilities().mayfly = true;
-                        }else{
-                            renderParticles(player, pLevel);
-                        }
-                    } else {
-                        if(!pLevel.isClientSide()) {
-                            player.getAbilities().flying = false;
-                            player.getAbilities().mayfly = false;
-                        }
-                    }
+        if (pEntity instanceof Player player && pSlotId < 4) {
+            if (hasFullSuitOfArmorOn(player)) {
+                if (ConfigUtils.infinity_armor_can_fly && hasFuel(player)) {
                     if(!pLevel.isClientSide()) {
-                        //Ad player effects
-                        player.fireImmune();
-                        player.getFoodData().setSaturation(5);
-                        player.getFoodData().setFoodLevel(19);
-                        if (delay >= maxDelay) {
-                            player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 1000, 1, false, false));
-                            player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1000, 1, false, false));
-                            delay = 0;
-                        } else {
-                            delay++;
-                        }
+                        player.getAbilities().mayfly = true;
+                    }else{
+                        renderParticles(player, pLevel);
                     }
                 } else {
                     if(!pLevel.isClientSide()) {
@@ -86,21 +67,34 @@ public class InfinityArmorItem extends ArmorItem implements GeoItem {
                         player.getAbilities().mayfly = false;
                     }
                 }
-                player.onUpdateAbilities();
+                if(!pLevel.isClientSide()) {
+                    player.fireImmune();
+                    player.getFoodData().setSaturation(5);
+                    player.getFoodData().setFoodLevel(19);
+                    player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 1000, 1, false, false));
+                    player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1000, 1, false, false));
+                }
+            } else {
+                if(!pLevel.isClientSide()) {
+                    player.getAbilities().flying = false;
+                    player.getAbilities().mayfly = false;
+                }
             }
+            player.onUpdateAbilities();
+        }
     }
-
 private void renderParticles(Player player, Level pLevel) {
     if(!player.onGround() && player.getAbilities().flying) {
         onGround = false;
         double pitch = player.getXRot();
         double yaw = -player.getYRot()+90; // multiplicar por -1 para inverter a rotação
-        double x = player.getX() + 0.3 * Math.sin(Math.toRadians(yaw));
+        double v = 0.3 * Math.sin(Math.toRadians(yaw));
+        double x = player.getX() + v;
         double y = player.getY();
         double z = player.getZ() + 0.3 * Math.cos(Math.toRadians(yaw));
         pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x, y, z, 0.0D, -0.2D, 0.0D);
 
-        x = player.getX() - 0.3 * Math.sin(Math.toRadians(yaw));
+        x = player.getX() - v;
         z = player.getZ() - 0.3 * Math.cos(Math.toRadians(yaw));
         pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x, y, z, 0.0D, -0.2D, 0.0D);
         particleDelay++;

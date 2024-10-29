@@ -220,6 +220,7 @@ public class ModTabAdditions {
                         pOutput.accept(new ItemStack(ModItemsAdditions.HAMMER_RANGE_UPGRADE.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.ASGREON_SPAWN_EGG.get()));
+                        pOutput.accept(new ItemStack(ModItemsAdditions.FLARON_SPAWN_EGG.get()));
 
                         pOutput.accept(new ItemStack(ModItemsAdditions.STAR_FRAGMENT.get()));
                         pOutput.accept(new ItemStack(ModItemsProgression.RESIDUAL_MATTER.get()));

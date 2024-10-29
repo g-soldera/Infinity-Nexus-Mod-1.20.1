@@ -16,10 +16,12 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModelLayers.ASGREON_LAYER, AsgreonModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.FLARON_LAYER, AsgreonModel::createBodyLayer);
     }
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.ASGREON.get(), Asgreon.createAttributes().build());
+        event.put(ModEntities.FLARON.get(), Asgreon.createAttributes().build());
     }
 
 }

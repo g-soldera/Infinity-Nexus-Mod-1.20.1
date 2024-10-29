@@ -1,0 +1,100 @@
+{
+  "type": "silentgear:standard",
+  "simple": true,
+  "harvest_tier": "minecraft:netherite",
+  "availability": {
+    "tier": 4,
+    "categories": [
+      "metal"
+    ],
+    "visible": true,
+    "gear_blacklist": [],
+    "can_salvage": true
+  },
+  "crafting_items": {
+    "main": {
+      "item": "infinity_nexus_mod:infinium_stellarum_ingot"
+    }
+  },
+  "name": {
+    "translate": "material.silentgear.netherite"
+  },
+  "name_prefix": {
+    "translate": "material.silentgear.netherite"
+  },
+  "stats": {
+    "coating": {
+      "durability": [
+        {
+          "mul2": 0.9
+        },
+        {
+          "add": 5.0
+        }
+      ],
+      "armor_durability": {
+        "mul2": 0.321212125
+      },
+      "harvest_speed": {
+        "mul2": 0.325
+      },
+      "melee_damage": {
+        "mul2": 0.93333334
+      },
+      "magic_damage": {
+        "mul2": 0.93333334
+      },
+      "ranged_damage": {
+        "mul2": 0.93333334
+      },
+      "armor_toughness": {
+        "add": 6.0
+      },
+      "knockback_resistance": {
+        "add": 3.0
+      },
+      "enchantment_value": {
+        "add": 15.0
+      }
+    }
+  },
+  "traits": {
+    "coating": [
+      {
+        "name": "silentgear:fireproof",
+        "level": 1
+      }
+    ]
+  },
+  "model": {
+    "coating/all": [
+      {
+        "texture": "silentgear:main_generic_hc",
+        "color": "#97FDFF"
+      },
+      {
+        "texture": "silentgear:_highlight"
+      }
+    ],
+    "coating/part": [
+      {
+        "texture": "silentgear:coating_material",
+        "color": "#97FDFF"
+      },
+      {
+        "texture": "silentgear:coating_jar"
+      }
+    ],
+    "coating/armor": [
+      {
+        "texture": "minecraft:netherite"
+      }
+    ],
+    "main/fragment": [
+      {
+        "texture": "silentgear:dust",
+        "color": "#97FDFF"
+      }
+    ]
+  }
+}

@@ -2,6 +2,13 @@ package com.Infinity.Nexus.Mod.events;
 
 import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,6 +27,9 @@ public class PlayerDamageEvent {
                     if (event.getSource().getEntity() instanceof Player enemy) {
                         ItemStack weapon = enemy.getMainHandItem();
                         if (!isCorrectWeapon(weapon)) {
+                            enemy.sendSystemMessage(Component.literal(InfinityNexusMod.message + "§cYou cannot attack other players with full Imperial Armor with this weapon!"));
+                            enemy.setSwimming(true);
+                            enemy.playNotifySound(SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.0F, 1.0F);
                             event.setCanceled(true);
                         } else {
                             float damage = event.getAmount();
@@ -27,6 +37,10 @@ public class PlayerDamageEvent {
                             event.setAmount(newDamage);
                         }
                     }else{
+                        if(event.getSource().getEntity() instanceof Mob mob){
+                            ServerPlayer target = (ServerPlayer) event.getEntity();
+                            target.attack(mob);
+                        }
                         event.setCanceled(true);
                     }
                 }else if(hasFullCarbonArmor(player)) {
@@ -47,7 +61,7 @@ public class PlayerDamageEvent {
         }
     }
     private static boolean isCorrectWeapon(ItemStack weapon) {
-        return             weapon.getItem() == ModItemsAdditions.IMPERIAL_INFINITY_SWORD.get()
+        return     weapon.getItem() == ModItemsAdditions.IMPERIAL_INFINITY_SWORD.get()
                 || weapon.getItem() == ModItemsAdditions.IMPERIAL_INFINITY_3D_SWORD.get()
                 || weapon.getItem() == ModItemsAdditions.IMPERIAL_INFINITY_AXE.get()
                 || weapon.getItem() == ModItemsAdditions.IMPERIAL_INFINITY_PAXEL.get()

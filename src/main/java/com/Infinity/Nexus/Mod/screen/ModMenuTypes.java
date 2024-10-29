@@ -56,9 +56,9 @@ public class ModMenuTypes {
             registerMenuType("recycler_menu", RecyclerMenu::new);
     public static final RegistryObject<MenuType<CondenserMenu>> MATTER_CONDENSER_MENU =
             registerMenuType("condenser_menu", CondenserMenu::new);
-
     public static final RegistryObject<MenuType<PlacerMenu>> PLACER_MENU =
             registerMenuType("placer_menu", PlacerMenu::new);
+
 
     //Solar
     public static final RegistryObject<MenuType<SolarMenu>> SOLAR_MENU = registerMenuType("solar_menu", SolarMenu::new);

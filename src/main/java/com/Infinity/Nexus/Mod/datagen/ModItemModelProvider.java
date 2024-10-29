@@ -229,6 +229,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItemsProgression.VOXEL_EAST);
 
         withExistingParent(ModItemsAdditions.ASGREON_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItemsAdditions.FLARON_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){

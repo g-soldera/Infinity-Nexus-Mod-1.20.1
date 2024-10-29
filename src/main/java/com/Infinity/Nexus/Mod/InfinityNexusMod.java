@@ -6,6 +6,7 @@ import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
 import com.Infinity.Nexus.Mod.config.Config;
 import com.Infinity.Nexus.Mod.entity.ModEntities;
 import com.Infinity.Nexus.Mod.entity.client.AsgreonRenderer;
+import com.Infinity.Nexus.Mod.entity.client.FlaronRenderer;
 import com.Infinity.Nexus.Mod.fluid.ModFluidType;
 import com.Infinity.Nexus.Mod.fluid.ModFluids;
 import com.Infinity.Nexus.Mod.item.ModItemProperties;
@@ -158,6 +159,7 @@ public class InfinityNexusMod
 
 
             EntityRenderers.register(ModEntities.ASGREON.get(), AsgreonRenderer::new);
+            EntityRenderers.register(ModEntities.FLARON.get(), FlaronRenderer::new);
 
         }
     }

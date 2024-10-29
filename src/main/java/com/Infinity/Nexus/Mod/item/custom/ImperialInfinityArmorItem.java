@@ -52,25 +52,20 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
             if (hasFullSuitOfArmorOn(player)) {
                 if(ConfigUtils.imperial_infinity_armor_can_fly ) {
                     player.getAbilities().mayfly = true;
+                    player.onUpdateAbilities();
                 }
                 player.getFoodData().setSaturation(20);
                 player.getFoodData().setFoodLevel(20);
-                if (delay >= maxDelay) {
                 player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.LUCK, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 1000, 1, false, false));
-                    delay = 0;
-                }else{
-                    delay++;
-                }
             }else{
-                player.getAbilities().flying = false;
-                player.getAbilities().mayfly = false;
+                //player.getAbilities().flying = false;
+                //player.getAbilities().mayfly = false;
             }
-            player.onUpdateAbilities();
         }
     }
 
@@ -87,7 +82,7 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
         return armor;
     }
     @Override
-    public boolean isEnchantable(ItemStack stack) {
+    public boolean isEnchantable(@NotNull ItemStack stack) {
         return true;
     }
     // Create our armor model/renderer for forge and return it
@@ -114,16 +109,10 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, 20, state -> {
-            // Apply our generic idle animation.
-            // Whether it plays or not is decided down below.
             state.setAnimation(DefaultAnimations.IDLE);
             state.getController().setAnimation(RawAnimation.begin().then("misc.idle", Animation.LoopType.LOOP));
 
-            // Let's gather some data from the state to use below
-            // This is the entity that is currently wearing/holding the item
             Entity entity = state.getData(DataTickets.ENTITY);
-
-            // We'll just have ArmorStands always animate, so we can return here
             if (entity instanceof Player)
                 return PlayState.CONTINUE;
 
@@ -139,7 +128,6 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
                 wornArmor.add(stack.getItem());
             }
 
-            // Check each of the pieces match our set
             boolean isFullSet = wornArmor.containsAll(ObjectArrayList.of(
                     ModItemsAdditions.IMPERIAL_INFINITY_HELMET.get(),
                     ModItemsAdditions.IMPERIAL_INFINITY_CHESTPLATE.get(),

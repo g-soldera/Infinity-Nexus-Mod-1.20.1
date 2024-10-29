@@ -7,4 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 public class ModModelLayers {
     public static final ModelLayerLocation ASGREON_LAYER = new ModelLayerLocation(
             new ResourceLocation(InfinityNexusMod.MOD_ID, "asgreon_layer"), "asgreon_layer");
+
+    public static final ModelLayerLocation FLARON_LAYER = new ModelLayerLocation(
+            new ResourceLocation(InfinityNexusMod.MOD_ID, "flaron_layer"), "flaron_layer");
 }
