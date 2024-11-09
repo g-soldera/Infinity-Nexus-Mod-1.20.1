@@ -88,7 +88,6 @@ public class Asgreon  extends Animal {
     }
 
 
-
     private void setupAnimationStates() {
         if (attackAnimationTimeout <= 0 && this.isAttacking()) {
             idleAnimationState.stop();
@@ -133,7 +132,7 @@ public class Asgreon  extends Animal {
             idleAnimationTimeout--;
         }
 
-        if (!this.isAttacking() || attackAnimationTimeout <= 0) {
+        if (!this.isAttacking() && attackAnimationTimeout <= 0) {
             attackAnimationState.stop();
             setAttacking(false);
         }
@@ -144,12 +143,12 @@ public class Asgreon  extends Animal {
             setSitting(false);
         }
 
-        if (!this.isWalking() || walkAnimationTimeout <= 0) {
+        if (!this.isWalking() && walkAnimationTimeout <= 0) {
             walkAnimationState.stop();
             setWalking(false);
         }
 
-        if (!this.isIdle() || idleAnimationTimeout <= 0) {
+        if (!this.isIdle() && idleAnimationTimeout <= 0) {
             idleAnimationState.stop();
             setIdle(false);
         }

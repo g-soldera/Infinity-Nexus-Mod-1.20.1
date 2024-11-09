@@ -6,6 +6,7 @@ import com.Infinity.Nexus.Mod.item.client.ImperialInfinityArmorRenderer;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AnimationState;
@@ -48,24 +49,26 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if(!pLevel.isClientSide() && pEntity instanceof Player player && pSlotId < 4) {
+        if (!pLevel.isClientSide() && pEntity instanceof Player player) {
             if (hasFullSuitOfArmorOn(player)) {
-                if(ConfigUtils.imperial_infinity_armor_can_fly ) {
+                if (ConfigUtils.imperial_infinity_armor_can_fly && !player.getAbilities().flying) {
                     player.getAbilities().mayfly = true;
-                    player.onUpdateAbilities();
                 }
+                player.setCustomName(Component.literal("§6Imperial " + player.getName().getString()));
                 player.getFoodData().setSaturation(20);
                 player.getFoodData().setFoodLevel(20);
-                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1000, 1, false, false));
+                //player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.LUCK, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 1000, 1, false, false));
-            }else{
-                //player.getAbilities().flying = false;
-                //player.getAbilities().mayfly = false;
+            } else {
+                player.setCustomName(Component.literal(player.getName().getString()));
+                player.getAbilities().flying = false;
+                player.getAbilities().mayfly = false;
             }
+            player.onUpdateAbilities();
         }
     }
 

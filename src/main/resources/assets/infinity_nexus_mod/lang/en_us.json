@@ -345,7 +345,10 @@
   "item.infinity_nexus.crystal_description": "§9This item can be obtained from the Miner tier",
   "item.infinity_nexus.stable_matter": "§9It can be obtained in the Matter Condenser using approximately ",
 
+  "entity.infinity_nexus_mod.asgreon": "§5Asgreon",
   "item.infinity_nexus_mod.asgreon_spawn_egg": "Asgreon Spawn Egg",
+  "entity.infinity_nexus_mod.flaron": "§5Flaron",
+  "item.infinity_nexus_mod.flaron_spawn_egg": "Flaron Spawn Egg",
 
   "block.infinity_nexus_mod.recycler": "Recycler",
   "block.infinity_nexus_mod.matter_condenser": "Matter Condenser",

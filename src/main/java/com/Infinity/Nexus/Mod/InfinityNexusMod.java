@@ -4,6 +4,7 @@ import com.Infinity.Nexus.Mod.block.ModBlocksAdditions;
 import com.Infinity.Nexus.Mod.block.ModBlocksProgression;
 import com.Infinity.Nexus.Mod.block.entity.ModBlockEntities;
 import com.Infinity.Nexus.Mod.config.Config;
+import com.Infinity.Nexus.Mod.effect.ModEffects;
 import com.Infinity.Nexus.Mod.entity.ModEntities;
 import com.Infinity.Nexus.Mod.entity.client.AsgreonRenderer;
 import com.Infinity.Nexus.Mod.entity.client.FlaronRenderer;
@@ -81,6 +82,8 @@ public class InfinityNexusMod
 
         ModFluids.register(modEventBus);
         ModFluidType.register(modEventBus);
+
+        ModEffects.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::setup);

@@ -50,21 +50,15 @@ public class InfinityArmorItem extends ArmorItem implements GeoItem {
     public InfinityArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties settings) {
         super(material, type, settings);
     }
-
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if (pEntity instanceof Player player && pSlotId < 4) {
+        if (pEntity instanceof Player player) {
             if (hasFullSuitOfArmorOn(player)) {
                 if (ConfigUtils.infinity_armor_can_fly && hasFuel(player)) {
-                    if(!pLevel.isClientSide()) {
+                    if(!pLevel.isClientSide() && !player.getAbilities().flying) {
                         player.getAbilities().mayfly = true;
                     }else{
                         renderParticles(player, pLevel);
-                    }
-                } else {
-                    if(!pLevel.isClientSide()) {
-                        player.getAbilities().flying = false;
-                        player.getAbilities().mayfly = false;
                     }
                 }
                 if(!pLevel.isClientSide()) {
