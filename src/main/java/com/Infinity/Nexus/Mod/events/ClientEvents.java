@@ -23,6 +23,8 @@ public class ClientEvents {
         if (event.getKey() == KeyBindings.FLIGHT_KEY.getKey().getValue() && event.getAction() == 1) {
             if (hasFullSuitOfArmorOn(player)) {
                 FlightManager.handleFlightActivation(player);
+            } else {
+                player.sendSystemMessage(Component.literal("§c[Debug] Você precisa da armadura completa!"));
             }
         }
     }
