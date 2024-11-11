@@ -38,18 +38,31 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.Set;
 import java.util.function.Consumer;
 
-
-public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
+/**
+ * Represents the Imperial Infinity Armor item, a powerful armor set that provides various effects and abilities.
+ * This armor is animated using GeckoLib and provides flight capabilities when wearing a full set.
+ */
+public class ImperialInfinityArmorItem extends ArmorItem implements GeoItem {
     private static final String IMPERIAL_PREFIX = "§6Imperial ";
-    private static final int EFFECT_DURATION = 20 * 60; // 60 seconds
+    private static final int EFFECT_DURATION = 20 * 60;
     private static final int EFFECT_AMPLIFIER = 1;
     
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
+    /**
+     * Constructs a new Imperial Infinity Armor item.
+     *
+     * @param material The material of the armor
+     * @param type The type of armor piece
+     * @param settings The item properties
+     */
     public ImperialInfinityArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties settings) {
         super(material, type, settings);
     }
 
+    /**
+     * Handles the armor's tick update logic, applying effects and abilities when worn.
+     */
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (pLevel.isClientSide() || !(pEntity instanceof Player player)) {
@@ -65,6 +78,12 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
         player.onUpdateAbilities();
     }
 
+    /**
+     * Updates the player's flying abilities and name prefix based on armor set completion.
+     *
+     * @param player The player wearing the armor
+     * @param hasFullSet Whether the player has a complete set of Imperial Infinity Armor
+     */
     private void updatePlayerAbilities(Player player, boolean hasFullSet) {
         if (hasFullSet && ConfigUtils.imperial_infinity_armor_can_fly) {
             player.getAbilities().mayfly = true;
@@ -79,6 +98,11 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
         }
     }
 
+    /**
+     * Applies various beneficial effects to the player wearing the full armor set.
+     *
+     * @param player The player to receive the effects
+     */
     private void applyArmorEffects(Player player) {
         player.getFoodData().setSaturation(20);
         player.getFoodData().setFoodLevel(20);
@@ -96,6 +120,12 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
         }
     }
 
+    /**
+     * Checks if the player is wearing a complete set of Imperial Infinity Armor.
+     *
+     * @param player The player to check
+     * @return true if wearing a complete set, false otherwise
+     */
     private boolean hasFullSuitOfArmorOn(Player player) {
         if (player == null) return false;
         
@@ -113,19 +143,21 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
     public boolean isEnchantable(@NotNull ItemStack stack) {
         return true;
     }
-    // Create our armor model/renderer for forge and return it
+
+    /**
+     * Initializes the client-side renderer for the armor.
+     */
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             private GeoArmorRenderer<?> renderer;
 
             @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, 
+                    EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 if (this.renderer == null)
                     this.renderer = new ImperialInfinityArmorRenderer();
 
-                // This prepares our GeoArmorRenderer for the current render frame.
-                // These parameters may be null however, so we don't do anything further with them
                 this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 
                 return this.renderer;
@@ -133,7 +165,9 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
         });
     }
 
-    // Let's add our animation controller
+    /**
+     * Registers the animation controllers for the armor.
+     */
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, 20, state -> {
@@ -144,12 +178,9 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
             if (entity instanceof Player)
                 return PlayState.CONTINUE;
 
-            // For this example, we only want the animation to play if the entity is wearing all pieces of the armor
-            // Let's collect the armor pieces the entity is currently wearing
             Set<Item> wornArmor = new ObjectOpenHashSet<>();
 
             for (ItemStack stack : entity.getArmorSlots()) {
-                // We can stop immediately if any of the slots are empty
                 if (stack.isEmpty())
                     return PlayState.STOP;
 
@@ -162,7 +193,6 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
                     ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS.get(),
                     ModItemsAdditions.IMPERIAL_INFINITY_BOOTS.get()));
 
-            // Play the animation if the full set is being worn, otherwise stop
             return isFullSet ? PlayState.CONTINUE : PlayState.STOP;
         }));
     }
@@ -171,5 +201,4 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
     }
-
 }
