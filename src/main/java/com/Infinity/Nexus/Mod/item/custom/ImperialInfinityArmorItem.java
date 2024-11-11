@@ -87,15 +87,13 @@ public class ImperialInfinityArmorItem extends ArmorItem implements GeoItem {
     private void updatePlayerAbilities(Player player, boolean hasFullSet) {
         if (hasFullSet && ConfigUtils.imperial_infinity_armor_can_fly) {
             player.getAbilities().mayfly = true;
-            if (!player.getAbilities().flying) {
-                player.getAbilities().flying = true;
-            }
             player.setCustomName(Component.literal(IMPERIAL_PREFIX + player.getName().getString()));
         } else {
             player.getAbilities().flying = false;
             player.getAbilities().mayfly = false;
             player.setCustomName(Component.literal(player.getName().getString()));
         }
+        player.onUpdateAbilities();
     }
 
     /**
