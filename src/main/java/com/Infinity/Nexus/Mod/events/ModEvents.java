@@ -4,12 +4,18 @@ import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.command.Teste;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.custom.HammerItem;
+import com.Infinity.Nexus.Mod.item.custom.InfinityArmorItem;
+import com.Infinity.Nexus.Mod.item.custom.ImperialInfinityArmorItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.command.ConfigCommand;
@@ -88,8 +94,10 @@ public class ModEvents {
     }
 
     private static void checkArmorAndDisableFlight(Player player) {
-        if (!hasFullImperialArmorSet(player)) {
-            FlightManager.disableFlight(player);
+        if (!hasFullSuitOfArmorOn(player)) {
+            player.getAbilities().flying = false;
+            player.getAbilities().mayfly = false;
+            player.onUpdateAbilities();
         }
     }
 
