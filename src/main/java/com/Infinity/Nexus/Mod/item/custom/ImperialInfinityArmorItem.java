@@ -76,7 +76,6 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
                 FlightManager.handleFlightMovement(player);
             } else {
                 player.setCustomName(Component.literal(player.getName().getString()));
-                FlightManager.disableFlight(player);
                 player.fallDistance = 0F;
             }
         }
