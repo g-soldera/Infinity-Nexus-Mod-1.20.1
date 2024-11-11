@@ -67,4 +67,49 @@ public class ModEvents {
             }
         }
     }
+
+    @SubscribeEvent
+    public static void onArmorChange(LivingEquipmentChangeEvent event) {
+        if (event.getEntity() instanceof Player player && !player.level().isClientSide()) {
+            if (event.getSlot().getType() == EquipmentSlot.Type.ARMOR) {
+                checkArmorAndDisableFlight(player);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onItemToss(ItemTossEvent event) {
+        Player player = event.getPlayer();
+        if (!player.level().isClientSide()) {
+            if (event.getEntity().getItem().getItem() instanceof ImperialInfinityArmorItem) {
+                checkArmorAndDisableFlight(player);
+            }
+        }
+    }
+
+    private static void checkArmorAndDisableFlight(Player player) {
+        if (!hasFullImperialArmorSet(player)) {
+            FlightManager.disableFlight(player);
+        }
+    }
+
+    public static boolean hasFullSuitOfArmorOn(Player player) {
+        Item boots = player.getInventory().getArmor(0).getItem();
+        Item leggings = player.getInventory().getArmor(1).getItem();
+        Item breastplate = player.getInventory().getArmor(2).getItem();
+        Item helmet = player.getInventory().getArmor(3).getItem();
+        ItemStack fuel = player.getInventory().getArmor(2);
+
+        boolean infinity = boots == ModItemsAdditions.INFINITY_BOOTS.get()
+                    && leggings == ModItemsAdditions.INFINITY_LEGGINGS.get()
+                    && breastplate == ModItemsAdditions.INFINITY_CHESTPLATE.get()
+                    && helmet == ModItemsAdditions.INFINITY_HELMET.get()
+                    && fuel.getOrCreateTag().getInt("Fuel") > 1;
+        boolean imperial = boots == ModItemsAdditions.IMPERIAL_INFINITY_BOOTS.get()
+                    && leggings == ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS.get()
+                    && breastplate == ModItemsAdditions.IMPERIAL_INFINITY_CHESTPLATE.get()
+                    && helmet == ModItemsAdditions.IMPERIAL_INFINITY_HELMET.get();
+
+        return imperial || infinity;
+    }
 }
