@@ -87,7 +87,7 @@ public class ModEvents {
     public static void onItemToss(ItemTossEvent event) {
         Player player = event.getPlayer();
         if (!player.level().isClientSide()) {
-            if (event.getEntity().getItem().getItem() instanceof ImperialInfinityArmorItem) {
+            if ((event.getEntity().getItem().getItem() instanceof ImperialInfinityArmorItem) || (event.getEntity().getItem().getItem() instanceof InfinityArmorItem)) {
                 checkArmorAndDisableFlight(player);
             }
         }
