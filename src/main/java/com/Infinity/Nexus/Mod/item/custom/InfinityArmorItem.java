@@ -58,6 +58,10 @@ public class InfinityArmorItem extends ArmorItem implements GeoItem {
     private static int particleDelay;
     private static boolean onGround;
     private static int fuel;
+    private static double lastY = Double.MAX_VALUE;
+    private static final double MIN_FALL_HEIGHT = 3.0;
+    private static boolean wasFlying = false;
+    private static boolean isFalling = false;
 
     /**
      * Constructs a new Infinity Armor item with specified material, type and properties.
@@ -110,7 +114,7 @@ public class InfinityArmorItem extends ArmorItem implements GeoItem {
             return;
         }
 
-        if (player.getAbilities().flying) {
+        if (player.getAbilities().mayfly) {
             renderParticles(player, level);
         }
     }
@@ -159,99 +163,82 @@ public class InfinityArmorItem extends ArmorItem implements GeoItem {
      * @param level The current level
      */
     private void renderParticles(Player player, Level level) {
-        if (player.getAbilities().flying) {
-            if (!player.onGround()) {
-                onGround = false;
-                renderFlightParticles(player, level);
+        boolean isCurrentlyFlying = player.getAbilities().flying;
+        
+        if (!player.onGround() && !isCurrentlyFlying) {
+            double currentY = player.getY();
+            if (currentY < lastY) {
+                isFalling = true;
             }
-        } else if (!onGround && player.onGround()) {
-            onGround = true;
-            renderLandingParticles(player, level);
+            lastY = currentY;
+        }
+
+        if (player.onGround()) {
+            if (isFalling || wasFlying) {
+                handleLandingEffects(player, level);
+                isFalling = false;
+                wasFlying = false;
+            }
+            lastY = player.getY();
+        }
+
+        if (isCurrentlyFlying) {
+            wasFlying = true;
+            handleFlightEffects(player, level);
         }
     }
 
     /**
-     * Creates particle effects during flight.
+     * Handles flight effects with particle and sound effects.
      *
-     * @param player The flying player
-     * @param level The current level
+     * @param player The player experiencing the flight
+     * @param pLevel The current level
      */
-    private void renderFlightParticles(Player player, Level level) {
-        double yaw = -player.getYRot() + 90;
-        double v = PARTICLE_VELOCITY * Math.sin(Math.toRadians(yaw));
-        
-        double x1 = player.getX() + v;
-        double x2 = player.getX() - v;
-        double z1 = player.getZ() + PARTICLE_VELOCITY * Math.cos(Math.toRadians(yaw));
-        double z2 = player.getZ() - PARTICLE_VELOCITY * Math.cos(Math.toRadians(yaw));
-        
-        level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x1, player.getY(), z1, 0.0D, PARTICLE_Y_VELOCITY, 0.0D);
-        level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x2, player.getY(), z2, 0.0D, PARTICLE_Y_VELOCITY, 0.0D);
-        
-        handleFlightSound(player, level);
-    }
+    private void handleFlightEffects(Player player, Level pLevel) {
+        double pitch = player.getXRot();
+        double yaw = -player.getYRot()+90;
+        double v = 0.3 * Math.sin(Math.toRadians(yaw));
+        double x = player.getX() + v;
+        double y = player.getY();
+        double z = player.getZ() + PARTICLE_VELOCITY * Math.cos(Math.toRadians(yaw));
+        pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x, y, z, 0.0D, PARTICLE_Y_VELOCITY, 0.0D);
 
-    /**
-     * Manages periodic flight sound effects.
-     *
-     * @param player The flying player
-     * @param level The current level
-     */
-    private void handleFlightSound(Player player, Level level) {
+        x = player.getX() - v;
+        z = player.getZ() - PARTICLE_VELOCITY * Math.cos(Math.toRadians(yaw));
+        pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x, y, z, 0.0D, PARTICLE_Y_VELOCITY, 0.0D);
         particleDelay++;
-        if (particleDelay >= PARTICLE_SOUND_DELAY) {
+        if(particleDelay >= PARTICLE_SOUND_DELAY) {
             particleDelay = 0;
-            level.playLocalSound(player.getX(), player.getY(), player.getZ(), 
-                               SoundEvents.CHORUS_FLOWER_GROW, SoundSource.AMBIENT, 0.5F, 0.4F, false);
+            pLevel.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.CHORUS_FLOWER_GROW, SoundSource.AMBIENT, 0.5F, 0.4F, false);
         }
     }
 
     /**
-     * Creates particle effects when landing.
+     * Handles landing effects with particle and sound effects.
      *
-     * @param player The landing player
+     * @param player The player experiencing the landing
      * @param level The current level
      */
-    private void renderLandingParticles(Player player, Level level) {
-        double[] radii = {0.5, 1.0, 1.5};
+    private void handleLandingEffects(Player player, Level pLevel) {
+        double radius = 0.5;
+
+        double[] radii = {radius + 0.5, radius + 1.0, radius + 1.5};
         int[] stepSizes = {15, 10, 5};
 
         for (int i = 0; i < radii.length; i++) {
-            spawnCircularParticles(player, level, radii[i], stepSizes[i]);
-        }
-        
-        playLandingSounds(player, level);
-    }
+            radius = radii[i];
+            int stepSize = stepSizes[i];
 
-    /**
-     * Creates circular particle patterns around the player.
-     *
-     * @param player The player at the center
-     * @param level The current level
-     * @param radius The radius of the circle
-     * @param stepSize The spacing between particles
-     */
-    private void spawnCircularParticles(Player player, Level level, double radius, int stepSize) {
-        for (int j = 0; j < 360; j += stepSize) {
-            double x = player.getX() + radius * Math.cos(Math.toRadians(j));
-            double z = player.getZ() + radius * Math.sin(Math.toRadians(j));
-            level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x, player.getY(), z, 0.0D, PARTICLE_RISE_VELOCITY, 0.0D);
-            level.addParticle(ParticleTypes.FIREWORK, x, player.getY(), z, 0.0D, PARTICLE_RISE_VELOCITY, 0.0D);
-            level.addParticle(ParticleTypes.SMALL_FLAME, x, player.getY(), z, 0.0D, PARTICLE_RISE_VELOCITY, 0.0D);
+            for (int j = 0; j < 360; j += stepSize) {
+                double x = player.getX() + radius * Math.cos(Math.toRadians(j));
+                double z = player.getZ() + radius * Math.sin(Math.toRadians(j));
+                pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x, player.getY(), z, 0.0D, PARTICLE_RISE_VELOCITY, 0.0D);
+                pLevel.addParticle(ParticleTypes.FIREWORK, x, player.getY(), z, 0.0D, PARTICLE_RISE_VELOCITY, 0.0D);
+                pLevel.addParticle(ParticleTypes.SMALL_FLAME, x, player.getY(), z, 0.0D, PARTICLE_RISE_VELOCITY, 0.0D);
+            }
         }
-    }
-
-    /**
-     * Plays sound effects when landing.
-     *
-     * @param player The landing player
-     * @param level The current level
-     */
-    private void playLandingSounds(Player player, Level level) {
-        level.playLocalSound(player.getX(), player.getY(), player.getZ(), 
-                           SoundEvents.PLAYER_BIG_FALL, SoundSource.AMBIENT, 0.5F, 0.5F, false);
-        level.playLocalSound(player.getX(), player.getY(), player.getZ(), 
-                           SoundEvents.FIRECHARGE_USE, SoundSource.AMBIENT, 0.5F, 0.1F, false);
+        pLevel.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BIG_FALL, SoundSource.AMBIENT, 0.5F, 0.5F, false);
+        pLevel.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.AMBIENT, 0.5F, 0.1F, false);
     }
 
     /**
