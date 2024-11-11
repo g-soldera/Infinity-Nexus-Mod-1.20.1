@@ -39,89 +39,227 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
+/**
+ * Represents the Infinity Armor item, a powerful armor set that provides flight capabilities
+ * and various effects when wearing a complete set. This armor requires fuel for flight and
+ * provides unique particle effects during movement.
+ */
 public class InfinityArmorItem extends ArmorItem implements GeoItem {
+    private static final int EFFECT_DURATION = 20 * 50;
+    private static final int EFFECT_AMPLIFIER = 1;
+    private static final int MAX_FOOD_LEVEL = 19;
+    private static final int MAX_SATURATION = 5;
+    private static final int PARTICLE_SOUND_DELAY = 250;
+    private static final double PARTICLE_VELOCITY = 0.3;
+    private static final double PARTICLE_Y_VELOCITY = -0.2D;
+    private static final double PARTICLE_RISE_VELOCITY = 0.02D;
+    
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private static int delay;
-    private static int maxDelay = 80*20;
-    private static int fuel;
     private static int particleDelay;
     private static boolean onGround;
+    private static int fuel;
 
+    /**
+     * Constructs a new Infinity Armor item with specified material, type and properties.
+     *
+     * @param material The material of the armor
+     * @param type The type of armor piece (helmet, chestplate, leggings, boots)
+     * @param settings The item properties
+     */
     public InfinityArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties settings) {
         super(material, type, settings);
     }
+
+    /**
+     * Handles per-tick updates for the armor item, managing effects, abilities, and particles.
+     *
+     * @param pStack The ItemStack being ticked
+     * @param pLevel The current level
+     * @param pEntity The entity wearing the armor
+     * @param pSlotId The slot ID where the item is located
+     * @param pIsSelected Whether the item is currently selected
+     */
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if (pEntity instanceof Player player) {
-            if (hasFullSuitOfArmorOn(player)) {
-                if (ConfigUtils.infinity_armor_can_fly && hasFuel(player)) {
-                    if(!pLevel.isClientSide() && !player.getAbilities().flying) {
-                        player.getAbilities().mayfly = true;
-                    }else{
-                        renderParticles(player, pLevel);
-                    }
-                }
-                if(!pLevel.isClientSide()) {
-                    player.fireImmune();
-                    player.getFoodData().setSaturation(5);
-                    player.getFoodData().setFoodLevel(19);
-                    player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 1000, 1, false, false));
-                    player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1000, 1, false, false));
-                }
-            } else {
-                if(!pLevel.isClientSide()) {
-                    player.getAbilities().flying = false;
-                    player.getAbilities().mayfly = false;
-                }
-            }
-            player.onUpdateAbilities();
+        if (!(pEntity instanceof Player player)) {
+            return;
+        }
+
+        boolean hasFullSet = hasFullSuitOfArmorOn(player);
+        
+        if (pLevel.isClientSide()) {
+            handleClientEffects(player, pLevel, hasFullSet);
+            return;
+        }
+
+        updatePlayerAbilities(player, pLevel, hasFullSet);
+        if (hasFullSet) {
+            applyArmorEffects(player);
         }
     }
-private void renderParticles(Player player, Level pLevel) {
-    if(!player.onGround() && player.getAbilities().flying) {
-        onGround = false;
-        double pitch = player.getXRot();
-        double yaw = -player.getYRot()+90; // multiplicar por -1 para inverter a rotação
-        double v = 0.3 * Math.sin(Math.toRadians(yaw));
-        double x = player.getX() + v;
-        double y = player.getY();
-        double z = player.getZ() + 0.3 * Math.cos(Math.toRadians(yaw));
-        pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x, y, z, 0.0D, -0.2D, 0.0D);
 
-        x = player.getX() - v;
-        z = player.getZ() - 0.3 * Math.cos(Math.toRadians(yaw));
-        pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x, y, z, 0.0D, -0.2D, 0.0D);
+    /**
+     * Manages client-side visual and audio effects for the armor.
+     *
+     * @param player The player wearing the armor
+     * @param level The current level
+     * @param hasFullSet Whether the player has a complete set of armor
+     */
+    private void handleClientEffects(Player player, Level level, boolean hasFullSet) {
+        if (!hasFullSet || !ConfigUtils.infinity_armor_can_fly || !hasFuel(player)) {
+            return;
+        }
+
+        if (player.getAbilities().flying) {
+            renderParticles(player, level);
+        }
+    }
+
+    /**
+     * Updates player abilities based on armor status and fuel availability.
+     *
+     * @param player The player to update
+     * @param level The current level
+     * @param hasFullSet Whether the player has a complete set of armor
+     */
+    private void updatePlayerAbilities(Player player, Level level, boolean hasFullSet) {
+        if (hasFullSet && ConfigUtils.infinity_armor_can_fly && hasFuel(player)) {
+            player.getAbilities().mayfly = true;
+        } else {
+            player.getAbilities().flying = false;
+            player.getAbilities().mayfly = false;
+        }
+        player.onUpdateAbilities();
+    }
+
+    /**
+     * Applies beneficial status effects to the player wearing the full armor set.
+     *
+     * @param player The player to receive the effects
+     */
+    private void applyArmorEffects(Player player) {
+        player.fireImmune();
+        player.getFoodData().setSaturation(MAX_SATURATION);
+        player.getFoodData().setFoodLevel(MAX_FOOD_LEVEL);
+        
+        MobEffectInstance[] effects = {
+            new MobEffectInstance(MobEffects.ABSORPTION, EFFECT_DURATION, EFFECT_AMPLIFIER, false, false),
+            new MobEffectInstance(MobEffects.REGENERATION, EFFECT_DURATION, EFFECT_AMPLIFIER, false, false)
+        };
+        
+        for (MobEffectInstance effect : effects) {
+            player.addEffect(effect);
+        }
+    }
+
+    /**
+     * Manages particle effects based on player movement state.
+     *
+     * @param player The player wearing the armor
+     * @param level The current level
+     */
+    private void renderParticles(Player player, Level level) {
+        if (player.getAbilities().flying) {
+            if (!player.onGround()) {
+                onGround = false;
+                renderFlightParticles(player, level);
+            }
+        } else if (!onGround && player.onGround()) {
+            onGround = true;
+            renderLandingParticles(player, level);
+        }
+    }
+
+    /**
+     * Creates particle effects during flight.
+     *
+     * @param player The flying player
+     * @param level The current level
+     */
+    private void renderFlightParticles(Player player, Level level) {
+        double yaw = -player.getYRot() + 90;
+        double v = PARTICLE_VELOCITY * Math.sin(Math.toRadians(yaw));
+        
+        double x1 = player.getX() + v;
+        double x2 = player.getX() - v;
+        double z1 = player.getZ() + PARTICLE_VELOCITY * Math.cos(Math.toRadians(yaw));
+        double z2 = player.getZ() - PARTICLE_VELOCITY * Math.cos(Math.toRadians(yaw));
+        
+        level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x1, player.getY(), z1, 0.0D, PARTICLE_Y_VELOCITY, 0.0D);
+        level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x2, player.getY(), z2, 0.0D, PARTICLE_Y_VELOCITY, 0.0D);
+        
+        handleFlightSound(player, level);
+    }
+
+    /**
+     * Manages periodic flight sound effects.
+     *
+     * @param player The flying player
+     * @param level The current level
+     */
+    private void handleFlightSound(Player player, Level level) {
         particleDelay++;
-        if(particleDelay >= 250) {
+        if (particleDelay >= PARTICLE_SOUND_DELAY) {
             particleDelay = 0;
-            pLevel.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.CHORUS_FLOWER_GROW, SoundSource.AMBIENT, 0.5F, 0.4F, false);
-        }
-    }else{
-        if(player.onGround() && !onGround) {
-            if(!player.isFallFlying()){onGround = true;}
-            double radius = 0.5;
-
-            double[] radii = {radius + 0.5, radius + 1.0, radius + 1.5};
-            int[] stepSizes = {15, 10, 5};
-
-            for (int i = 0; i < radii.length; i++) {
-                radius = radii[i];
-                int stepSize = stepSizes[i];
-
-                for (int j = 0; j < 360; j += stepSize) {
-                    double x = player.getX() + radius * Math.cos(Math.toRadians(j));
-                    double z = player.getZ() + radius * Math.sin(Math.toRadians(j));
-                    pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x, player.getY(), z, 0.0D, 0.02D, 0.0D);
-                    pLevel.addParticle(ParticleTypes.FIREWORK, x, player.getY(), z, 0.0D, 0.02D, 0.0D);
-                    pLevel.addParticle(ParticleTypes.SMALL_FLAME, x, player.getY(), z, 0.0D, 0.02D, 0.0D);
-                }
-            }
-            pLevel.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BIG_FALL, SoundSource.AMBIENT, 0.5F, 0.5F, false);
-            pLevel.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.AMBIENT, 0.5F, 0.1F, false);
+            level.playLocalSound(player.getX(), player.getY(), player.getZ(), 
+                               SoundEvents.CHORUS_FLOWER_GROW, SoundSource.AMBIENT, 0.5F, 0.4F, false);
         }
     }
-}
 
+    /**
+     * Creates particle effects when landing.
+     *
+     * @param player The landing player
+     * @param level The current level
+     */
+    private void renderLandingParticles(Player player, Level level) {
+        double[] radii = {0.5, 1.0, 1.5};
+        int[] stepSizes = {15, 10, 5};
+
+        for (int i = 0; i < radii.length; i++) {
+            spawnCircularParticles(player, level, radii[i], stepSizes[i]);
+        }
+        
+        playLandingSounds(player, level);
+    }
+
+    /**
+     * Creates circular particle patterns around the player.
+     *
+     * @param player The player at the center
+     * @param level The current level
+     * @param radius The radius of the circle
+     * @param stepSize The spacing between particles
+     */
+    private void spawnCircularParticles(Player player, Level level, double radius, int stepSize) {
+        for (int j = 0; j < 360; j += stepSize) {
+            double x = player.getX() + radius * Math.cos(Math.toRadians(j));
+            double z = player.getZ() + radius * Math.sin(Math.toRadians(j));
+            level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x, player.getY(), z, 0.0D, PARTICLE_RISE_VELOCITY, 0.0D);
+            level.addParticle(ParticleTypes.FIREWORK, x, player.getY(), z, 0.0D, PARTICLE_RISE_VELOCITY, 0.0D);
+            level.addParticle(ParticleTypes.SMALL_FLAME, x, player.getY(), z, 0.0D, PARTICLE_RISE_VELOCITY, 0.0D);
+        }
+    }
+
+    /**
+     * Plays sound effects when landing.
+     *
+     * @param player The landing player
+     * @param level The current level
+     */
+    private void playLandingSounds(Player player, Level level) {
+        level.playLocalSound(player.getX(), player.getY(), player.getZ(), 
+                           SoundEvents.PLAYER_BIG_FALL, SoundSource.AMBIENT, 0.5F, 0.5F, false);
+        level.playLocalSound(player.getX(), player.getY(), player.getZ(), 
+                           SoundEvents.FIRECHARGE_USE, SoundSource.AMBIENT, 0.5F, 0.1F, false);
+    }
+
+    /**
+     * Checks and manages fuel consumption for flight capabilities.
+     *
+     * @param player The player to check fuel for
+     * @return Whether flight is currently fueled
+     */
     private boolean hasFuel(Player player) {
         if(ConfigUtils.infinity_armor_need_fuel) {
             ItemStack breastplate = player.getInventory().getArmor(2);
@@ -145,25 +283,29 @@ private void renderParticles(Player player, Level pLevel) {
                 }
                 return false;
             }
-        }else{
-            return true;
         }
+        return true;
     }
 
-
-    public static boolean hasFullSuitOfArmorOn(Player player) {
-        Item boots = player.getInventory().getArmor(0).getItem();
-        Item leggings = player.getInventory().getArmor(1).getItem();
-        Item breastplate = player.getInventory().getArmor(2).getItem();
-        Item helmet = player.getInventory().getArmor(3).getItem();
-
-        boolean armor =
-                boots == ModItemsAdditions.INFINITY_BOOTS.get()
-                && leggings == ModItemsAdditions.INFINITY_LEGGINGS.get()
-                && breastplate == ModItemsAdditions.INFINITY_CHESTPLATE.get()
-                && helmet == ModItemsAdditions.INFINITY_HELMET.get();
-        return armor;
+    /**
+     * Checks if the player is wearing a complete set of Infinity Armor.
+     *
+     * @param player The player to check
+     * @return Whether the player has a complete set equipped
+     */
+    private boolean hasFullSuitOfArmorOn(Player player) {
+        if (player == null) return false;
+        
+        return player.getInventory().armor.stream().allMatch(stack -> {
+            if (stack.isEmpty()) return false;
+            Item item = stack.getItem();
+            return item == ModItemsAdditions.INFINITY_BOOTS.get() ||
+                   item == ModItemsAdditions.INFINITY_LEGGINGS.get() ||
+                   item == ModItemsAdditions.INFINITY_CHESTPLATE.get() ||
+                   item == ModItemsAdditions.INFINITY_HELMET.get();
+        });
     }
+
     @Override
     public boolean isEnchantable(ItemStack stack) {
         return true;
