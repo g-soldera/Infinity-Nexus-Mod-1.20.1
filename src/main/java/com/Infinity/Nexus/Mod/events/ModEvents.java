@@ -4,12 +4,17 @@ import com.Infinity.Nexus.Mod.InfinityNexusMod;
 import com.Infinity.Nexus.Mod.command.Teste;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.custom.HammerItem;
+import com.Infinity.Nexus.Mod.flight.FlightManager;
+import com.Infinity.Nexus.Mod.item.custom.ImperialInfinityArmorItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.command.ConfigCommand;
@@ -66,5 +71,37 @@ public class ModEvents {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onArmorChange(LivingEquipmentChangeEvent event) {
+        if (event.getEntity() instanceof Player player && !player.level().isClientSide()) {
+            if (event.getSlot().getType() == EquipmentSlot.Type.ARMOR) {
+                checkArmorAndDisableFlight(player);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onItemToss(ItemTossEvent event) {
+        Player player = event.getPlayer();
+        if (!player.level().isClientSide()) {
+            if (event.getEntity().getItem().getItem() instanceof ImperialInfinityArmorItem) {
+                checkArmorAndDisableFlight(player);
+            }
+        }
+    }
+
+    private static void checkArmorAndDisableFlight(Player player) {
+        if (!hasFullImperialArmorSet(player)) {
+            FlightManager.disableFlight(player);
+        }
+    }
+
+    private static boolean hasFullImperialArmorSet(Player player) {
+        return player.getInventory().getArmor(0).getItem() == ModItemsAdditions.IMPERIAL_INFINITY_BOOTS.get()
+                && player.getInventory().getArmor(1).getItem() == ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS.get()
+                && player.getInventory().getArmor(2).getItem() == ModItemsAdditions.IMPERIAL_INFINITY_CHESTPLATE.get()
+                && player.getInventory().getArmor(3).getItem() == ModItemsAdditions.IMPERIAL_INFINITY_HELMET.get();
     }
 }

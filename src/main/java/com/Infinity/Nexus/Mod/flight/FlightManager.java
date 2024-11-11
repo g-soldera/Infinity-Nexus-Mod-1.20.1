@@ -33,6 +33,17 @@ public class FlightManager {
         }
     }
 
+    public static void disableFlight(Player player) {
+        isFlying = false;
+        player.getAbilities().flying = false;
+        player.getAbilities().mayfly = false;
+        player.fallDistance = 0F;
+        player.onUpdateAbilities();
+        Vec3 motion = player.getDeltaMovement();
+        player.setDeltaMovement(motion.x, -0.3D, motion.z);
+        player.hasImpulse = true;
+    }
+
     private static void toggleFlight(Player player) {
         isFlying = !isFlying;
         lastToggleTime = System.currentTimeMillis();
