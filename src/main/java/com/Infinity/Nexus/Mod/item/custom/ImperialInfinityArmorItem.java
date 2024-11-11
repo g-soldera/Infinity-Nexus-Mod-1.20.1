@@ -3,11 +3,8 @@ package com.Infinity.Nexus.Mod.item.custom;
 import com.Infinity.Nexus.Mod.config.ConfigUtils;
 import com.Infinity.Nexus.Mod.item.ModItemsAdditions;
 import com.Infinity.Nexus.Mod.item.client.ImperialInfinityArmorRenderer;
-import com.Infinity.Nexus.Mod.flight.FlightManager;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.Input;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -23,7 +20,6 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -45,17 +41,8 @@ import java.util.function.Consumer;
 
 public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private static final double FLIGHT_SPEED = 0.5D;
-    private static final double VERTICAL_SPEED = 0.3D;
-    private static int lastJumpTime = 0;
-    private static boolean isFlying = false;
-    private static final int DOUBLE_JUMP_WINDOW = 20;
-    private static final int GROUND_DEACTIVATION_TIME = 20;
-    private static int groundTime = 0;
-    private static boolean canDoubleJump = true;
-    private boolean wasJumpKeyPressed = false;
-    private static int jumpCount = 0;
-
+    private static int delay;
+    private static int maxDelay = 80*20;
     public ImperialInfinityArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties settings) {
         super(material, type, settings);
     }
@@ -64,20 +51,24 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (!pLevel.isClientSide() && pEntity instanceof Player player) {
             if (hasFullSuitOfArmorOn(player)) {
+                if (ConfigUtils.imperial_infinity_armor_can_fly && !player.getAbilities().flying) {
+                    player.getAbilities().mayfly = true;
+                }
                 player.setCustomName(Component.literal("§6Imperial " + player.getName().getString()));
                 player.getFoodData().setSaturation(20);
                 player.getFoodData().setFoodLevel(20);
+                //player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.LUCK, 1000, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 1000, 1, false, false));
-                
-                FlightManager.handleFlightMovement(player);
             } else {
                 player.setCustomName(Component.literal(player.getName().getString()));
-                player.fallDistance = 0F;
+                player.getAbilities().flying = false;
+                player.getAbilities().mayfly = false;
             }
+            player.onUpdateAbilities();
         }
     }
 
@@ -97,7 +88,7 @@ public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
     public boolean isEnchantable(@NotNull ItemStack stack) {
         return true;
     }
-    
+    // Create our armor model/renderer for forge and return it
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
