@@ -40,50 +40,75 @@ import java.util.function.Consumer;
 
 
 public class ImperialInfinityArmorItem extends  ArmorItem implements GeoItem {
+    private static final String IMPERIAL_PREFIX = "§6Imperial ";
+    private static final int EFFECT_DURATION = 20 * 60; // 60 seconds
+    private static final int EFFECT_AMPLIFIER = 1;
+    
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private static int delay;
-    private static int maxDelay = 80*20;
+
     public ImperialInfinityArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties settings) {
         super(material, type, settings);
     }
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if (!pLevel.isClientSide() && pEntity instanceof Player player) {
-            if (hasFullSuitOfArmorOn(player)) {
-                if (ConfigUtils.imperial_infinity_armor_can_fly && !player.getAbilities().flying) {
-                    player.getAbilities().mayfly = true;
-                }
-                player.setCustomName(Component.literal("§6Imperial " + player.getName().getString()));
-                player.getFoodData().setSaturation(20);
-                player.getFoodData().setFoodLevel(20);
-                //player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1000, 1, false, false));
-                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1000, 1, false, false));
-                player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 1000, 1, false, false));
-                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1000, 1, false, false));
-                player.addEffect(new MobEffectInstance(MobEffects.LUCK, 1000, 1, false, false));
-                player.addEffect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 1000, 1, false, false));
-            } else {
-                player.setCustomName(Component.literal(player.getName().getString()));
-                player.getAbilities().flying = false;
-                player.getAbilities().mayfly = false;
+        if (pLevel.isClientSide() || !(pEntity instanceof Player player)) {
+            return;
+        }
+
+        boolean hasFullSet = hasFullSuitOfArmorOn(player);
+        updatePlayerAbilities(player, hasFullSet);
+        if (hasFullSet) {
+            applyArmorEffects(player);
+        }
+        
+        player.onUpdateAbilities();
+    }
+
+    private void updatePlayerAbilities(Player player, boolean hasFullSet) {
+        if (hasFullSet && ConfigUtils.imperial_infinity_armor_can_fly) {
+            player.getAbilities().mayfly = true;
+            if (!player.getAbilities().flying) {
+                player.getAbilities().flying = true;
             }
-            player.onUpdateAbilities();
+            player.setCustomName(Component.literal(IMPERIAL_PREFIX + player.getName().getString()));
+        } else {
+            player.getAbilities().flying = false;
+            player.getAbilities().mayfly = false;
+            player.setCustomName(Component.literal(player.getName().getString()));
+        }
+    }
+
+    private void applyArmorEffects(Player player) {
+        player.getFoodData().setSaturation(20);
+        player.getFoodData().setFoodLevel(20);
+        
+        MobEffectInstance[] effects = {
+            new MobEffectInstance(MobEffects.MOVEMENT_SPEED, EFFECT_DURATION, EFFECT_AMPLIFIER, false, false),
+            new MobEffectInstance(MobEffects.DIG_SPEED, EFFECT_DURATION, EFFECT_AMPLIFIER, false, false),
+            new MobEffectInstance(MobEffects.DAMAGE_BOOST, EFFECT_DURATION, EFFECT_AMPLIFIER, false, false),
+            new MobEffectInstance(MobEffects.LUCK, EFFECT_DURATION, EFFECT_AMPLIFIER, false, false),
+            new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, EFFECT_DURATION, EFFECT_AMPLIFIER, false, false)
+        };
+        
+        for (MobEffectInstance effect : effects) {
+            player.addEffect(effect);
         }
     }
 
     private boolean hasFullSuitOfArmorOn(Player player) {
-        Item boots = player.getInventory().getArmor(0).getItem();
-        Item leggings = player.getInventory().getArmor(1).getItem();
-        Item breastplate = player.getInventory().getArmor(2).getItem();
-        Item helmet = player.getInventory().getArmor(3).getItem();
-        boolean armor =
-                boots == ModItemsAdditions.IMPERIAL_INFINITY_BOOTS.get()
-                && leggings == ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS.get()
-                && breastplate == ModItemsAdditions.IMPERIAL_INFINITY_CHESTPLATE.get()
-                && helmet == ModItemsAdditions.IMPERIAL_INFINITY_HELMET.get();
-        return armor;
+        if (player == null) return false;
+        
+        return player.getInventory().armor.stream().allMatch(stack -> {
+            if (stack.isEmpty()) return false;
+            Item item = stack.getItem();
+            return item == ModItemsAdditions.IMPERIAL_INFINITY_BOOTS.get() ||
+                   item == ModItemsAdditions.IMPERIAL_INFINITY_LEGGINGS.get() ||
+                   item == ModItemsAdditions.IMPERIAL_INFINITY_CHESTPLATE.get() ||
+                   item == ModItemsAdditions.IMPERIAL_INFINITY_HELMET.get();
+        });
     }
+
     @Override
     public boolean isEnchantable(@NotNull ItemStack stack) {
         return true;
