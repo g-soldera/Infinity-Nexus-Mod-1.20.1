@@ -86,7 +86,7 @@ public class MobCrusherScreen extends AbstractContainerScreen<MobCrusherMenu> im
                 Component.translatable(showArea ? "gui.infinity_nexus_mod.mob_crusher.hide_area" : "gui.infinity_nexus_mod.mob_crusher.show_area"), 
                 this::onAreaButtonClick)
                 .pos((width - imageWidth) / 2 + 180, (height - imageHeight) / 2 + 140)
-                .size(60, 20)
+                .size(80, 20)
                 .build()
         );
     }
@@ -190,15 +190,6 @@ public class MobCrusherScreen extends AbstractContainerScreen<MobCrusherMenu> im
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 
-        if (hasRedstoneSignal == 1) {
-            guiGraphics.drawString(this.font, "Redstone: [ON]", x + 196, index, 0XFF0000);
-            guiGraphics.renderFakeItem(new ItemStack(Items.REDSTONE), x + 178, index-4);
-            index += 15;
-        }else{
-            guiGraphics.drawString(this.font, "Redstone: [Ok]", x + 196, index, 0X00FF00);
-            guiGraphics.renderFakeItem(new ItemStack(Items.REDSTONE), x + 178, index - 4);
-            index += 15;
-        }
         if (hasComponent == 0){
             guiGraphics.drawString(this.font, "Component: [Missing]", x + 196, index, 0XFF0000);
             guiGraphics.renderFakeItem(new ItemStack(ModItems.REDSTONE_COMPONENT.get()), x + 178, index - 4);
@@ -206,24 +197,6 @@ public class MobCrusherScreen extends AbstractContainerScreen<MobCrusherMenu> im
         }else {
             guiGraphics.drawString(this.font, "Component: [Ok]", x + 196, index, 0X00FF00);
             guiGraphics.renderFakeItem(new ItemStack(ModItems.REDSTONE_COMPONENT.get()), x + 178, index - 4);
-            index += 15;
-        }
-        if (hasEnoughEnergy == 0){
-            guiGraphics.drawString(this.font, "Energy: [Missing]", x + 196, index, 0XFF0000);
-            guiGraphics.renderFakeItem(new ItemStack(Items.REDSTONE), x + 178, index - 4);
-            index += 15;
-        }else {
-            guiGraphics.drawString(this.font, "Energy: [Ok]", x + 196, index, 0X00FF00);
-            guiGraphics.renderFakeItem(new ItemStack(Items.REDSTONE), x + 178, index - 4);
-            index += 15;
-        }
-        if (hasSlotFree == 0){
-            guiGraphics.drawString(this.font, "Slot: [Missing]", x + 196, index, 0XFF0000);
-            guiGraphics.renderFakeItem(new ItemStack(Items.CHEST), x + 178, index - 4);
-            index += 15;
-        }else {
-            guiGraphics.drawString(this.font, "Slot: [Ok]", x + 196, index, 0X00FF00);
-            guiGraphics.renderFakeItem(new ItemStack(Items.CHEST), x + 178, index - 4);
             index += 15;
         }
         if (hasRecipe == 1){
@@ -253,14 +226,6 @@ public class MobCrusherScreen extends AbstractContainerScreen<MobCrusherMenu> im
             guiGraphics.drawString(this.font, hasLink, x + 196, index, 0XB6FF00);
             guiGraphics.renderFakeItem(new ItemStack(ModItems.LINKING_TOOL.get()), x + 178, index - 4);
             index += 15;
-        }
-        if (hasRedstoneSignal == 0 && hasComponent == 1 && hasEnoughEnergy == 1
-                && hasSlotFree == 1){
-            guiGraphics.drawString(this.font, "Killing: [Ok]", x + 196, index, 0X00FF00);
-            guiGraphics.renderFakeItem(new ItemStack(Items.CRAFTING_TABLE), x + 178, index - 4);
-        }else {
-            guiGraphics.drawString(this.font, "Killing: [OFF]", x + 196, index, 0XFF0000);
-            guiGraphics.renderFakeItem(new ItemStack(Items.CRAFTING_TABLE), x + 178, index - 4);
         }
     }
     private void renderFluidAreaTooltips(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y,

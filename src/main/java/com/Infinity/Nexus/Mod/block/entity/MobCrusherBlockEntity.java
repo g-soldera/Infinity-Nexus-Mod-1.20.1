@@ -59,6 +59,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.enchantment.Enchantments;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -462,26 +463,130 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         }
         this.data.set(6, 1);
 
-        if(!hasMobInside(machineLevel, pos, level)) {
-            this.data.set(7, 0);
-            return;
-        }
-        this.data.set(7, 1);
+        if(hasMobInside(machineLevel, pos, level)) {
+            this.data.set(7, 1);
+            increaseCraftingProgress();
 
-        increaseCraftingProgress();
-
-        if (hasProgressFinished()) {
-            this.data.set(3, 1);
-            level.setBlock(pos, state.setValue(MobCrusher.LIT, machineLevel+9), 3);
-            verifyMobs(level, pos, machineLevel);
-            extractEnergy(this);
-            setChanged(level, pos, state);
-            if(!itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
-                ModUtils.ejectItemsWhePusher(pos.above(),UPGRADE_SLOTS, OUTPUT_SLOT, itemHandler, level);
+            if (hasProgressFinished()) {
+                this.data.set(3, 1);
+                level.setBlock(pos, state.setValue(MobCrusher.LIT, machineLevel+9), 3);
+                verifyMobs(level, pos, machineLevel);
+                extractEnergy(this);
+                setChanged(level, pos, state);
+                resetProgress();
             }
-            resetProgress();
+        } else {
+            this.data.set(7, 0);
         }
         this.data.set(3, 0);
+
+        itemProcessingTicks++;
+        if (itemProcessingTicks >= PROCESSING_INTERVAL) {
+            processStoredItems(pos, level);
+            itemProcessingTicks = 0;
+        }
+    }
+
+    /**
+     * Attempts to eject items to the appropriate destination.
+     * If a linking tool is present, tries linked destination first, then falls back to above block.
+     * If no linking tool is present, tries above block directly.
+     */
+    private void tryEjectItems(BlockPos pos, Level level) {
+        boolean itemsNeedHandling = false;
+
+        if (!itemHandler.getStackInSlot(LINK_SLOT).isEmpty()) {
+            for (int outputSlot : OUTPUT_SLOT) {
+                ItemStack stackToTransfer = itemHandler.getStackInSlot(outputSlot);
+                if (!stackToTransfer.isEmpty()) {
+                    ItemStack beforeTransfer = stackToTransfer.copy();
+                    handleLinkedInsertion(stackToTransfer);
+                    
+                    if (!stackToTransfer.isEmpty() && stackToTransfer.getCount() == beforeTransfer.getCount()) {
+                        itemsNeedHandling = true;
+                    }
+                }
+            }
+        } else {
+            itemsNeedHandling = true;
+        }
+
+        if (itemsNeedHandling) {
+            tryEjectUpward(pos, level);
+        }
+    }
+
+    /**
+     * Attempts to eject items to the block above.
+     * If items can't be transferred, they remain in the machine.
+     */
+    private void tryEjectUpward(BlockPos pos, Level level) {
+        BlockEntity targetEntity = level.getBlockEntity(pos.above());
+        if (targetEntity == null) {
+            return;
+        }
+
+        targetEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(targetHandler -> {
+            boolean hasValidSlots = false;
+            for (int outputSlot : OUTPUT_SLOT) {
+                ItemStack stackToTransfer = itemHandler.getStackInSlot(outputSlot);
+                if (!stackToTransfer.isEmpty()) {
+                    for (int targetSlot = 0; targetSlot < targetHandler.getSlots(); targetSlot++) {
+                        if (canInsertItem(stackToTransfer, targetSlot, targetHandler)) {
+                            hasValidSlots = true;
+                            break;
+                        }
+                    }
+                    if (hasValidSlots) break;
+                }
+            }
+
+            if (hasValidSlots) {
+                for (int outputSlot : OUTPUT_SLOT) {
+                    ItemStack stackToTransfer = itemHandler.getStackInSlot(outputSlot);
+                    if (!stackToTransfer.isEmpty()) {
+                        ItemStack remaining = transferItemToInventory(stackToTransfer.copy(), targetHandler);
+                        itemHandler.setStackInSlot(outputSlot, remaining);
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * Checks if an item can be inserted into a specific slot.
+     */
+    private boolean canInsertItem(ItemStack stack, int slot, IItemHandler handler) {
+        if (stack.isEmpty()) {
+            return false;
+        }
+        
+        ItemStack existingStack = handler.getStackInSlot(slot);
+        if (existingStack.isEmpty()) {
+            return handler.isItemValid(slot, stack);
+        }
+        
+        if (!existingStack.is(stack.getItem())) {
+            return false;
+        }
+        
+        int maxStackSize = Math.min(handler.getSlotLimit(slot), stack.getMaxStackSize());
+        return existingStack.getCount() + stack.getCount() <= maxStackSize;
+    }
+
+    /**
+     * Attempts to transfer an ItemStack to an inventory.
+     */
+    private ItemStack transferItemToInventory(ItemStack stack, IItemHandler targetHandler) {
+        ItemStack remaining = stack.copy();
+        
+        for (int slot = 0; slot < targetHandler.getSlots() && !remaining.isEmpty(); slot++) {
+            if (canInsertItem(remaining, slot, targetHandler)) {
+                remaining = targetHandler.insertItem(slot, remaining, false);
+            }
+        }
+        
+        return remaining;
     }
 
     /**
@@ -595,34 +700,46 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
      * Executes the mob killing operation and processes drops.
      * @param entity The target entity to be processed
      */
-    private void execute(Entity entity) {
+    private List<ItemStack> execute(Entity entity) {
         if (!(level instanceof ServerLevel) || !(entity instanceof Mob mob)) {
-            return; 
+            return new ArrayList<>(); 
         }
         ServerLevel serverLevel = (ServerLevel) level;
+        List<ItemStack> allDrops = new ArrayList<>();
 
-        ItemStack component = this.itemHandler.getStackInSlot(COMPONENT_SLOT);
+        ItemStack sword = this.itemHandler.getStackInSlot(SWORD_SLOT);
+        int machineLevel = getMachineLevel();
 
         Player player = new IFFakePlayer(serverLevel);
-        player.setItemInHand(InteractionHand.MAIN_HAND, this.itemHandler.getStackInSlot(SWORD_SLOT));
+        player.setItemInHand(InteractionHand.MAIN_HAND, sword);
         ServerPlayer randomPlayer = serverLevel.getRandomPlayer();
-        DamageSource source = player.damageSources().playerAttack((randomPlayer != null) && getMachineLevel() >= 7 ? randomPlayer : player);
         
-        LootTable table = Objects.requireNonNull(this.level.getServer()).getLootData().getLootTable(mob.getLootTable());
+        int fireAspectLevel = sword.getEnchantmentLevel(Enchantments.FIRE_ASPECT);
+        if (fireAspectLevel > 0) {
+            mob.setSecondsOnFire(fireAspectLevel * 4); 
+        }
+
+        DamageSource source = player.damageSources().playerAttack((randomPlayer != null) && machineLevel >= 7 ? randomPlayer : player);
+        
+        int lootingLevel = sword.getEnchantmentLevel(Enchantments.MOB_LOOTING);
+        
         LootParams.Builder context = new LootParams.Builder(serverLevel)
-                .withParameter(LootContextParams.THIS_ENTITY, entity)
+                .withParameter(LootContextParams.THIS_ENTITY, mob)
                 .withParameter(LootContextParams.DAMAGE_SOURCE, source)
                 .withParameter(LootContextParams.ORIGIN, new Vec3(entity.getX(), entity.getY(), entity.getZ()))
                 .withParameter(LootContextParams.KILLER_ENTITY, player)
                 .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, player)
-                .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, player);
-        
+                .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, player)
+                .withParameter(LootContextParams.TOOL, sword) 
+                .withLuck((float)lootingLevel); 
+
+        LootTable table = Objects.requireNonNull(this.level.getServer()).getLootData().getLootTable(mob.getLootTable());
         table.getRandomItems(context.create(LootContextParamSets.ENTITY)).forEach(stack -> {
-            insertItemOnInventory(stack);
-            for(int loot = 0; loot < getMachineLevel(); loot++) {
+            allDrops.add(stack.copy());
+            for(int loot = 0; loot < machineLevel; loot++) {
                 int rand = RandomSource.create().nextInt(10);
                 if (rand == 0) {
-                    insertItemOnInventory(stack);
+                    allDrops.add(stack.copy());
                 }
             }
         });
@@ -630,7 +747,8 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         List<ItemEntity> extra = new ArrayList<>();
         try {
             if (mob.captureDrops() == null) mob.captureDrops(new ArrayList<>());
-            ObfuscationReflectionHelper.findMethod(Mob.class, "m_7472_", DamageSource.class, int.class, boolean.class).invoke(mob, source, 0, true);
+            ObfuscationReflectionHelper.findMethod(Mob.class, "m_7472_", DamageSource.class, int.class, boolean.class)
+                .invoke(mob, source, lootingLevel, true); 
             if (mob.captureDrops() != null) {
                 extra.addAll(mob.captureDrops());
             }
@@ -638,17 +756,20 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
             e.printStackTrace();
         }
         
-        ForgeHooks.onLivingDrops(mob, source, extra, 3, true);
-        player.attack(entity);
+        ForgeHooks.onLivingDrops(mob, source, extra, 3 + lootingLevel, true);
+        player.attack(mob);
+        
         extra.forEach(itemEntity -> {
-            insertItemOnInventory(itemEntity.getItem());
+            allDrops.add(itemEntity.getItem().copy());
             itemEntity.remove(Entity.RemovalReason.KILLED);
         });
         
-        if (entity instanceof LivingEntity living) {
-            living.setHealth(0);
-            insertExpense(living.getExperienceReward());
-        }
+        mob.setHealth(0);
+        
+        int baseXP = mob.getExperienceReward();
+        insertExpense(baseXP);
+
+        return allDrops;
     }
 
     /**
@@ -669,20 +790,20 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
             List<Mob> entities = new ArrayList<>(pLevel.getEntitiesOfClass(Mob.class, 
                 new AABB(pPos.offset(machinelevel * -1, 0, machinelevel * -1), 
                         pPos.offset(+machinelevel, 3, +machinelevel))));
-            this.data.set(4, 0);
+            
             if (!entities.isEmpty()) {
                 boolean hasFreeSlots = hasFreeSlots();
                 if(!hasFreeSlots && entities.size() > 30) {
-                    if(hasProgressFinished()){
-                        insertItemOnInventory(ItemStack.EMPTY);
-                    }
                     entities.forEach(Entity::discard);
                     notifyOwner();
-                } else if(hasFreeSlots) {
-                    this.data.set(4, 1);
-                    for (Mob entity : entities) {
-                        if (entity != null && entity.isAlive()) {
-                            execute(entity);
+                    return;
+                }
+                
+                for (Mob entity : entities) {
+                    if (entity != null && entity.isAlive()) {
+                        List<ItemStack> drops = execute(entity);
+                        for (ItemStack drop : drops) {
+                            insertItemOnSelfInventory(drop.copy());
                         }
                     }
                 }
@@ -693,97 +814,36 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     /**
-     * Processes solid fuel items to generate energy.
+     * Processes stored items, attempting to send them to linked containers or upward.
      */
-    private void verifySolidFuel() {
-        ItemStack slotItem = itemHandler.getStackInSlot(FUEL_SLOT);
-        int burnTime = ForgeHooks.getBurnTime(slotItem, null);
-        if(burnTime > 1) {
-            while(itemHandler.getStackInSlot(FUEL_SLOT).getCount() > 0 && 
-                  this.getEnergyStorage().getEnergyStored() + burnTime < this.getEnergyStorage().getMaxEnergyStored()) {
-                this.getEnergyStorage().receiveEnergy(burnTime, false);
-                itemHandler.extractItem(FUEL_SLOT, 1, false);
+    private void processStoredItems(BlockPos pos, Level level) {
+        for (int outputSlot : OUTPUT_SLOT) {
+            ItemStack stackToProcess = itemHandler.getStackInSlot(outputSlot);
+            if (!stackToProcess.isEmpty()) {
+                ItemStack remaining = stackToProcess.copy();
+                boolean itemMoved = false;
+
+                if (hasLinkingTool()) {
+                    ItemStack beforeTransfer = remaining.copy();
+                    handleLinkedInsertion(remaining);
+                    if (remaining.isEmpty() || remaining.getCount() != beforeTransfer.getCount()) {
+                        itemHandler.setStackInSlot(outputSlot, remaining);
+                        itemMoved = true;
+                    }
+                }
+
+                if (!itemMoved && !remaining.isEmpty()) {
+                    BlockEntity targetEntity = level.getBlockEntity(pos.above());
+                    if (targetEntity != null) {
+                        targetEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
+                            ItemStack afterTransfer = transferItemToInventory(remaining.copy(), handler);
+                            if (afterTransfer.isEmpty() || afterTransfer.getCount() != remaining.getCount()) {
+                                itemHandler.setStackInSlot(outputSlot, afterTransfer);
+                            }
+                        });
+                    }
+                }
             }
-        }
-    }
-
-    /**
-     * Notifies the owner of the machine about important events.
-     * TODO: Implement notification system
-     */
-    private void notifyOwner() {
-        //TODO
-    }
-
-    /**
-     * Checks if there are any free output slots available.
-     * @return true if there are empty output slots
-     */
-    private boolean hasFreeSlots() {
-        AtomicInteger freeSlots = new AtomicInteger(0);
-        for (int slot : OUTPUT_SLOT) {
-            if (this.itemHandler.getStackInSlot(slot).isEmpty()) {
-                freeSlots.getAndIncrement();
-            }
-        }
-        return freeSlots.get() > 0;
-    }
-
-    /**
-     * Main entry point for item insertion logic.
-     * Determines whether to use linked container or local inventory.
-     * @param itemStack The item stack to insert
-     */
-    private void insertItemOnInventory(ItemStack itemStack) {
-        try {
-            if (hasLinkingTool()) {
-                handleLinkedInsertion(itemStack);
-            } else {
-                insertItemOnSelfInventory(itemStack);
-            }
-        } catch (Exception e) {
-            System.out.println("§f[INM§f]§c: Failed to insert item in: " + this.getBlockPos());
-        }
-    }
-
-    /**
-     * Checks if a linking tool is present in the linking slot.
-     * @return true if linking tool is present
-     */
-    private boolean hasLinkingTool() {
-        return itemHandler.getStackInSlot(LINK_SLOT).is(ModItems.LINKING_TOOL.get());
-    }
-
-    /**
-     * Handles item insertion when a linking tool is present.
-     * @param itemStack The item stack to insert
-     */
-    private void handleLinkedInsertion(ItemStack itemStack) {
-        ItemStack linkingTool = itemHandler.getStackInSlot(LINK_SLOT).copy();
-        AtomicBoolean success = new AtomicBoolean(false);
-
-        if (linkingTool.hasCustomHoverName()) {
-            processLinkingToolData(linkingTool.getDisplayName().getString(), itemStack, success);
-        }
-
-        if (!success.get()) {
-            insertItemOnSelfInventory(itemStack);
-        }
-    }
-
-    /**
-     * Processes the linking tool data and attempts to insert items into linked container.
-     * @param toolName The display name of the linking tool containing coordinates
-     * @param itemStack The item stack to insert
-     * @param success Reference to track insertion success
-     */
-    private void processLinkingToolData(String toolName, ItemStack itemStack, AtomicBoolean success) {
-        resetLinkCoordinates();
-        LinkCoordinates coords = parseLinkCoordinates(toolName);
-        
-        if (coords != null) {
-            BlockEntity targetEntity = level.getBlockEntity(coords.toBlockPos());
-            handleLinkedContainer(targetEntity, coords, itemStack, success);
         }
     }
 
@@ -839,9 +899,8 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
      * @param targetEntity The linked block entity
      * @param coords The link coordinates
      * @param itemStack The item stack to insert
-     * @param success Reference to track insertion success
      */
-    private void handleLinkedContainer(BlockEntity targetEntity, LinkCoordinates coords, ItemStack itemStack, AtomicBoolean success) {
+    private void handleLinkedContainer(BlockEntity targetEntity, LinkCoordinates coords, ItemStack itemStack) {
         if (targetEntity == null || !canLink(targetEntity)) {
             return;
         }
@@ -852,6 +911,7 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
         }
 
         if (!itemHandler.getStackInSlot(OUTPUT_SLOT[7]).isEmpty()) {
+            AtomicBoolean success = new AtomicBoolean(false);
             attemptItemTransfer(targetEntity, coords, itemStack, success);
         }
     }
@@ -928,10 +988,32 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
      * @param itemStack The item stack to insert
      */
     private void insertItemOnSelfInventory(ItemStack itemStack) {
+        if (itemStack.isEmpty()) {
+            return;
+        }
+        
         for (int slot : OUTPUT_SLOT) {
-            if (ModUtils.canPlaceItemInContainer(itemStack, slot, this.itemHandler)) {
-                this.itemHandler.insertItem(slot, itemStack, false);
-                break;
+            ItemStack existingStack = this.itemHandler.getStackInSlot(slot);
+            if (!existingStack.isEmpty() && 
+                ItemStack.isSameItemSameTags(existingStack, itemStack) && 
+                existingStack.getCount() < existingStack.getMaxStackSize()) {
+                
+                int spaceAvailable = existingStack.getMaxStackSize() - existingStack.getCount();
+                int amountToAdd = Math.min(spaceAvailable, itemStack.getCount());
+                
+                existingStack.grow(amountToAdd);
+                itemStack.shrink(amountToAdd);
+                
+                if (itemStack.isEmpty()) {
+                    return;
+                }
+            }
+        }
+        
+        for (int slot : OUTPUT_SLOT) {
+            if (this.itemHandler.getStackInSlot(slot).isEmpty()) {
+                this.itemHandler.insertItem(slot, itemStack.copy(), false);
+                return;
             }
         }
     }
@@ -1090,11 +1172,9 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
      * @return true if the position is on an edge
      */
     private boolean isEdgePosition(int x, int y, int z, int range) {
-        // Vertical edges
         if (Math.abs(x) == range && Math.abs(z) == range) {
             return true;
         }
-        // Horizontal edges at top or bottom
         if (y == 0 || y == 2) {
             return Math.abs(x) == range || Math.abs(z) == range;
         }
@@ -1116,4 +1196,75 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
             renderAreaPreview(level, pos);
         }
     }
+
+    /**
+     * Verifica se há slots livres no inventário.
+     */
+    private boolean hasFreeSlots() {
+        for (int slot : OUTPUT_SLOT) {
+            if (itemHandler.getStackInSlot(slot).isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if a linking tool is installed.
+     * @return true if a linking tool is installed
+     */
+    private boolean hasLinkingTool() {
+        return !itemHandler.getStackInSlot(LINK_SLOT).isEmpty();
+    }
+
+    /**
+     * Notify the owner of the machine.
+     */
+    private void notifyOwner() {
+    }
+
+    /**
+     * Checks and processes solid fuel.
+     */
+    private void verifySolidFuel() {
+        ItemStack fuelStack = itemHandler.getStackInSlot(FUEL_SLOT);
+        if (!fuelStack.isEmpty()) {
+            int burnTime = ForgeHooks.getBurnTime(fuelStack, null);
+            if (burnTime > 0) {
+                fuelStack.shrink(1);
+                itemHandler.setStackInSlot(FUEL_SLOT, fuelStack);
+            }
+        }
+    }
+
+    /**
+     * Processes item insertion into a linked container.
+     */
+    private void handleLinkedInsertion(ItemStack stack) {
+        if (stack.isEmpty()) return;
+
+        BlockEntity targetEntity = level.getBlockEntity(new BlockPos(
+            this.data.get(8),
+            this.data.get(9),
+            this.data.get(10)
+        ));
+
+        if (targetEntity == null) return;
+
+        targetEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
+            for (int slot = 0; slot < handler.getSlots(); slot++) {
+                if (handler.isItemValid(slot, stack)) {
+                    ItemStack remaining = handler.insertItem(slot, stack.copy(), false);
+                    stack.setCount(remaining.getCount());
+                    if (stack.isEmpty()) break;
+                }
+            }
+        });
+    }
+
+    /**
+     * Add these variables at the beginning of the class
+     */
+    private int itemProcessingTicks = 0;
+    private static final int PROCESSING_INTERVAL = 100;
 }
