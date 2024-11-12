@@ -18,7 +18,7 @@ public class MobCrusherHandler {
     }
     public static boolean insert(int slot, @NotNull ItemStack stack) {
         return switch (slot) {
-            case 0,1,2,3,4,5,6,7,8 -> !ModUtils.isUpgrade(stack) && !ModUtils.isComponent(stack);
+            case 0,1,2,3,4,5,6,7,8 -> false;
             case 9,10,11,12 -> ModUtils.isUpgrade(stack);
             case 13 -> ModUtils.isComponent(stack);
             case 14 -> stack.getItem() instanceof SwordItem;
@@ -26,5 +26,6 @@ public class MobCrusherHandler {
             case 16 -> ForgeHooks.getBurnTime(stack, null) > 0;
             default -> false;
         };
+
     }
 }
