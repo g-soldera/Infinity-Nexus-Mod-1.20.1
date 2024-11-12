@@ -2,6 +2,6 @@
 [V] Fazer a paxel Funcionar como esperado
 [V] Consertar o fly da armadura
 [V] Mostrar a area de ação do MobCrusher
-[X] Algum sistema de craft magico ou mystico
+[X] Algum sistema de craft magico ou místico
 [X] Criar um mob para carda ORB
 [X] Arumar a animação dos mobs para nã ose sobrepor umas as outras
