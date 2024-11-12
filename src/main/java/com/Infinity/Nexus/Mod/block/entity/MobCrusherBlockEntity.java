@@ -477,11 +477,90 @@ public class MobCrusherBlockEntity extends BlockEntity implements MenuProvider {
             extractEnergy(this);
             setChanged(level, pos, state);
             if(!itemHandler.getStackInSlot(COMPONENT_SLOT).isEmpty()) {
-                ModUtils.ejectItemsWhePusher(pos.above(),UPGRADE_SLOTS, OUTPUT_SLOT, itemHandler, level);
+                tryEjectItems(pos, level);
             }
             resetProgress();
         }
         this.data.set(3, 0);
+    }
+
+    /**
+     * Handles the ejection of items to the block above, checking if it's possible.
+     */
+    private void tryEjectItems(BlockPos pos, Level level) {
+        if (!itemHandler.getStackInSlot(LINK_SLOT).isEmpty()) {
+            handleLinkedInsertion();
+            return;
+        }
+
+        BlockPos abovePos = pos.above();
+        BlockEntity targetEntity = level.getBlockEntity(abovePos);
+        
+        if (targetEntity == null) {
+            return;
+        }
+
+        targetEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(targetHandler -> {
+            boolean hasValidSlots = false;
+            for (int outputSlot : OUTPUT_SLOT) {
+                ItemStack stackToTransfer = itemHandler.getStackInSlot(outputSlot);
+                if (!stackToTransfer.isEmpty()) {
+                    for (int targetSlot = 0; targetSlot < targetHandler.getSlots(); targetSlot++) {
+                        if (canInsertItem(stackToTransfer, targetSlot, targetHandler)) {
+                            hasValidSlots = true;
+                            break;
+                        }
+                    }
+                    if (hasValidSlots) break;
+                }
+            }
+
+            if (hasValidSlots) {
+                for (int outputSlot : OUTPUT_SLOT) {
+                    ItemStack stackToTransfer = itemHandler.getStackInSlot(outputSlot);
+                    if (!stackToTransfer.isEmpty()) {
+                        ItemStack remaining = transferItemToInventory(stackToTransfer.copy(), targetHandler);
+                        itemHandler.setStackInSlot(outputSlot, remaining);
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * Checks if an item can be inserted into a specific slot.
+     */
+    private boolean canInsertItem(ItemStack stack, int slot, IItemHandler handler) {
+        if (stack.isEmpty()) {
+            return false;
+        }
+        
+        ItemStack existingStack = handler.getStackInSlot(slot);
+        if (existingStack.isEmpty()) {
+            return handler.isItemValid(slot, stack);
+        }
+        
+        if (!existingStack.is(stack.getItem())) {
+            return false;
+        }
+        
+        int maxStackSize = Math.min(handler.getSlotLimit(slot), stack.getMaxStackSize());
+        return existingStack.getCount() + stack.getCount() <= maxStackSize;
+    }
+
+    /**
+     * Attempts to transfer an ItemStack to an inventory.
+     */
+    private ItemStack transferItemToInventory(ItemStack stack, IItemHandler targetHandler) {
+        ItemStack remaining = stack.copy();
+        
+        for (int slot = 0; slot < targetHandler.getSlots() && !remaining.isEmpty(); slot++) {
+            if (canInsertItem(remaining, slot, targetHandler)) {
+                remaining = targetHandler.insertItem(slot, remaining, false);
+            }
+        }
+        
+        return remaining;
     }
 
     /**
